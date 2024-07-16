@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-:root {
+ :root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -20,47 +20,29 @@
   --text-color: black;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback;
+  --body-font-family: "Avenir Next";
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
   --body-font-size-xs: 16px;
+  --body-font-size: 16px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 24px;
-  --heading-font-size-s: 20px;
-  --heading-font-size-xs: 18px;
+  --heading-font-size-xxl: 45.3333px;
+  --heading-font-size-xl: 31px;
+  --heading-font-size-l: 25px;
+  --heading-font-size-m: 19.6667px;
+  --heading-font-size-s: 17.6667px;
+  --heading-font-size-xs: 15.6667px;
 
   /* nav height */
   --nav-height: 64px;
 }
 
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 100.06%;
-  ascent-override: 95%;
-  src: local('Arial');
-}
-
-@media (width >= 900px) {
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
-  }
-}
-
 body {
-  font-size: var(--body-font-size-m);
+  font-size: var(--body-font-size);
   margin: 0;
   font-family: var(--body-font-family);
   line-height: 1.6;
@@ -204,19 +186,6 @@ main img {
 /* sections */
 main .section {
   padding: 64px 16px;
-}
-
-@media (width >= 600px) {
-  main .section {
-    padding: 64px 32px;
-  }
-}
-
-@media (width >= 900px) {
-  .section > div {
-    max-width: 1200px;
-    margin: auto;
-  }
 }
 
 /* section metadata */
