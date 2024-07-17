@@ -1,4 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { domEl, div } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
   /* change to ul, li */
@@ -6,13 +7,21 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+    [...li.children].forEach((divElement) => {
+      if (
+        divElement.children.length === 1
+        && divElement.querySelector('picture')
+      ) {
+        divElement.className = 'cards-card-image';
+      } else divElement.className = 'cards-card-body';
     });
     ul.append(li);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img').forEach((img) => img
+    .closest('picture')
+    .replaceWith(
+      createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
+    ));
   block.textContent = '';
   block.append(ul);
 
@@ -37,25 +46,25 @@ export default function decorate(block) {
     card.parentElement.parentElement.classList.add(`grid-item-${idx}`);
 
     // modify card structure to have a card-content div
-    const cardContent = document.createElement('div');
-    cardContent.classList.add('card-content');
+    const cardContent = div({ class: 'card-content' });
 
     const isVideo = anchor.href.startsWith('https://mediaspace.esri.com/');
     if (isVideo) {
-      const startButton = document.createElement('calcite-button');
-      startButton.setAttribute('appearance', 'solid');
-      startButton.setAttribute('kind', 'inverse');
-      startButton.setAttribute('color', 'light');
-      startButton.setAttribute('scale', 'l');
-      startButton.setAttribute('round', '');
-      startButton.setAttribute('icon-start', 'play-f');
-      startButton.setAttribute('dir', 'ltr');
-      startButton.setAttribute('alignment', 'center');
-      startButton.setAttribute('width', 'auto');
-      startButton.setAttribute('label', 'play video');
-      startButton.setAttribute('type', 'button');
-      startButton.setAttribute('calcite-hydrated', '');
-      startButton.classList.add('start-button');
+      const startButton = domEl('calcite-button', {
+        appearance: 'solid',
+        kind: 'inverse',
+        color: 'light',
+        scale: 'l',
+        round: '',
+        'icon-start': 'play-f',
+        dir: 'ltr',
+        alignment: 'center',
+        width: 'auto',
+        label: 'play video',
+        type: 'button',
+        'calcite-hydrated': '',
+        class: 'start-button',
+      });
       cardContent.appendChild(startButton);
     }
 
