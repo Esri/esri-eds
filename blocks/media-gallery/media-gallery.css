@@ -11,19 +11,23 @@
         margin: auto;
         padding: 0;
     }
+
     p {
         margin: 0;
     }
+
     picture {
         display: block;
         aspect-ratio: 16/9;
         overflow: hidden;
         position: relative;
     }
-    picture:after {
+
+    picture::after {
         --gradient-angle: to top;
         --gradient-angle-m: to top;
         --gradient-transition: 60%;
+
         content: "";
         height: 100%;
         width: 100%;
@@ -32,9 +36,11 @@
         inset-inline-start: 0;
         background: linear-gradient(to top, #353535cc, transparent 60%);
     }
+
     .cards-card-body {
         position: relative;
     }
+
     .card-content {
         position: absolute;
         z-index: 1;
@@ -48,6 +54,7 @@
         flex-direction: column;
         justify-content: flex-end;
     }
+
     .card-title {
         pointer-events: none;
         color: white;
@@ -58,6 +65,7 @@
         text-align: start;
         margin: 0;
     }
+
     .card-description {
         display: none;
         pointer-events: none;
@@ -74,20 +82,25 @@
         text-overflow: ellipsis;
         margin-block-end: 0;
     }
+
     img {
         width: 100%;
         aspect-ratio: 16/9;
         object-fit: cover;
     }
+
     .card-content, img {
         transition: 0.2s ease;
     }
+
     .cards-card-body:is(:hover,:focus,:focus-within) .card-content {
-        box-shadow: 0 0 0 10px inset #ffffffcc;
+        box-shadow: 0 0 0 10px inset #fffc;
     }
+
     .cards-card-body:is(:hover,:focus,:focus-within) img {
         transform: scale(1.08);
     }
+
     .start-button {
         margin: 0;
         margin-bottom: 8px;
@@ -100,13 +113,13 @@
         align-items: center;
         position: absolute;
         z-index: 2;
-        top: calc(50% - 22px);;
+        top: calc(50% - 22px);
         left: calc(50% - 22px);
+
         svg {
             width: 24px;
             height: 24px;
         }
-    
     }
 }
 
@@ -115,12 +128,15 @@
         ul {
             grid-template-columns: 1fr 1fr;
         }
+
         .card-title {
             margin-bottom: 0.5rem;
         }
+
         .card-description {
             display: -webkit-box;
         }
+
         .start-button {
             position: static;
         }
