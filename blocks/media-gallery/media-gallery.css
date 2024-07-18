@@ -34,7 +34,7 @@
         position: absolute;
         inset-block-end: 0;
         inset-inline-start: 0;
-        background: linear-gradient(to top, #353535cc, transparent 60%);
+        background: linear-gradient(to top, var(--esri-ui-opacity80-inverse), transparent 60%);
     }
 
     .cards-card-body {
