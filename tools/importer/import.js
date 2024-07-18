@@ -41,10 +41,28 @@ function storyteller(main, document) {
     });
 }
 
+function tabs(main, document) {
+  main.querySelectorAll('.cmp-carousel__content').forEach((container) => {
+    const cells = [...container.querySelectorAll(':scope > .cmp-carousel__item')]
+      .map((tabContent) => {
+        const tabLabelId = tabContent.getAttribute('aria-labelledby');
+        const tabName = container.querySelector(`#${tabLabelId}`).textContent;
+
+        return [tabName, tabContent];
+      });
+
+    container.replaceChildren(WebImporter.Blocks.createBlock(document, {
+      name: 'tabs',
+      cells,
+    }));
+  });
+}
+
 function transformers(main, document) {
   videos(main, document);
   calciteButton(main, document);
   storyteller(main, document);
+  tabs(main, document);
 }
 
 export default {
