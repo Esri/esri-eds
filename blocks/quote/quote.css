@@ -1,0 +1,137 @@
+.quote-container {
+  padding-top: 0;
+  width: 100vw;
+}
+
+.quote {
+  margin: 0;
+  width: 100%;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    
+    li {
+      width: 1440px;
+      max-width: 96vw;
+      padding: 0 0.5rem;
+    }
+  }
+
+  .quote-block-body {
+    box-sizing: border-box;
+    padding: 3rem 0.5rem 1.5rem 1.5rem;
+    font-family: var(--calcite-sans-family);
+    width: 1440px;
+    max-width: 96vw;
+
+    .icon-quote {
+      width: 48px;
+      height: 48px;      
+    }
+  }
+
+  p:nth-child(2) {
+    line-height: 1.375;
+    color: #bfbfbf;
+    font-weight: 400;
+    font-size: var(--font-3);
+    margin: 1rem 0;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  p:nth-child(3) {
+    line-height: 1.375;
+    color: white;
+    font-weight: 500;
+    font-size: var(--font-1);
+    margin: 0;
+  }
+
+  p:nth-child(4) {
+    line-height: 1.375;
+    color: white;
+    font-weight: 400;
+    font-size: var(--font-1);
+    padding-bottom: 1.5rem;
+    margin: 0;
+  }
+
+  .quote-block-image {
+    box-sizing: border-box;
+    width: 1440px;
+    max-width: 96vw;
+    padding: 0 0.5rem;
+
+    picture {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1/1;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 95%;
+      height: 95%;
+      position: relative;
+      top: 5%;
+    }
+  }
+}
+
+@media (width >= 480px) {
+  .quote {
+    li {
+      display: grid;
+      grid-template-columns: 3fr 9fr;
+      grid-template-rows: 1fr;
+      padding: 0;
+      margin: auto;
+    }
+
+    .quote-block-body {
+      padding: 4.5rem 0.5rem 4.5rem 1rem;
+      width: 960px;
+      max-width: 64vw;
+    }
+
+    .quote-block-image {
+      padding: 4.5rem 0.5rem;
+      margin-top: 3rem;
+      width: 480px;
+      max-width: 32vw;
+
+      picture {
+        img {
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (width >= 860px) {
+  .quote {
+    .quote-block-body {
+      padding-left: 0.5rem;
+      width: 780px;
+      max-width: 52vw;
+    }
+
+    .quote-block-image {
+      width: 360px;
+      max-width: 24vw;
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+@media (width >= 1024px) {
+  .quote {
+    .quote-block-body {
+      padding-left: 1.5rem;
+    }
+  }
+}

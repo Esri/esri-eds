@@ -14,15 +14,18 @@
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
-  --background-color: white;
+  --background-color-light: white;
+  --background-color-dark: #2B2B2B;
   --light-color: #eee;
   --dark-color: #ccc;
   --text-color: black;
   --esri-ui-opacity80-inverse: #353535cc;
 
+  -webkit-font-smoothing: antialiased;
+
   /* fonts */
   --calcite-code-family: "Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace;
-  --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;    
+  --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
   --font-minus-3: clamp(.625rem, .625rem + 0vw, .625rem);
   --font-minus-2: clamp(.625rem, 0.5682rem + 0.2525vw, .75rem);
   --font-minus-1: clamp(0.75rem, 0.6931rem + 0.2525vw, 0.875rem);
@@ -62,7 +65,7 @@ body {
   font-family: var(--body-font-family);
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: var(--background-color-dark);
   display: none;
 }
 
