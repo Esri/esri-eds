@@ -3,14 +3,19 @@
 function hero(main, document) {
   const heroContainer = document
     .querySelector('div.hero-banner-global-v2.aem-GridColumn');
-  const clonedHero = heroContainer.querySelector('.hbg-container--large').cloneNode();
-  console.log('clonedHero', clonedHero.outerHTML, heroContainer.outerHTML);
+  const heroInner = heroContainer.querySelector('.hbg-container--large');
+
+  // remove background image as it's the same as the video poster
+  heroInner.querySelector('picture.hbg-container--large--backgroundImage').remove();
+
+  const videoContainer = heroInner.querySelector('.video-container');
+  // move video to the end of the hero container
+  heroInner.append(videoContainer);
+
   heroContainer.replaceWith(WebImporter.Blocks.createBlock(document, {
     name: 'hero',
-    cells: [['<h1>Hero test</h1>', clonedHero]],
+    cells: [[heroInner]],
   }));
-  console.log('new hero container', heroContainer.outerHTML);
-  console.log('new hero container', main.querySelector('table'));
 }
 
 function videos(main, document) {
@@ -27,6 +32,7 @@ function videos(main, document) {
       img.setAttribute('src', videoPoster);
 
       const div = document.createElement('div');
+      div.classList.add('video-container');
       div.appendChild(videoLink);
       div.appendChild(img);
 
