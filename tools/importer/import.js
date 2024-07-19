@@ -54,9 +54,14 @@ function storyteller(main, document) {
   main.querySelectorAll('.storyteller__container')
     .forEach((container) => {
       const [leftChild, rightChild] = [...container.children];
+      let cells = [[leftChild, rightChild]];
+      if (!container.closest('.storyteller').classList.contains('st-content--left')) {
+        cells = [[rightChild, leftChild]];
+      }
+
       container.replaceChildren(WebImporter.Blocks.createBlock(document, {
         name: 'storyteller',
-        cells: [[leftChild, rightChild]],
+        cells,
       }));
     });
 }
