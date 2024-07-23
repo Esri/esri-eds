@@ -8,7 +8,7 @@ main .hero-container {
 
 .hero {
   position: relative;
-  padding: 32px;
+  padding: var(--space-8);
   min-height: 300px;
 }
 
@@ -16,7 +16,7 @@ main .hero-container {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  color: white;
+  color: var(--calcite-ui-text-1);
 }
 
 .hero picture {

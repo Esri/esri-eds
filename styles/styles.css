@@ -12,14 +12,32 @@
 
  :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
   --background-color-light: white;
-  --background-color-dark: #2B2B2B;
   --light-color: #eee;
   --dark-color: #ccc;
   --text-color: black;
-  --esri-ui-opacity80-inverse: #353535cc;
+
+ /* esri.com special colors 
+ * Colors with opacity 
+ * Naming Convention for Colors with Opacity Values: $colorOpacityValue */
+--esri-ui-opacity00: rgba($blk-000, 0);
+--esri-ui-opacity20: rgba($blk-000, 0.2);
+--esri-ui-opacity40: rgba($blk-000, 0.4);
+--esri-ui-opacity60: rgba($blk-000, 0.5);
+--esri-ui-opacity80: rgba($blk-000, 0.80);
+--esri-ui-opacity85: rgba($blk-000, 0.85);
+--esri-ui-opacity90: rgba($blk-000, 0.90);
+--esri-ui-opacity95: rgba($blk-000, 0.95);
+--esri-ui-opacity97: rgba($blk-000, 0.97);
+--esri-ui-opacity00-inverse: rgba($blk-190, 0);
+--esri-ui-opacity20-inverse: rgba($blk-190, 0.2);
+--esri-ui-opacity40-inverse: rgba($blk-190, 0.4);
+--esri-ui-opacity50-inverse: rgba($blk-190, 0.5);
+--esri-ui-opacity80-inverse: rgba($blk-190, 0.80);
+--esri-ui-opacity85-inverse: rgba($blk-190, 0.85);
+--esri-ui-opacity90-inverse: rgba($blk-190, 0.90);
+--esri-ui-opacity95-inverse: rgba($blk-190, 0.95);
+--esri-ui-opacity97-inverse: rgba($blk-190, 0.97);
 
   -webkit-font-smoothing: antialiased;
 
@@ -28,7 +46,7 @@
   --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
   --font-minus-3: clamp(.625rem, .625rem + 0vw, .625rem);
   --font-minus-2: clamp(.625rem, 0.5682rem + 0.2525vw, .75rem);
-  --font-minus-1: clamp(0.75rem, 0.6931rem + 0.2525vw, 0.875rem);
+  --font-minus-1: clamp(0.75rem, 0.6932rem + 0.2525vw, 0.875rem);
   --font-0: clamp(0.875rem, 0.8181rem + 0.2525vw, 1rem);
   --font-1: clamp(1rem, 0.9431rem + 0.2525vw, 1.125rem);
   --font-2: clamp(1.125rem, 1.0681rem + 0.2525vw, 1.25rem);
@@ -38,8 +56,27 @@
   --font-6: clamp(2rem, 1.5454rem + 2.0202vw, 3rem);
   --font-7: clamp(2.5rem, 2.0454rem + 2.0202vw, 3.5rem);
   --font-8: clamp(2.5rem, 1.8181rem + 3.0303vw, 4rem);
-  --body-font-family: "Avenir Next";
-  --heading-font-family: var(--body-font-family);
+
+  /* Spacing */
+  --unit:  1rem; /* 16px */
+  --space-px: calc(0.625 * var(--unit));  /*  10px */
+  --space-1: calc(0.25 * 1rem);           /* 4px */
+  --space-2: calc(0.5 * var(--unit));     /* 8px */
+  --space-3: calc(0.75 * var(--unit));    /* 12px */
+  --space-4: calc(1 * var(--unit));       /* 16px */
+  --space-5: calc(1.25 * var(--unit));    /* 20px */
+  --space-6: calc(1.5 * var(--unit));     /* 24px */
+  --space-8: calc(2 * var(--unit));       /* 32px */
+  --space-10: calc(2.5 * var(--unit));    /* 40px */
+  --space-12: calc(3 * var(--unit));      /* 48px */
+  --space-16: calc(4 * var(--unit));      /* 64px */
+  --space-20: calc(5 * var(--unit));      /* 80px */
+  --space-24: calc(6 * var(--unit));      /* 96px */
+  --space-32: calc(8 * var(--unit));      /* 128px */
+  --space-40: calc(10 * var(--unit));     /* 160px */
+  --space-48: calc(12 * var(--unit));     /* 192px */
+  --space-56: calc(14 * var(--unit));     /* 224px */
+  --space-64: calc(16 * var(--unit));     /* 256px */
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -47,25 +84,17 @@
   --body-font-size-xs: 16px;
   --body-font-size: 16px;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 45.3333px;
-  --heading-font-size-xl: 31px;
-  --heading-font-size-l: 25px;
-  --heading-font-size-m: 19.6667px;
-  --heading-font-size-s: 17.6667px;
-  --heading-font-size-xs: 15.6667px;
-
   /* nav height */
   --nav-height: 64px;
 }
 
 body {
-  font-size: var(--body-font-size);
+  font-size: var(--font-0);
   margin: 0;
-  font-family: var(--body-font-family);
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color-dark);
+  font-family: var(--calcite-sans-family);
+  line-height: 1.5;
+  color: var(--calcite-ui-text-1);
+  background-color: var(--calcite-ui-foreground-1);
   display: none;
 }
 
@@ -83,7 +112,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--heading-font-family);
+  font-family: var(--calcite-sans-family);
   font-weight: 600;
   line-height: 1.25;
   margin-top: 1em;
@@ -91,12 +120,13 @@ h6 {
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
+/* heading sizes */
+h1 { font-size: var(--font-6); }
+h2 { font-size: var(--font-4); }
+h3 { font-size: var(--font-3); }
+h4 { font-size: var(--font-2); }
+h5 { font-size: var(--font-1); }
+h6 { font-size: var(--font-0); }
 
 p,
 dl,
@@ -114,8 +144,30 @@ pre {
   font-size: var(--body-font-size-s);
 }
 
+sup,
+sub {
+	font-size: var(--font-minus-2);
+  line-height: 0;
+}
+
+blockquote {
+	color: var(--calcite-ui-text-2);
+	margin: var(--space-4) 0;
+	font-size: var(--font-1);
+	line-height: 1.375;
+	border-inline-start: 2px solid var(--calcite-ui-border-1);
+	padding-inline-start: 1rem;
+}
+
+blockquote p {
+	font-size: var(--font-1);
+	line-height: 1.375;
+}
+
 code {
-  padding: 0.125em;
+  color: var(--calcite-ui-text-2);
+	background-color: var(--esri-ui-opacity85-inverse);
+	padding: 0 0.2rem;
 }
 
 pre {
@@ -132,48 +184,50 @@ main pre {
 
 /* links */
 a:any-link {
-  color: var(--link-color);
+  color: var(--calcite-ui-text-link);
   text-decoration: none;
 }
 
-a:hover {
+a:hover,a:focus {
   text-decoration: underline;
-  color: var(--link-hover-color);
+  color: var(--calcite-ui-text-link);
 }
 
 /* buttons */
 a.button:any-link,
 button {
-  font-family: var(--body-font-family);
+  font-family: var(--calcite-sans-family);
   display: inline-block;
   box-sizing: border-box;
   text-decoration: none;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   padding: 5px 30px;
   text-align: center;
   font-style: normal;
-  font-weight: 600;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  background-color: var(--calcite-ui-brand);
+  color: var(--calcite-ui-text-inverse);
+  font-size: var(--calcite-font-size--1);
+  font-weight: var(--calcite-font-weight-normal);
+  line-height: 1rem;
+  margin-block-start: var(--space-8);
+  margin-inline-end: var(--space-2);
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
   cursor: pointer;
+  background-color: var(--calcite-ui-brand-hover);
 }
 
 button:disabled,
 button:disabled:hover {
-  background-color: var(--light-color);
+  opacity: var(--calcite-ui-opacity-disabled);
   cursor: unset;
 }
 
@@ -203,7 +257,8 @@ main img {
 
 /* sections */
 main .section {
-  padding: 64px 0;
+  padding: var(--space-16) 0;
+  background-color: var(--calcite-ui-foreground-1);
 }
 
 .video-iframe-box {
@@ -235,13 +290,13 @@ main .section {
       justify-content: center;
       align-items: center;
       transition: .15s ease-in-out;
-      background-color: white;
+      background-color: var(--calcite-ui-text-1);;
       border-radius: 50%;
     }
 
     .video-close-button:hover {
-      background-color: #009af2;
-      color: white;
+      background-color: var(--calcite-ui-brand);
+      color: var(--calcite-ui-text-1);
     }
   }
 
