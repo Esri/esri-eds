@@ -1,0 +1,66 @@
+.call-to-action-wrapper {
+  display: flex;
+  color: var(--calcite-ui-text-1);
+  padding: var(--space-24) 0 var(--space-32);
+  background: var(--calcite-ui-foreground-1);
+  justify-content: center;
+}
+
+.call-to-action {
+  display: flex;
+  inline-size: 99%;
+  position: relative;
+}
+
+.call-to-action > div {
+  display: flex;
+  inline-size: 100%;
+}
+
+.call-to-action > div::after {
+  content: "";
+  block-size: 100%;
+  position: absolute;
+  inline-size: 0.01rem;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  background-color: var(--calcite-ui-border-1);
+}
+
+.call-to-action > div > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  block-size: var(--space-56);
+}
+
+.call-to-action h2 {
+  font-size: var(--font-3);
+  font-weight: var(--calcite-font-weight-normal);
+}
+
+p.button-container .button {
+  margin-inline-end: 0;
+  margin-block-start: 0;
+}
+
+@media (width <= 768px) {
+  .call-to-action > div {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .call-to-action > div::after {
+      block-size: 0.01rem;
+      inline-size: 100%;
+      inset-inline-start: 0;
+      inset-block-start: 50%;
+      transform: translateY(-50%);
+  }
+
+  .call-to-action > div > div {
+      margin-block: var(--space-10);
+  }
+}
