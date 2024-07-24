@@ -5,12 +5,18 @@ function hero(main, document) {
     .querySelector('div.hero-banner-global-v2.aem-GridColumn');
   const heroInner = heroContainer.querySelector('.hbg-container--large');
 
-  // remove background image as it's the same as the video poster
-  heroInner.querySelector('picture.hbg-container--large--backgroundImage').remove();
+  const backgroundImage = heroInner.querySelector('picture.hbg-container--large--backgroundImage');
 
   const videoContainer = heroInner.querySelector('.video-container');
-  // move video to the end of the hero container
-  heroInner.append(videoContainer);
+  if (videoContainer) {
+    // move video to the end of the hero container
+    heroInner.append(videoContainer);
+
+    // remove background image as it's the same as the video poster
+    backgroundImage.remove();
+  } else {
+    heroInner.append(backgroundImage);
+  }
 
   heroContainer.replaceWith(WebImporter.Blocks.createBlock(document, {
     name: 'hero',
@@ -67,14 +73,35 @@ function storyteller(main, document) {
 }
 
 function tabs(main, document) {
-  main.querySelectorAll('.cmp-carousel__content')
+  main.querySelectorAll('.esri-carousel,.esri-tabs')
     .forEach((container) => {
-      const cells = [...container.querySelectorAll(':scope > .cmp-carousel__item')]
+      const withIcons = container.classList.contains('tab-icons');
+
+      const cells = [...container.querySelectorAll('[role="tabpanel"]')]
         .map((tabContent) => {
           const tabLabelId = tabContent.getAttribute('aria-labelledby');
-          const tabName = container.querySelector(`#${tabLabelId}`).textContent;
+          const tabName = container.querySelector(`#${tabLabelId}`);
 
-          return [tabName, tabContent];
+          const tabLabel = document.createElement('div');
+          tabLabel.innerHTML = tabName.innerHTML;
+          if (withIcons) {
+            const tabIcon = tabContent.querySelector('.tab--icon > div');
+            const svgFileName = tabIcon.getAttribute('data-asset');
+            // example path: /content/dam/esrisites/en-us/common/icons/meridian-/search-48.svg
+            // get "search" from the path
+            const iconName = svgFileName
+              .split('/')
+              .pop()
+              .split('-')
+              .slice(0, -1)
+              .join('-');
+            const icon = document.createElement('p');
+            icon.textContent = `:${iconName}:`;
+            tabIcon.remove();
+            tabLabel.prepend(icon);
+          }
+
+          return [tabLabel, tabContent];
         });
 
       container.replaceChildren(WebImporter.Blocks.createBlock(document, {
