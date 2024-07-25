@@ -172,6 +172,21 @@ function callToAction(main, document) {
     });
 }
 
+function transformUrls(main, document) {
+  // load urls from local file (in the filesystem) importer-urls.txt
+  const fs = require('node:fs/promises');
+  const urls = fs.readFileSync('importer-urls.txt');
+  console.log('urls', urls);
+
+  main.querySelectorAll('a')
+    .forEach((a) => {
+      const href = a.getAttribute('href');
+      if (href.startsWith('/')) {
+        console.log('link', a.textContent, 'href', href, 'attribute href', href);
+      }
+    });
+}
+
 function transformers(main, document) {
   videos(main, document);
   calciteButton(main, document);
@@ -181,6 +196,7 @@ function transformers(main, document) {
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
+  transformUrls(main, document);
 }
 
 export default {
