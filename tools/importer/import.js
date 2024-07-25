@@ -1,5 +1,7 @@
 /* global WebImporter */
 
+import urls from './urls.js';
+
 function hero(main, document) {
   const heroContainer = document
     .querySelector('div.hero-banner-global-v2.aem-GridColumn');
@@ -172,17 +174,19 @@ function callToAction(main, document) {
     });
 }
 
-function transformUrls(main, document) {
+function transformUrls(main) {
   // load urls from local file (in the filesystem) importer-urls.txt
-  const fs = require('node:fs/promises');
-  const urls = fs.readFileSync('importer-urls.txt');
-  console.log('urls', urls);
+  const urlPathnames = urls.map((url) => new URL(url).pathname);
 
   main.querySelectorAll('a')
     .forEach((a) => {
       const href = a.getAttribute('href');
-      if (href.startsWith('/')) {
-        console.log('link', a.textContent, 'href', href, 'attribute href', href);
+      if (!href.startsWith('/')) {
+        return;
+      }
+
+      if (!urlPathnames.includes(href)) {
+        a.setAttribute('href', urls[urlPathnames.indexOf(href)]);
       }
     });
 }
@@ -196,7 +200,7 @@ function transformers(main, document) {
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
-  transformUrls(main, document);
+  transformUrls(main);
 }
 
 export default {
