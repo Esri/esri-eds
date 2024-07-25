@@ -118,11 +118,17 @@ h6 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   scroll-margin: calc(var(--nav-height) + 1em);
+  color: white;
 }
 
-/* heading sizes */
+/* heading sizes and styles */
 h1 { font-size: var(--font-6); }
-h2 { font-size: var(--font-4); }
+
+h2 {
+  font-size: var(--font-4);
+  line-height: 1.375;
+}
+
 h3 { font-size: var(--font-3); }
 h4 { font-size: var(--font-2); }
 h5 { font-size: var(--font-1); }
