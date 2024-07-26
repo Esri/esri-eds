@@ -5,6 +5,9 @@ import urls from './urls.js';
 function hero(main, document) {
   const heroContainer = document
     .querySelector('div.hero-banner-global-v2.aem-GridColumn');
+  if (!heroContainer) {
+    return;
+  }
   const heroInner = heroContainer.querySelector('.hbg-container--large');
 
   const backgroundImage = heroInner.querySelector('picture.hbg-container--large--backgroundImage');
@@ -194,6 +197,9 @@ function transformUrls(main) {
   main.querySelectorAll('a')
     .forEach((a) => {
       const href = a.getAttribute('href');
+      if (!href) {
+        console.log('no href', a, a.parentElement.outerHTML);
+      }
       if (!href.startsWith('/')) {
         return;
       }
@@ -204,7 +210,36 @@ function transformUrls(main) {
     });
 }
 
-function transformers(main, document) {
+const extraPages = {};
+
+function getPath(params) {
+  return new URL(params.originalURL).pathname.replace(/\/$/, '')
+    .replace(/\.html$/, '');
+}
+
+function map(main, document, params) {
+  main.querySelectorAll('.raw-html-for-js-app').forEach((rawHtmlForJsApp) => {
+    if (!rawHtmlForJsApp.querySelector('#eam-map-wrapper')) {
+      throw new Error('eam-map-wrapper not found in raw-html-for-js-app', rawHtmlForJsApp);
+    }
+
+    main.querySelector('a#returnBtn').remove();
+    main.querySelector('a#fullScreenButton').remove();
+
+    const path = getPath(params);
+
+    const link = document.createElement('a');
+    link.setAttribute('href', path);
+    link.textContent = path;
+
+    rawHtmlForJsApp.replaceWith(WebImporter.Blocks.createBlock(document, {
+      name: 'map',
+      cells: [[link]],
+    }));
+  });
+}
+
+function transformers(main, document, params) {
   videos(main, document);
   calciteButton(main, document);
   hero(main, document);
@@ -213,11 +248,12 @@ function transformers(main, document) {
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
+  map(main, document, params);
   transformUrls(main);
 }
 
 export default {
-  transformDOM: ({ document }) => {
+  transformDOM: ({ document, params }) => {
     const main = document.querySelector('main');
     // remove header and footer from main
     WebImporter.DOMUtils.remove(main, [
@@ -226,7 +262,7 @@ export default {
       '.disclaimer',
     ]);
 
-    transformers(main, document);
+    transformers(main, document, params);
 
     return main;
   },
