@@ -146,7 +146,20 @@ function mediaGallery(main, document) {
 function cards(main, document) {
   main.querySelectorAll('.card-container-v3')
     .forEach((container) => {
-      const cells = [...container.querySelectorAll(':scope > ul > li > article')].map((card) => [card]);
+      const cells = [...container.querySelectorAll(':scope > ul > li > article')]
+        .map((card) => {
+          if (card.children.length === 1 && card.children[0].tagName === 'A') {
+            const link = card.children[0];
+            const newCard = document.createElement('div');
+            const newLink = document.createElement('a');
+            const href = link.getAttribute('href');
+            newLink.setAttribute('href', href);
+            newLink.textContent = href;
+            newCard.append(newLink, ...link.children);
+            return [newCard];
+          }
+          return [card];
+        });
       if (!cells) {
         throw new Error('No cards found', container.outerHTML);
       }
