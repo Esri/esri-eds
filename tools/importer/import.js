@@ -87,33 +87,61 @@ function createIcon(iconName, originalURL) {
   return icon;
 }
 
+function getCardArrayFromContainer(container, document) {
+  return [...container.querySelectorAll(':scope > ul > li > article')]
+    .map((card) => {
+      if (card.children.length === 1 && card.children[0].tagName === 'A') {
+        const link = card.children[0];
+        const newCard = document.createElement('div');
+        const newLink = document.createElement('a');
+        const href = link.getAttribute('href');
+        newLink.setAttribute('href', href);
+        newLink.textContent = href;
+        newCard.append(newLink, ...link.children);
+        return newCard;
+      }
+      return card;
+    });
+}
+
 function tabs(main, document) {
   main.querySelectorAll('.esri-carousel,.esri-tabs')
     .forEach((container) => {
       const withIcons = container.classList.contains('tab-icons');
+      let withCards = false;
 
       const cells = [...container.querySelectorAll('[role="tabpanel"]')]
         .map((tabContent) => {
           const tabLabelId = tabContent.getAttribute('aria-labelledby');
           const tabName = container.querySelector(`#${tabLabelId}`);
-
           const tabLabel = document.createElement('div');
           tabLabel.innerHTML = tabName.innerHTML;
+
           if (withIcons) {
             const tabIcon = tabContent.querySelector('.tab--icon > div');
-            const svgFileName = tabIcon.getAttribute('data-asset');
-            // example path: /content/dam/esrisites/en-us/common/icons/meridian-/search-48.svg
-            // get "search" from the path
-            const iconName = svgFileName
-              .split('/')
-              .pop()
-              .split('-')
-              .slice(0, -1)
-              .join('-');
-            const icon = document.createElement('p');
-            icon.append(createIcon(iconName, tabIcon.getAttribute('data-asset')));
-            tabIcon.remove();
-            tabLabel.prepend(icon);
+            if (tabIcon) {
+              const svgFileName = tabIcon.getAttribute('data-asset');
+              // example path: /content/dam/esrisites/en-us/common/icons/meridian-/search-48.svg
+              // get "search" from the path
+              const iconName = svgFileName
+                .split('/')
+                .pop()
+                .split('-')
+                .slice(0, -1)
+                .join('-');
+              const icon = document.createElement('p');
+              icon.append(createIcon(iconName, tabIcon.getAttribute('data-asset')));
+              tabIcon.remove();
+              tabLabel.prepend(icon);
+            }
+          }
+
+          const cardsContainer = tabContent.querySelector('.card-container-v3');
+          if (cardsContainer) {
+            withCards = true;
+            const cardArray = getCardArrayFromContainer(cardsContainer, document);
+
+            return [tabLabel, cardArray];
           }
 
           return [tabLabel, tabContent];
@@ -122,6 +150,7 @@ function tabs(main, document) {
       container.replaceChildren(WebImporter.Blocks.createBlock(document, {
         name: 'tabs',
         cells,
+        variants: withCards ? ['cards'] : [],
       }));
     });
 }
@@ -157,22 +186,23 @@ function mediaGallery(main, document) {
 }
 
 function cards(main, document) {
+  main.querySelectorAll('.block-group')
+    .forEach((container) => {
+      const cells = [...container.querySelectorAll('.block')]
+        .map((block) => {
+          return [block];
+        });
+
+      container.replaceWith(WebImporter.Blocks.createBlock(document, {
+        name: 'cards',
+        cells,
+        variants: ['Block group'],
+      }));
+    });
+
   main.querySelectorAll('.card-container-v3')
     .forEach((container) => {
-      const cells = [...container.querySelectorAll(':scope > ul > li > article')]
-        .map((card) => {
-          if (card.children.length === 1 && card.children[0].tagName === 'A') {
-            const link = card.children[0];
-            const newCard = document.createElement('div');
-            const newLink = document.createElement('a');
-            const href = link.getAttribute('href');
-            newLink.setAttribute('href', href);
-            newLink.textContent = href;
-            newCard.append(newLink, ...link.children);
-            return [newCard];
-          }
-          return [card];
-        });
+      const cells = getCardArrayFromContainer(container, document).map((card) => [card]);
       if (!cells) {
         throw new Error('No cards found', container.outerHTML);
       }
@@ -247,7 +277,41 @@ function map(main, document, params) {
   });
 }
 
+function hashCode(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    // eslint-disable-next-line no-bitwise
+    hash = (hash << 5) - hash + char;
+  }
+  // Convert to 32bit unsigned integer in base 36 and pad with "0" to ensure length is 7.
+  // eslint-disable-next-line no-bitwise
+  return (hash >>> 0).toString(36).padStart(7, '0');
+}
+
+function anonymousIcons(main) {
+  const iconNames = {
+    '1oevmje': 'thumbsup',
+    '0erguqf': 'locations',
+    '0bg3tpq': 'employees',
+    '1eovq9a': 'handshake',
+    '1ao49og': 'headset',
+    '0sr5z39': 'lightbulb',
+  };
+  main.querySelectorAll('.esri-text__iconContainer > svg')
+    .forEach((icon) => {
+      const iconHash = hashCode(icon.outerHTML);
+      const iconName = iconNames[iconHash];
+      if (!iconName) {
+        console.error('Unknown icon hash', iconHash, icon);
+        throw new Error(`Unknown icon hash: ${iconHash}`);
+      }
+      icon.outerHTML = `:${iconName}:`;
+    });
+}
+
 function transformers(main, document, params) {
+  anonymousIcons(main);
   videos(main, document);
   calciteButton(main, document);
   hero(main, document);
