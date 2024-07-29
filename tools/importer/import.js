@@ -77,6 +77,16 @@ function storyteller(main, document) {
     });
 }
 
+function createIcon(iconName, originalURL) {
+  const icon = document.createElement('span');
+  icon.className = 'aem-icon';
+  icon.textContent = `:${iconName}:`;
+  icon.setAttribute('icon-name', iconName);
+  icon.setAttribute('data-original-url', `${WebImporter.FileUtils.sanitizePath(originalURL)}`);
+
+  return icon;
+}
+
 function tabs(main, document) {
   main.querySelectorAll('.esri-carousel,.esri-tabs')
     .forEach((container) => {
@@ -101,7 +111,7 @@ function tabs(main, document) {
               .slice(0, -1)
               .join('-');
             const icon = document.createElement('p');
-            icon.textContent = `:${iconName}:`;
+            icon.append(createIcon(iconName, tabIcon.getAttribute('data-asset')));
             tabIcon.remove();
             tabLabel.prepend(icon);
           }
@@ -197,9 +207,6 @@ function transformUrls(main) {
   main.querySelectorAll('a')
     .forEach((a) => {
       const href = a.getAttribute('href');
-      if (!href) {
-        console.log('no href', a, a.parentElement.outerHTML);
-      }
       if (!href.startsWith('/')) {
         return;
       }
@@ -220,7 +227,8 @@ function getPath(params) {
 function map(main, document, params) {
   main.querySelectorAll('.raw-html-for-js-app').forEach((rawHtmlForJsApp) => {
     if (!rawHtmlForJsApp.querySelector('#eam-map-wrapper')) {
-      throw new Error('eam-map-wrapper not found in raw-html-for-js-app', rawHtmlForJsApp);
+      console.error('eam-map-wrapper not found in raw-html-for-js-app', rawHtmlForJsApp);
+      return;
     }
 
     main.querySelector('a#returnBtn').remove();
@@ -253,7 +261,7 @@ function transformers(main, document, params) {
 }
 
 export default {
-  transformDOM: ({ document, params }) => {
+  transform: ({ document, params }) => {
     const main = document.querySelector('main');
     // remove header and footer from main
     WebImporter.DOMUtils.remove(main, [
@@ -264,6 +272,29 @@ export default {
 
     transformers(main, document, params);
 
-    return main;
+    const pages = [{
+      element: main,
+      path: getPath(params),
+    }];
+
+    // main.querySelectorAll('span.aem-icon').forEach((icon) => {
+    //   const originalURL = icon.getAttribute('data-original-url');
+    //   const iconName = icon.getAttribute('icon-name');
+    //   // console.log('detected span.aem-icon', icon, originalURL);
+    //   console.log('from url', iconName, originalURL);
+    //   pages.push({
+    //     from: originalURL,
+    //     path: `icons/${iconName}.svg`,
+    //   });
+    // });
+
+    if (extraPages.css) {
+      // pages.push({
+      //   element: extraPages.css,
+      //   path: `${path}/styles.css`,
+      // });
+    }
+
+    return pages;
   },
 };
