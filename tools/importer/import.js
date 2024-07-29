@@ -8,7 +8,7 @@ function hero(main, document) {
   if (!heroContainer) {
     return;
   }
-  const heroInner = heroContainer.querySelector('.hbg-container--large');
+  const heroInner = heroContainer.querySelector('.hbg-container');
 
   const backgroundImage = heroInner.querySelector('picture.hbg-container--large--backgroundImage');
 
@@ -19,7 +19,7 @@ function hero(main, document) {
 
     // remove background image as it's the same as the video poster
     backgroundImage.remove();
-  } else {
+  } else if (backgroundImage) {
     heroInner.append(backgroundImage);
   }
 
