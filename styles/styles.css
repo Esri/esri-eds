@@ -223,6 +223,11 @@ button {
   margin-inline-end: var(--space-2);
 }
 
+a.button[kind="inverse"] {
+  color: var(--calcite-ui-text-inverse);
+  background-color: var(--calcite-ui-inverse);
+}
+
 a.button:hover,
 a.button:focus,
 button:hover,
