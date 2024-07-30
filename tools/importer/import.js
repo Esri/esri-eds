@@ -189,9 +189,7 @@ function cards(main, document) {
   main.querySelectorAll('.block-group')
     .forEach((container) => {
       const cells = [...container.querySelectorAll('.block')]
-        .map((block) => {
-          return [block];
-        });
+        .map((block) => [block]);
 
       container.replaceWith(WebImporter.Blocks.createBlock(document, {
         name: 'cards',
@@ -298,20 +296,36 @@ function anonymousIcons(main) {
     '1ao49og': 'headset',
     '0sr5z39': 'lightbulb',
   };
+
+  const foundIcons = {};
+
   main.querySelectorAll('.esri-text__iconContainer > svg')
     .forEach((icon) => {
       const iconHash = hashCode(icon.outerHTML);
-      const iconName = iconNames[iconHash];
+      let iconName = iconNames[iconHash];
       if (!iconName) {
         console.error('Unknown icon hash', iconHash, icon);
-        throw new Error(`Unknown icon hash: ${iconHash}`);
+        iconName = iconHash;
+        // throw new Error(`Unknown icon hash: ${iconHash}`);
       }
+
+      // remove icon class and id
+      icon.removeAttribute('class');
+      icon.removeAttribute('id');
+
+      foundIcons[iconName] = icon.outerHTML;
+
       icon.outerHTML = `:${iconName}:`;
     });
+
+  return foundIcons;
 }
 
 function transformers(main, document, params) {
-  anonymousIcons(main);
+  const report = {
+    icons: anonymousIcons(main),
+  };
+
   videos(main, document);
   calciteButton(main, document);
   hero(main, document);
@@ -322,6 +336,8 @@ function transformers(main, document, params) {
   callToAction(main, document);
   map(main, document, params);
   transformUrls(main);
+
+  return report;
 }
 
 export default {
@@ -334,11 +350,12 @@ export default {
       '.disclaimer',
     ]);
 
-    transformers(main, document, params);
+    const report = transformers(main, document, params);
 
     const pages = [{
       element: main,
       path: getPath(params),
+      report,
     }];
 
     // main.querySelectorAll('span.aem-icon').forEach((icon) => {
