@@ -1,6 +1,14 @@
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
-    "custom-property-pattern": null
+    "custom-property-pattern": null,
+    "declaration-no-important": true,
+    "max-nesting-depth": [5, 
+      {
+        "message": "Please keep the nesting depth 3 or less."
+      }
+    ],
+    "declaration-property-value-no-unknown": true,
+    "keyframes-name-pattern": null
   }
 }

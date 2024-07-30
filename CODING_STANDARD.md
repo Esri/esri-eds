@@ -1,5 +1,7 @@
 # Coding Standards
 
+CSS standards are enforced by Stylelint. The following are the standards that are enforced.
+
 ## Comments
 
 Use CSS-style comments for code that is not self-explanatory. The should be a space between the comment and the asterisk.
@@ -77,7 +79,7 @@ Best practice is to include fallback value for variables. This is not strictly r
 ## Nesting
 
 - Preproceesors should not be used. Native CSS nesting may be used. 
-- Nesting must be limited to 3 levels deep.
+- Nesting must be limited to 2 levels deep.
 
 ## Media Queries
 
