@@ -52,7 +52,15 @@ async function loadFonts() {
 function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
-    if (a.href.startsWith('https://mediaspace.esri.com/')) {
+    // change urls to be allowed to be embedded
+    if (a.href.startsWith('https://youtu.be')) {
+      a.href = a.href.replace('youtu.be', 'www.youtube.com/embed');
+    }
+
+    if (
+      a.href.startsWith('https://mediaspace.esri.com/')
+   || a.href.startsWith('https://www.youtube.com/')
+    ) {
       const closeButton = div(
         {
           class: 'video-close-button',

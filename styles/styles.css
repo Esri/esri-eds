@@ -282,7 +282,7 @@ main .section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--esri-ui-opacity80-inverse);
+  background-color: #353535cc;
   overscroll-behavior: contain;
 
   .video-iframe-wrapper {
@@ -301,13 +301,13 @@ main .section {
       justify-content: center;
       align-items: center;
       transition: .15s ease-in-out;
-      background-color: var(--calcite-ui-text-1);;
+      background-color: white;
       border-radius: 50%;
     }
 
     .video-close-button:hover {
       background-color: var(--calcite-ui-brand);
-      color: var(--calcite-ui-text-1);
+      color: white;
     }
   }
 

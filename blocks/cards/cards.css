@@ -1,31 +1,74 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-  grid-gap: 16px;
+.cards {
+  background-color: var(--calcite-ui-foreground-1);
+  padding: 4rem 0;
+
+  .cards-card-body {
+    margin: 8px;
+  
+    h3 {
+      font-size: var(--font-2);
+      line-height: 1.375;
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+  
+    p:last-child {
+      font-size: var(--font-minus-1);
+      margin: .5rem 0;
+      margin-bottom: 1.5rem;
+      padding-bottom: 2.75rem;
+    }
+  
+    h3, p:last-child {
+      padding-right: var(--space-5);
+      color: var(--calcite-ui-text-1);
+    }
+
+    & > *:first-child {
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .cards-card-image {
+    line-height: 0;
+  }
+
+  & > ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    inline-size: 100%;  
+    width: 1440px;
+    max-width: 96vw;
+    margin: auto;
+
+    & > li {
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
 }
 
-.cards > ul > li {
-  border: 1px solid var(--dark-color);
-  background-color: var(--background-color);
+@media (width >= 768px) {
+  .cards > ul > li {
+    inline-size: 50%;
+  }
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+@media (width >= 1024px) {
+  .cards > ul > li {
+    inline-size: 33.333%;
+  }
 }
 
-.cards .cards-card-image {
-  line-height: 0;
-}
-
-.cards .cards-card-body > *:first-child {
-  margin-top: 0;
-}
-
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+@media (width >= 1440px) {
+  .cards > ul > li {
+    inline-size: 25%;
+  }
 }
