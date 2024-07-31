@@ -358,10 +358,10 @@ function inlineIcons(main, html) {
 }
 
 function quote(main, document) {
-  document.querySelectorAll('.quote').forEach((quote) => {
-    const container = quote.closest('.column-24');
+  document.querySelectorAll('.quote').forEach((quoteEl) => {
+    const container = quoteEl.closest('.column-24');
     if (!container) {
-      throw new Error(`quote not in column-24${quote.outerHTML}`);
+      throw new Error(`quote not in column-24${quoteEl.outerHTML}`);
     }
 
     const cells = [[...container.children]];
