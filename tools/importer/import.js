@@ -320,7 +320,7 @@ function inlineIcons(main, html) {
       let iconName = iconNames[iconHash];
       if (!iconName) {
         console.error('Unknown icon hash', iconHash, icon);
-        iconName = iconHash;
+        iconName = `pending-${iconHash}`;
         // throw new Error(`Unknown icon hash: ${iconHash}`);
       }
 
@@ -366,9 +366,7 @@ export default {
     const pages = [{
       element: main,
       path: getPath(params),
-      report: {
-        icons: 'icons',
-      },
+      report,
     }];
 
     // main.querySelectorAll('span.aem-icon').forEach((icon) => {
