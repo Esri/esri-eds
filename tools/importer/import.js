@@ -100,6 +100,7 @@ function getCardArrayFromContainer(container, document) {
         newCard.append(newLink, ...link.children);
         return newCard;
       }
+
       return card;
     });
 }
@@ -159,18 +160,20 @@ function mediaGallery(main, document) {
   main.querySelectorAll('.media-gallery')
     .forEach((container) => {
       const mgCards = [...container.querySelectorAll('.mg__card')];
-      const cells = mgCards.map((card) => {
-        const wrapper = card.querySelector('.mg-card__wrapper');
-        const href = wrapper.getAttribute('data-href');
+      const cells = mgCards
+        .filter((card) => card.querySelector('.mg-card__wrapper'))
+        .map((card) => {
+          const wrapper = card.querySelector('.mg-card__wrapper');
+          const href = wrapper.getAttribute('data-href');
 
-        const link = document.createElement('a');
-        link.setAttribute('href', href);
-        link.textContent = href;
+          const link = document.createElement('a');
+          link.setAttribute('href', href);
+          link.textContent = href;
 
-        card.append(link);
+          card.append(link);
 
-        return [card];
-      });
+          return [card];
+        });
 
       const variants = [];
       if (mgCards.length > 2 && mgCards[0].getAttribute('attr-width') === '2' && mgCards[1].getAttribute('attr-width') === '1') {
@@ -205,8 +208,18 @@ function cards(main, document) {
         throw new Error('No cards found', container.outerHTML);
       }
 
+      const withVideo = cells.some((row) => row[0]
+        .querySelector(':scope > a:first-child')
+        ?.getAttribute('href')
+        .startsWith('https://youtu.be/'));
+
+      let blockName = 'cards';
+      if (withVideo) {
+        blockName = 'Video cards';
+      }
+
       container.replaceWith(WebImporter.Blocks.createBlock(document, {
-        name: 'cards',
+        name: blockName,
         cells,
       }));
     });
@@ -352,7 +365,9 @@ function transformers(main, document, params, html) {
 }
 
 export default {
-  transform: ({ document, params, html }) => {
+  transform: ({
+    document, params, html, url,
+  }) => {
     const main = document.querySelector('main');
     // remove header and footer from main
     WebImporter.DOMUtils.remove(main, [
@@ -361,11 +376,13 @@ export default {
       '.disclaimer',
     ]);
 
+    const path = (new URL(url)).pathname;
+
     const report = transformers(main, document, params, html);
 
     const pages = [{
       element: main,
-      path: getPath(params),
+      path,
       report,
     }];
 
