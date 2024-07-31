@@ -409,23 +409,10 @@ export default {
 
     const report = transformers(main, document, html);
 
-    const pages = [{
+    return [{
       element: main,
       path,
       report,
     }];
-
-    // main.querySelectorAll('span.aem-icon').forEach((icon) => {
-    //   const originalURL = icon.getAttribute('data-original-url');
-    //   const iconName = icon.getAttribute('icon-name');
-    //   // console.log('detected span.aem-icon', icon, originalURL);
-    //   console.log('from url', iconName, originalURL);
-    //   pages.push({
-    //     from: originalURL,
-    //     path: `icons/${iconName}.svg`,
-    //   });
-    // });
-
-    return pages;
   },
 };
