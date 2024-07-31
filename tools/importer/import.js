@@ -156,6 +156,15 @@ function tabs(main, document) {
     });
 }
 
+function createLink(document, href) {
+  const url = (href.startsWith('/')) ? `https://www.esri.com${href}` : href;
+  const link = document.createElement('a');
+  link.setAttribute('href', url);
+  link.textContent = url;
+
+  return link;
+}
+
 function mediaGallery(main, document) {
   main.querySelectorAll('.media-gallery')
     .forEach((container) => {
@@ -164,19 +173,27 @@ function mediaGallery(main, document) {
         .filter((card) => card.querySelector('.mg-card__wrapper'))
         .map((card) => {
           const wrapper = card.querySelector('.mg-card__wrapper');
-          const href = wrapper.getAttribute('data-href');
+          const href = wrapper.getAttribute('data-href') ?? wrapper.getAttribute('href');
 
-          const link = document.createElement('a');
-          link.setAttribute('href', href);
-          link.textContent = href;
+          if (wrapper.tagName === 'A') {
+            const div = document.createElement('div');
+            div.append(...wrapper.children);
+            wrapper.replaceWith(div);
+          }
+          const link = createLink(document, href);
 
           card.append(link);
 
           return [card];
         });
 
+      function getCardWidth(card) {
+        const firstChild = card.firstElementChild;
+        return firstChild.getAttribute('data-card-width');
+      }
+
       const variants = [];
-      if (mgCards.length > 2 && mgCards[0].getAttribute('attr-width') === '2' && mgCards[1].getAttribute('attr-width') === '1') {
+      if (mgCards.length > 2 && getCardWidth(mgCards[0]) === '2' && getCardWidth(mgCards[1]) === '1') {
         variants.push('alternate-2-1');
       }
 
@@ -340,6 +357,22 @@ function inlineIcons(main, html) {
   return foundIcons;
 }
 
+function quote(main, document) {
+  document.querySelectorAll('.quote').forEach((quote) => {
+    const container = quote.closest('.column-24');
+    if (!container) {
+      throw new Error(`quote not in column-24${quote.outerHTML}`);
+    }
+
+    const cells = [[...container.children]];
+
+    container.replaceWith(WebImporter.Blocks.createBlock(document, {
+      name: 'quote',
+      cells,
+    }));
+  });
+}
+
 function transformers(main, document, html) {
   const report = {
     icons: inlineIcons(main, html),
@@ -354,6 +387,7 @@ function transformers(main, document, html) {
   cards(main, document);
   callToAction(main, document);
   map(main, document, html);
+  quote(main, document);
   transformUrls(main);
 
   return report;
