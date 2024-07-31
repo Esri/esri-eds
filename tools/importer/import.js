@@ -277,7 +277,7 @@ function map(main, document, params) {
 
 function hashCode(str) {
   let hash = 0;
-  for (let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i += 1) {
     const char = str.charCodeAt(i);
     // eslint-disable-next-line no-bitwise
     hash = (hash << 5) - hash + char;
@@ -287,20 +287,35 @@ function hashCode(str) {
   return (hash >>> 0).toString(36).padStart(7, '0');
 }
 
-function anonymousIcons(main) {
+function inlineIcons(main, html) {
   const iconNames = {
-    '1oevmje': 'thumbsup',
+    '0gn1vbo': 'thumbsup',
     '0erguqf': 'locations',
     '0bg3tpq': 'employees',
-    '1eovq9a': 'handshake',
-    '1ao49og': 'headset',
+    '0cusfqy': 'handshake',
+    '0oy3ew8': 'headset',
     '0sr5z39': 'lightbulb',
   };
+
+  const themeColorRegex = /--theme-color: (#[0-9a-fA-F]{6});/g;
+  const themeColorMatch = themeColorRegex.exec(html);
+  const themeColor = themeColorMatch[1];
 
   const foundIcons = {};
 
   main.querySelectorAll('.esri-text__iconContainer > svg')
     .forEach((icon) => {
+      // if svg path has fill as css (and not inline) add it as an inline style
+      const path = icon.querySelector('path');
+      // get css fill and set it as inline fill
+      if (!path.style.fill) {
+        path.style.fill = themeColor;
+      }
+
+      icon.removeAttribute('class');
+      icon.removeAttribute('id');
+      path.removeAttribute('id');
+
       const iconHash = hashCode(icon.outerHTML);
       let iconName = iconNames[iconHash];
       if (!iconName) {
@@ -308,10 +323,6 @@ function anonymousIcons(main) {
         iconName = iconHash;
         // throw new Error(`Unknown icon hash: ${iconHash}`);
       }
-
-      // remove icon class and id
-      icon.removeAttribute('class');
-      icon.removeAttribute('id');
 
       foundIcons[iconName] = icon.outerHTML;
 
@@ -321,9 +332,9 @@ function anonymousIcons(main) {
   return foundIcons;
 }
 
-function transformers(main, document, params) {
+function transformers(main, document, params, html) {
   const report = {
-    icons: anonymousIcons(main),
+    icons: inlineIcons(main, html),
   };
 
   videos(main, document);
@@ -341,7 +352,7 @@ function transformers(main, document, params) {
 }
 
 export default {
-  transform: ({ document, params }) => {
+  transform: ({ document, params, html }) => {
     const main = document.querySelector('main');
     // remove header and footer from main
     WebImporter.DOMUtils.remove(main, [
@@ -350,12 +361,14 @@ export default {
       '.disclaimer',
     ]);
 
-    const report = transformers(main, document, params);
+    const report = transformers(main, document, params, html);
 
     const pages = [{
       element: main,
       path: getPath(params),
-      report,
+      report: {
+        icons: 'icons',
+      },
     }];
 
     // main.querySelectorAll('span.aem-icon').forEach((icon) => {
