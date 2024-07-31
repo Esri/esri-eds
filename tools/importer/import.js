@@ -267,7 +267,7 @@ function map(main, document, html) {
 
     const apiDataRegex = /axios.get\(\s*"([^"]+)"\s*\)/;
     const apiDataMatch = apiDataRegex.exec(html);
-    const mapUrl = apiDataMatch[1];
+    const mapUrl = (apiDataMatch?.length >= 2) ? apiDataMatch[1] : 'TODO import map url correctly';
 
     main.querySelector('a#returnBtn').remove();
     main.querySelector('a#fullScreenButton').remove();
