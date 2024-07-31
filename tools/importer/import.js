@@ -258,28 +258,23 @@ function transformUrls(main) {
     });
 }
 
-const extraPages = {};
-
-function getPath(params) {
-  return new URL(params.originalURL).pathname.replace(/\/$/, '')
-    .replace(/\.html$/, '');
-}
-
-function map(main, document, params) {
+function map(main, document, html) {
   main.querySelectorAll('.raw-html-for-js-app').forEach((rawHtmlForJsApp) => {
     if (!rawHtmlForJsApp.querySelector('#eam-map-wrapper')) {
       console.error('eam-map-wrapper not found in raw-html-for-js-app', rawHtmlForJsApp);
       return;
     }
 
+    const apiDataRegex = /axios.get\(\s*"([^"]+)"\s*\)/;
+    const apiDataMatch = apiDataRegex.exec(html);
+    const mapUrl = apiDataMatch[1];
+
     main.querySelector('a#returnBtn').remove();
     main.querySelector('a#fullScreenButton').remove();
 
-    const path = getPath(params);
-
     const link = document.createElement('a');
-    link.setAttribute('href', path);
-    link.textContent = path;
+    link.setAttribute('href', mapUrl);
+    link.textContent = mapUrl;
 
     rawHtmlForJsApp.replaceWith(WebImporter.Blocks.createBlock(document, {
       name: 'map',
@@ -345,7 +340,7 @@ function inlineIcons(main, html) {
   return foundIcons;
 }
 
-function transformers(main, document, params, html) {
+function transformers(main, document, html) {
   const report = {
     icons: inlineIcons(main, html),
   };
@@ -358,7 +353,7 @@ function transformers(main, document, params, html) {
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
-  map(main, document, params);
+  map(main, document, html);
   transformUrls(main);
 
   return report;
@@ -366,7 +361,7 @@ function transformers(main, document, params, html) {
 
 export default {
   transform: ({
-    document, params, html, url,
+    document, html, url,
   }) => {
     const main = document.querySelector('main');
     // remove header and footer from main
@@ -378,7 +373,7 @@ export default {
 
     const path = (new URL(url)).pathname;
 
-    const report = transformers(main, document, params, html);
+    const report = transformers(main, document, html);
 
     const pages = [{
       element: main,
@@ -396,13 +391,6 @@ export default {
     //     path: `icons/${iconName}.svg`,
     //   });
     // });
-
-    if (extraPages.css) {
-      // pages.push({
-      //   element: extraPages.css,
-      //   path: `${path}/styles.css`,
-      // });
-    }
 
     return pages;
   },
