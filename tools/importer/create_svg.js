@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const csv = require('csv-parser');
 
 const csvFilePath = path.join(__dirname, 'import-report.csv');
