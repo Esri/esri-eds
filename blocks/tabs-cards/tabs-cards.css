@@ -1,0 +1,101 @@
+.tabs-cards {
+  width: 1440px;
+  max-width: 96vw;
+  margin: auto;
+
+  img {
+    width: 100%;
+    aspect-ratio: 342 / 192;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    display: block;
+    border: solid 1px var(--calcite-ui-border-1);
+
+    & > p {
+      position: relative;
+
+      & > p {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #ffffffd9;
+        padding: var(--space-2) var(--space-5);
+        letter-spacing: .2rem;
+        font-weight: var(--calcite-font-weight-bold);
+        text-transform: uppercase;
+        color: var(--calcite-ui-text-2);
+        font-size: var(--font-minus-2);
+      }
+    }
+  }
+
+  .esri-event-card, .other-event-card {
+    padding: 0.5rem;
+    flex: 0 0 100%;
+    box-sizing: border-box; 
+
+
+    .text-wrapper {
+      padding: var(--space-5) var(--space-5) var(--space-6) var(--space-5);
+      box-sizing: border-box;
+
+      p:nth-child(1) {
+        color: var(--calcite-ui-text-1);
+        font-size: var(--font-2);
+        margin-bottom: var(--space-3);
+      }
+
+      p:nth-child(2) {
+        color: var(--calcite-ui-text-2);
+        font-size: var(--font-minus-1);
+        margin-bottom: var(--space-2);
+      }
+
+      p:nth-child(3) {
+        color: var(--calcite-ui-text-1);
+        font-size: var(--font-minus-1);
+      }
+    }
+  }
+
+  & > div {
+    & > div:nth-child(2) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: row wrap;
+    }
+  }
+}
+
+@media (width >= 768px) {
+  .tabs-cards {
+    .esri-event-card, .other-event-card {
+      flex: 0 0 50%;
+    }
+  }
+}
+
+@media (width >= 1024px) {
+  .tabs-cards {
+    .esri-event-card, .other-event-card {
+      flex: 0 0 33.33%;
+    }
+  }
+}
+
+@media (width >= 1440px) {
+  .tabs-cards {
+    .esri-event-card, .other-event-card {
+      flex: 0 0 25%;
+    }
+  }
+}
