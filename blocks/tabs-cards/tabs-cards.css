@@ -1,10 +1,10 @@
 .tabs-cards {
-  width: 1440px;
-  max-width: 96vw;
+  inline-size: 1440px;
+  max-inline-size: 96vw;
   margin: auto;
 
   img {
-    width: 100%;
+    inline-size: 100%;
     aspect-ratio: 342 / 192;
   }
 
@@ -22,9 +22,9 @@
 
       & > p {
         position: absolute;
-        bottom: 5px;
-        left: 0;
-        width: 100%;
+        inset-block-end: 5px;
+        inset-inline-start: 0;
+        inline-size: 100%;
         box-sizing: border-box;
         background-color: #ffffffd9;
         padding: var(--space-2) var(--space-5);
@@ -50,13 +50,13 @@
       p:nth-child(1) {
         color: var(--calcite-ui-text-1);
         font-size: var(--font-2);
-        margin-bottom: var(--space-3);
+        margin-block-end: var(--space-3);
       }
 
       p:nth-child(2) {
         color: var(--calcite-ui-text-2);
         font-size: var(--font-minus-1);
-        margin-bottom: var(--space-2);
+        margin-block-end: var(--space-2);
       }
 
       p:nth-child(3) {

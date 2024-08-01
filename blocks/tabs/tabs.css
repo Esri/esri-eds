@@ -3,26 +3,26 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    width: 100vw;
+    inline-size: 100vw;
   }
 
     p:last-child {
-      margin-bottom: 0;
+      margin-block-end: 0;
       display: flex;
       justify-content: center;
 
       picture {
         display: block;
         position: relative;
-        width: 90vw;
+        inline-size: 90vw;
         aspect-ratio: 1/1;
       }
 
       img {
         position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
+        inset-block-end: 0;
+        inline-size: 100%;
+        block-size: 100%;
       }
     }
 
@@ -31,7 +31,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 96vw;
+      inline-size: 96vw;
       padding: 0;
       margin: 0 auto;
 
@@ -56,11 +56,11 @@
       }
 
       .arrow-button.left {
-        left: 0;
+        inset-inline-start: 0;
       }
 
       .arrow-button.right {
-        right: 0;
+        inset-inline-end: 0;
       }
 
       .arrow-button[aria-hidden='true'] {
@@ -69,8 +69,8 @@
 
       .tab-title {
         display: block;
-        border-bottom: 1px solid var(--calcite-ui-border-2);
-        padding-bottom: 2px;
+        border-block-end: 1px solid var(--calcite-ui-border-2);
+        padding-block-end: 2px;
       }
       
       .tab-title button {
@@ -87,14 +87,14 @@
       }
 
       .tab-title[aria-hidden='false'] {
-        border-bottom: 3px solid var(--calcite-ui-brand);
-        padding-bottom: 0;
+        border-block-end: 3px solid var(--calcite-ui-brand);
+        padding-block-end: 0;
       }
     }
 
     .tab-content {
       display: block;
-      width: 100vw;
+      inline-size: 100vw;
       position: relative;
       padding: 0;
     }
@@ -106,20 +106,20 @@
     p:first-child img {
       position: absolute;
       object-fit: cover;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
     }
 
     .buttons-wrapper {
-      width: 90%;
+      inline-size: 90%;
       margin: auto;
-      margin-top: 2rem;
+      margin-block-start: 2rem;
 
       calcite-button {
-        padding-bottom: 0.75rem;
-        margin-bottom: 0.5rem;
-        margin-right: 0.7rem;
+        padding-block-end: 0.75rem;
+        margin-block-end: 0.5rem;
+        margin-inline-end: 0.7rem;
 
         span {
           color: var(--calcite-ui-text-1);
@@ -129,10 +129,10 @@
 
     .text-wrapper {
       padding: 0 5vw;
-      padding-top: 4rem;
+      padding-block-start: 4rem;
 
       p, h2 {
-        width: 90%;
+        inline-size: 90%;
       }
 
       p:first-child {
@@ -141,19 +141,19 @@
         text-transform: uppercase;
         color: var(--calcite-ui-text-2);
         margin: 0;
-        margin-bottom: 0.5rem;
+        margin-block-end: 0.5rem;
       }
 
       p:last-child {
         color: var(--calcite-ui-text-1);
         margin: 0;
-        margin-bottom: 1.5rem;
+        margin-block-end: 1.5rem;
       }
 
       h2 {
         font-size: var(--font-8);
         margin: 0;
-        margin-bottom: 0.6rem;
+        margin-block-end: 0.6rem;
       }
     }
 
@@ -178,11 +178,10 @@
 
     .tab-nav {
       position: absolute;
-      top: 10px;
-      max-width: 93vw;
-      width: 1420px;
-      left: 0;
-      right: 0;
+      inset-block-start: 10px;
+      max-inline-size: 93vw;
+      inline-size: 1420px;
+      inset-inline: 0;
       margin: 0 auto;
       box-sizing: content-box;
       z-index: 2;
@@ -190,25 +189,25 @@
       .tab-title {
         display: block;
         flex: 1;
-        border-bottom: 1px solid var(--calcite-ui-text-1);
+        border-block-end: 1px solid var(--calcite-ui-text-1);
       }
         
       .tab-title button {
-        width: 100%;
+        inline-size: 100%;
         padding: 1rem;
       }
 
       .tab-title[aria-hidden='false'] {
-        border-bottom: 1px solid var(--calcite-ui-text-1);
+        border-block-end: 1px solid var(--calcite-ui-text-1);
       }
         
       .tab-title[aria-selected='true'] {
-        border-bottom: 3px solid var(--calcite-ui-brand);
+        border-block-end: 3px solid var(--calcite-ui-brand);
       }
     }
       
     .tab-content[aria-hidden='false'] {
-      min-height: 960px;
+      min-block-size: 960px;
       display: grid;
       grid-template: 
       "text img"
@@ -217,16 +216,15 @@
     
       .buttons-wrapper {
         grid-area: buttons;
-        margin-top: 0;
-        padding-left: 2vw;
+        margin-block-start: 0;
+        padding-inline-start: 2vw;
         box-sizing: border-box;
-        width: 100%;
+        inline-size: 100%;
       }
       
       .text-wrapper {
         grid-area: text;
-        padding-right: 0;
-        padding-left: 2vw;
+        padding-inline: 2vw 0;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -238,7 +236,7 @@
     }
       
     .tab-content[aria-hidden='false'] p:last-child picture {
-      width: 100%;
+      inline-size: 100%;
     }
       
     .tab-content[aria-hidden='false'] p:last-child picture img {
@@ -250,9 +248,9 @@
     .tab-content[aria-hidden='false'] > p:first-child {
       position: absolute;
       object-fit: cover;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
       margin: 0;
       z-index: 0;
     }
@@ -261,9 +259,8 @@
 
 @media (width >= 1480px) {
   .tabs .tab-content[aria-hidden='false'] :is(.text-wrapper, .buttons-wrapper) {
-          width: 720px;
-          margin-right: 0;
-          margin-left: auto;
-          padding-left: 0;
+          inline-size: 720px;
+          margin-inline: auto 0;
+          padding-inline-start: 0;
   }
 }
