@@ -1,11 +1,11 @@
 .quote-container {
-  padding-top: 0;
-  width: 100vw;
+  padding-block-start: 0;
+  inline-size: 100vw;
 }
 
 .quote {
   margin: 0;
-  width: 100%;
+  inline-size: 100%;
 
   ul {
     list-style-type: none;
@@ -13,8 +13,8 @@
     margin: 0 auto;
     
     li {
-      width: 1440px;
-      max-width: 96vw;
+      inline-size: 1440px;
+      max-inline-size: 96vw;
       padding: 0 0.5rem;
     }
   }
@@ -23,12 +23,12 @@
     box-sizing: border-box;
     padding: 3rem 0.5rem 1.5rem 1.5rem;
     font-family: var(--calcite-sans-family);
-    width: 1440px;
-    max-width: 96vw;
+    inline-size: 1440px;
+    max-inline-size: 96vw;
 
     .icon-quote {
-      width: 48px;
-      height: 48px;      
+      inline-size: 48px;
+      block-size: 48px;      
     }
   }
 
@@ -38,7 +38,7 @@
     font-weight: 400;
     font-size: var(--font-3);
     margin: 1rem 0;
-    margin-top: 0.5rem;
+    margin-block-start: 0.5rem;
     font-style: italic;
   }
 
@@ -55,28 +55,28 @@
     color: var(--calcite-ui-text-1);
     font-weight: 400;
     font-size: var(--font-1);
-    padding-bottom: 1.5rem;
+    padding-block-end: 1.5rem;
     margin: 0;
   }
 
   .quote-block-image {
     box-sizing: border-box;
-    width: 1440px;
-    max-width: 96vw;
+    inline-size: 1440px;
+    max-inline-size: 96vw;
     padding: 0 0.5rem;
 
     picture {
       display: block;
-      width: 100%;
+      inline-size: 100%;
       aspect-ratio: 1/1;
     }
 
     img {
       border-radius: 50%;
-      width: 95%;
-      height: 95%;
+      inline-size: 95%;
+      block-size: 95%;
       position: relative;
-      top: 5%;
+      inset-block-start: 5%;
     }
   }
 }
@@ -93,19 +93,19 @@
 
     .quote-block-body {
       padding: 4.5rem 0.5rem 4.5rem 1rem;
-      width: 960px;
-      max-width: 64vw;
+      inline-size: 960px;
+      max-inline-size: 64vw;
     }
 
     .quote-block-image {
       padding: 4.5rem 0.5rem;
-      margin-top: 3rem;
-      width: 480px;
-      max-width: 32vw;
+      margin-block-start: 3rem;
+      inline-size: 480px;
+      max-inline-size: 32vw;
 
       picture {
         img {
-          top: 0;
+          inset-block-start: 0;
         }
       }
     }
@@ -115,15 +115,15 @@
 @media (width >= 860px) {
   .quote {
     .quote-block-body {
-      padding-left: 0.5rem;
-      width: 780px;
-      max-width: 52vw;
+      padding-inline-start: 0.5rem;
+      inline-size: 780px;
+      max-inline-size: 52vw;
     }
 
     .quote-block-image {
-      width: 360px;
-      max-width: 24vw;
-      margin-top: 1.5rem;
+      inline-size: 360px;
+      max-inline-size: 24vw;
+      margin-block-start: 1.5rem;
     }
   }
 }
@@ -131,7 +131,7 @@
 @media (width >= 1024px) {
   .quote {
     .quote-block-body {
-      padding-left: 1.5rem;
+      padding-inline-start: 1.5rem;
     }
   }
 }

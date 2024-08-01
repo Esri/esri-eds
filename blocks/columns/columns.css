@@ -4,7 +4,7 @@
 }
 
 .columns img {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .columns > div > div {

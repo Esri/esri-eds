@@ -1,7 +1,7 @@
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
-  width: 100%;
+  inline-size: 100%;
   z-index: 2;
   position: fixed;
 }
@@ -15,8 +15,8 @@ header nav {
   align-items: center;
   gap: 0 2em;
   margin: auto;
-  max-width: 1264px;
-  height: var(--nav-height);
+  max-inline-size: 1264px;
+  block-size: var(--nav-height);
   padding: 0 1rem;
   font-family: var(--calcite-sans-family);
 }
@@ -27,7 +27,7 @@ header nav[aria-expanded='true'] {
     'sections sections' 1fr
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
-  min-height: 100vh;
+  min-block-size: 100vh;
 }
 
 @media (width >= 600px) {
@@ -43,7 +43,7 @@ header nav[aria-expanded='true'] {
   }
 
   header nav[aria-expanded='true'] {
-    min-height: 0;
+    min-block-size: 0;
     overflow: visible;
   }
 }
@@ -60,13 +60,13 @@ header nav a:any-link {
 /* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
-  height: 22px;
+  block-size: 22px;
   display: flex;
   align-items: center;
 }
 
 header nav .nav-hamburger button {
-  height: 22px;
+  block-size: 22px;
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -84,7 +84,7 @@ header nav .nav-hamburger-icon::after {
   box-sizing: border-box;
   display: block;
   position: relative;
-  width: 20px;
+  inline-size: 20px;
 }
 
 header nav .nav-hamburger-icon::before,
@@ -97,37 +97,36 @@ header nav .nav-hamburger-icon::after {
 header nav[aria-expanded='false'] .nav-hamburger-icon,
 header nav[aria-expanded='false'] .nav-hamburger-icon::before,
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
+  block-size: 2px;
   border-radius: 2px;
   background: currentcolor;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
+  inset-block-start: -6px;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
+  inset-block-start: 6px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
+  block-size: 22px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
+  inset-block-start: 3px;
+  inset-inline-start: 1px;
   transform: rotate(45deg);
   transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
+  inline-size: 24px;
+  block-size: 2px;
   border-radius: 2px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
+  inset-block: unset 3px;
   transform: rotate(-45deg);
 }
 
@@ -148,8 +147,8 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 128px;
-  height: auto;
+  inline-size: 128px;
+  block-size: auto;
 }
 
 /* sections */
@@ -169,7 +168,7 @@ header nav[aria-expanded='true'] .nav-sections {
 
 header nav .nav-sections ul {
   list-style: none;
-  padding-left: 0;
+  padding-inline-start: 0;
   font-size: var(--body-font-size-s);
   font-weight: 500;
 }
@@ -179,7 +178,7 @@ header nav .nav-sections ul > li {
 }
 
 header nav .nav-sections ul > li > ul {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 header nav .nav-sections ul > li > ul > li {
@@ -199,7 +198,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 16px;
+    padding-inline-end: 16px;
     cursor: pointer;
   }
 
@@ -207,19 +206,18 @@ header nav .nav-sections ul > li > ul > li {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 0.5em;
-    right: 2px;
+    inset-block-start: 0.5em;
+    inset-inline-end: 2px;
     transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
+    inline-size: 6px;
+    block-size: 6px;
     border: 2px solid currentcolor;
     border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
   }
 
   header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
+    inset-block: unset 0.5em;
     transform: rotate(315deg);
   }
 
@@ -244,9 +242,9 @@ header nav .nav-sections ul > li > ul > li {
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
     display: block;
     position: absolute;
-    left: -1em;
-    width: 200px;
-    margin-top: 12px;
+    inset-inline-start: -1em;
+    inline-size: 200px;
+    margin-block-start: 12px;
     padding: 1em;
     background-color: var(--light-color);
     white-space: initial;
@@ -255,13 +253,13 @@ header nav .nav-sections ul > li > ul > li {
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
     content: '';
     position: absolute;
-    top: -8px;
-    left: 8px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    inset-block-start: -8px;
+    inset-inline-start: 8px;
+    inline-size: 0;
+    block-size: 0;
+    border-inline-start: 8px solid transparent;
+    border-inline-end: 8px solid transparent;
+    border-block-end: 8px solid var(--light-color);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {

@@ -1,5 +1,5 @@
 .media-gallery-wrapper {
-    width: 100vw;
+    inline-size: 100vw;
 }
 
 .media-gallery {
@@ -7,7 +7,7 @@
         list-style-type: none;
         display: grid;
         grid-gap: 1rem;
-        width: calc(100vw - 4rem);
+        inline-size: calc(100vw - 4rem);
         margin: auto;
         padding: 0;
     }
@@ -29,8 +29,8 @@
         --gradient-transition: 60%;
 
         content: "";
-        height: 100%;
-        width: 100%;
+        block-size: 100%;
+        inline-size: 100%;
         position: absolute;
         inset-block-end: 0;
         inset-inline-start: 0;
@@ -44,9 +44,9 @@
     .card-content {
         position: absolute;
         z-index: 1;
-        top: 0;
-        width: 100%;
-        height: 100%;
+        inset-block-start: 0;
+        inline-size: 100%;
+        block-size: 100%;
         padding: 0 var(--space-6) var(--space-6) var(--space-6);
         box-sizing: border-box;
         display: flex;
@@ -82,7 +82,7 @@
     }
 
     img {
-        width: 100%;
+        inline-size: 100%;
         aspect-ratio: 16/9;
         object-fit: cover;
     }
@@ -101,20 +101,20 @@
 
     .start-button {
         margin: 0;
-        margin-bottom: 8px;
-        width: 44px;
-        height: 44px;
+        margin-block-end: 8px;
+        inline-size: 44px;
+        block-size: 44px;
         display: flex;
         justify-content: center;
         align-items: center;
         position: absolute;
         z-index: 2;
-        top: calc(50% - 22px);
-        left: calc(50% - 22px);
+        inset-block-start: calc(50% - 22px);
+        inset-inline-start: calc(50% - 22px);
 
         svg {
-            width: 24px;
-            height: 24px;
+            inline-size: 24px;
+            block-size: 24px;
         }
     }
 }
@@ -126,7 +126,7 @@
         }
 
         .card-title {
-            margin-bottom: 0.5rem;
+            margin-block-end: 0.5rem;
         }
 
         .card-description {
@@ -144,7 +144,7 @@
         ul {
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            width: 90%;
+            inline-size: 90%;
         }
     }
 
