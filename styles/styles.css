@@ -17,8 +17,8 @@
   --dark-color: #ccc;
   --text-color: black;
 
- /* esri.com special colors 
- * Colors with opacity 
+ /* esri.com special colors
+ * Colors with opacity
  * Naming Convention for Colors with Opacity Values: $colorOpacityValue */
 --esri-ui-opacity00: rgba($blk-000, 0);
 --esri-ui-opacity20: rgba($blk-000, 0.2);
@@ -100,10 +100,6 @@ body {
 
 body.appear {
   display: block;
-}
-
-header {
-  block-size: var(--nav-height);
 }
 
 h1,
