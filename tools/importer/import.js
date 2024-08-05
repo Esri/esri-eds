@@ -373,6 +373,29 @@ function quote(main, document) {
   });
 }
 
+function columns(main, document) {
+  main.querySelectorAll('.fifty-fifty_container')
+    .forEach((container) => {
+      const children = [...container.children];
+      if (children.length !== 2) {
+        throw new Error('fifty-fifty_container expected 2 children', container.outerHTML);
+      }
+      let columnElements = children;
+      if (container.classList.contains('fifty-fifty_container--content-end')) {
+        if (columnElements[0].classList.contains('fifty-fifty_content')) {
+          columnElements = columnElements.reverse();
+        }
+      }
+
+      container.replaceWith(
+        WebImporter.Blocks.createBlock(document, {
+          name: 'columns',
+          cells: [columnElements],
+        }),
+      );
+    });
+}
+
 function transformers(main, document, html) {
   const report = {
     icons: inlineIcons(main, html),
@@ -388,6 +411,7 @@ function transformers(main, document, html) {
   callToAction(main, document);
   map(main, document, html);
   quote(main, document);
+  columns(main, document);
   transformUrls(main);
 
   return report;
