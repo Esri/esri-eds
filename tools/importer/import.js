@@ -270,7 +270,7 @@ function transformUrls(main) {
       }
 
       if (!urlPathnames.includes(href)) {
-        a.setAttribute('href', urls[urlPathnames.indexOf(href)]);
+        a.setAttribute('href', `https://www.esri.com${href}`);
       }
     });
 }
@@ -396,6 +396,54 @@ function columns(main, document) {
     });
 }
 
+function mosaicReveal(main, document) {
+  main.querySelectorAll('.mosaic-reveal > .mosaic-reveal > .mosaic-reveal_mosaics')
+    .forEach((container) => {
+      const cells = [...container.children]
+        .map((mosaic) => {
+          const imageUrl = mosaic.getAttribute('data-lazy-image');
+          const backgroundImage = document.createElement('img');
+          backgroundImage.src = imageUrl;
+          const mosaicRevealContent = mosaic.querySelector(':scope > .mosaic-reveal_content');
+
+          return [backgroundImage, mosaicRevealContent];
+        });
+      const parent = container.parentElement;
+
+      container.replaceWith(WebImporter.Blocks.createBlock(document, {
+        name: 'Mosaic reveal',
+        cells,
+      }));
+
+      parent.append(WebImporter.Blocks.createBlock(document, {
+        name: 'Section metadata',
+        cells: [['Style', 'Column section']],
+      }));
+    });
+}
+
+function sections(main, document) {
+  main.querySelectorAll('.aem-GridColumn:not(:last-child)')
+    .forEach((container) => {
+      const hr = document.createElement('hr');
+      container.after(hr);
+    });
+}
+
+function links(main, document) {
+  main.querySelectorAll('calcite-link')
+    .forEach((link) => {
+      const a = document.createElement('a');
+      const href = link.getAttribute('href');
+      a.setAttribute('href', href);
+      a.textContent = link.textContent;
+      if (link.getAttribute('icon-end') === 'arrowRight') {
+        a.textContent += ' :arrow-right:';
+      }
+      link.replaceWith(a);
+    });
+}
+
 function transformers(main, document, html) {
   const report = {
     icons: inlineIcons(main, html),
@@ -403,6 +451,8 @@ function transformers(main, document, html) {
 
   videos(main, document);
   calciteButton(main, document);
+  links(main, document);
+  sections(main, document);
   hero(main, document);
   storyteller(main, document);
   tabs(main, document);
@@ -412,6 +462,7 @@ function transformers(main, document, html) {
   map(main, document, html);
   quote(main, document);
   columns(main, document);
+  mosaicReveal(main, document);
   transformUrls(main);
 
   return report;
