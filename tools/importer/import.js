@@ -408,14 +408,13 @@ function mosaicReveal(main, document) {
 
           return [backgroundImage, mosaicRevealContent];
         });
-      const parent = container.parentElement;
 
       container.replaceWith(WebImporter.Blocks.createBlock(document, {
         name: 'Mosaic reveal',
         cells,
       }));
 
-      parent.append(WebImporter.Blocks.createBlock(document, {
+      container.append(WebImporter.Blocks.createBlock(document, {
         name: 'Section metadata',
         cells: [['Style', 'Column section']],
       }));
