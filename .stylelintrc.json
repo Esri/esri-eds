@@ -3,8 +3,9 @@
   "plugins": ["stylelint-use-logical"],
   "rules": {
     "custom-property-pattern": null,
+    "no-empty-source": null,
     "declaration-no-important": true,
-    "max-nesting-depth": [5, 
+    "max-nesting-depth": [3,
       {
         "message": "Please keep the nesting depth 3 or less."
       }
