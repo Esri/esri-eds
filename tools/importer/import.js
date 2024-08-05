@@ -408,13 +408,14 @@ function mosaicReveal(main, document) {
 
           return [backgroundImage, mosaicRevealContent];
         });
+      const parent = container.parentElement;
 
       container.replaceWith(WebImporter.Blocks.createBlock(document, {
         name: 'Mosaic reveal',
         cells,
       }));
 
-      container.append(WebImporter.Blocks.createBlock(document, {
+      parent.append(WebImporter.Blocks.createBlock(document, {
         name: 'Section metadata',
         cells: [['Style', 'Column section']],
       }));
@@ -443,6 +444,16 @@ function links(main, document) {
     });
 }
 
+function localNavigation(main, document) {
+  const container = document.querySelector('.local-navigation.aem-GridColumn');
+  if (container) {
+    container.replaceWith(WebImporter.Blocks.createBlock(document, {
+      name: 'Local navigation',
+      cells: [['']],
+    }));
+  }
+}
+
 function transformers(main, document, html) {
   const report = {
     icons: inlineIcons(main, html),
@@ -462,6 +473,7 @@ function transformers(main, document, html) {
   quote(main, document);
   columns(main, document);
   mosaicReveal(main, document);
+  localNavigation(main, document);
   transformUrls(main);
 
   return report;
