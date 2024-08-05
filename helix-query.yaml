@@ -1,0 +1,18 @@
+indices:
+  default:
+    include:
+      - /**
+    exclude:
+      - '/drafts/**'
+      - '/tools/**'
+    target: /query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"])
+      hasLocalNavigation:
+        selectFirst: main > div > div.local-navigation
+        value: attribute(el, "className")
