@@ -1,6 +1,13 @@
 /* global WebImporter */
-
 import urls from './urls.js';
+
+function createBlock(container, document, name, cells, variants = []) {
+  container.replaceChildren(WebImporter.Blocks.createBlock(document, {
+    name,
+    cells,
+    variants,
+  }));
+}
 
 function hero(main, document) {
   const heroContainer = document
@@ -14,19 +21,13 @@ function hero(main, document) {
 
   const videoContainer = heroInner.querySelector('.video-container');
   if (videoContainer) {
-    // move video to the end of the hero container
     heroInner.append(videoContainer);
-
-    // remove background image as it's the same as the video poster
     backgroundImage.remove();
   } else if (backgroundImage) {
     heroInner.append(backgroundImage);
   }
 
-  heroContainer.replaceWith(WebImporter.Blocks.createBlock(document, {
-    name: 'hero',
-    cells: [[heroInner]],
-  }));
+  createBlock(heroContainer, document, 'hero', [[heroInner]]);
 }
 
 function videos(main, document) {
@@ -70,10 +71,7 @@ function storyteller(main, document) {
         cells = [[rightChild, leftChild]];
       }
 
-      container.replaceChildren(WebImporter.Blocks.createBlock(document, {
-        name: 'storyteller',
-        cells,
-      }));
+      createBlock(container, document, 'storyteller', cells);
     });
 }
 
@@ -122,8 +120,6 @@ function tabs(main, document) {
             const tabIcon = tabContent.querySelector('.tab--icon > div');
             if (tabIcon) {
               const svgFileName = tabIcon.getAttribute('data-asset');
-              // example path: /content/dam/esrisites/en-us/common/icons/meridian-/search-48.svg
-              // get "search" from the path
               const iconName = svgFileName
                 .split('/')
                 .pop()
@@ -148,11 +144,7 @@ function tabs(main, document) {
           return [tabLabel, tabContent];
         });
 
-      container.replaceChildren(WebImporter.Blocks.createBlock(document, {
-        name: 'tabs',
-        cells,
-        variants: withCards ? ['cards'] : [],
-      }));
+      createBlock(container, document, 'tabs', cells, withCards ? ['cards'] : []);
     });
 }
 
@@ -197,11 +189,7 @@ function mediaGallery(main, document) {
         variants.push('alternate-2-1');
       }
 
-      container.replaceWith(WebImporter.Blocks.createBlock(document, {
-        name: 'media-gallery',
-        cells,
-        variants,
-      }));
+      createBlock(container, document, 'media-gallery', cells, variants);
     });
 }
 
@@ -211,11 +199,7 @@ function cards(main, document) {
       const cells = [...container.querySelectorAll('.block')]
         .map((block) => [block]);
 
-      container.replaceWith(WebImporter.Blocks.createBlock(document, {
-        name: 'cards',
-        cells,
-        variants: ['Block group'],
-      }));
+      createBlock(container, document, 'cards', cells, ['Block group']);
     });
 
   main.querySelectorAll('.card-container-v3')
@@ -235,10 +219,7 @@ function cards(main, document) {
         blockName = 'Video cards';
       }
 
-      container.replaceWith(WebImporter.Blocks.createBlock(document, {
-        name: blockName,
-        cells,
-      }));
+      createBlock(container, document, blockName, cells);
     });
 }
 
@@ -249,17 +230,11 @@ function callToAction(main, document) {
       if (children.length !== 3) {
         throw new Error('callToAction expected 3 children', container.outerHTML);
       }
-      container.replaceWith(
-        WebImporter.Blocks.createBlock(document, {
-          name: 'Call to action',
-          cells: [[children[0], children[2]]],
-        }),
-      );
+      createBlock(container, document, 'Call to action', [[children[0], children[2]]]);
     });
 }
 
 function transformUrls(main) {
-  // load urls from local file (in the filesystem) importer-urls.txt
   const urlPathnames = urls.map((url) => new URL(url).pathname);
 
   main.querySelectorAll('a')
@@ -293,10 +268,7 @@ function map(main, document, html) {
     link.setAttribute('href', mapUrl);
     link.textContent = mapUrl;
 
-    rawHtmlForJsApp.replaceWith(WebImporter.Blocks.createBlock(document, {
-      name: 'map',
-      cells: [[link]],
-    }));
+    createBlock(rawHtmlForJsApp, document, 'map', [[link]]);
   });
 }
 
@@ -304,11 +276,8 @@ function hashCode(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i += 1) {
     const char = str.charCodeAt(i);
-    // eslint-disable-next-line no-bitwise
     hash = (hash << 5) - hash + char;
   }
-  // Convert to 32bit unsigned integer in base 36 and pad with "0" to ensure length is 7.
-  // eslint-disable-next-line no-bitwise
   return (hash >>> 0).toString(36).padStart(7, '0');
 }
 
@@ -330,9 +299,7 @@ function inlineIcons(main, html) {
 
   main.querySelectorAll('.esri-text__iconContainer > svg')
     .forEach((icon) => {
-      // if svg path has fill as css (and not inline) add it as an inline style
       const path = icon.querySelector('path');
-      // get css fill and set it as inline fill
       if (!path.style.fill) {
         path.style.fill = themeColor;
       }
@@ -346,7 +313,6 @@ function inlineIcons(main, html) {
       if (!iconName) {
         console.error('Unknown icon hash', iconHash, icon);
         iconName = `pending-${iconHash}`;
-        // throw new Error(`Unknown icon hash: ${iconHash}`);
       }
 
       foundIcons[iconName] = icon.outerHTML;
@@ -366,10 +332,7 @@ function quote(main, document) {
 
     const cells = [[...container.children]];
 
-    container.replaceWith(WebImporter.Blocks.createBlock(document, {
-      name: 'quote',
-      cells,
-    }));
+    createBlock(container, document, 'quote', cells);
   });
 }
 
@@ -387,12 +350,7 @@ function columns(main, document) {
         }
       }
 
-      container.replaceWith(
-        WebImporter.Blocks.createBlock(document, {
-          name: 'columns',
-          cells: [columnElements],
-        }),
-      );
+      createBlock(container, document, 'columns', [columnElements]);
     });
 }
 
@@ -410,15 +368,9 @@ function mosaicReveal(main, document) {
         });
       const parent = container.parentElement;
 
-      container.replaceWith(WebImporter.Blocks.createBlock(document, {
-        name: 'Mosaic reveal',
-        cells,
-      }));
+      createBlock(container, document, 'Mosaic reveal', cells);
 
-      parent.append(WebImporter.Blocks.createBlock(document, {
-        name: 'Section metadata',
-        cells: [['Style', 'Column section']],
-      }));
+      createBlock(parent, document, 'Section metadata', [['Style', 'Column section']]);
     });
 }
 
@@ -447,10 +399,7 @@ function links(main, document) {
 function localNavigation(main, document) {
   const container = document.querySelector('.local-navigation.aem-GridColumn');
   if (container) {
-    container.replaceWith(WebImporter.Blocks.createBlock(document, {
-      name: 'Local navigation',
-      cells: [['']],
-    }));
+    createBlock(container, document, 'Local navigation', [['']]);
   }
 }
 
@@ -484,7 +433,6 @@ export default {
     document, html, url,
   }) => {
     const main = document.querySelector('main');
-    // remove header and footer from main
     WebImporter.DOMUtils.remove(main, [
       'header',
       'footer',
