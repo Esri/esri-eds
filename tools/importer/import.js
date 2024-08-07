@@ -235,7 +235,7 @@ function callToAction(main, document) {
 }
 
 function transformUrls(main) {
-  const urlPathnames = urls.map((url) => new URL(url).pathname);
+  const urlPathnames = urls.map(({ url }) => new URL(url).pathname);
 
   main.querySelectorAll('a')
     .forEach((a) => {
