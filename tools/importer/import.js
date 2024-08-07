@@ -257,7 +257,10 @@ function transformUrls(main) {
       if (!urlPathnames.includes(href)) {
         const newUrl = `https://www.esri.com${href}`;
         a.setAttribute('href', newUrl);
-        a.textContent = newUrl;
+        const trimmedContent = a.textContent.trim();
+        if (trimmedContent === '' || trimmedContent === href) {
+          a.textContent = newUrl;
+        }
       }
     });
 }
