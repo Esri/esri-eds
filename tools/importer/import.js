@@ -1,6 +1,18 @@
 /* global WebImporter */
 import urls from './urls.js';
 
+function createMetadata(main, document, pathname) {
+  const meta = {};
+
+  const urlInfo = urls.find(({ url }) => (new URL(url).pathname) === pathname);
+  console.log('urlInfo', urlInfo);
+
+  meta.theme = `calcite-mode-${urlInfo.calcite_mode}`;
+
+  const block = WebImporter.Blocks.getMetadataBlock(document, meta);
+  main.append(block);
+}
+
 function createBlock(container, document, name, cells, variants = []) {
   container.replaceChildren(WebImporter.Blocks.createBlock(document, {
     name,
@@ -405,11 +417,12 @@ function localNavigation(main, document) {
   }
 }
 
-function transformers(main, document, html) {
+function transformers(main, document, html, pathname) {
   const report = {
     icons: inlineIcons(main, html),
   };
 
+  createMetadata(main, document, pathname);
   videos(main, document);
   calciteButton(main, document);
   links(main, document);
@@ -441,13 +454,13 @@ export default {
       '.disclaimer',
     ]);
 
-    const path = (new URL(url)).pathname;
+    const { pathname } = new URL(url);
 
-    const report = transformers(main, document, html);
+    const report = transformers(main, document, html, pathname);
 
     return [{
       element: main,
-      path,
+      path: pathname,
       report,
     }];
   },
