@@ -6,7 +6,7 @@ main .hero-container {
   overflow: hidden;
 }
 
-.hero.block {
+.hero {
   display: flex;
   inline-size: 100%;
   block-size: 100%;
@@ -15,16 +15,22 @@ main .hero-container {
   z-index: 1;
 }
 
-.hero.block h1 {
-  margin-block-end: .6rem;
-  color: var(--calcite-ui-text-1);
-  font-weight: var(--calcite-font-weight-bold);
+.hero h1 {
+  margin-block: var(--space-20) .6rem;
   display: flex;
   margin-inline: 4vw;
-
+  font-size: var(--font-8)
 }
 
-.hero.block > div {
+.hero.medium h1 {
+  font-size: var(--font-7);
+}
+
+.hero.small h1 {
+  font-size: var(--font-6);
+}
+
+.hero > div {
   display: flex;
   inline-size: 100%;
   block-size: 100%;
@@ -32,19 +38,19 @@ main .hero-container {
   color: var(--calcite-ui-text-1);
 }
 
-.hero.block p {
+.hero p {
   display: flex;
   margin-inline: 4vw;
 }
 
-.hero.block p:nth-of-type(3) > picture  {
+.hero p:nth-of-type(3) > picture  {
   display: flex;
   align-items: center;
   block-size: 100%;
   aspect-ratio: auto;
 }
 
-.hero.block p:nth-of-type(4) picture {
+.hero p:nth-of-type(4) picture {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -55,45 +61,38 @@ main .hero-container {
   z-index: -2;
 }
 
-.hero.block p:nth-of-type(4) picture img {
+.hero p:nth-of-type(4) picture img {
   inline-size: 100%;
 }
 
-.hero.block h1, .hero.large.block h1 {
-  font-size: var(--font-8);
-  margin-block-start: var(--space-20);
-}
-
-.hero.medium.block h1 {
-  font-size: var(--font-7);
-}
-
-.hero.small.block h1 {
-  font-size: var(--font-6);
-}
-
-.hero.block > div > div > p:last-child > picture img {
+.hero p:last-child > picture img {
   object-fit: cover;
+  block-size: 100%;
+  inline-size: 100%;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: -2;
 }
 
-.hero.block p:nth-of-type(4) a {
+.hero p:nth-of-type(4) a {
   display: none;
 }
 
-.hero.block video {
+.hero video {
   display: none;
 }
 
 @media (width >= 768px) {
-  .hero.small.block p:nth-of-type(3) > picture  {
+  .hero.small p:nth-of-type(3) > picture  {
     aspect-ratio: 1 / 1;
   }
 
-  .hero.block h1, .hero.block p {
+  .hero h1, .hero p {
     inline-size: 50%;
   }
 
-  .hero.block p:nth-of-type(3)  {
+  .hero p:nth-of-type(3)  {
     block-size: 100%;
     position: absolute;
     inset-inline-end: 0;
@@ -101,7 +100,7 @@ main .hero-container {
     justify-content: center;
   }
 
-  .hero.block video {
+  .hero video {
     display: block;
     position: absolute;
     inset-block-start: 0;
@@ -112,28 +111,28 @@ main .hero-container {
     z-index: -1;
   }
   
-  .hero.block > div > div {
+  .hero > div > div {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
  
-  .hero.large.block, .hero.block { 
+  .hero { 
     block-size: 700px;
     min-block-size: 35vw;
   }
 
-  .hero.medium.block {
+  .hero.medium {
     block-size: 576px;
     min-block-size: 28vw;
   }
 
-  .hero.small.block {
+  .hero.small {
     block-size: 360px;
     min-block-size: 21vw;
   }
 
-  .hero.xmall.block {
+  .hero.xsmall {
     block-size: auto;
     min-block-size: 170px;
   }
