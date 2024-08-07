@@ -417,11 +417,30 @@ function localNavigation(main, document) {
   }
 }
 
+function newsletter(main, document) {
+  const newsletterContainer = document.querySelector('aside#side-drawer');
+  if (newsletterContainer) {
+    const newsletterIframeSrc = newsletterContainer.querySelector('iframe').getAttribute('data-src');
+    const newsletterIframeUrl = `https://www.esri.com/${newsletterIframeSrc}`;
+    const newsletterLink = document.createElement('a');
+    newsletterLink.setAttribute('href', newsletterIframeUrl);
+    newsletterLink.textContent = newsletterIframeUrl;
+
+    main.append(WebImporter.Blocks.createBlock(document, {
+      name: 'newsletter',
+      cells: [[newsletterLink]],
+    }));
+
+    newsletterContainer.closest('.aem-GridColumn.experiencefragment').remove();
+  }
+}
+
 function transformers(main, document, html, pathname) {
   const report = {
     icons: inlineIcons(main, html),
   };
 
+  newsletter(main, document);
   createMetadata(main, document, pathname);
   videos(main, document);
   calciteButton(main, document);
