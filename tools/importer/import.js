@@ -5,8 +5,6 @@ function createMetadata(main, document, pathname) {
   const meta = {};
 
   const urlInfo = urls.find(({ url }) => (new URL(url).pathname) === pathname);
-  console.log('urlInfo', urlInfo);
-
   meta.theme = `calcite-mode-${urlInfo.calcite_mode}`;
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
@@ -257,7 +255,9 @@ function transformUrls(main) {
       }
 
       if (!urlPathnames.includes(href)) {
-        a.setAttribute('href', `https://www.esri.com${href}`);
+        const newUrl = `https://www.esri.com${href}`;
+        a.setAttribute('href', newUrl);
+        a.textContent = newUrl;
       }
     });
 }
