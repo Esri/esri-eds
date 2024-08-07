@@ -34,6 +34,7 @@
       inline-size: 96vw;
       padding: 0;
       margin: 0 auto;
+      border-block-end: 1px solid var(--calcite-ui-border-1);
 
       .tab-titles {
         padding: 0;
@@ -41,6 +42,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-block-end: 0;
       }
 
       calcite-icon {
@@ -69,8 +71,7 @@
 
       .tab-title {
         display: block;
-        border-block-end: 1px solid var(--calcite-ui-border-2);
-        padding-block-end: 2px;
+        transition: 0.3s ease;
       }
       
       .tab-title button {
@@ -78,8 +79,18 @@
         color: var(--calcite-ui-text-1);
         font-size: var(--font-0);
         font-weight: 400;
-        padding: 0.75rem;
+        padding: 1rem;
         margin: auto;
+        max-inline-size: 286px;
+
+        button {
+          background: none;
+          color: var(--calcite-ui-text-1);
+          font-size: var(--font-0);
+          font-weight: 400;
+          padding: 0.75rem;
+          margin: auto;
+        }
       }
 
       .tab-title[aria-hidden='true'] {
@@ -185,6 +196,7 @@
       margin: 0 auto;
       box-sizing: content-box;
       z-index: 2;
+      border-block-end: none;
 
       .tab-title {
         display: block;
@@ -198,7 +210,11 @@
       }
 
       .tab-title[aria-hidden='false'] {
-        border-block-end: 1px solid var(--calcite-ui-text-1);
+        border-block-end: 3px solid transparent;
+      }
+      
+      .tab-title[aria-selected='false']:hover {
+        border-block-end: 3px solid #0079c180;
       }
         
       .tab-title[aria-selected='true'] {
@@ -255,12 +271,16 @@
       z-index: 0;
     }
   }
+
+  .tabs.tabs-cards-variant .tab-component .tab-nav {
+    border-block-end: 1px solid var(--calcite-ui-border-1);
+  }
 }
 
 @media (width >= 1480px) {
   .tabs .tab-content[aria-hidden='false'] :is(.text-wrapper, .buttons-wrapper) {
-          inline-size: 720px;
-          margin-inline: auto 0;
-          padding-inline-start: 0;
+    inline-size: 720px;
+    margin-inline: auto 0;
+    padding-inline-start: 0;
   }
 }
