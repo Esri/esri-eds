@@ -11,33 +11,25 @@
  */
 
  :root {
-  /* colors */
-  --background-color-light: white;
-  --light-color: #eee;
-  --dark-color: #ccc;
-  --text-color: black;
-
- /* esri.com special colors
- * Colors with opacity
- * Naming Convention for Colors with Opacity Values: $colorOpacityValue */
---esri-ui-opacity00: rgba($blk-000, 0);
---esri-ui-opacity20: rgba($blk-000, 0.2);
---esri-ui-opacity40: rgba($blk-000, 0.4);
---esri-ui-opacity60: rgba($blk-000, 0.5);
---esri-ui-opacity80: rgba($blk-000, 0.80);
---esri-ui-opacity85: rgba($blk-000, 0.85);
---esri-ui-opacity90: rgba($blk-000, 0.90);
---esri-ui-opacity95: rgba($blk-000, 0.95);
---esri-ui-opacity97: rgba($blk-000, 0.97);
---esri-ui-opacity00-inverse: rgba($blk-190, 0);
---esri-ui-opacity20-inverse: rgba($blk-190, 0.2);
---esri-ui-opacity40-inverse: rgba($blk-190, 0.4);
---esri-ui-opacity50-inverse: rgba($blk-190, 0.5);
---esri-ui-opacity80-inverse: rgba($blk-190, 0.80);
---esri-ui-opacity85-inverse: rgba($blk-190, 0.85);
---esri-ui-opacity90-inverse: rgba($blk-190, 0.90);
---esri-ui-opacity95-inverse: rgba($blk-190, 0.95);
---esri-ui-opacity97-inverse: rgba($blk-190, 0.97);
+  /* esri.com colors with opacity */
+  --esri-ui-opacity00: rgb(53 53 53 / 0%);
+  --esri-ui-opacity20: rgb(53 53 53 / 20%);
+  --esri-ui-opacity40: rgb(53 53 53 / 40%);
+  --esri-ui-opacity60: rgb(53 53 53 / 50%);
+  --esri-ui-opacity80: rgb(53 53 53 / 80%);
+  --esri-ui-opacity85: rgb(53 53 53 / 85%);
+  --esri-ui-opacity90: rgb(53 53 53 / 90%);
+  --esri-ui-opacity95: rgb(53 53 53 / 95%);
+  --esri-ui-opacity97: rgb(53 53 53 / 97%);
+  --esri-ui-opacity00-inverse: rgb(255 255 255/ 0%);
+  --esri-ui-opacity20-inverse: rgb(255 255 255/ 2%);
+  --esri-ui-opacity40-inverse: rgb(255 255 255/ 4%);
+  --esri-ui-opacity50-inverse: rgb(255 255 255/ 5%);
+  --esri-ui-opacity80-inverse: rgb(255 255 255/ 80%);
+  --esri-ui-opacity85-inverse: rgb(255 255 255/ 85%);
+  --esri-ui-opacity90-inverse: rgb(255 255 255/ 90%);
+  --esri-ui-opacity95-inverse: rgb(255 255 255/ 95%);
+  --esri-ui-opacity97-inverse: rgb(255 255 255/ 97%);
 
   -webkit-font-smoothing: antialiased;
 
@@ -78,12 +70,6 @@
   --space-56: calc(14 * var(--unit));     /* 224px */
   --space-64: calc(16 * var(--unit));     /* 256px */
 
-  /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
-  --body-font-size: 16px;
-
   /* nav height */
   --nav-height: 64px;
 }
@@ -113,7 +99,6 @@ h6 {
   line-height: 1.25;
   margin-block: 1em 0.5em;
   scroll-margin: calc(var(--nav-height) + 1em);
-  color: white;
 }
 
 /* heading sizes and styles */
@@ -140,8 +125,26 @@ blockquote {
 
 code,
 pre {
-  font-family: var(--fixed-font-family);
-  font-size: var(--body-font-size-s);
+  font-family: var(--calcite-code-family);
+  font-size: var(--font-0);
+}
+
+code {
+  color: var(--calcite-ui-text-2);
+	background-color: var(--esri-ui-opacity85-inverse);
+	padding: 0 0.2rem;
+}
+
+pre {
+  overflow: scroll;
+}
+
+main pre {
+  background-color: var(--calcite-ui-foreground-2);
+  padding: 1em;
+  border-radius: 0.25em;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 sup,
@@ -162,24 +165,6 @@ blockquote {
 blockquote p {
 	font-size: var(--font-1);
 	line-height: 1.375;
-}
-
-code {
-  color: var(--calcite-ui-text-2);
-	background-color: var(--esri-ui-opacity85-inverse);
-	padding: 0 0.2rem;
-}
-
-pre {
-  overflow: scroll;
-}
-
-main pre {
-  background-color: var(--light-color);
-  padding: 1em;
-  border-radius: 0.25em;
-  overflow-x: auto;
-  white-space: pre;
 }
 
 /* links */
@@ -240,7 +225,7 @@ a.button.secondary,
 button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
-  color: var(--text-color);
+  color: var(--calcite-ui-text-1);
 }
 
 main img {
@@ -261,9 +246,10 @@ main img {
 }
 
 /* sections */
-main .section {
+.section > div > div {
   padding: var(--space-16) 0;
   background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
 }
 
 .video-iframe-box {
@@ -276,7 +262,7 @@ main .section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #353535cc;
+  background-color: var(--esri-ui-opacity80);
   overscroll-behavior: contain;
 
   .video-iframe-wrapper {
@@ -295,13 +281,13 @@ main .section {
       justify-content: center;
       align-items: center;
       transition: .15s ease-in-out;
-      background-color: white;
+      background-color: var(--calcite-ui-inverse-press);
       border-radius: 50%;
     }
 
     .video-close-button:hover {
       background-color: var(--calcite-ui-brand);
-      color: white;
+      
     }
   }
 
@@ -332,5 +318,5 @@ main .section {
 /* section metadata */
 main .section.light,
 main .section.highlight {
-  background-color: var(--light-color);
+  background-color: var(--calcite-ui-foreground-2);
 }
