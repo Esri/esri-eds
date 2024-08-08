@@ -1,0 +1,215 @@
+.mosaic-reveal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    color: var(--calcite-ui-text-1);
+    font-size: calc(100% + 6vw);
+    line-height: 1.1;
+    font-weight: var(--calcite-font-weight-medium);
+    font-style: normal;
+    margin: 0 0 var(--space-4);
+  }
+
+  & > div:first-child {
+    padding: var(--space-8) 11%;
+    box-sizing: border-box;
+  }
+}
+
+.mosaic-reveal {
+  --calcite-ui-icon-color: var(--calcite-ui-text-1);
+  --calcite-ui-text-link: var(--calcite-ui-text-1);
+  --calcite-link-blue-underline: #fff6;
+
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+
+  calcite-icon {
+    position: absolute;
+    inset-block-end: var(--space-4);
+    inset-inline-end: var(--space-4);
+    z-index: 2;
+  }
+
+  .mosaic-reveal-content {
+    position: absolute;
+    inline-size: 100%;
+    block-size: 100%;
+    inset-inline-start: 0;
+    background-color: #0079c1;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.5s ease;
+    inset-block-start: 0;
+    transform-origin: 50% 100%;
+    opacity: 1;
+
+    & > h3, & > p, & > p > a {
+      margin-block-start: 0;
+      color: var(--calcite-ui-text-1);
+      inline-size: 80%;
+    }
+
+    & > h3 {
+      font-size: 1.414rem;
+      margin: 0 0 var(--space-4) 0;
+      line-height: 1.375;
+      font-weight: var(--calcite-font-weight-normal);
+    }
+
+    & > p:nth-child(3) {
+      margin-block-end: var(--space-4);
+      line-height: 1.25;
+      font-size: var(--font-minus-1);
+    }
+
+    & > p.button-container {
+      background: none;
+
+      a {
+        background: none;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .mosaic-reveal-content[aria-hidden='true'] {
+    inset-block-start: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  & > div { /* stylelint-disable-line no-descending-specificity */
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      position: absolute;
+      inset-inline-start: 0;
+      inset-block-start: 0;
+      inline-size: 100%;
+      content: "";
+      display: block;
+      block-size: 100%;
+      background: linear-gradient(to bottom, #0000 66%, #000000b3 100%);
+    }
+  }
+
+  & > div:last-child {
+    &::after {
+      display: none;
+    }
+  }
+
+  picture {
+    display: block;
+    block-size: calc(220px + 50vw - 180px);
+    cursor: pointer;
+    overflow: hidden;
+
+    img {
+      block-size: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .title {
+    position: absolute;
+    inset-block-end: 0;
+    z-index: 2;
+    padding: var(--space-1) var(--space-12) var(--space-4) var(--space-5);
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--calcite-ui-text-1);
+    font-weight: var(--calcite-font-weight-normal);
+    line-height: 1.375;
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (width >= 480px) {
+  .mosaic-reveal {
+    .title {
+      padding: var(--space-3) var(--space-12) var(--space-4) var(--space-8);
+    }
+  }
+}
+
+@media (width >= 560px) {
+  .mosaic-reveal-container {
+    & > div:first-child {
+      padding: 12%;
+    }
+  }
+
+  .mosaic-reveal {
+    picture {
+      block-size: 300px;
+    }
+  }
+}
+
+@media (width >= 860px) {
+  .mosaic-reveal {
+    picture {
+      block-size: 400px;
+      cursor: default;
+    }
+
+    .title {
+      padding: var(--space-3) var(--space-12) var(--space-12) var(--space-12);
+    }
+  }
+}
+
+@media (width >= 1024px) {
+  .mosaic-reveal-container {
+    h2 {
+      font-size: 4.75rem;
+      line-height: 1.11;
+    }
+  }
+}
+
+@media (width >= 1200px) {
+  .mosaic-reveal-container {
+    flex-direction: row;
+
+    & > div:first-child {
+      flex-basis: 50%;
+      inline-size: 50%;
+      max-inline-size: 50%;
+      padding: 6%;
+    }
+  }
+
+  .mosaic-reveal-wrapper {
+    flex-basis: 50%;
+    inline-size: 50%;
+  }
+
+  .mosaic-reveal {
+    .title {
+      padding: var(--space-4) var(--space-6) var(--space-12);
+      font-size: 1.414rem;
+    }
+  }
+}
+
+@media (width >= 1450px) {
+  .mosaic-reveal {
+    .title {
+      padding: var(--space-3) var(--space-12) var(--space-12) var(--space-12);
+    }
+  }
+}
