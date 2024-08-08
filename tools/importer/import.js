@@ -4,8 +4,8 @@ import urls from './urls.js';
 function createMetadata(main, document, pathname) {
   const meta = {};
 
-  const urlInfo = urls.find(({ url }) => (new URL(url).pathname) === pathname);
-  meta.theme = `calcite-mode-${urlInfo.calcite_mode}`;
+  const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
+  meta.Theme = urlInfo.Theme;
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
@@ -245,7 +245,7 @@ function callToAction(main, document) {
 }
 
 function transformUrls(main) {
-  const urlPathnames = urls.map(({ url }) => new URL(url).pathname);
+  const urlPathnames = urls.map(({ URL: url }) => new URL(url).pathname);
 
   main.querySelectorAll('a')
     .forEach((a) => {
