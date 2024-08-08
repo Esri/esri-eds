@@ -7,6 +7,10 @@ https://www.esri.com/en-us/about/about-esri/mea-central-asia
 https://www.esri.com/en-us/about/about-esri/overview
 https://www.esri.com/en-us/about/about-esri/technology
 https://www.esri.com/en-us/capabilities/3d-gis/overview
+https://www.esri.com/en-us/capabilities/3d-gis/features/3d-data-management
+https://www.esri.com/en-us/capabilities/3d-gis/features/3d-analysis
+https://www.esri.com/en-us/capabilities/3d-gis/features/3d-visualization
+https://www.esri.com/en-us/capabilities/3d-gis/features/3d-immersive-experiences
 https://www.esri.com/en-us/capabilities/3d-gis/resources
 https://www.esri.com/en-us/capabilities/data-management
 https://www.esri.com/en-us/capabilities/field-operations/get-started
