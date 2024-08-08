@@ -10,6 +10,7 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  loadScript,
 } from './aem.js';
 
 import { div, iframe, domEl } from './dom-helpers.js';
@@ -141,6 +142,9 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
+  loadScript('https://js.arcgis.com/calcite-components/1.8.0/calcite.esm.js');
+  loadCSS('https://js.arcgis.com/calcite-components/1.8.0/calcite.css');
+
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
