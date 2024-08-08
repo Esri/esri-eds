@@ -1,4 +1,8 @@
 export default function decorate(block) {
+  block.querySelectorAll('picture > img').forEach((img) => {
+    img.setAttribute('loading', 'eager');
+  });
+
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
   const videoAssets = block.querySelectorAll('a');
