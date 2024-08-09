@@ -6,7 +6,7 @@ import {
   decorateIcons,
   decorateSections,
   decorateBlocks,
-  decorateTemplateAndTheme,
+  decorateTemplateAndTheme as aemDecorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
   loadCSS,
@@ -135,6 +135,16 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateVideoLinks(main);
+}
+
+function decorateTemplateAndTheme() {
+  aemDecorateTemplateAndTheme();
+  const { classList } = document.body;
+  if (classList.contains('light')) {
+    classList.add('calcite-mode-light');
+  } else if (classList.contains('dark')) {
+    classList.add('calcite-mode-dark');
+  }
 }
 
 /**
