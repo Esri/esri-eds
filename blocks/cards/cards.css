@@ -1,5 +1,11 @@
+.cards-card-body {
+  --content-spacing: var(--space-2);
+  --content-end-spacing: var(--space-5);
+}
+
 .cards {
   background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
   padding: 4rem 0;
 
   .cards-card-body {
@@ -21,7 +27,6 @@
   
     h3, p:last-child {
       padding-inline-end: var(--space-5);
-      color: var(--calcite-ui-text-1);
     }
 
     & > *:first-child {
@@ -70,4 +75,76 @@
   .cards > ul > li {
     inline-size: 25%;
   }
+}
+
+/* Cards Simple */
+.cards.simple li{
+  position: relative;
+  display: flex;
+}
+
+@media (width >= 1440px) {
+  .cards.simple li {
+    inline-size: 33.3334%;
+  }
+}
+
+.cards.simple .cards-card-body{
+  background-color: var(--calcite-ui-foreground-1);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  word-wrap: break-word;
+  border: 1px solid var(--calcite-ui-border-1);
+  transition: border-color 0.25s linear;
+
+  .card-body-content{
+    padding: var(--space-5);
+    margin: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  p{
+    margin: 0;
+
+    &:last-child {
+      padding: 0;
+      margin-block-end: var(--content-end-spacing);
+    }
+  }
+
+  h3{
+    margin-block: 0 var(--content-spacing);
+  }
+
+  a{
+    color: var(--calcite-ui-text-1);
+    display: flex;
+    flex: 1;
+    white-space: normal;
+    margin: 0;
+    flex-direction: column;
+    text-align: start;
+    padding: 0;
+    background-color: transparent;
+    border-inline-start: 3px solid transparent;
+    transition: border-color 0.25s linear;
+    line-height: 1.5;
+  }
+
+  img{
+    block-size: 44px;
+    inline-size: 44px;
+    margin-block-end: var(--content-spacing);
+  }
+}
+
+.cards.simple .cards-card-body:is(:focus-within, :hover){
+  border: 1px solid var(--calcite-ui-brand);
+}
+
+.cards.simple a:is(:hover, :focus, :active) {
+  border-inline-start: 3px solid var(--calcite-ui-brand);
 }
