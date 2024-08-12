@@ -1,7 +1,6 @@
-import { stdout } from 'process';
+import { writeFileSync } from 'fs';
 import languages from './languages.js';
 import enUrls from './en_urls.js';
-import { writeFileSync } from 'fs';
 
 const urlsByLanguage = [];
 
