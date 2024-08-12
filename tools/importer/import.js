@@ -1,5 +1,6 @@
 /* global WebImporter */
 import urls from './urls.js';
+import svgs from './svgs.js';
 
 function createMetadata(main, document, pathname) {
   const meta = {};
@@ -298,46 +299,59 @@ function hashCode(str) {
   return (hash >>> 0).toString(36).padStart(7, '0');
 }
 
-function inlineIcons(main, html) {
-  const iconNames = {
-    '0gn1vbo': 'thumbsup',
-    '0erguqf': 'locations',
-    '0bg3tpq': 'employees',
-    '0cusfqy': 'handshake',
-    '0oy3ew8': 'headset',
-    '0sr5z39': 'lightbulb',
-  };
+function findIcon(iconNode) {
+  const iconName = svgs.find(({ contents }) => {
+    const div = document.createElement('div');
+    div.innerHTML = contents;
+    const testSvg = div.querySelector(':scope > svg');
 
+    return testSvg.outerHTML === iconNode.outerHTML;
+  })?.name;
+
+  return iconName;
+}
+
+function inlineIcons(main, html) {
   const themeColorRegex = /--theme-color: (#[0-9a-fA-F]{6});/g;
   const themeColorMatch = themeColorRegex.exec(html);
   const themeColor = themeColorMatch[1];
 
-  const foundIcons = {};
+  const foundIcons = [];
+  const notFoundIcons = [];
 
   main.querySelectorAll('.esri-text__iconContainer > svg')
     .forEach((icon) => {
       const path = icon.querySelector('path');
+      let color = path.style.fill;
       if (!path.style.fill) {
-        path.style.fill = themeColor;
+        color = themeColor;
       }
 
       icon.removeAttribute('class');
-      icon.removeAttribute('id');
-      path.removeAttribute('id');
+      // icon.removeAttribute('id');
+      // path.removeAttribute('id');
 
-      const iconHash = hashCode(icon.outerHTML);
-      let iconName = iconNames[iconHash];
+      let iconName = findIcon(icon);
+      // let iconName = iconNames[iconHash];
       if (!iconName) {
+        const iconHash = hashCode(icon.outerHTML);
         console.error('Unknown icon hash', iconHash, icon);
         iconName = `pending-${iconHash}`;
+        notFoundIcons.push(color);
+      } else {
+        console.log('found icon!', iconName, icon);
+        foundIcons.push({
+          name: iconName,
+          color,
+        });
       }
-
-      foundIcons[iconName] = icon.outerHTML;
-
       icon.outerHTML = `:${iconName}:`;
     });
 
-  return foundIcons;
+  return {
+    foundIcons,
+    notFoundIcons,
+  };
 }
 
 function quote(main, document) {
