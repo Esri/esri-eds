@@ -1,0 +1,89 @@
+.section.sidedrawer-container {
+    float: unset;
+    inline-size: unset;
+    clear: unset;
+    padding: 0;
+    inset-block-start: 150px;
+    position: relative
+}
+
+.sidedrawer {
+    display: none;
+}
+
+.sidedrawer-button {
+    position: absolute;
+    font-weight: var(--calcite-font-weight-medium);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    writing-mode: vertical-rl;
+    padding: calc(var(--space-3) + 4px);
+    background-color: var(--calcite-ui-border-2);
+    white-space: nowrap;
+    color: var(--calcite-ui-text-1);
+    padding-inline: calc(var(--space-12) - 3px) var(--space-6);
+    border-color: var(--calcite-ui-border-2);
+    margin-block-end: -50px;
+}
+
+.sidedrawer-button:is(:hover, :focus) {
+    background-color: var(--calcite-ui-border-2);
+}
+
+html[dir="rtl"] .sidedrawer-button {
+    margin-block: -50px auto;
+    padding-inline: var(--space-6) calc(var(--space-12) + 5px);
+    margin-inline-end: 0;
+}
+
+.sidedrawer-wrapper .sidedrawer.block {
+    transition: all 0.6s ease-out;
+}
+
+.sidedrawer-wrapper .sidedrawer-content-wrapper {
+    background: var(--calcite-ui-foreground-1);
+    transform-origin: top left;
+    border: 0;
+}
+
+.sidedrawer-content {
+    border: 0;
+}
+
+.sidedrawer-contentframe {
+    padding: 54px;
+    inline-size: 550px;
+    max-inline-size: 95vw;
+    block-size: 90.25vw;
+    max-block-size: 300px;
+    min-block-size: 0;
+    color: var(--calcite-ui-text-1);
+    background-color: var(--calcite-ui-foreground-1);
+}
+
+@media (width >= 1024px) {
+    .block.sidedrawer {
+        display: block;
+        position: fixed;
+        inset-inline-end: -2px;
+        z-index: 999;
+        margin-inline: 99% 0;
+        padding: 0;
+   }
+
+    .sidedrawer-content[aria-expanded="false"] {
+        max-inline-size: 0;
+        transition: all 0.6s ease-out;
+   }
+
+    .sidedrawer-content[aria-expanded="true"]{
+        transition: all 0.6s ease-out;
+        inline-size: 100%;
+        max-inline-size: 700px;
+   }
+
+    html[dir="rtl"] .sidedrawer {
+        inset-inline: auto -2px;
+    }
+}
