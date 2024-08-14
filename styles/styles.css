@@ -178,6 +178,13 @@ a:hover,a:focus {
   color: var(--calcite-ui-text-link);
 }
 
+/* horizontal rule */
+hr {
+  margin: var(--space-4) 0;
+  border: none;
+  border-block-start: 1px solid var(--calcite-ui-border-1);
+}
+
 /* buttons */
 a.button:any-link,
 button {

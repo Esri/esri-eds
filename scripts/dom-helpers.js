@@ -155,6 +155,10 @@ export function select(...items) {
 export function option(...items) {
   return domEl('option', ...items);
 }
+export function horizontalRule(...items) {
+  return domEl('hr', ...items);
+}
+
 export function calciteButton(...items) {
   return domEl('calcite-button', ...items);
 }
