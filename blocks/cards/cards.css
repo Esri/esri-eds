@@ -77,16 +77,51 @@
   }
 }
 
+/* Cards per row - width calculation */
+.cardsperrow > ul > li {
+  --cards-per-row: 1;
+  
+  inline-size: calc(100% / var(--cards-per-row));
+
+  @media (width >= 768px) {
+    --cards-per-row: 2;
+  }
+
+  @media (width >= 1024px) {
+    --cards-per-row: 3;
+  }
+}
+
+@media (width >= 1440px) {
+  .cardsperrow-1 > ul > li {
+    --cards-per-row: 1;
+  }
+  
+  .cardsperrow-2 > ul > li {
+    --cards-per-row: 2;
+  }
+  
+  .cardsperrow-3 > ul > li {
+    --cards-per-row: 3;
+  }
+  
+  .cardsperrow-4 > ul > li{
+    --cards-per-row: 4;
+  }
+  
+  .cardsperrow-5 > ul > li {
+    --cards-per-row: 5;
+  }
+  
+  .cardsperrow-6 > ul > li {
+    --cards-per-row: 6;
+  }
+}
+
 /* Cards Simple */
 .cards.simple li{
   position: relative;
   display: flex;
-}
-
-@media (width >= 1440px) {
-  .cards.simple li {
-    inline-size: 33.3334%;
-  }
 }
 
 .cards.simple .cards-card-body{
