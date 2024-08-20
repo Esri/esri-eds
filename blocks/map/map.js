@@ -1,8 +1,22 @@
 import {
-  div, iframe, p, horizontalRule,
+  div, iframe, p, horizontalRule, domEl,
 } from '../../scripts/dom-helpers.js';
 
-function getMapFrame(url) {
+const getMapPlaceholder = () => {
+  const mapPlaceholder = domEl('calcite-loader', {
+    label: 'Loading Map',
+    class: 'iframe-map-placeholder',
+  });
+
+  return mapPlaceholder;
+};
+
+const handleLoadFrame = () => {
+  const mapPlaceholder = document.querySelector('.iframe-map-placeholder');
+  mapPlaceholder.style.display = 'none';
+};
+
+const getMapFrame = (url) => {
   const mapFrame = iframe({
     id: 'map-frame',
     class: 'map-frame-aspect-ratio',
@@ -13,10 +27,11 @@ function getMapFrame(url) {
     tabindex: '0',
     loading: 'lazy',
     title: 'Esri locations map',
+    onload: handleLoadFrame,
   });
 
   return mapFrame;
-}
+};
 
 export default async function decorate(block) {
   const blockParams = block.querySelectorAll('p');
@@ -27,7 +42,6 @@ export default async function decorate(block) {
 
   const gridContainer = div({ class: 'grid-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
-  frameWrapper.appendChild(getMapFrame(mapLink));
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
   const nodeTextParam = p({ id: 'map-text-content' });
@@ -46,6 +60,23 @@ export default async function decorate(block) {
   gridContainerChildren.forEach((child) => {
     gridContainer.appendChild(child);
   });
+
+  const observer = new IntersectionObserver((entries) => {
+    const frameContainer = entries[0];
+
+    if (!frameContainer.isIntersecting) return;
+
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        frameWrapper.appendChild(getMapPlaceholder());
+        frameWrapper.appendChild(getMapFrame(mapLink));
+        observer.unobserve(e.target);
+      }
+    });
+    observer.disconnect();
+  }, { threshold: 0.75 });
+
+  observer.observe(frameWrapper);
 
   block.append(gridContainer);
 }

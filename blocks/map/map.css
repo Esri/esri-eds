@@ -46,9 +46,21 @@
     padding: 0
 }
 
+#map-default-content-wrapper > div > h2 {
+    font-weight: var(--calcite-font-weight-normal);
+    margin: 0 0 var(--space-4);
+    line-height: 1.375;
+}
+
 .map.block:not(.section) {
     background-color: transparent;
     padding: 0
+}
+
+.iframe-map-placeholder {
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
 }
 
 hr.separator {
