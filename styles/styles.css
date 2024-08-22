@@ -75,6 +75,7 @@
 }
 
 body {
+  box-sizing: border-box;
   font-size: var(--font-0);
   margin: 0;
   font-family: var(--calcite-sans-family);
@@ -82,6 +83,12 @@ body {
   color: var(--calcite-ui-text-1);
   background-color: var(--calcite-ui-foreground-1);
   display: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
 }
 
 body.appear {
