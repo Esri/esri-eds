@@ -1,0 +1,130 @@
+.local-navigation-wrapper {
+  background-color: var(--calcite-ui-foreground-1, #2b2b2b);
+}
+
+.local-navigation {
+  z-index: 3000;
+  position: sticky;
+  padding-inline: 0;
+  margin-inline: auto;
+  min-block-size: 56px;
+  inset-block-start: 0;
+  inline-size: 1440px;
+  max-inline-size: 92vw;
+}
+  
+.local-navigation nav#main {
+  display: flex;
+}
+
+.local-navigation ul li a {
+  display: block;
+  cursor: pointer;
+  line-height: 25px;
+  font-size: var(--font-0);
+  text-decoration: none;
+  padding: var(--space-4);
+  padding-inline: var(--space-8);
+  color: var(--calcite-ui-text-1, #fff);
+}
+
+.local-navigation .nav-title a {
+  font-size: var(--font-2);
+  color: var(--calcite-ui-text-1);
+  text-decoration: none;
+}
+
+.local-navigation .nav-title {
+  z-index: 3001;
+  flex: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 14px 14px 14px 0;
+}
+
+.local-navigation ul li a:hover {
+  box-shadow: none;
+  background-color: var(--calcite-ui-foreground-2, #202020);
+}
+
+.local-navigation nav .button-container p a {
+  display: inline;
+  margin-inline-end: 0;
+  padding: var(--space-3);
+  align-self: center;
+  color: var(--calcite-ui-text-1, #fff);
+}
+
+.local-navigation .nav-title a:hover {
+  background-color: var(--calcite-ui-foreground-1, #2b2b2b);
+  box-shadow: inset 0 -3px 0 0 var(--calcite-ui-foreground-1, #2b2b2b);
+}
+
+.local-navigation calcite-icon {
+  z-index: 3001;
+  cursor: pointer;
+  position: relative;
+  inset-block-start: var(--space-4);
+  inset-inline-end: var(--space-6);
+}
+
+.local-navigation ul li.page-title {
+  display: block;
+  position: relative;
+  inset-block-start: var(--space-10);
+  background-color: var(--calcite-ui-foreground-1, #2b2b2b);
+}
+
+.local-navigation ul {
+  z-index: 3001;
+  position: fixed;
+  inline-size: 100%;
+  inset-inline-end: 0;
+}
+
+.local-navigation ul.mobile-menu[aria-expanded='false'] {
+  display: none;
+}
+
+.local-navigation ul li a[aria-current='true'] {
+  box-shadow: inset 3px 0 0 0 var(--calcite-ui-brand-hover);
+  background-color: var(--calcite-ui-foreground-2, #202020);
+}
+
+@media (width >= 616px) {
+  .local-navigation ul {
+    position: absolute;
+    inline-size: 320px;
+  }
+
+  .local-navigation nav .button-container p a {
+    display: inline;
+  }
+}
+
+@media (width >= 975px) {
+  .local-navigation ul {
+    margin: 0;
+    display: flex;
+    position: relative;
+    font-size: 1.3vw;
+    justify-content: end;
+  }
+
+  .local-navigation ul li.page-title {
+    position: static;
+    background-color: var(--calcite-ui-foreground-1, #2b2b2b);
+  }
+
+  .local-navigation ul li a[aria-current='true'] {
+    box-shadow: inset 0 -3px 0 0 var(--calcite-ui-brand-hover);
+  }
+
+  .local-navigation ul.mobile-menu[aria-expanded='false'] {
+    display: flex;
+  }
+
+  .local-navigation calcite-icon {
+    display: none;
+  }
+}
