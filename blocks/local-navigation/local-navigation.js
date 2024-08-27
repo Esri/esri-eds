@@ -1,20 +1,19 @@
 import { domEl } from '../../scripts/dom-helpers.js';
 
+/**
+ * return url with current domain if different from the json data provide page origin
+ * @param {string} url The page url
+ */
 function updateURL(url) {
   const ISLOCAL = /localhost/gm;
   const currDomain = ISLOCAL.test(window.location.href) ? 'http://localhost:3000' : '';
   return url.replace(/^https?:\/\/[^/]+/, currDomain);
 }
 
-function appendNode(value) {
-  const updatedUrl = updateURL(value.titlelink);
-  const navTitle = document.querySelector('.local-navigation .nav-title');
-  const aHref = domEl('a', { href: updatedUrl });
-  aHref.innerHTML = `${value.title}`;
-  aHref.setAttribute('aria-current', 'false');
-  navTitle.appendChild(aHref);
-}
-
+/**
+ * return the last folder in the url path
+ * @param {string} href The current page url
+ */
 function currPg(href) {
   const cleanUrl = href.split(/[?#]/)[0];
   const parts = cleanUrl.split('/');
@@ -22,9 +21,25 @@ function currPg(href) {
   return lastFolder;
 }
 
-function appendPageTitle(pgObj) {
+/**
+ * Create a new anchor tag for navigation title and append to the nav if json data provided
+ * @param {Object, Element} value The navigation title and url, block The header block element
+ */
+function navigationTitle(value, block) {
+  const updatedUrl = updateURL(value.titlelink);
+  const navTitle = block.querySelector('.navigation-title');
+  const aHref = domEl('a', { href: updatedUrl });
+  aHref.innerHTML = `${value.title}`;
+  navTitle.appendChild(aHref);
+}
+
+/**
+ * Create a new list item for page title and append to the nav tag ul
+ * @param {Object, Element} pgObj The page title and page url.
+ */
+function appendPageTitle(pgObj, block) {
   const updatedUrl = updateURL(pgObj.pageLink);
-  const navTagUL = document.querySelector('.local-navigation ul');
+  const navTagUL = block.querySelector('ul');
   const li = domEl('li', { class: 'page-title', id: pgObj.pageTitle });
   const aHref = domEl('a', { href: updatedUrl });
   const currPageTitle = currPg(window.location.href);
@@ -37,22 +52,65 @@ function appendPageTitle(pgObj) {
   navTagUL.appendChild(li);
 }
 
-function parseXML(xmlData) {
+/**
+ * For document authored paged title only 'function docAuthPageTitle()'.
+ * Normalize url path, replace origin if different current origin.
+ * @param {JSON, Element} xmlData The api returned xmlData page folder json schema.
+ */
+function parseXML(xmlData, block) {
   for (let i = 0; i < xmlData.length; i += 1) {
     Object.entries(xmlData[i]).forEach(([key, value]) => {
       if (key === 'main') {
-        appendNode(value);
+        navigationTitle(value, block);
       }
       if (key === 'pageTitle') {
-        appendPageTitle(xmlData[i]);
+        appendPageTitle(xmlData[i], block);
       }
     });
   }
 }
 
+/**
+ * For document authored paged title only 'function docAuthPageTitle()'.
+ * Normalize url path, replace origin if different current origin.
+ * @param {Element} block The header block element
+ */
+function normalizeUrlPath(urlPath) {
+  const currentOrigin = window.location.origin;
+  const originRegex = /^https?:\/\/([^\s/$.?#].[^\s]*)$/i;
+  if (originRegex.test(urlPath)) {
+    const url = new URL(urlPath);
+    if (url.origin !== currentOrigin) {
+      return url.href.replace(url.origin, currentOrigin);
+    }
+    return url.href;
+  }
+  return `${currentOrigin}${urlPath.startsWith('/') ? '' : '/'}${urlPath}`;
+}
+
+/**
+ * Create a new anchor tag for navigation title and append to the nav if authored via document
+ * @param {Element} block The header block element
+ */
+function docAuthPageTitle(block) {
+  const xmlPgTitle = block.querySelector('.navigation-title a');
+  const navTitle = block.querySelector('.navigation-title');
+  const urlDocPgUrl = block.querySelector('div a');
+  const aHref = document.createElement('a');
+  if (((xmlPgTitle.innerHTML).length === 0) && (urlDocPgUrl.href !== null)) {
+    aHref.href = normalizeUrlPath(urlDocPgUrl.href);
+    aHref.innerHTML = `${urlDocPgUrl.innerHTML}`;
+    navTitle.appendChild(aHref);
+  }
+}
+
+/**
+ * set nav wrapper, mobile menu button, trial button, and aria attributes
+ * @param {Element} block The header block element
+ */
 function initNavWrapper(block) {
   const htmlNavTag = document.createElement('nav');
-  const navTitle = domEl('div', { class: 'nav-title' });
+  const navTitle = domEl('div', { class: 'navigation-title' });
   const ul = document.createElement('ul');
   const mobileButton = domEl('calcite-icon', {
     class: 'btn-mobile',
@@ -78,6 +136,10 @@ function initNavWrapper(block) {
   block.appendChild(htmlNavTag);
 }
 
+/**
+ * toggle caret-up or caret-down mobile menu caret icon and aria-expanded attribute
+ * @param {Element} block The header block element
+ */
 function btnEventListener(block) {
   const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
   const mobileMenu = block.querySelector('ul.mobile-menu');
@@ -93,6 +155,10 @@ function btnEventListener(block) {
   });
 }
 
+/**
+ * Fetch local navigation api data. If on localhost, use cors-anywhere proxy to bypass CORS policy
+ * @param {Element} block The header block element
+ */
 export default async function decorate(block) {
   const ISLOCAL = /localhost/gm;
   const PROXY = ISLOCAL.test(window.location.href) ? 'https://cors-anywhere.herokuapp.com/' : '';
@@ -103,7 +169,8 @@ export default async function decorate(block) {
     .then((response) => response.json())
     .then((data) => {
       initNavWrapper(block);
-      parseXML(data);
+      parseXML(data, block);
+      docAuthPageTitle(block);
       btnEventListener(block);
     })
     .catch((error) => error);
