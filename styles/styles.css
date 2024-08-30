@@ -294,6 +294,7 @@ main img {
       justify-content: center;
       align-items: center;
       transition: .15s ease-in-out;
+      background: var(--calcite-ui-text-1);
       background-color: var(--calcite-ui-text-inverse);
       border-radius: 50%;
     }

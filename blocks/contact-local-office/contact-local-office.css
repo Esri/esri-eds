@@ -24,6 +24,13 @@
     position: relative;
 }
 
+.video-play-anchor  {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
+}   
+
 .about-main-heading {
     font-size: var(--font-8);
     font-weight: var(--calcite-font-weight-bold);
