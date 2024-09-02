@@ -7,7 +7,9 @@
     "lint:js": "eslint .",
     "lint:css": "stylelint eds/blocks/**/*.css eds/styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
-    "lint-fix": "npm run lint:js -- --fix && npm run lint:css -- --fix"
+    "lint-fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
+    "import": "aem-import-helper import --urls tools/importer/urls.txt --import.js tools/importer/import.bundle.js",
+    "bundle": "aem-import-helper bundle --importjs tools/importer/import.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
     "@babel/core": "7.26.0",
     "@babel/eslint-parser": "7.25.9",
     "@eslint/eslintrc": "3.2.0",
+    "aem-import-helper": "^0.5.0",
     "csv-parser": "^3.0.0",
     "eslint": "9.17.0",
     "eslint-config-airbnb-base": "15.0.0",
