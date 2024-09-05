@@ -463,7 +463,6 @@ function centeredContentSwitcher(main, document) {
         const backgroundImage = document.createElement('img');
         backgroundImage.src = imageUrl;
 
-        console.log('child', section);
         const options = [...section.querySelector('.centered-content-switcher_options').children];
         const img = options[idx].querySelector('img.centered-content-switcher_thumb');
         div.append(img);
