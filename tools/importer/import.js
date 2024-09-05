@@ -452,6 +452,28 @@ function newsletter(main, document) {
   }
 }
 
+function centeredContentSwitcher(main, document) {
+  main.querySelectorAll('.centered-content-switcher_wrapper')
+    .forEach((container) => {
+      const cells = [...container.querySelectorAll(':scope > section')].map((section, idx) => {
+        const div = document.createElement('div');
+        div.append(section.querySelector('.centered-content-switcher_info'));
+
+        const imageUrl = section.getAttribute('data-lazy-image');
+        const backgroundImage = document.createElement('img');
+        backgroundImage.src = imageUrl;
+
+        console.log('child', section);
+        const options = [...section.querySelector('.centered-content-switcher_options').children];
+        const img = options[idx].querySelector('img.centered-content-switcher_thumb');
+        div.append(img);
+
+        return [div, backgroundImage];
+      });
+      createBlock(container, document, 'Centered content switcher', cells);
+    });
+}
+
 function transformers(main, document, html, pathname) {
   const report = {
     icons: inlineIcons(main, html),
@@ -465,6 +487,7 @@ function transformers(main, document, html, pathname) {
   sections(main, document);
   hero(main, document);
   storyteller(main, document);
+  centeredContentSwitcher(main, document);
   tabs(main, document);
   mediaGallery(main, document);
   cards(main, document);
