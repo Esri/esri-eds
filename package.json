@@ -8,7 +8,7 @@
     "lint:css": "stylelint eds/blocks/**/*.css eds/styles/*.css",
     "lint": "npm run lint:js && npm run lint:css",
     "lint-fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
-    "import": "aem-import-helper import --urls tools/importer/urls.txt --import.js tools/importer/import.bundle.js",
+    "import": "aem-import-helper import --urls tools/importer/urls.txt --importjs tools/importer/import.bundle.js",
     "bundle": "aem-import-helper bundle --importjs tools/importer/import.js"
   },
   "repository": {
