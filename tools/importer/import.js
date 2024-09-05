@@ -215,7 +215,16 @@ function cards(main, document) {
 
   main.querySelectorAll('.card-container-v3')
     .forEach((container) => {
-      const cells = getCardArrayFromContainer(container, document).map((card) => [card]);
+      const cells = getCardArrayFromContainer(container, document).map((card) => {
+        const category = card.querySelector('.esri-text__category');
+        if (category) {
+          category.textContent = category.textContent.toUpperCase();
+          // append after card's first child
+          card.children[0].after(category);
+        }
+
+        return [card];
+      });
       if (!cells) {
         throw new Error('No cards found', container.outerHTML);
       }
