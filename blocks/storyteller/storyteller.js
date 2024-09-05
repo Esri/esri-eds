@@ -18,6 +18,23 @@ function isMP4(vidUrls) {
 }
 
 /**
+ * Set the foreground container for mp4 video.
+ * @returns {element} The block element
+ */
+function setforegroundContainers(block) {
+  const vids = block.querySelectorAll('a');
+  const mp4Authored = isMP4(vids);
+  const picTags = block.querySelectorAll('picture');
+
+  if (!mp4Authored) {
+    if (picTags.length > 1) {
+      const picTag = picTags[1];
+      picTag.parentNode.classList.add('foreground-container');
+    }
+  }
+}
+
+/**
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
  */
@@ -25,10 +42,14 @@ function toggleVideo(videoBtn) {
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
+  const vidBtn = foregroundWrapper.querySelector('.video-playbutton');
+  const calciteIconPlayBtn = vidBtn.querySelector('calcite-icon');
   if (vidSrc.paused === true) {
     vidSrc.play();
+    calciteIconPlayBtn.setAttribute('icon', 'play-f');
   } else {
     vidSrc.pause();
+    calciteIconPlayBtn.setAttribute('icon', 'pause-f');
   }
 }
 
@@ -51,9 +72,12 @@ async function getVideoBtn() {
   return videoButton;
 }
 
+/**
+ * Produce a video tag with appropriate attributes.
+ * @returns {element} foregroundSrc The source of the video
+ */
 async function setVideoTag(foregroundSrc) {
   const videoTag = document.createElement('video');
-
   videoTag.muted = true;
   videoTag.toggleAttribute('autoplay', 'true');
   videoTag.toggleAttribute('loop', true);
@@ -63,10 +87,25 @@ async function setVideoTag(foregroundSrc) {
   return videoTag;
 }
 
+/**
+ * Get all mp4 urls from the block.
+ * @returns {element} The block element
+ */
+function getMP4(block) {
+  const aTags = block.querySelectorAll('a');
+  const mp4Urls = [];
+  aTags.forEach((aTag) => {
+    if (aTag.href.includes('.mp4')) {
+      mp4Urls.push(aTag);
+    }
+  });
+  return mp4Urls;
+}
+
 export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
-  const vidUrls = block.querySelectorAll('a');
+  const vidUrls = getMP4(block);
   const foregroundContentContainer = document.createElement('div');
   const foregroundPicture = block.querySelectorAll('picture')[1];
   const foregroundSrc = foregroundPicture.querySelector('img').src;
@@ -76,17 +115,17 @@ export default async function decorate(block) {
   const videoTag = await setVideoTag(foregroundSrc);
 
   foregroundContent.classList.add('content-wrapper');
-
   if (isMP4(vidUrls) === true) {
     foregroundPicture.classList.add('hide-poster');
   }
-
-  if ((pictureTagLeft !== null) && (vidUrls.length >= 1)) {
+  if ((pictureTagLeft !== null)) {
+    setforegroundContainers(block);
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tag = block.querySelector('h2');
-
-    source.setAttribute('src', vidUrls[0].href);
-    videoTag.appendChild(source);
+    if (vidUrls.length >= 1) {
+      source.setAttribute('src', vidUrls[0].href);
+      videoTag.appendChild(source);
+    }
     block.classList.add('content-right');
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
@@ -94,25 +133,26 @@ export default async function decorate(block) {
     foregroundContent.appendChild(pTags[2]);
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
-    foregroundWrapper.appendChild(videoBtn);
+    if (vidUrls.length >= 1) {
+      foregroundWrapper.appendChild(videoBtn);
+    }
   }
 
   if ((pictureTagLeft === null) && (vidUrls.length >= 1)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
-
-    source.setAttribute('src', vidUrls[1].href);
-    videoTag.appendChild(source);
+    if (vidUrls.length >= 1) {
+      source.setAttribute('src', vidUrls[0].href);
+      videoTag.appendChild(source);
+    }
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
-
     if (pTags.length > 5) {
       foregroundContent.appendChild(pTags[pTags.length - 1]);
     } else {
       foregroundContent.appendChild(pTags[4]);
     }
-
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
     foregroundWrapper.appendChild(videoBtn);

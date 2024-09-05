@@ -5,16 +5,15 @@
 
 .storyteller {
   overflow: hidden;
-  min-block-size: 1100px;
 }
 
 .storyteller h2 {
   font-size: var(--font-6);
-  padding-inline: var(--space-6);
 }
 
 .storyteller .foreground-container {
-  position: absolute;
+  inline-size: auto;
+  position: relative;
 }
 
 .storyteller button.video-playbutton {
@@ -25,9 +24,10 @@
   cursor: pointer;
   position: absolute;
   inset-inline-end: 0;
-  inset-block-start: 0;
   background-color: black;
   border-radius: var(--space-2);
+  margin-inline-end: var(--space-4);
+  inset-block-start: var(--space-2);
   margin-block-start: var(--space-2);
   padding: var(--space-2) var(--space-3);
 }
@@ -37,52 +37,40 @@
   flex-direction: column-reverse;
 }
 
-.storyteller p:nth-of-type(1) {
-  font-size: var(--font-2);
-  padding-inline: var(--space-6);
-}
-
-.storyteller .foreground-content .content-wrapper p {
-  font-size: var(--font-0);
-  padding-inline-start: var(--space-6);
-}
-
-.storyteller.content-right p:nth-of-type(1) {
-  inline-size: 90%;
-}
-
-.storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper   {
+.storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper {
   opacity: 0.85;
   align-self: end;
   inline-size: auto;
   position: absolute;
+  padding-inline: var(--space-6);
   color: var(--calcite-ui-text-1);
   background-color: var(--calcite-ui-background);
-}
-
-.storyteller p.button-container {
-  padding-inline-start: var(--space-6);
 }
 
 .storyteller.content-right h2, .storyteller.content-right p:nth-of-type(1), .storyteller.storyteller.content-right p.button-container {
   padding-inline-start: 0;
 }
 
-.storyteller.content-right .content-wrapper p {
-  padding-inline-start: var(--space-6);
+.storyteller .foreground-container a, .storyteller .foreground-container picture, .storyteller p:nth-of-type(1) picture, .storyteller picture.hide-poster {
+  display: none;
 }
 
-.storyteller.content-right div:nth-of-type(2) p {
-  inline-size: 75%;
+.storyteller.content-right p picture {
+  padding-inline-end: var(--space-12);
+}
+
+.storyteller.content-right div:nth-of-type(2) p { 
+  inline-size: 90%;
 }
 
 .storyteller .foreground-content .content-wrapper h2 {
-  margin-block-end: 0;
   font-size: var(--font-2);
-  padding-inline-start: var(--space-6);
 }
 
 .storyteller p.button-container a.button {
+  text-wrap: wrap;
+  line-height: 1.4;
+  text-align: start;
   text-decoration: none;
   padding: var(--space-4);
   font-size: var(--font-1); 
@@ -90,79 +78,140 @@
 }
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img {
+  max-inline-size: 100%;
   block-size: 100%;
+}
+
+.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img, .storyteller.content-right div:nth-of-type(1) p:nth-of-type(1) picture img {
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
 
 .storyteller.content-right div:nth-of-type(1) p:nth-of-type(1) picture img {
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
   block-size: revert-layer;
 }
 
 .storyteller.content-right div div:nth-of-type(2) {
   block-size: auto;
-  padding-inline-start: var(--space-6);
+  padding-inline: var(--space-6);
 }
 
-.storyteller p picture {
-  display: block;
-  padding-inline-start: var(--space-20);
-}
-
-.storyteller .foreground-container a, .storyteller .foreground-container picture, .storyteller p:nth-of-type(1) picture, .storyteller picture.hide-poster {
-  display: none;
+.storyteller:not(.content-right) div:nth-of-type(1) > div:nth-of-type(1) {
+  padding-inline: var(--space-6);
 }
 
 .storyteller .foreground-content {
   display: flex;
   block-size: 100%;
   position: relative;
-  padding-inline-start: var(--space-6);
 }
 
-.storyteller div p:nth-of-type(2) video {
-  inline-size: 500px;
-  position: relative;
+.storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+  margin-inline: var(--space-6);
+}
+
+.storyteller.content-right .foreground-content, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+  padding-inline: 0;
 }
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
   block-size: 100%;
   position: absolute;
-} 
+  padding-inline-start: var(--space-24);
+}
+
+.storyteller.content-right div div p:nth-of-type(2) picture {
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  inset-inline-end: 0;
+  inline-size: 500px;
+  margin: 0 auto;
+  padding: 0;
+}
+ 
+.storyteller div p:nth-of-type(2) video {
+  inline-size: 100%;
+  position: relative;
+}
+
+.storyteller.content-right button.video-playbutton {
+  margin-inline-end: var(--space-4); 
+}
+
+@media (width >= 510px) {
+  .storyteller button.video-playbutton {
+    margin-inline-end: var(--space-4); 
+  }
+
+  .storyteller div div:nth-of-type(2) .foreground-content, .storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper, .storyteller div p:nth-of-type(2) video, .storyteller .foreground-container, .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture img {
+    inline-size: 500px;
+  }
+  
+  .storyteller.content-right .foreground-container {
+    margin-inline-start: var(--space-6);
+  }
+}
+
+@media (width >= 900px) {
+  .section > div.storyteller-wrapper {
+    margin-block-end: var(--space-20);
+  }
+}
 
 @media (width >= 1152px) { 
   .storyteller {
     padding: 0 ;
+    inline-size: 100%;
     position: relative;
-  }
-  
-  .storyteller h2, .storyteller p:nth-of-type(1) {
-    padding-inline: var(--space-20) var(--space-16);
+    min-block-size: 1100px;
   }
 
-  .storyteller p.button-container {
-    padding-inline-start: var(--space-20);
+  .section > div.storyteller-wrapper, .storyteller .foreground-content .content-wrapper h2 {
+    margin-block-end: 0;
   }
 
-  .storyteller:not(.content-right) div > div:nth-of-type(1) p:nth-of-type(2), .storyteller:not(.content-right) div > div:nth-of-type(1) p:nth-of-type(4), .storyteller:not(.content-right) div > div:nth-of-type(1) p:nth-of-type(6) {
-    font-size: var(--font-0);
-    font-weight: var(--calcite-font-weight-medium);
-    padding-inline: var(--space-20) var(--space-16);
+  .storyteller.content-right div div:nth-of-type(2) > h2 {
+    max-inline-size: 600px;
+    margin-inline-end: var(--space-20);
   }
 
-  .storyteller:not(.content-right) div > div:nth-of-type(1) p:nth-of-type(3), .storyteller:not(.content-right) div > div:nth-of-type(1) p:nth-of-type(5), .storyteller:not(.content-right) div > div:nth-of-type(1) p:nth-of-type(7) {
-    font-size: var(--font-0);
-    padding-inline: var(--space-20) var(--space-16);
+  .storyteller div div p:not(.button-container) {
+    padding-inline: 0;
+  }
+
+  .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
+    padding-inline-start: 0;
   } 
 
-  .storyteller p picture {
-    padding-inline-start: 0;
+  .storyteller.content-right div:nth-of-type(2) p {
+    inline-size: 75%;
+    max-inline-size: 575px;
   }
 
-  .storyteller p:nth-of-type(1) picture {
-    display: block;
+  .storyteller.content-right div .foreground-content .content-wrapper p {
+    padding-inline: 0;
+  }
+  
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) p {
+    margin-inline-start: auto;
+    max-inline-size: 660px
+  }
+  
+  .storyteller div div p:nth-of-type(2).foreground-container {
+    margin-inline: var(--space-6);
+  }
+
+  .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+    margin-inline: 0;
+  }
+
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) p {
+    padding-inline: var(--space-32) var(--space-8);
+  }
+
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+    margin-inline: var(--space-6);
   }
 
   .storyteller > div {
@@ -176,37 +225,56 @@
   .storyteller.content-right div {
     flex-direction: row;
   }
-
-  .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2) {
-    inline-size: 50%;
-  }
-  
+    
   .storyteller div div:nth-of-type(2) {
     block-size: 100%;
   }
 
-  .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture {
+  .storyteller .foreground-container {
     position: absolute;
-    inset-block-start: 50%;
+    overflow: hidden;
+    inset-block: 50% 0;
     transform: translateY(-50%);
+  }
+
+  .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2), .storyteller.content-right .foreground-container {
+    inline-size: 50%;
+  }
+  
+  .storyteller.content-right div div:nth-of-type(1) {
+    position: relative;
   }
 
   .storyteller.content-right div div:nth-of-type(2) {
     display: block;
     block-size: auto;
     inline-size: 50%;
-    padding-inline-start: var(--space-20);
+    padding: var(--space-20) 0 var(--space-20) var(--space-16) ;
   }
 
-  .storyteller.content-right h2 {
-    inline-size: 75%;
-    padding-inline-start: 0;
+  .storyteller .foreground-content .content-wrapper, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
+    padding-inline: 0;
+  }
+
+  .storyteller div p:nth-of-type(2) video, .storyteller.content-right div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper {
+    position: absolute;
   }
   
-  .storyteller .foreground-container {
+  .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .content-wrapper {
+    padding-inline: var(--space-6);
+  }
+
+  .storyteller button.video-playbutton {
+    margin-inline-end: var(--space-4); 
+  }
+
+  .storyteller p:nth-of-type(1) picture {
+    display: block;
+  }
+
+  .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture, .storyteller.content-right div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
     position: absolute;
-    overflow: hidden;
-    inset-block: 50% 0;
+    inset-block-start: 50%;
     transform: translateY(-50%);
   }
 
@@ -216,36 +284,11 @@
     inset-inline: 50% 0;
   }
 
-  .storyteller .foreground-content {
-    padding-inline-start: 0;    
-  }
-
   .storyteller.content-right .foreground-content {
     display: flex;
     block-size: 100%;
     inline-size: 100%;
     position: relative;
     justify-content: end;
-  }
-  
-  .storyteller div div:nth-of-type(2) .foreground-content {
-    inline-size: 500px;
-  }
-  
-  .storyteller.content-right div div:nth-of-type(1) {
-    position: relative;
-  }
-
-  .storyteller div p:nth-of-type(2) video {
-    inset-block-end: 0;
-  }
-
-  .storyteller div p:nth-of-type(2) video, .storyteller.content-right div p:nth-of-type(2) video {
-    position: absolute;
-  }
-  
-  .storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper   {
-    inline-size: 500px;
-    position: absolute;
   }
 }
