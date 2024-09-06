@@ -346,7 +346,6 @@ function inlineIcons(main, html) {
         iconName = `pending-${iconHash}`;
         notFoundIcons.push(color);
       } else {
-        console.log('found icon!', iconName, icon);
         foundIcons.push({
           name: iconName,
           color,
@@ -379,7 +378,7 @@ function columns(main, document) {
     .forEach((container) => {
       const children = [...container.children];
       if (children.length !== 2) {
-        throw new Error('fifty-fifty_container expected 2 children', container.outerHTML);
+        throw new Error('fifty-fifty_container expected 2 children');
       }
       let columnElements = children;
       if (container.classList.contains('fifty-fifty_container--content-end')) {
@@ -390,6 +389,18 @@ function columns(main, document) {
 
       createBlock(container, document, 'columns', [columnElements]);
     });
+
+  main.querySelectorAll('.media-text-split .mts-media-text-split').forEach((container) => {
+    const children = [...container.children];
+    if (container.getAttribute('data-direction') === 'right') {
+      children.reverse();
+    }
+
+    if (children.length !== 2) {
+      throw new Error('media-text-split expected 2 children');
+    }
+    createBlock(container, document, 'columns', [children]);
+  });
 }
 
 function mosaicReveal(main, document) {
@@ -489,8 +500,6 @@ function locationOverview(main, document) {
       const cta = newDiv.querySelector('div.ecs__link');
       link.replaceChildren(cta);
       newDiv.append(link);
-
-      console.log('new div', newDiv, newDiv.outerHTML);
 
       return [newDiv];
     });
