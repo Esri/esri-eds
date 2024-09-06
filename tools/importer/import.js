@@ -491,10 +491,13 @@ function centeredContentSwitcher(main, document) {
     });
 }
 
-function locationOverview(main, document) {
+function elasticContentStrip(main, document) {
   main.querySelectorAll('.elastic-content-strip > .ecs__wrapper > .ecs__main').forEach((container) => {
     const cells = [...container.children].map((child) => {
       const link = child.querySelector('a');
+      if (!link) {
+        return [child];
+      }
       const newDiv = document.createElement('div');
       newDiv.append(...link.children);
       const cta = newDiv.querySelector('div.ecs__link');
@@ -503,7 +506,7 @@ function locationOverview(main, document) {
 
       return [newDiv];
     });
-    createBlock(container, document, 'Location overview', cells);
+    createBlock(container, document, 'Elastic content strip', cells);
   });
 }
 
@@ -525,7 +528,7 @@ function transformers(main, document, html, pathname) {
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
-  locationOverview(main, document);
+  elasticContentStrip(main, document);
   map(main, document, html);
   quote(main, document);
   columns(main, document);
