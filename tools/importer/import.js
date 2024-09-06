@@ -328,7 +328,7 @@ function inlineIcons(main, html) {
   const foundIcons = [];
   const notFoundIcons = [];
 
-  main.querySelectorAll('.esri-text__iconContainer > svg')
+  main.querySelectorAll('.esri-text__iconContainer > svg, .ecs__panel__icon > svg')
     .forEach((icon) => {
       const path = icon.querySelector('path');
       let color = path.style.fill;
@@ -337,8 +337,6 @@ function inlineIcons(main, html) {
       }
 
       icon.removeAttribute('class');
-      // icon.removeAttribute('id');
-      // path.removeAttribute('id');
 
       let iconName = findIcon(icon);
       // let iconName = iconNames[iconHash];
@@ -482,6 +480,24 @@ function centeredContentSwitcher(main, document) {
     });
 }
 
+function locationOverview(main, document) {
+  main.querySelectorAll('.elastic-content-strip > .ecs__wrapper > .ecs__main').forEach((container) => {
+    const cells = [...container.children].map((child) => {
+      const link = child.querySelector('a');
+      const newDiv = document.createElement('div');
+      newDiv.append(...link.children);
+      const cta = newDiv.querySelector('div.ecs__link');
+      link.replaceChildren(cta);
+      newDiv.append(link);
+
+      console.log('new div', newDiv, newDiv.outerHTML);
+
+      return [newDiv];
+    });
+    createBlock(container, document, 'Location overview', cells);
+  });
+}
+
 function transformers(main, document, html, pathname) {
   const report = {
     icons: inlineIcons(main, html),
@@ -500,6 +516,7 @@ function transformers(main, document, html, pathname) {
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
+  locationOverview(main, document);
   map(main, document, html);
   quote(main, document);
   columns(main, document);
