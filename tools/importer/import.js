@@ -510,6 +510,22 @@ function elasticContentStrip(main, document) {
   });
 }
 
+function largeContentStack(main, document) {
+  main.querySelectorAll('.large-content-stack')
+    .forEach((container) => {
+      const background = container.querySelector('.has-background--img');
+      const imgSrc = background.getAttribute('data-lazy-image');
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      // WebImporter.DOMUtils.replaceBackgroundByImg(background);
+
+      const newContainer = document.createElement('div');
+      newContainer.append(...container.children, img);
+
+      createBlock(container, document, 'Large content stack', [[newContainer]]);
+    });
+}
+
 function transformers(main, document, html, pathname) {
   const report = {
     icons: inlineIcons(main, html),
@@ -533,6 +549,7 @@ function transformers(main, document, html, pathname) {
   quote(main, document);
   columns(main, document);
   mosaicReveal(main, document);
+  largeContentStack(main, document);
   localNavigation(main, document);
   transformUrls(main);
 
