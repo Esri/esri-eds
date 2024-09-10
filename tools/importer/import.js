@@ -67,8 +67,13 @@ function calciteButton(main, document) {
   main.querySelectorAll('calcite-button')
     .forEach((button) => {
       const link = document.createElement('a');
-      link.setAttribute('href', button.getAttribute('href'));
+      const href = button.getAttribute('href');
+      link.setAttribute('href', href);
+
       link.textContent = button.textContent;
+      if (!button.textContent.trim()) {
+        link.textContent = href;
+      }
       button.replaceWith(link);
     });
 }
@@ -517,7 +522,6 @@ function largeContentStack(main, document) {
       const imgSrc = background.getAttribute('data-lazy-image');
       const img = document.createElement('img');
       img.src = imgSrc;
-      // WebImporter.DOMUtils.replaceBackgroundByImg(background);
 
       const newContainer = document.createElement('div');
       newContainer.append(...container.children, img);
