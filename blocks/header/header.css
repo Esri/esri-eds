@@ -1,0 +1,9 @@
+/* remove styles coming from styles.css */
+/* stylelint-disable */
+.gnav_top-nav_language-chooser-button {
+    margin: unset;
+}
+
+.gnav_top-nav_language-chooser-button:focus {
+    background-color: unset;
+}

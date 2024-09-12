@@ -86,6 +86,9 @@ export function p(...items) {
 export function a(...items) {
   return domEl('a', ...items);
 }
+export function link(...items) {
+  return domEl('link', ...items);
+}
 export function h1(...items) {
   return domEl('h1', ...items);
 }
