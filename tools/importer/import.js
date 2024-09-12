@@ -13,7 +13,7 @@ function createMetadata(main, document, pathname) {
 }
 
 function createBlock(container, document, name, cells, variants = []) {
-  container.replaceChildren(WebImporter.Blocks.createBlock(document, {
+  container.replaceWith(WebImporter.Blocks.createBlock(document, {
     name,
     cells,
     variants,
@@ -102,7 +102,7 @@ function createIcon(iconName, originalURL) {
 }
 
 function getCardArrayFromContainer(container, document) {
-  return [...container.querySelectorAll(':scope > ul > li > article')]
+  return [...container.querySelectorAll(':scope > li > article')]
     .map((card) => {
       if (card.children.length === 1 && card.children[0].tagName === 'A') {
         const link = card.children[0];
@@ -149,7 +149,7 @@ function tabs(main, document) {
             }
           }
 
-          const cardsContainer = tabContent.querySelector('.card-container-v3');
+          const cardsContainer = tabContent.querySelector('.card-container-v3 > ul');
           if (cardsContainer) {
             withCards = true;
             const cardArray = getCardArrayFromContainer(cardsContainer, document);
@@ -218,7 +218,7 @@ function cards(main, document) {
       createBlock(container, document, 'cards', cells, ['Block group']);
     });
 
-  main.querySelectorAll('.card-container-v3')
+  main.querySelectorAll('.card-container-v3 > ul')
     .forEach((container) => {
       const cells = getCardArrayFromContainer(container, document).map((card) => {
         const category = card.querySelector('.esri-text__category');
@@ -569,6 +569,8 @@ export default {
       'header',
       'footer',
       '.disclaimer',
+      '.card-container-v3_i18n',
+      'button.paginate-container.icon-ui-down',
     ]);
 
     const { pathname } = new URL(url);
