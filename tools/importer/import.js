@@ -281,13 +281,11 @@ function transformUrls(main) {
 }
 
 function map(main, document, pathname) {
-  const maps = [];
-
   const mapsMapping = {
     '/about/about-esri/mea-central-asia': 'https://webapps-cdn.esri.com/Apps/regional-maps/mea.html',
     '/about/about-esri/asia-pacific': 'https://webapps-cdn.esri.com/Apps/regional-maps/asiapacific.html',
     '/about/about-esri/americas': 'https://webapps-cdn.esri.com/Apps/regional-maps/americas.html',
-    '/about/about-esri/europe': 'https://webapps-cdn.esri.com/Apps/regional-maps/europe.html',
+    '/about/about-esri/europe/overview': 'https://webapps-cdn.esri.com/Apps/regional-maps/europe.html',
   };
 
   main.querySelectorAll('.raw-html-for-js-app').forEach((rawHtmlForJsApp) => {
@@ -306,16 +304,12 @@ function map(main, document, pathname) {
     main.querySelector('a#returnBtn').remove();
     main.querySelector('a#fullScreenButton').remove();
 
-    maps.push(mapUrl);
-
     const link = document.createElement('a');
     link.setAttribute('href', mapUrl);
     link.textContent = mapUrl;
 
     createBlock(rawHtmlForJsApp, document, 'map', [[link]]);
   });
-
-  return maps;
 }
 
 function hashCode(str) {
