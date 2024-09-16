@@ -265,6 +265,7 @@ function transformUrls(main) {
   main.querySelectorAll('a')
     .forEach((a) => {
       const href = a.getAttribute('href');
+      console.log('a', a, href);
       if (!href.startsWith('/')) {
         return;
       }
@@ -280,19 +281,33 @@ function transformUrls(main) {
     });
 }
 
-function map(main, document, html) {
+function map(main, document, pathname) {
+  const maps = [];
+
+  const mapsMapping = {
+    '/about/about-esri/mea-central-asia': 'https://webapps-cdn.esri.com/Apps/regional-maps/mea.html',
+    '/about/about-esri/asia-pacific': 'https://webapps-cdn.esri.com/Apps/regional-maps/asiapacific.html',
+    '/about/about-esri/americas': 'https://webapps-cdn.esri.com/Apps/regional-maps/americas.html',
+    '/about/about-esri/europe': 'https://webapps-cdn.esri.com/Apps/regional-maps/europe.html',
+  };
+
   main.querySelectorAll('.raw-html-for-js-app').forEach((rawHtmlForJsApp) => {
     if (!rawHtmlForJsApp.querySelector('#eam-map-wrapper')) {
       console.error('eam-map-wrapper not found in raw-html-for-js-app', rawHtmlForJsApp);
       return;
     }
 
-    const apiDataRegex = /axios.get\(\s*"([^"]+)"\s*\)/;
-    const apiDataMatch = apiDataRegex.exec(html);
-    const mapUrl = (apiDataMatch?.length >= 2) ? apiDataMatch[1] : 'TODO import map url correctly';
+    const noLangPathname = pathname.replace(/\/[a-z]{2}-[a-z]{2}\//, '/');
+    const mapUrl = mapsMapping[noLangPathname];
+    if (!mapUrl) {
+      console.error('No map URL found for pathname', noLangPathname, pathname);
+      return;
+    }
 
     main.querySelector('a#returnBtn').remove();
     main.querySelector('a#fullScreenButton').remove();
+
+    maps.push(mapUrl);
 
     const link = document.createElement('a');
     link.setAttribute('href', mapUrl);
@@ -300,6 +315,8 @@ function map(main, document, html) {
 
     createBlock(rawHtmlForJsApp, document, 'map', [[link]]);
   });
+
+  return maps;
 }
 
 function hashCode(str) {
@@ -518,8 +535,7 @@ function elasticContentStrip(main, document) {
 function largeContentStack(main, document) {
   main.querySelectorAll('.large-content-stack')
     .forEach((container) => {
-      const background = container.querySelector('.has-background--img');
-      const imgSrc = background.getAttribute('data-lazy-image');
+      const imgSrc = container.querySelector('.has-background--img')?.getAttribute('data-lazy-image');
       const img = document.createElement('img');
       img.src = imgSrc;
 
@@ -549,13 +565,15 @@ function transformers(main, document, html, pathname) {
   cards(main, document);
   callToAction(main, document);
   elasticContentStrip(main, document);
-  map(main, document, html);
+  const maps = map(main, document, pathname);
   quote(main, document);
   columns(main, document);
   mosaicReveal(main, document);
   largeContentStack(main, document);
   localNavigation(main, document);
   transformUrls(main);
+
+  report.maps = maps;
 
   return report;
 }
