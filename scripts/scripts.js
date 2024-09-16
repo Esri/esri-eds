@@ -64,6 +64,7 @@ function decorateVideoLinks(element) {
       a.href.startsWith('https://mediaspace.esri.com/')
    || a.href.startsWith('https://www.youtube.com/')
     ) {
+      a.classList.add('video-link');
       const closeButton = div(
         {
           class: 'video-close-button',
