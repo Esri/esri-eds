@@ -265,7 +265,6 @@ function transformUrls(main) {
   main.querySelectorAll('a')
     .forEach((a) => {
       const href = a.getAttribute('href');
-      console.log('a', a, href);
       if (!href.startsWith('/')) {
         return;
       }
