@@ -516,7 +516,7 @@ function newsletter(main, document) {
   }
 }
 
-function centeredContentSwitcher(main, document) {
+function switchers(main, document) {
   main.querySelectorAll('.centered-content-switcher_wrapper')
     .forEach((container) => {
       const cells = [...container.querySelectorAll(':scope > section')].map((section, idx) => {
@@ -535,6 +535,33 @@ function centeredContentSwitcher(main, document) {
       });
       createBlock(container, document, 'Centered content switcher', cells);
     });
+
+  main.querySelectorAll('.aem-GridColumn.largeimageswitcher > .c-image-switcher').forEach((container) => {
+    const contentContainer = container.querySelector('.c-image-switcher-content-container');
+
+    const switcherLinks = contentContainer.querySelector('.c-image-switcher-links');
+    console.log('image switcher', switcherLinks);
+    switcherLinks.remove();
+
+    const variants = [];
+    if (container.classList.contains('c-image-switcher--flip')) {
+      variants.push('flip');
+    }
+
+    const cells = [[contentContainer]];
+    cells.push(...[...switcherLinks.children].map((link) => {
+      const wrapper = document.createElement('div');
+      // wrapper.append(link);
+
+      const linkNumber = link.getAttribute('data-component-link-placement');
+      const imageWrapper = container.querySelector(`#image${linkNumber}`);
+      wrapper.append(imageWrapper);
+
+      return [wrapper];
+    }));
+
+    createBlock(container, document, 'Image switcher', cells, variants);
+  });
 }
 
 function elasticContentStrip(main, document) {
@@ -581,7 +608,7 @@ function transformers(main, document, html, pathname) {
   sections(main, document);
   hero(main, document);
   storyteller(main, document);
-  centeredContentSwitcher(main, document);
+  switchers(main, document);
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
