@@ -2,6 +2,10 @@
 import urls from './urls.js';
 import svgs from './svgs.js';
 
+let report = {};
+let fragmentPages = [];
+const edsUrl = 'https://main--esri--aemsites.aem.live';
+
 function createMetadata(main, document, pathname) {
   const meta = {};
 
@@ -119,11 +123,21 @@ function getCardArrayFromContainer(container, document) {
     });
 }
 
-function tabs(main, document) {
+function toClassName(name) {
+  return typeof name === 'string'
+    ? name
+      .toLowerCase()
+      .replace(/[^0-9a-z]/gi, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+    : '';
+}
+
+function tabs(main, document, pathname) {
   main.querySelectorAll('.esri-carousel,.esri-tabs')
     .forEach((container) => {
       const withIcons = container.classList.contains('tab-icons');
-      let withCards = false;
+      const withCards = false;
 
       const cells = [...container.querySelectorAll('[role="tabpanel"]')]
         .map((tabContent) => {
@@ -149,12 +163,29 @@ function tabs(main, document) {
             }
           }
 
-          const cardsContainer = tabContent.querySelector('.card-container-v3 > ul');
-          if (cardsContainer) {
-            withCards = true;
-            const cardArray = getCardArrayFromContainer(cardsContainer, document);
+          const tabContentTable = tabContent.querySelector('table');
+          if (tabContentTable) {
+            console.log('Table found in tab', tabContentTable, tabContent);
 
-            return [tabLabel, cardArray];
+            const tabPathname = `${pathname}/tabs/${toClassName(tabLabel.textContent)}`;
+
+            const link = document.createElement('a');
+            const url = edsUrl + tabPathname;
+            link.setAttribute('href', url);
+            link.textContent = url;
+            tabContentTable.replaceWith(link);
+
+            const wrapper = document.createElement('div');
+            wrapper.append(tabContentTable);
+
+            fragmentPages.push({
+              element: wrapper,
+              path: tabPathname,
+            });
+
+            const reportTabs = report.fragmentTabs ?? [];
+            reportTabs.push(tabPathname);
+            report.tabs = reportTabs;
           }
 
           return [tabLabel, tabContent];
@@ -540,9 +571,7 @@ function largeContentStack(main, document) {
 }
 
 function transformers(main, document, html, pathname) {
-  const report = {
-    icons: inlineIcons(main, html),
-  };
+  report.icons = inlineIcons(main, html);
 
   newsletter(main, document);
   createMetadata(main, document, pathname);
@@ -553,28 +582,27 @@ function transformers(main, document, html, pathname) {
   hero(main, document);
   storyteller(main, document);
   centeredContentSwitcher(main, document);
-  tabs(main, document);
   mediaGallery(main, document);
   cards(main, document);
   callToAction(main, document);
   elasticContentStrip(main, document);
-  const maps = map(main, document, pathname);
+  map(main, document, pathname);
   quote(main, document);
   columns(main, document);
   mosaicReveal(main, document);
   largeContentStack(main, document);
+  tabs(main, document, pathname);
   localNavigation(main, document);
   transformUrls(main);
-
-  report.maps = maps;
-
-  return report;
 }
 
 export default {
   transform: ({
     document, html, url,
   }) => {
+    report = {};
+    fragmentPages = [];
+
     const main = document.querySelector('main');
     WebImporter.DOMUtils.remove(main, [
       'header',
@@ -583,15 +611,30 @@ export default {
       '.card-container-v3_i18n',
       'button.paginate-container.icon-ui-down',
     ]);
+    main.querySelectorAll('.aem-GridColumn').forEach((column) => {
+      if (column.textContent.trim() === '') {
+        column.remove();
+      }
+    });
 
     const { pathname } = new URL(url);
 
-    const report = transformers(main, document, html, pathname);
+    transformers(main, document, html, pathname);
 
-    return [{
-      element: main,
-      path: pathname,
-      report,
-    }];
+    const pages = [
+      {
+        element: main,
+        path: pathname,
+        report,
+      },
+      ...fragmentPages.map((fragmentPage) => ({
+        element: fragmentPage.element,
+        path: fragmentPage.path,
+      })),
+    ];
+
+    console.log('pages', pages);
+
+    return pages;
   },
 };
