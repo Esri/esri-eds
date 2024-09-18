@@ -526,7 +526,23 @@ function switchers(main, document) {
     .forEach((container) => {
       const cells = [...container.querySelectorAll(':scope > section')].map((section, idx) => {
         const div = document.createElement('div');
-        div.append(section.querySelector('.centered-content-switcher_info'));
+        const contentSwitcherInfo = section.querySelector('.centered-content-switcher_info');
+        if (!contentSwitcherInfo.querySelector('.esri-text__category')) {
+          const exceptions = {
+            'https://youtu.be/Yv5_lLlmvPY?co3=true': 'Video',
+          };
+          const href = section.querySelector('.calcite-button-wrapper').getAttribute('data-href');
+          const exception = exceptions[href];
+          if (!exception) {
+            console.error('esri-text__category not found in centered-content-switcher_info', contentSwitcherInfo);
+            throw new Error('esri-text__category not found in centered-content-switcher_info');
+          }
+
+          const category = document.createElement('div');
+          category.textContent = exception;
+          contentSwitcherInfo.prepend(category);
+        }
+        div.append(contentSwitcherInfo);
 
         const imageUrl = section.getAttribute('data-lazy-image');
         const backgroundImage = document.createElement('img');
