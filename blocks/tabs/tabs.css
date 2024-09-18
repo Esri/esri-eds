@@ -188,15 +188,12 @@
     }
 
     .tab-nav {
-      position: absolute;
-      inset-block-start: 10px;
       max-inline-size: 93vw;
       inline-size: 1420px;
       inset-inline: 0;
       margin: 0 auto;
       box-sizing: content-box;
       z-index: 2;
-      border-block-end: none;
 
       .tab-title {
         display: block;

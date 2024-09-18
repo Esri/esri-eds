@@ -11,6 +11,9 @@ import {
   li,
   button,
 } from '../../scripts/dom-helpers.js';
+import {
+  loadFragment,
+} from '../fragment/fragment.js';
 
 export default async function decorate(block) {
   const isTabsCardsVariant = block.classList.contains('tabs-cards-variant');
@@ -23,10 +26,34 @@ export default async function decorate(block) {
 
   const loadBlocks = [];
   const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
-  const tabContents = [...block.children].map((child) => [...child.children[1].children]);
-  if (!isTabsCardsVariant) {
-    document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
+  let tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
+  const tabsContainFragments = tabContents.every((content) => {
+    if (content.length !== 1) return false;
+    if (content[0].childElementCount !== 1) return false;
+    if (content[0].children[0].childElementCount !== 0) return false;
+    return content[0].children[0].tagName === 'A';
+  });
+
+  let contents;
+  if (tabsContainFragments) {
+    const promises = tabContents.map(async (tabContent, i) => {
+      const relativePath = `/${tabContent[0].children[0].href.split('/').slice(3).join('/')}`;
+      const content = await loadFragment(relativePath);
+      block.children[i].children[1].replaceWith(content);
+      return content;
+    });
+
+    tabContents = await Promise.all(promises);
+
+    contents = tabContents.map((content) => div({
+      class: 'tab-content',
+      role: 'tabpanel',
+      'aria-hidden': true,
+    }, content));
+  }
+
+  if (!isTabsCardsVariant && !tabsContainFragments) {
     tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
       const textWrapper = div({ class: 'text-wrapper' }, ...text);
@@ -62,15 +89,15 @@ export default async function decorate(block) {
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
       content.splice(2, 2, buttonsWrapper);
     });
-  } else {
-    document.querySelector('.tabs-container').classList.add('calcite-mode-light');
   }
 
-  const contents = tabContents.map((content) => div({
-    class: 'tab-content',
-    role: 'tabpanel',
-    'aria-hidden': true,
-  }, ...content));
+  if (!tabsContainFragments) {
+    contents = tabContents.map((content) => div({
+      class: 'tab-content',
+      role: 'tabpanel',
+      'aria-hidden': true,
+    }, ...content));
+  }
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
     id: title.toLowerCase().replace(' ', '-'),
