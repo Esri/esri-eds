@@ -17,6 +17,10 @@ function createMetadata(main, document, pathname) {
 }
 
 function createBlock(container, document, name, cells, variants = []) {
+  report[name] ??= new Set();
+  const blockReport = report[name];
+  variants.forEach((variant) => blockReport.add(variant));
+
   container.replaceWith(WebImporter.Blocks.createBlock(document, {
     name,
     cells,
@@ -182,10 +186,6 @@ function tabs(main, document, pathname) {
               element: wrapper,
               path: tabPathname,
             });
-
-            const reportTabs = report.fragmentTabs ?? [];
-            reportTabs.push(tabPathname);
-            report.tabs = reportTabs;
           }
 
           return [tabLabel, tabContent];
@@ -438,7 +438,7 @@ function columns(main, document) {
         }
       }
 
-      createBlock(container, document, 'columns', [columnElements]);
+      createBlock(container, document, 'Columns', [columnElements]);
     });
 
   main.querySelectorAll('.media-text-split .mts-media-text-split').forEach((container) => {
@@ -528,19 +528,16 @@ function switchers(main, document) {
         const div = document.createElement('div');
         const contentSwitcherInfo = section.querySelector('.centered-content-switcher_info');
         if (!contentSwitcherInfo.querySelector('.esri-text__category')) {
-          const exceptions = {
+          const categoryByHref = {
             'https://youtu.be/Yv5_lLlmvPY?co3=true': 'Video',
           };
           const href = section.querySelector('.calcite-button-wrapper').getAttribute('data-href');
-          const exception = exceptions[href];
-          if (!exception) {
-            console.error('esri-text__category not found in centered-content-switcher_info', contentSwitcherInfo);
-            throw new Error('esri-text__category not found in centered-content-switcher_info');
+          const category = categoryByHref[href];
+          if (category) {
+            const categoryEl = document.createElement('div');
+            categoryEl.textContent = category;
+            contentSwitcherInfo.prepend(categoryEl);
           }
-
-          const category = document.createElement('div');
-          category.textContent = exception;
-          contentSwitcherInfo.prepend(category);
         }
         div.append(contentSwitcherInfo);
 
