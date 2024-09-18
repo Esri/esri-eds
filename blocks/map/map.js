@@ -33,11 +33,11 @@ const getMapFrame = (url) => {
   return mapFrame;
 };
 
-export default async function decorate(block) {
+export default function decorate(block) {
   const blockParams = block.querySelectorAll('p');
 
-  const mapLink = blockParams[0].innerText;
-  const textParameter = blockParams[1].innerText;
+  const textParameter = blockParams[0].innerText;
+  const mapLink = blockParams[1].innerText;
   block.textContent = '';
 
   const gridContainer = div({ class: 'grid-container' });
