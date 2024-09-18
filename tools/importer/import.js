@@ -335,11 +335,16 @@ function map(main, document, pathname) {
     main.querySelector('a#returnBtn').remove();
     main.querySelector('a#fullScreenButton').remove();
 
+    const textContainer = rawHtmlForJsApp.closest('.aem-GridColumn').querySelector('.cmp-container .cmp-container');
+    const wrapper = document.createElement('div');
+    wrapper.append(textContainer);
+
     const link = document.createElement('a');
     link.setAttribute('href', mapUrl);
     link.textContent = mapUrl;
+    wrapper.append(link);
 
-    createBlock(rawHtmlForJsApp, document, 'map', [[link]]);
+    createBlock(rawHtmlForJsApp, document, 'map', [[wrapper]]);
   });
 }
 
