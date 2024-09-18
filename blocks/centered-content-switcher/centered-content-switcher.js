@@ -4,7 +4,6 @@ import {
   ul,
   li,
   div,
-  img,
   p,
 } from '../../scripts/dom-helpers.js';
 
@@ -60,12 +59,12 @@ export default function decorate(block) {
     ul(
       { class: 'desktop-nav-list' },
       ...[...block.children].map((child, idx) => {
-        const thumbnailUrl = child.children[0].children[2].querySelector('img').src;
+        const picture = child.children[0].querySelector('picture');
         const headingText = child.querySelector('h2').textContent;
 
         const listItem = li(
           { class: idx === selectedIdx ? 'active' : '' },
-          img({ src: thumbnailUrl }),
+          picture,
           p(headingText),
         );
         return listItem;
