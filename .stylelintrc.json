@@ -3,14 +3,15 @@
   "plugins": ["stylelint-use-logical"],
   "rules": {
     "custom-property-pattern": null,
+    "keyframes-name-pattern": null,
     "no-empty-source": null,
+    "no-descending-specificity": null,
     "declaration-no-important": true,
     "max-nesting-depth": [3,
       {
         "message": "Please keep the nesting depth 3 or less."
       }
     ],
-    "keyframes-name-pattern": null,
     "csstools/use-logical": ["always", {"except": ["float", "inset-block"]}]
   }
 }
