@@ -675,6 +675,7 @@ export default {
       '.disclaimer',
       '.card-container-v3_i18n',
       'button.paginate-container.icon-ui-down',
+      '.paginate-container',
     ]);
     main.querySelectorAll('.aem-GridColumn').forEach((column) => {
       if (column.textContent.trim() === '') {
