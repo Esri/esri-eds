@@ -5,7 +5,6 @@ import enUrls from './en_urls.js';
 const urlsByLanguage = [];
 
 languages.forEach((language) => {
-  console.log('languages', language);
   enUrls.forEach(({ Theme, URL }) => {
     const newUrl = URL.replace('/en-us/', `/${language}/`);
 
