@@ -476,6 +476,7 @@ function columns(main, document) {
 function mosaicReveal(main, document) {
   main.querySelectorAll('.mosaic-reveal > .mosaic-reveal > .mosaic-reveal_mosaics')
     .forEach((container) => {
+      container.classList.remove('calcite-mode-dark');
       const cells = [...container.children]
         .map((mosaic) => {
           const imageUrl = mosaic.getAttribute('data-lazy-image');
@@ -485,11 +486,8 @@ function mosaicReveal(main, document) {
 
           return [backgroundImage, mosaicRevealContent];
         });
-      const parent = container.parentElement;
 
       createBlock(container, document, 'Mosaic reveal', cells);
-
-      createBlock(parent, document, 'Section metadata', [['Style', 'Column section']]);
     });
 }
 
