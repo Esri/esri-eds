@@ -299,13 +299,18 @@ function cards(main, document) {
 }
 
 function callToAction(main, document) {
-  main.querySelectorAll('.cta-questions_primary-dbl-button-column-container')
+  main.querySelectorAll('.cta-questions')
     .forEach((container) => {
-      const children = [...container.children];
-      if (children.length !== 3) {
-        throw new Error('callToAction expected 3 children', container.outerHTML);
+      const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container')
+      if (primaryDblContainer) {
+        const children = [...primaryDblContainer.children];
+        if (children.length !== 3) {
+          throw new Error('callToAction expected 3 children', primaryDblContainer.outerHTML);
+        }
+        createBlock(primaryDblContainer, document, 'Call to action', [[children[0], children[2]]]);
+      } else {
+        createBlock(container, document, 'Call to action', [[container.firstElementChild]]);
       }
-      createBlock(container, document, 'Call to action', [[children[0], children[2]]]);
     });
 }
 
