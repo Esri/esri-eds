@@ -142,14 +142,21 @@ export function decorateMain(main) {
   decorateVideoLinks(main);
 }
 
-function decorateTemplateAndTheme() {
-  aemDecorateTemplateAndTheme();
-  const { classList } = document.body;
+function decorateMode(element) {
+  const { classList } = element;
   if (classList.contains('light')) {
     classList.add('calcite-mode-light');
   } else if (classList.contains('dark')) {
     classList.add('calcite-mode-dark');
   }
+}
+
+export function decorateBlockMode(block) {
+  decorateMode(block);
+}
+export function decorateTemplateAndTheme() {
+  aemDecorateTemplateAndTheme();
+  decorateMode(document.body);
 }
 
 /**
@@ -215,6 +222,15 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+}
+
+export function decorateInnerHrefButtonsWithArrowIcon(block) {
+  block.querySelectorAll('a').forEach((a) => {
+    const icon = domEl('calcite-icon', { class: 'default-arrow-right', icon: 'arrowRight', scale: 's' });
+    if (a.href.includes('esri.com') || (a.href.includes('esri--aemsites'))) {
+      a.appendChild(icon);
+    }
+  });
 }
 
 loadPage();
