@@ -644,7 +644,6 @@ function transformers(main, document, html, pathname) {
   videos(main, document);
   calciteButton(main, document);
   links(main, document);
-  sections(main, document);
   hero(main, document);
   storyteller(main, document);
   switchers(main, document);
