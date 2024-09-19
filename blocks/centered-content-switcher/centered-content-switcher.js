@@ -54,10 +54,14 @@ export default function decorate(block) {
   );
 
   // create desktop nav
+  const numberOfColumns = [...block.children].length === 6 ? 3 : 2;
   const desktopNav = div(
     { class: 'desktop-nav calcite-animate calcite-animate__in-up' },
     ul(
-      { class: 'desktop-nav-list' },
+      {
+        class: 'desktop-nav-list',
+        style: `grid-template-columns: repeat(${numberOfColumns}, 1fr)`,
+      },
       ...[...block.children].map((child, idx) => {
         const picture = child.children[0].querySelector('picture');
         const headingText = child.querySelector('h2').textContent;
@@ -67,6 +71,7 @@ export default function decorate(block) {
           picture,
           p(headingText),
         );
+
         return listItem;
       }),
     ),
@@ -129,19 +134,33 @@ export default function decorate(block) {
     tab.setAttribute('style', `background-image: url(${imgUrl})`);
 
     const anchor = tab.querySelector('a');
-    const playButton = calciteButton({
-      'icon-start': 'play-f',
-      label: 'Play',
-      appearance: 'solid',
-      kind: 'inverse',
-      scale: 'l',
-      round: '',
-      href: anchor.href,
-    });
-    anchor.textContent = '';
-    anchor.appendChild(playButton);
-    anchor.parentElement.parentElement.removeChild(anchor.parentElement);
-    tab.children[0].appendChild(anchor);
+    const innerText = tab.innerText.split('\n').map((el) => el.trim().toLowerCase());
+    const hasVideo = innerText.includes('video');
+
+    if (hasVideo) {
+      const playButton = calciteButton({
+        'icon-start': 'play-f',
+        label: 'Play',
+        appearance: 'solid',
+        kind: 'inverse',
+        scale: 'l',
+        round: '',
+        href: anchor.href,
+      });
+      anchor.textContent = '';
+      anchor.appendChild(playButton);
+      anchor.parentElement.parentElement.removeChild(anchor.parentElement);
+      tab.children[0].appendChild(anchor);
+    } else {
+      const button = calciteButton({
+        'icon-end': 'arrowRight',
+        label: anchor.textContent,
+        href: anchor.href,
+      }, anchor.textContent);
+
+      anchor.parentElement.appendChild(button);
+      anchor.parentElement.removeChild(anchor);
+    }
   });
 
   block.children[selectedIdx].setAttribute('aria-hidden', 'false');
