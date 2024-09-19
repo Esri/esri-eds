@@ -4,6 +4,7 @@ import svgs from './svgs.js';
 
 let report = {};
 let fragmentPages = [];
+let theme = '';
 const edsUrl = 'https://main--esri--aemsites.aem.live';
 
 function createMetadata(main, document, pathname) {
@@ -11,12 +12,32 @@ function createMetadata(main, document, pathname) {
 
   const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
   meta.Theme = urlInfo.Theme;
+  theme = meta.Theme;
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 }
 
+function hasCalciteMode(container, mode) {
+  return container.closest(`.calcite-mode-${mode}`);
+}
+
+function getCalciteMode(container) {
+  const modes = ['gray', 'light', 'dark'].filter((mode) => mode !== theme);
+
+  return modes.find((mode) => hasCalciteMode(container, mode));
+}
+
+function decorateVariants(container, variants) {
+  const calciteMode = getCalciteMode(container);
+  if (calciteMode) {
+    variants.push(calciteMode);
+  }
+}
+
 function createBlock(container, document, name, cells, variants = []) {
+  decorateVariants(container, variants);
+
   report[name] ??= new Set();
   const blockReport = report[name];
   variants.forEach((variant) => blockReport.add(variant));
@@ -169,8 +190,6 @@ function tabs(main, document, pathname) {
 
           const tabContentTable = tabContent.querySelector('table');
           if (tabContentTable) {
-            console.log('Table found in tab', tabContentTable, tabContent);
-
             const tabPathname = `${pathname}/tabs/${toClassName(tabLabel.textContent)}`;
 
             const link = document.createElement('a');
@@ -558,7 +577,6 @@ function switchers(main, document) {
     const contentContainer = container.querySelector('.c-image-switcher-content-container');
 
     const switcherLinks = contentContainer.querySelector('.c-image-switcher-links');
-    console.log('image switcher', switcherLinks);
     switcherLinks.remove();
 
     const variants = [];
@@ -677,8 +695,6 @@ export default {
         path: fragmentPage.path,
       })),
     ];
-
-    console.log('pages', pages);
 
     return pages;
   },
