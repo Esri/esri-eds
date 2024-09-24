@@ -1,8 +1,5 @@
 import {
   createOptimizedPicture,
-  buildBlock,
-  decorateBlock,
-  loadBlock,
 } from '../../scripts/aem.js';
 import {
   calciteButton,
@@ -16,15 +13,12 @@ import {
 } from '../fragment/fragment.js';
 
 export default async function decorate(block) {
-  const isTabsCardsVariant = block.classList.contains('tabs-cards-variant');
-
   block.querySelectorAll('img').forEach((img) => img
     .closest('picture')
     .replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
 
-  const loadBlocks = [];
   const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
   let tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
@@ -53,7 +47,26 @@ export default async function decorate(block) {
     }, content));
   }
 
-  if (!isTabsCardsVariant && !tabsContainFragments) {
+  const isCardsVariant = contents?.every((content) => content.querySelectorAll('.cards').length > 0);
+  if (isCardsVariant) {
+    contents.forEach((content) => {
+      const cards = content.querySelectorAll('.cards-card-body');
+      cards.forEach((card) => {
+        const anchor = card.querySelector('a');
+        anchor.classList.remove('button');
+        anchor.textContent = '';
+
+        const cardParent = card.parentElement;
+        cardParent.removeChild(card);
+
+        anchor.parentElement.parentElement.removeChild(anchor.parentElement);
+        anchor.appendChild(card);
+        cardParent.appendChild(anchor);
+      });
+    });
+  }
+
+  if (!tabsContainFragments) {
     tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
       const textWrapper = div({ class: 'text-wrapper' }, ...text);
@@ -96,7 +109,7 @@ export default async function decorate(block) {
       class: 'tab-content',
       role: 'tabpanel',
       'aria-hidden': true,
-    }, ...content));
+    }, div({ class: 'grid-container' }, ...content)));
   }
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
@@ -104,17 +117,6 @@ export default async function decorate(block) {
     role: 'tab',
     'aria-hidden': true,
   }, button(...title)));
-
-  if (isTabsCardsVariant) {
-    contents.forEach((content) => {
-      const tabsCardsBlock = buildBlock('tabs-cards', [[content.innerHTML]]);
-      content.replaceChildren(tabsCardsBlock);
-      decorateBlock(tabsCardsBlock);
-      loadBlocks.push(loadBlock(tabsCardsBlock));
-    });
-
-    await Promise.all(loadBlocks);
-  }
 
   const arrowLeft = calciteButton(
     {
