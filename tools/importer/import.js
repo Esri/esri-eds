@@ -14,6 +14,8 @@ function createMetadata(main, document, pathname) {
   meta.Theme = urlInfo.Theme;
   theme = meta.Theme;
 
+  meta.Title = document.querySelector('meta[property="og:title"]')?.content;
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 }
