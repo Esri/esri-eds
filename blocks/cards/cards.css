@@ -1,6 +1,10 @@
 .cards-card-body {
   --content-spacing: var(--space-2);
   --content-end-spacing: var(--space-5);
+  --title-size: var(--font-2);
+  --subtitle-size: var(--font-minus-1);
+  --description-size: var(--font-minus-1);
+  --category-size: var(--font-minus-2);
 }
 
 .cards {
@@ -12,7 +16,7 @@
     margin: 8px;
   
     h3 {
-      font-size: var(--font-2);
+      font-size: var(--title-size);
       line-height: 1.375;
       margin-block-end: 0;
       font-weight: 400;
@@ -78,7 +82,7 @@
 }
 
 /* Cards per row - width calculation */
-.cardsperrow > ul > li {
+[class*="cards"] > ul > li {
   --cards-per-row: 1;
   
   inline-size: calc(100% / var(--cards-per-row));
@@ -86,8 +90,10 @@
   @media (width >= 768px) {
     --cards-per-row: 2;
   }
+}
 
-  @media (width >= 1024px) {
+@media (width >= 1024px) {
+  [class*="cards"] > ul > li {
     --cards-per-row: 3;
   }
 }
@@ -143,11 +149,6 @@
 
   p{
     margin: 0;
-
-    &:last-child {
-      padding: 0;
-      margin-block-end: var(--content-end-spacing);
-    }
   }
 
   h3{
@@ -176,10 +177,133 @@
   }
 }
 
-.cards.simple .cards-card-body:is(:focus-within, :hover){
-  border: 1px solid var(--calcite-ui-brand);
+/* Cards Standard */
+.cards.standard li{
+  position: relative;
+  display: flex;
+}
+
+.cards.standard .cards-card-body{
+  background-color: var(--calcite-ui-foreground-1);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  word-wrap: break-word;
+  transition: border-color 0.25s linear;
+  border: 1px solid var(--calcite-ui-border-1);
+
+  .card-body-content {
+    margin: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding-block-end: var(--space-6);
+    position: relative;
+  }
+
+  p {
+    margin: 0;
+    color: var(--calcite-ui-text-1);
+    font-size: var(--description-size);
+
+    &:has(> picture) {
+      position: relative;
+    }
+
+    &:last-child {
+      padding: 0;
+      margin-block-end: var(--content-end-spacing);
+    }
+
+    &.overlay-text {
+      padding: var(--space-2) var(--space-5);
+      inline-size: 100%;
+      letter-spacing: .2rem;
+      background-color: var(--esri-ui-opacity85-inverse);
+      margin-block-end: 0;
+      font-weight: var(--calcite-font-weight-bold);
+      text-transform: uppercase;
+      color: var(--calcite-ui-text-2);
+      font-size: var(--category-size);
+      position: absolute;
+      box-sizing: border-box;
+      inset-block-end: 25px;
+    }
+  }
+
+  .card-body-title,.card-body-subtitle,p:last-child {
+    margin:0;
+    padding-inline: var(--space-5);
+  }
+
+  .card-body-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: start;
+    color: var(--calcite-ui-text-1);
+    font-size: var(--title-size);
+    margin-block-end:  var(--space-3);
+  }
+
+  .card-body-subtitle {
+    color: var(--calcite-ui-text-2);
+    margin-block-end: var(--content-spacing);
+    font-size: var(--subtitle-size);
+  }
+
+  a {
+    color: var(--calcite-ui-text-1);
+    display: flex;
+    flex: 1;
+    white-space: normal;
+    text-align: start;
+    padding: 0;
+    background-color: transparent;
+    transition: border-color 0.25s linear;
+    line-height: 1.5;
+    margin: 0;
+    text-decoration: none;
+  }
+
+  picture {
+    padding-block-end: var(--space-5);
+    display: inline-block;
+    inline-size: 100%;
+
+    img {
+      inline-size: 100%;
+      block-size: auto;
+    }
+  }
+}
+
+.cards.simple .cards-card-body p:last-child {
+  padding: 0;
+  margin-block-end: var(--content-end-spacing);
 }
 
 .cards.simple a:is(:hover, :focus, :active) {
   border-inline-start: 3px solid var(--calcite-ui-brand);
+}
+
+.cards.centered { text-align: center; }
+
+.cards.centered .cards-card-body {
+  p:last-child {
+    padding: 0 var(--space-5) var(--space-8) var(--space-5);
+  }
+}
+
+.cards.simple .cards-card-body:is(:hover,:focus-within){
+  border: 1px solid var(--calcite-ui-brand);
+}
+
+.cards.standard .cards-card-body:is(:hover,:focus-within) {
+  border: 1px solid var(--calcite-ui-brand);
+}
+
+.cards.standard .cards-card-body:not(:has(a)):is(:hover,:focus-within) {
+  border: 1px solid var(--calcite-ui-border-1);
 }
