@@ -127,6 +127,24 @@ function buildAutoBlocks(main) {
   }
 }
 
+function decorateMode(element) {
+  const { classList } = element;
+  const calciteModes = ['light', 'dark', 'gray'];
+  calciteModes.forEach((mode) => {
+    if (classList.contains(mode)) {
+      classList.add(`calcite-mode-${mode}`);
+    }
+  });
+}
+
+export function decorateBlockMode(block) {
+  decorateMode(block);
+}
+
+function decorateModes(main) {
+  main.querySelectorAll('.block').forEach(decorateMode);
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -139,21 +157,10 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateModes(main);
   decorateVideoLinks(main);
 }
 
-function decorateMode(element) {
-  const { classList } = element;
-  if (classList.contains('light')) {
-    classList.add('calcite-mode-light');
-  } else if (classList.contains('dark')) {
-    classList.add('calcite-mode-dark');
-  }
-}
-
-export function decorateBlockMode(block) {
-  decorateMode(block);
-}
 export function decorateTemplateAndTheme() {
   aemDecorateTemplateAndTheme();
   decorateMode(document.body);
