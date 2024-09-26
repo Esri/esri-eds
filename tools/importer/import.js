@@ -303,7 +303,7 @@ function cards(main, document) {
 function callToAction(main, document) {
   main.querySelectorAll('.cta-questions')
     .forEach((container) => {
-      const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container')
+      const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container');
       if (primaryDblContainer) {
         const children = [...primaryDblContainer.children];
         if (children.length !== 3) {
@@ -513,9 +513,10 @@ function links(main, document) {
       const href = link.getAttribute('href');
       a.setAttribute('href', href);
       a.textContent = link.textContent;
-      if (link.getAttribute('icon-end') === 'arrowRight') {
-        a.textContent += ' :arrow-right:';
-      }
+      // TOOD add later on if we see the need for it
+      // if (link.getAttribute('icon-end') === 'arrowRight') {
+      //   a.textContent += ' :arrow-right:';
+      // }
       link.replaceWith(a);
     });
 }
@@ -591,14 +592,16 @@ function switchers(main, document) {
 
     const cells = [[contentContainer]];
     cells.push(...[...switcherLinks.children].map((link) => {
-      const wrapper = document.createElement('div');
-      // wrapper.append(link);
+      const thumbnail = link.querySelector('img');
 
       const linkNumber = link.getAttribute('data-component-link-placement');
       const imageWrapper = container.querySelector(`#image${linkNumber}`);
-      wrapper.append(imageWrapper);
+      imageWrapper.append(thumbnail);
 
-      return [wrapper];
+      const backgroundPicture = imageWrapper.querySelector('picture');
+      backgroundPicture.remove();
+
+      return [imageWrapper, backgroundPicture];
     }));
 
     createBlock(container, document, 'Image switcher', cells, variants);
