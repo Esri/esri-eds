@@ -7,14 +7,69 @@ let fragmentPages = [];
 let theme = '';
 const edsUrl = 'https://main--esri--aemsites.aem.live';
 
-function createMetadata(main, document, pathname) {
+const validBreadcrumbUrls = {
+  Capabilities: '/arcgis/geospatial-platform/overview',
+  'Capabilities,3D GIS': '/capabilities/3d-gis/overview',
+  About: '/about/about-esri/overview',
+  'About,About Esri': '/about/about-esri/overview',
+};
+
+function toClassName(name) {
+  return typeof name === 'string'
+    ? name
+      .toLowerCase()
+      .replace(/[^0-9a-z]/gi, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+    : '';
+}
+
+function createMetadata(main, document, pathname, html) {
   const meta = {};
 
   const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
   meta.Theme = urlInfo.Theme;
   theme = meta.Theme;
 
-  meta.Title = document.querySelector('meta[property="og:title"]')?.content;
+  meta.Title = document.querySelector('meta[property="og:title"]').content;
+  meta.Description = document.querySelector('meta[property="og:description"]').content;
+
+  // parse html
+  const parser = new DOMParser();
+  const parsedHtml = parser.parseFromString(html, 'text/html');
+  const breadcrumbsEl = parsedHtml.querySelector('#breadcrumbs');
+  const breadcrumbsContent = JSON.parse(breadcrumbsEl.textContent);
+  const breadcrumbsArray = breadcrumbsContent.itemListElement;
+
+  const root = 'https://www.esri.com';
+  const urlPrefix = `${root}${pathname.substring(6)}`;
+  let accumulatedUrl = '';
+  const breadcrumbs = [];
+  for (let i = 0; i < breadcrumbsArray.length; i += 1) {
+    const currentElement = breadcrumbsArray[i];
+    const breadcrumbsName = currentElement.name;
+    breadcrumbs.push(breadcrumbsName);
+
+    accumulatedUrl += `/${toClassName(breadcrumbsName)}`;
+    const currentAccUrl = urlPrefix + accumulatedUrl;
+    if (currentAccUrl !== currentElement.item && !validBreadcrumbUrls[breadcrumbsName]) {
+      if (i >= breadcrumbsArray.length - 1) {
+        if (currentElement.item === root + pathname) {
+          break;
+        }
+        console.error('Last breadcrumb does not match', currentAccUrl, currentElement.item);
+        throw new Error('Last breadcrumb does not match');
+      }
+
+      if (!report.breadcrumbs_mismatch) {
+        report.breadcrumbs_mismatch = {};
+      }
+
+      const currentElementUrl = new URL(currentElement.item);
+      report.breadcrumbs_mismatch[breadcrumbs.join(',')] = currentElementUrl.pathname.substring(6);
+    }
+  }
+  meta.Breadcrumbs = breadcrumbs.join(', ');
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
@@ -148,16 +203,6 @@ function getCardArrayFromContainer(container, document) {
 
       return card;
     });
-}
-
-function toClassName(name) {
-  return typeof name === 'string'
-    ? name
-      .toLowerCase()
-      .replace(/[^0-9a-z]/gi, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '')
-    : '';
 }
 
 function tabs(main, document, pathname) {
@@ -645,7 +690,7 @@ function transformers(main, document, html, pathname) {
   report.icons = inlineIcons(main, html);
 
   newsletter(main, document);
-  createMetadata(main, document, pathname);
+  createMetadata(main, document, pathname, html);
   videos(main, document);
   calciteButton(main, document);
   links(main, document);
