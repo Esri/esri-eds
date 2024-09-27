@@ -12,6 +12,22 @@ const validBreadcrumbUrls = {
   'Capabilities,3D GIS': '/capabilities/3d-gis/overview',
   About: '/about/about-esri/overview',
   'About,About Esri': '/about/about-esri/overview',
+  'Capabilities,3D GIS,Features': '/capabilities/3d-gis/overview',
+  'Capabilities,Field Operations': '/capabilities/field-operations/overview',
+  'Capabilities,GeoAI': '/capabilities/geoai/overview',
+  'Capabilities,Indoor GIS': '/capabilities/indoor-gis/overview',
+  'Capabilities,Indoor GIS,Pillars': '/capabilities/indoor-gis/overview',
+  'Capabilities,Mapping': '/capabilities/mapping/overview',
+  'Capabilities,Real-Time Visualization and Analytics': '/capabilities/real-time/overview',
+  'Capabilities,Real-Time Visualization and Analytics,Capabilities': '/capabilities/real-time/overview',
+  'Capabilities,Imagery and Remote Sensing': '/capabilities/imagery-remote-sensing/overview',
+  'Capabilities,Imagery and Remote Sensing,Capabilities': '/capabilities/imagery-remote-sensing/overview',
+  'Capabilities,Real-Time Visualization and Analytics,Partners': '/capabilities/real-time/overview',
+  'Capabilities,Spatial Analytics and Data Science': '/capabilities/spatial-analytics-data-science/overview',
+  'Artificial Intelligence': '/artificial-intelligence/overview',
+  'Digital Transformation': '/digital-transformation/overview',
+  'Digital Twin': '/digital-twin/overview',
+  'Location Intelligence': '/location-intelligence/overview',
 };
 
 function toClassName(name) {
@@ -24,22 +40,16 @@ function toClassName(name) {
     : '';
 }
 
-function createMetadata(main, document, pathname, html) {
-  const meta = {};
-
-  const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
-  meta.Theme = urlInfo.Theme;
-  theme = meta.Theme;
-
-  meta.Title = document.querySelector('meta[property="og:title"]').content;
-  meta.Description = document.querySelector('meta[property="og:description"]').content;
-
-  // parse html
+function getBreadcrumbs(html, pathname) {
   const parser = new DOMParser();
   const parsedHtml = parser.parseFromString(html, 'text/html');
   const breadcrumbsEl = parsedHtml.querySelector('#breadcrumbs');
   const breadcrumbsContent = JSON.parse(breadcrumbsEl.textContent);
   const breadcrumbsArray = breadcrumbsContent.itemListElement;
+  // removing the extra "Europe" at the end of the breadcrumbs
+  if (pathname.endsWith('/about/about-esri/europe/overview')) {
+    breadcrumbsArray.pop();
+  }
 
   const root = 'https://www.esri.com';
   const urlPrefix = `${root}${pathname.substring(6)}`;
@@ -62,7 +72,7 @@ function createMetadata(main, document, pathname, html) {
         throw new Error('Last breadcrumb does not match');
       }
 
-      console.error('Breadcrumb mismatch', breadcrumbsName, validBreadcrumbUrls, validBreadcrumbUrls[breadcrumbsName]);
+      console.error('Breadcrumb mismatch', accBreadcrumbs, validBreadcrumbUrls[accBreadcrumbs], breadcrumbsArray);
 
       if (!report.breadcrumbs_mismatch) {
         report.breadcrumbs_mismatch = {};
@@ -72,7 +82,19 @@ function createMetadata(main, document, pathname, html) {
       report.breadcrumbs_mismatch[accBreadcrumbs] = currentElementUrl.pathname.substring(6);
     }
   }
-  meta.Breadcrumbs = breadcrumbs.join(', ');
+  return breadcrumbs;
+}
+
+function createMetadata(main, document, pathname, html) {
+  const meta = {};
+
+  const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
+  meta.Theme = urlInfo.Theme;
+  theme = meta.Theme;
+
+  meta.Title = document.querySelector('meta[property="og:title"]').content;
+  meta.Description = document.querySelector('meta[property="og:description"]').content;
+  meta.Breadcrumbs = getBreadcrumbs(html, pathname).join(', ');
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
