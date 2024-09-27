@@ -6,6 +6,27 @@ sampleRUM('cwv');
 
 // add more delayed functionality here
 
+/**
+ * Loads analytic attributes to all links inside a block.
+ * @param {Element} doc The container element
+ */
+function loadAnalytics() {
+  document.querySelectorAll('.block').forEach((block) => {
+    block.querySelectorAll('[href]').forEach((link) => {
+      if ((link.tagName === 'A') || (link.tagName === 'CALCITE-BUTTON')) {
+        link.setAttribute('data-event', 'track-component');
+        link.setAttribute('data-component-name', block.getAttribute('data-block-name'));
+        link.setAttribute('data-component-link-type', 'link');
+        if (/^[a-zA-Z ]+$/.test(link.innerHTML)) {
+          link.setAttribute('data-component-link', link.innerHTML);
+        }
+      }
+    });
+  });
+}
+
+loadAnalytics();
+
 // Launch script
 loadScript('https://assets.adobedtm.com/2d251f50426c/e52f833be42a/launch-bdb68bbb4cf5-development.min.js');
 
