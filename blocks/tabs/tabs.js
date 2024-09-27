@@ -53,14 +53,11 @@ export default async function decorate(block) {
       const cards = content.querySelectorAll('.cards-card-body');
       cards.forEach((card) => {
         const anchor = card.querySelector('a');
-        anchor.classList.remove('button');
-        anchor.textContent = '';
+        const newAnchor = anchor.cloneNode();
+        newAnchor.classList.remove('button');
 
         const cardParent = card.parentElement;
-        cardParent.removeChild(card);
-
-        anchor.parentElement.parentElement.removeChild(anchor.parentElement);
-        anchor.appendChild(card);
+        newAnchor.replaceChildren(card);
         cardParent.appendChild(anchor);
       });
     });
