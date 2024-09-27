@@ -50,9 +50,10 @@ function createMetadata(main, document, pathname, html) {
     const breadcrumbsName = currentElement.name;
     breadcrumbs.push(breadcrumbsName);
 
+    const accBreadcrumbs = breadcrumbs.join(',');
     accumulatedUrl += `/${toClassName(breadcrumbsName)}`;
     const currentAccUrl = urlPrefix + accumulatedUrl;
-    if (currentAccUrl !== currentElement.item && !validBreadcrumbUrls[breadcrumbsName]) {
+    if (currentAccUrl !== currentElement.item && !validBreadcrumbUrls[accBreadcrumbs]) {
       if (i >= breadcrumbsArray.length - 1) {
         if (currentElement.item === root + pathname) {
           break;
@@ -61,12 +62,14 @@ function createMetadata(main, document, pathname, html) {
         throw new Error('Last breadcrumb does not match');
       }
 
+      console.error('Breadcrumb mismatch', breadcrumbsName, validBreadcrumbUrls, validBreadcrumbUrls[breadcrumbsName]);
+
       if (!report.breadcrumbs_mismatch) {
         report.breadcrumbs_mismatch = {};
       }
 
       const currentElementUrl = new URL(currentElement.item);
-      report.breadcrumbs_mismatch[breadcrumbs.join(',')] = currentElementUrl.pathname.substring(6);
+      report.breadcrumbs_mismatch[accBreadcrumbs] = currentElementUrl.pathname.substring(6);
     }
   }
   meta.Breadcrumbs = breadcrumbs.join(', ');
