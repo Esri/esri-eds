@@ -46,7 +46,7 @@
     padding: 0
 }
 
-#map-default-content-wrapper > div > h2 {
+#map-default-content-wrapper > h2 {
     font-weight: var(--calcite-font-weight-normal);
     margin: 0 0 var(--space-4);
     line-height: 1.375;

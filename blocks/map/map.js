@@ -35,20 +35,20 @@ const getMapFrame = (url) => {
 
 export default function decorate(block) {
   const blockParams = block.querySelectorAll('p');
-
-  const textParameter = blockParams[0].innerText;
+  const heading = block.querySelector('h2');
+  const blockText = blockParams[0].innerText;
   const mapLink = blockParams[1].innerText;
   block.textContent = '';
 
   const gridContainer = div({ class: 'grid-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
 
-  const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
+  const defaultContentContainer = div();
   const nodeTextParam = p({ id: 'map-text-content' });
-  nodeTextParam.textContent = textParameter;
+  nodeTextParam.textContent = blockText;
   const hr = horizontalRule({ class: 'separator center' });
 
-  const contentWrapperChildren = [defaultContentContainer, hr, nodeTextParam];
+  const contentWrapperChildren = [defaultContentContainer, heading, hr, nodeTextParam];
   const defaultContentWrapper = div({ id: 'map-default-content-wrapper' });
 
   contentWrapperChildren.forEach((child) => {
