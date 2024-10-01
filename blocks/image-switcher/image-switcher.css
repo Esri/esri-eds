@@ -1,0 +1,224 @@
+.image-switcher .nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+  .nav-list {
+    text-decoration: none;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+
+    .nav-item {
+      block-size: 64px;
+      border: 1px solid var(--calcite-ui-border-1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 180ms, box-shadow 180ms;
+    }
+
+    .nav-item.active, .nav-item:hover {
+      box-shadow: 0 0 0 .5px var(--calcite-ui-brand), inset 0 0 0 .5px var(--calcite-ui-brand), inset 0 3px 0 0 var(--calcite-ui-brand);
+    }
+
+    p {
+      display: none;
+    }
+
+    picture {
+      inline-size: 48px;
+      block-size: 48px;
+
+      img {
+        inline-size: 48px;
+        block-size: 48px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.image-switcher .content {
+  padding: var(--space-5);
+
+  div {
+    max-inline-size: 600px;  
+  }
+
+  h2 {
+    font-size: var(--font-4);
+    line-height: 1.375;
+    font-weight: 400;
+    margin-block: 0 var(--space-2);
+  }
+
+  p {
+    margin-block: 0 var(--space-6);
+  }
+}
+
+.image-switcher .images {
+  block-size: 75vh;
+
+  h3 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 300;
+    margin-block-start: 0;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--calcite-ui-text-2)
+  }
+
+  calcite-link {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  & > div {
+    position: relative;
+    block-size: 100%;
+  }
+  
+  & > div[aria-hidden="true"] {
+    display: none;
+  }
+
+  .image-div {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .image-content {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    z-index: 3;
+    background-color: var(--esri-ui-opacity97-inverse);
+    margin: var(--space-10);
+    padding: var(--space-8);
+  }
+
+  img {
+    object-fit: cover;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+}
+
+@media (width >= 736px) {
+  .image-switcher .images {
+    h3 {
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 300;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 25px;
+    }
+
+    calcite-link {
+      font-size: 16px;
+      line-height: 25px;
+    }
+  }
+}
+
+@media (width >= 1096px) {
+  .image-switcher {
+    display: flex;
+    flex-direction: row-reverse;
+    block-size: 950px;
+  }
+
+  .image-switcher.flip {
+    flex-direction: row;
+  }
+
+  .image-switcher .images, .image-switcher .content {
+    block-size: 100%;
+    inline-size: 50%;
+    padding: 0;
+  }
+
+  .image-switcher .images {
+    .image-content {
+      margin: auto auto var(--space-24);
+      max-inline-size: 82%;
+      padding: var(--space-8);
+      inset-inline-end: 0;
+      inset-block: auto 0;
+    }
+  }
+
+  .image-switcher .content {
+    padding: var(--space-20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-switcher .nav {
+    block-size: auto;
+    inline-size: 100%;
+
+    .nav-list {
+      flex-direction: column;
+      inline-size: 100%;
+
+      .nav-item {
+        block-size: auto;
+        padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
+        justify-content: flex-start;
+      }
+
+      .nav-item.active, .nav-item:hover {
+        box-shadow: inset 3px 0 var(--calcite-ui-brand), inset -1px 0 var(--calcite-ui-brand), inset 0 1px var(--calcite-ui-brand), inset 0 -1px var(--calcite-ui-brand);
+      }
+
+      picture {
+        inline-size: 60px;
+        block-size: 60px;
+        margin-inline-end: var(--space-5);
+
+        img {
+          inline-size: 60px;
+          block-size: 60px;
+        }
+      }
+
+      p {
+        display: block;
+        color: var(--calcite-ui-text-2);
+        text-align: start;
+        font-size: var(--font-0);
+        cursor: pointer;
+        margin-block: auto;
+        padding-inline: 0;
+      }
+    }
+  }
+}
+
+@media (width >= 1455px) {
+  .image-switcher .nav {
+    .nav-list {
+      max-block-size: calc(86px * 4);
+    }
+  }
+}
