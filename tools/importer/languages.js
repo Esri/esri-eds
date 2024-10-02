@@ -1,4 +1,5 @@
 export default [
-  'en-us',
-  'ar-sa',
+  // 'en-us',
+  // 'ar-sa',
+  'fr-fr',
 ];
