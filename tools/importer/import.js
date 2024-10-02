@@ -769,10 +769,15 @@ export default {
         path: pathname,
         report,
       },
-      ...fragmentPages.map((fragmentPage) => ({
-        element: fragmentPage.element,
-        path: fragmentPage.path,
-      })),
+      ...fragmentPages.map((fragmentPage) => {
+        const metadataBlock = WebImporter.Blocks.getMetadataBlock(document, { robots: 'noindex,nofollow' });
+        fragmentPage.element.append(metadataBlock);
+
+        return ({
+          element: fragmentPage.element,
+          path: fragmentPage.path,
+        });
+      }),
     ];
 
     return pages;
