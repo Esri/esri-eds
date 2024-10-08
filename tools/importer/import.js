@@ -70,7 +70,7 @@ function getBreadcrumbs(html, pathname) {
         }
         console.error('Last breadcrumb does not match', currentAccUrl, currentElement.item);
         // throw new Error('Last breadcrumb does not match');
-      } else {
+      }
 
       console.error('Breadcrumb mismatch', accBreadcrumbs, validBreadcrumbUrls[accBreadcrumbs], breadcrumbsArray);
 
