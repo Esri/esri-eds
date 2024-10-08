@@ -69,8 +69,8 @@ function getBreadcrumbs(html, pathname) {
           break;
         }
         console.error('Last breadcrumb does not match', currentAccUrl, currentElement.item);
-        throw new Error('Last breadcrumb does not match');
-      }
+        // throw new Error('Last breadcrumb does not match');
+      } else {
 
       console.error('Breadcrumb mismatch', accBreadcrumbs, validBreadcrumbUrls[accBreadcrumbs], breadcrumbsArray);
 
@@ -569,11 +569,14 @@ function mosaicReveal(main, document) {
 }
 
 function sections(main, document) {
-  main.querySelectorAll('.aem-GridColumn:not(:last-child)')
-    .forEach((container) => {
+  main.querySelectorAll('.aem-GridColumn:not(:last-child)').forEach((container) => {
+    if (container.textContent.trim() === '') {
+      container.remove();
+    } else {
       const hr = document.createElement('hr');
       container.after(hr);
-    });
+    }
+  });
 }
 
 function links(main, document) {
@@ -719,6 +722,7 @@ function transformers(main, document, html, pathname) {
   videos(main, document);
   calciteButton(main, document);
   links(main, document);
+  localNavigation(main, document);
   sections(main, document);
   hero(main, document);
   storyteller(main, document);
@@ -733,7 +737,6 @@ function transformers(main, document, html, pathname) {
   mosaicReveal(main, document);
   largeContentStack(main, document);
   tabs(main, document, pathname);
-  localNavigation(main, document);
   transformUrls(main);
 }
 
@@ -753,11 +756,6 @@ export default {
       'button.paginate-container.icon-ui-down',
       '.paginate-container',
     ]);
-    main.querySelectorAll('.aem-GridColumn').forEach((column) => {
-      if (column.textContent.trim() === '') {
-        column.remove();
-      }
-    });
 
     const { pathname } = new URL(url);
 
