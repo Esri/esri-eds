@@ -1,6 +1,20 @@
-import { loadCSS, loadScript } from '../../scripts/aem.js';
+import { loadCSS, loadScript, getMetadata } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import { link } from '../../scripts/dom-helpers.js';
+
+/**
+  * Use getMetadata to get the locale of the page
+  * * Update the html lang attribute to the locale
+  * If the language is Arabic, Hebrew or Kuwaiti Arabic, set the direction to rtl
+  */
+function setLocaleAndDirection() {
+  const locale = getMetadata('og:locale') || 'en-us';
+  const dir = (locale === 'ar-sa' || locale === 'he-il' || locale === 'ar-kw') ? 'rtl' : 'ltr';
+  document.querySelector('html').setAttribute('dir', dir);
+
+  const lang = (locale === 'en-us') ? 'en' : locale;
+  document.querySelector('html').setAttribute('lang', lang);
+}
 
 /**
  * get all entries from the index
@@ -63,6 +77,7 @@ async function alternateHeaders() {
  * @param {Element} block The header block element
  */
 export default async function decorate() {
+  setLocaleAndDirection();
   await alternateHeaders().then(async () => {
     window.gnav_jsonPath = '/2022-nav-config.25.json';
     await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
