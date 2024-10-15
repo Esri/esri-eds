@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--esri--aemsites.hlx.page/
-- Live: https://main--esri--aemsites.hlx.live/
+- Preview: https://main--esri-eds--esri.aem.page/
+- Live: https://main--esri-eds--esri.aem.live/
 
 ## Installation
 
