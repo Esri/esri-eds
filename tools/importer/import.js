@@ -7,29 +7,6 @@ let fragmentPages = [];
 let theme = '';
 const edsUrl = 'https://main--esri--aemsites.aem.live';
 
-const validBreadcrumbUrls = {
-  Capabilities: '/arcgis/geospatial-platform/overview',
-  'Capabilities,3D GIS': '/capabilities/3d-gis/overview',
-  About: '/about/about-esri/overview',
-  'About,About Esri': '/about/about-esri/overview',
-  'Capabilities,3D GIS,Features': '/capabilities/3d-gis/overview',
-  'Capabilities,Field Operations': '/capabilities/field-operations/overview',
-  'Capabilities,GeoAI': '/capabilities/geoai/overview',
-  'Capabilities,Indoor GIS': '/capabilities/indoor-gis/overview',
-  'Capabilities,Indoor GIS,Pillars': '/capabilities/indoor-gis/overview',
-  'Capabilities,Mapping': '/capabilities/mapping/overview',
-  'Capabilities,Real-Time Visualization and Analytics': '/capabilities/real-time/overview',
-  'Capabilities,Real-Time Visualization and Analytics,Capabilities': '/capabilities/real-time/overview',
-  'Capabilities,Imagery and Remote Sensing': '/capabilities/imagery-remote-sensing/overview',
-  'Capabilities,Imagery and Remote Sensing,Capabilities': '/capabilities/imagery-remote-sensing/overview',
-  'Capabilities,Real-Time Visualization and Analytics,Partners': '/capabilities/real-time/overview',
-  'Capabilities,Spatial Analytics and Data Science': '/capabilities/spatial-analytics-data-science/overview',
-  'Artificial Intelligence': '/artificial-intelligence/overview',
-  'Digital Transformation': '/digital-transformation/overview',
-  'Digital Twin': '/digital-twin/overview',
-  'Location Intelligence': '/location-intelligence/overview',
-};
-
 function toClassName(name) {
   return typeof name === 'string'
     ? name
@@ -63,7 +40,7 @@ function getBreadcrumbs(html, pathname) {
     const accBreadcrumbs = breadcrumbs.join(',');
     accumulatedUrl += `/${toClassName(breadcrumbsName)}`;
     const currentAccUrl = urlPrefix + accumulatedUrl;
-    if (currentAccUrl !== currentElement.item && !validBreadcrumbUrls[accBreadcrumbs]) {
+    if (currentAccUrl !== currentElement.item) {
       if (i >= breadcrumbsArray.length - 1) {
         if (currentElement.item === root + pathname) {
           break;
@@ -72,7 +49,7 @@ function getBreadcrumbs(html, pathname) {
         // throw new Error('Last breadcrumb does not match');
       }
 
-      console.error('Breadcrumb mismatch', accBreadcrumbs, validBreadcrumbUrls[accBreadcrumbs], breadcrumbsArray);
+      console.error('Breadcrumb mismatch', accBreadcrumbs, breadcrumbsArray);
 
       if (!report.breadcrumbs_mismatch) {
         report.breadcrumbs_mismatch = {};
@@ -744,7 +721,11 @@ export default {
   transform: ({
     document, html, url,
   }) => {
-    report = {};
+    const { pathname } = new URL(url);
+
+    report = {
+      locale: pathname.split('/')[1],
+    };
     fragmentPages = [];
 
     const main = document.querySelector('main');
@@ -756,8 +737,6 @@ export default {
       'button.paginate-container.icon-ui-down',
       '.paginate-container',
     ]);
-
-    const { pathname } = new URL(url);
 
     transformers(main, document, html, pathname);
 
