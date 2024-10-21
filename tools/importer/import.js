@@ -32,6 +32,7 @@ function getBreadcrumbs(html, pathname) {
   const urlPrefix = `${root}${pathname.substring(6)}`;
   let accumulatedUrl = '';
   const breadcrumbs = [];
+  let lastMismatch;
   for (let i = 0; i < breadcrumbsArray.length; i += 1) {
     const currentElement = breadcrumbsArray[i];
     const breadcrumbsName = currentElement.name;
@@ -56,9 +57,15 @@ function getBreadcrumbs(html, pathname) {
       }
 
       const currentElementUrl = new URL(currentElement.item);
-      report.breadcrumbs_mismatch[accBreadcrumbs] = currentElementUrl.pathname.substring(6);
+      const currentMismatch = currentElementUrl.pathname.substring(6);
+
+      if (lastMismatch !== currentMismatch) {
+        report.breadcrumbs_mismatch[accBreadcrumbs] = currentMismatch;
+        lastMismatch = currentMismatch;
+      }
     }
   }
+
   return breadcrumbs;
 }
 
