@@ -162,6 +162,10 @@ export function horizontalRule(...items) {
   return domEl('hr', ...items);
 }
 
+export function script(...items) {
+  return domEl('script', ...items);
+}
+
 export function calciteButton(...items) {
   return domEl('calcite-button', ...items);
 }

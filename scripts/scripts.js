@@ -127,9 +127,21 @@ function buildAutoBlocks(main) {
   }
 }
 
+const calciteModes = ['light', 'dark', 'gray'];
+
+function decorateBodyMode() {
+  const { classList } = document.body;
+  const main = document.body.querySelector('main');
+
+  calciteModes.forEach((mode) => {
+    if (classList.contains(mode)) {
+      main.classList.add(`calcite-mode-${mode}`);
+    }
+  });
+}
+
 function decorateMode(element) {
   const { classList } = element;
-  const calciteModes = ['light', 'dark', 'gray'];
   calciteModes.forEach((mode) => {
     if (classList.contains(mode)) {
       classList.add(`calcite-mode-${mode}`);
@@ -163,7 +175,7 @@ export function decorateMain(main) {
 
 export function decorateTemplateAndTheme() {
   aemDecorateTemplateAndTheme();
-  decorateMode(document.body);
+  decorateBodyMode();
 }
 
 /**

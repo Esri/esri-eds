@@ -9,8 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
- :root {
+:root {
   /* esri.com colors with opacity */
   --esri-ui-opacity00: rgb(53 53 53 / 0%);
   --esri-ui-opacity20: rgb(53 53 53 / 20%);
@@ -33,7 +32,7 @@
 
   /* image filters */
   --image-white-filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(1857%) hue-rotate(0deg) brightness(109%) contrast(108%);
-  
+
   -webkit-font-smoothing: antialiased;
 
   .calcite-mode-dark {
@@ -74,25 +73,25 @@
   --font-8: clamp(2.5rem, 1.8181rem + 3.0303vw, 4rem);
 
   /* Spacing */
-  --unit:  1rem; /* 16px */
-  --space-px: calc(0.625 * var(--unit));  /*  10px */
-  --space-1: calc(0.25 * 1rem);           /* 4px */
-  --space-2: calc(0.5 * var(--unit));     /* 8px */
-  --space-3: calc(0.75 * var(--unit));    /* 12px */
-  --space-4: calc(1 * var(--unit));       /* 16px */
-  --space-5: calc(1.25 * var(--unit));    /* 20px */
-  --space-6: calc(1.5 * var(--unit));     /* 24px */
-  --space-8: calc(2 * var(--unit));       /* 32px */
-  --space-10: calc(2.5 * var(--unit));    /* 40px */
-  --space-12: calc(3 * var(--unit));      /* 48px */
-  --space-16: calc(4 * var(--unit));      /* 64px */
-  --space-20: calc(5 * var(--unit));      /* 80px */
-  --space-24: calc(6 * var(--unit));      /* 96px */
-  --space-32: calc(8 * var(--unit));      /* 128px */
-  --space-40: calc(10 * var(--unit));     /* 160px */
-  --space-48: calc(12 * var(--unit));     /* 192px */
-  --space-56: calc(14 * var(--unit));     /* 224px */
-  --space-64: calc(16 * var(--unit));     /* 256px */
+  --unit: 1rem; /* 16px */
+  --space-px: calc(0.625 * var(--unit)); /*  10px */
+  --space-1: calc(0.25 * 1rem); /* 4px */
+  --space-2: calc(0.5 * var(--unit)); /* 8px */
+  --space-3: calc(0.75 * var(--unit)); /* 12px */
+  --space-4: calc(1 * var(--unit)); /* 16px */
+  --space-5: calc(1.25 * var(--unit)); /* 20px */
+  --space-6: calc(1.5 * var(--unit)); /* 24px */
+  --space-8: calc(2 * var(--unit)); /* 32px */
+  --space-10: calc(2.5 * var(--unit)); /* 40px */
+  --space-12: calc(3 * var(--unit)); /* 48px */
+  --space-16: calc(4 * var(--unit)); /* 64px */
+  --space-20: calc(5 * var(--unit)); /* 80px */
+  --space-24: calc(6 * var(--unit)); /* 96px */
+  --space-32: calc(8 * var(--unit)); /* 128px */
+  --space-40: calc(10 * var(--unit)); /* 160px */
+  --space-48: calc(12 * var(--unit)); /* 192px */
+  --space-56: calc(14 * var(--unit)); /* 224px */
+  --space-64: calc(16 * var(--unit)); /* 256px */
 
   /* nav height */
   --nav-height: 64px;
@@ -109,261 +108,279 @@ body {
   display: none;
 }
 
-*,
-*::before,
-*::after {
-	box-sizing: inherit;
-}
-
 body.appear {
   display: block;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--calcite-sans-family);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-block: 1em 0.5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
-}
-
-/* heading sizes and styles */
-h1 { font-size: var(--font-6); }
-
-h2 {
-  font-size: var(--font-4);
-  line-height: 1.375;
-}
-
-h3 { font-size: var(--font-3); }
-h4 { font-size: var(--font-2); }
-h5 { font-size: var(--font-1); }
-h6 { font-size: var(--font-0); }
-
-p,
-dl,
-ol,
-ul,
-pre,
-blockquote {
-  margin-block: 1em;
-}
-
-code,
-pre {
-  font-family: var(--calcite-code-family);
-  font-size: var(--font-0);
-}
-
-code {
-  color: var(--calcite-ui-text-2);
-	background-color: var(--esri-ui-opacity85-inverse);
-	padding: 0 0.2rem;
-}
-
-pre {
-  overflow: scroll;
-}
-
-main pre {
-  background-color: var(--calcite-ui-foreground-2);
-  padding: 1em;
-  border-radius: 0.25em;
-  overflow-x: auto;
-  white-space: pre;
-}
-
-sup,
-sub {
-	font-size: var(--font-minus-2);
-  line-height: 0;
-}
-
-blockquote {
-	color: var(--calcite-ui-text-2);
-	margin: var(--space-4) 0;
-	font-size: var(--font-1);
-	line-height: 1.375;
-	border-inline-start: 2px solid var(--calcite-ui-border-1);
-	padding-inline-start: 1rem;
-}
-
-blockquote p {
-	font-size: var(--font-1);
-	line-height: 1.375;
-}
-
-/* links */
-a:any-link {
-  color: var(--calcite-ui-text-link);
-  text-decoration: none;
-}
-
-a:hover,a:focus {
-  text-decoration: underline;
-  color: var(--calcite-ui-text-link);
-}
-
-/* horizontal rule */
-hr {
-  margin: var(--space-4) 0;
-  border: none;
-  border-block-start: 1px solid var(--calcite-ui-border-1);
-}
-
-/* buttons */
-a.button:any-link,
-button {
-  font-family: var(--calcite-sans-family);
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 1px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-color: var(--calcite-ui-brand);
-  color: var(--calcite-ui-text-inverse);
-  font-size: var(--calcite-font-size--1);
-  font-weight: var(--calcite-font-weight-normal);
-  line-height: 1rem;
-  margin-block-start: var(--space-8);
-  margin-inline-end: var(--space-2);
-}
-
-a.button[kind="inverse"] {
-  color: var(--calcite-ui-text-inverse);
-  background-color: var(--calcite-ui-inverse);
-}
-
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  cursor: pointer;
-  background-color: var(--calcite-ui-brand-hover);
-}
-
-button:disabled,
-button:disabled:hover {
-  opacity: var(--calcite-ui-opacity-disabled);
-  cursor: unset;
-}
-
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--calcite-ui-text-1);
-}
-
-main img {
-  max-inline-size: 100%;
-  inline-size: auto;
-  block-size: auto;
-}
-
-.icon {
-  display: inline-block;
-  block-size: 24px;
-  inline-size: 24px;
-}
-
-.icon img {
-  block-size: 100%;
-  inline-size: 100%;
-}
-
-/* arrow right icon ->
-  This is the default icon we add for inside redirects
-*/
-
-.default-arrow-right {
-  margin-inline-start: 4px;
-}
-
-/* sections */
-.section > div > div {
-  background-color: var(--calcite-ui-foreground-1);
-  color: var(--calcite-ui-text-1);
-}
-
-.video-iframe-box {
-  position: fixed;
-  z-index: 5;
-  inline-size: 100vw;
-  block-size: 100vh;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--esri-ui-opacity80);
-  overscroll-behavior: contain;
-
-  .video-iframe-wrapper {
-    position: relative;
-    inline-size: 85%;
-    aspect-ratio: 16/9;
-
-    .video-close-button {
-      position: absolute;
-      inset-block-start: -20px;
-      inset-inline-end: -20px;
-      inline-size: 50px;
-      block-size: 50px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: .15s ease-in-out;
-      background: var(--calcite-ui-text-1);
-      background-color: var(--calcite-ui-text-inverse);
-      border-radius: 50%;
-    }
-
-    .video-close-button:hover {
-      background-color: var(--calcite-ui-brand);
-      color: var(--calcite-ui-text-inverse);
-      
-    }
+main {
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
   }
 
-  .video-iframe {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--calcite-sans-family);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-block: 1em 0.5em;
+    scroll-margin: calc(var(--nav-height) + 1em);
+  }
+
+  /* heading sizes and styles */
+
+  h1 {
+    font-size: var(--font-6);
+  }
+
+  h2 {
+    font-size: var(--font-4);
+    line-height: 1.375;
+  }
+
+  h3 {
+    font-size: var(--font-3);
+  }
+
+  h4 {
+    font-size: var(--font-2);
+  }
+
+  h5 {
+    font-size: var(--font-1);
+  }
+
+  h6 {
+    font-size: var(--font-0);
+  }
+
+  p,
+  dl,
+  ol,
+  ul,
+  pre,
+  blockquote {
+    margin-block: 1em;
+  }
+
+  code,
+  pre {
+    font-family: var(--calcite-code-family);
+    font-size: var(--font-0);
+  }
+
+  code {
+    color: var(--calcite-ui-text-2);
+    background-color: var(--esri-ui-opacity85-inverse);
+    padding: 0 0.2rem;
+  }
+
+  pre {
+    overflow: scroll;
+    background-color: var(--calcite-ui-foreground-2);
+    padding: 1em;
+    border-radius: 0.25em;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  sup,
+  sub {
+    font-size: var(--font-minus-2);
+    line-height: 0;
+  }
+
+  blockquote {
+    color: var(--calcite-ui-text-2);
+    margin: var(--space-4) 0;
+    font-size: var(--font-1);
+    line-height: 1.375;
+    border-inline-start: 2px solid var(--calcite-ui-border-1);
+    padding-inline-start: 1rem;
+  }
+
+  blockquote p {
+    font-size: var(--font-1);
+    line-height: 1.375;
+  }
+
+  /* links */
+
+  a:any-link {
+    color: var(--calcite-ui-text-link);
+    text-decoration: none;
+  }
+
+  a:hover, a:focus {
+    text-decoration: underline;
+    color: var(--calcite-ui-text-link);
+  }
+
+  /* horizontal rule */
+
+  hr {
+    margin: var(--space-4) 0;
     border: none;
-    inline-size: 100%;
+    border-block-start: 1px solid var(--calcite-ui-border-1);
+  }
+
+  /* buttons */
+
+  a.button:any-link,
+  button {
+    font-family: var(--calcite-sans-family);
+    display: inline-block;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 5px 30px;
+    text-align: center;
+    font-style: normal;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: var(--calcite-ui-brand);
+    color: var(--calcite-ui-text-inverse);
+    font-size: var(--calcite-font-size--1);
+    font-weight: var(--calcite-font-weight-normal);
+    line-height: 1rem;
+    margin-block-start: var(--space-8);
+    margin-inline-end: var(--space-2);
+  }
+
+  a.button[kind="inverse"] {
+    color: var(--calcite-ui-text-inverse);
+    background-color: var(--calcite-ui-inverse);
+  }
+
+  a.button:hover,
+  a.button:focus,
+  button:hover,
+  button:focus {
+    cursor: pointer;
+    background-color: var(--calcite-ui-brand-hover);
+  }
+
+  button:disabled,
+  button:disabled:hover {
+    opacity: var(--calcite-ui-opacity-disabled);
+    cursor: unset;
+  }
+
+  a.button.secondary,
+  button.secondary {
+    background-color: unset;
+    border: 2px solid currentcolor;
+    color: var(--calcite-ui-text-1);
+  }
+
+  img {
+    max-inline-size: 100%;
+    inline-size: auto;
+    block-size: auto;
+  }
+
+  .icon {
+    display: inline-block;
+    block-size: 24px;
+    inline-size: 24px;
+  }
+
+  .icon img {
     block-size: 100%;
-    position: absolute;
+    inline-size: 100%;
+  }
+
+  /* arrow right icon ->
+    This is the default icon we add for inside redirects
+  */
+
+  .default-arrow-right {
+    margin-inline-start: 4px;
+  }
+
+  /* sections */
+
+  .section > div > div {
+    background-color: var(--calcite-ui-foreground-1);
+    color: var(--calcite-ui-text-1);
+  }
+
+  .video-iframe-box {
+    position: fixed;
+    z-index: 5;
+    inline-size: 100vw;
+    block-size: 100vh;
     inset-block-start: 0;
     inset-inline-start: 0;
-  }
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--esri-ui-opacity80);
+    overscroll-behavior: contain;
 
-@media (width >= 900px) {
-  .section > div {
-    margin: auto;
-  }
-}
-
-@media (width >= 1024px) {
-  .video-iframe-box {
     .video-iframe-wrapper {
-      inline-size: 65%;
+      position: relative;
+      inline-size: 85%;
+      aspect-ratio: 16/9;
+
+      .video-close-button {
+        position: absolute;
+        inset-block-start: -20px;
+        inset-inline-end: -20px;
+        inline-size: 50px;
+        block-size: 50px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .15s ease-in-out;
+        background: var(--calcite-ui-text-1);
+        background-color: var(--calcite-ui-text-inverse);
+        border-radius: 50%;
+      }
+
+      .video-close-button:hover {
+        background-color: var(--calcite-ui-brand);
+        color: var(--calcite-ui-text-inverse);
+
+      }
+    }
+
+    .video-iframe {
+      border: none;
+      inline-size: 100%;
+      block-size: 100%;
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-start: 0;
     }
   }
-}
 
-/* section metadata */
-main .section.light,
-main .section.highlight {
-  background-color: var(--calcite-ui-foreground-2);
+  @media (width >= 900px) {
+    .section > div {
+      margin: auto;
+    }
+  }
+
+  @media (width >= 1024px) {
+    .video-iframe-box {
+      .video-iframe-wrapper {
+        inline-size: 65%;
+      }
+    }
+  }
+
+  /* section metadata */
+
+  .section.light,
+  .section.highlight {
+    background-color: var(--calcite-ui-foreground-2);
+  }
 }
