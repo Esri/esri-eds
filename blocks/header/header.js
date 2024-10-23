@@ -76,166 +76,47 @@ async function alternateHeaders() {
   head.appendChild(xDefaultLink);
 }
 
-function createBreadcrumbs() {
-  const breadcrumbsDictionary = {
-    About: '/about/about-esri/overview',
-    Capabilities: '/arcgis/geospatial-platform/overview',
-    'Capabilities,3D GIS': '/capabilities/3d-gis/overview',
-    'Capabilities,Field Operations': '/capabilities/field-operations/overview',
-    'Capabilities,GeoAI': '/capabilities/geoai/overview',
-    'Capabilities,Imagery and Remote Sensing': '/capabilities/imagery-remote-sensing/overview',
-    'Capabilities,Indoor GIS': '/capabilities/indoor-gis/overview',
-    'Capabilities,Mapping': '/capabilities/mapping/overview',
-    'Capabilities,Real-Time Visualization and Analytics': '/capabilities/real-time/overview',
-    'Capabilities,Spatial Analytics and Data Science': '/capabilities/spatial-analytics-data-science/overview',
-    'Artificial Intelligence': '/artificial-intelligence/overview',
-    'Digital Transformation': '/digital-transformation/overview',
-    'Digital Twin': '/digital-twin/overview',
-    'Location Intelligence': '/location-intelligence/overview',
-    'About,À propos d’Esri,Europe': '/about/about-esri/europe',
-    Fonctionnalités: '/arcgis/geospatial-platform/overview',
-    'Fonctionnalités,SIG 3D': '/capabilities/3d-gis/overview',
-    'Fonctionnalités,Opérations sur le terrain': '/capabilities/field-operations/overview',
-    'Fonctionnalités,GeoAI': '/capabilities/geoai/overview',
-    'Fonctionnalités,Imagerie et télédétection': '/capabilities/imagery-remote-sensing/overview',
-    'Fonctionnalités,SIG Indoor': '/capabilities/indoor-gis/overview',
-    'Fonctionnalités,Mapping': '/capabilities/mapping/overview',
-    'Fonctionnalités,Visualisation et analyse en temps réel': '/capabilities/real-time/overview',
-    'Fonctionnalités,Analyse spatiale et Data Science': '/capabilities/spatial-analytics-data-science/overview',
-    'Intelligence artificielle': '/artificial-intelligence',
-    'Transformation numérique': '/digital-transformation/overview',
-    'Intelligence géographique': '/location-intelligence/overview',
-    'About,关于 Esri,Europe': '/about/about-esri/europe',
-    功能: '/arcgis/geospatial-platform/overview',
-    '功能,3D GIS': '/capabilities/3d-gis/overview',
-    '功能,外业操作': '/capabilities/field-operations/overview',
-    '功能,GeoAI': '/capabilities/geoai/overview',
-    '功能,影像和遥感': '/capabilities/imagery-remote-sensing/overview',
-    '功能,室内 GIS': '/capabilities/indoor-gis/overview',
-    '功能,制图': '/capabilities/mapping/overview',
-    '功能,实时可视化和分析': '/capabilities/real-time/overview',
-    '功能,空间分析和数据科学': '/capabilities/spatial-analytics-data-science/overview',
-    人工智能: '/artificial-intelligence',
-    数字化转型: '/digital-transformation/overview',
-    位置智能: '/location-intelligence/overview',
-    'About,Esri について,Europe': '/about/about-esri/europe',
-    機能: '/arcgis/geospatial-platform/overview',
-    '機能,3D GIS': '/capabilities/3d-gis/overview',
-    '機能,現場作業': '/capabilities/field-operations/overview',
-    '機能,GeoAI': '/capabilities/geoai/overview',
-    '機能,画像およびリモート センシング': '/capabilities/imagery-remote-sensing/overview',
-    '機能,Indoor GIS': '/capabilities/indoor-gis/overview',
-    '機能,Mapping': '/capabilities/mapping/overview',
-    '機能,リアルタイムのビジュアライゼーションと解析': '/capabilities/real-time/overview',
-    '機能,空間解析とデータ サイエンス': '/capabilities/spatial-analytics-data-science/overview',
-    '人工知能 (AI)': '/artificial-intelligence',
-    'デジタル トランスフォーメーション': '/digital-transformation/overview',
-    'ロケーション インテリジェンス': '/location-intelligence/overview',
-    'About,Acerca de Esri,Europe': '/about/about-esri/europe',
-    Capacidades: '/arcgis/geospatial-platform/overview',
-    'Capacidades,SIG 3D': '/capabilities/3d-gis/overview',
-    'Capacidades,Operaciones de campo': '/capabilities/field-operations/overview',
-    'Capacidades,GeoAI': '/capabilities/geoai/overview',
-    'Capacidades,Imágenes y teledetección': '/capabilities/imagery-remote-sensing/overview',
-    'Capacidades,SIG en interiores': '/capabilities/indoor-gis/overview',
-    'Capacidades,Representación cartográfica': '/capabilities/mapping/overview',
-    'Capacidades,Visualización y análisis en tiempo real': '/capabilities/real-time/overview',
-    'Capacidades,Análisis espacial y ciencia de datos': '/capabilities/spatial-analytics-data-science/overview',
-    'Inteligencia artificial': '/artificial-intelligence',
-    'Transformación digital': '/digital-transformation/overview',
-    'Inteligencia de ubicación': '/location-intelligence/overview',
-    'About,Об Esri': '/about/about-esri/overview',
-    'About,Об Esri,Europe': '/about/about-esri/europe',
-    Возможности: '/arcgis/geospatial-platform/overview',
-    'Возможности,3D-ГИС': '/capabilities/3d-gis/overview',
-    'Возможности,Полевые операции': '/capabilities/field-operations/overview',
-    'Возможности,GeoAI': '/capabilities/geoai/overview',
-    'Возможности,Данные дистанционного зондирования и изображения': '/capabilities/imagery-remote-sensing/overview',
-    'Возможности,ГИС внутри помещений': '/capabilities/indoor-gis/overview',
-    'Возможности,Картография': '/capabilities/mapping/overview',
-    'Возможности,Визуализация данных в реальном времени и аналитика': '/capabilities/real-time/overview',
-    'Возможности,Пространственная аналитика и Наука о данных': '/capabilities/spatial-analytics-data-science/overview',
-    'Искусственный интеллект': '/artificial-intelligence',
-    'Цифровое преобразование': '/digital-transformation/overview',
-    'Аналитика, основанная на местоположении': '/location-intelligence/overview',
-    'About,Über Esri,Europe': '/about/about-esri/europe',
-    Funktionen: '/arcgis/geospatial-platform/overview',
-    'Funktionen,3D-GIS': '/capabilities/3d-gis/overview',
-    'Funktionen,Außendienst': '/capabilities/field-operations/overview',
-    'Funktionen,GeoAI': '/capabilities/geoai/overview',
-    'Funktionen,Bilddaten und Fernerkundung': '/capabilities/imagery-remote-sensing/overview',
-    'Funktionen,Indoor-GIS': '/capabilities/indoor-gis/overview',
-    'Funktionen,Kartenerstellung': '/capabilities/mapping/overview',
-    'Funktionen,Visualisierung und Analysen in Echtzeit': '/capabilities/real-time/overview',
-    'Funktionen,Räumliche Analyse und Data Science': '/capabilities/spatial-analytics-data-science/overview',
-    'Künstliche Intelligenz': '/artificial-intelligence',
-    'Digitale Transformation': '/digital-transformation/overview',
-    'About,نبذة عن Esri,Europe': '/about/about-esri/europe',
-    الإمكانات: '/arcgis/geospatial-platform/overview',
-    'الإمكانات,نظم معلومات جغرافية ثلاثية الأبعاد': '/capabilities/3d-gis/overview',
-    'الإمكانات,العمليات الميدانية': '/capabilities/field-operations/overview',
-    'الإمكانات,GeoAI': '/capabilities/geoai/overview',
-    'الإمكانات,الصور والاستشعار عن بعد': '/capabilities/imagery-remote-sensing/overview',
-    'الإمكانات,Indoor GIS': '/capabilities/indoor-gis/overview',
-    'الإمكانات,تخطيط': '/capabilities/mapping/overview',
-    'الإمكانات,تصورات وتحليلات في الوقت الحقيقي': '/capabilities/real-time/overview',
-    'الإمكانات,التحليلات المكانية وعلوم البيانات': '/capabilities/spatial-analytics-data-science/overview',
-    'الذكاء الاصطناعي': '/artificial-intelligence/overview',
-    'ذكاء الموقع': '/location-intelligence/overview',
-    'About,Informazioni su Esri,Europa': '/about/about-esri/europe',
-    Funzionalità: '/arcgis/geospatial-platform/overview',
-    'Funzionalità,GIS 3D': '/capabilities/3d-gis/overview',
-    'Funzionalità,Operazioni sul campo': '/capabilities/field-operations/overview',
-    'Funzionalità,GeoAI': '/capabilities/geoai/overview',
-    'Funzionalità,Immagini e telerilevamento': '/capabilities/imagery-remote-sensing/overview',
-    'Funzionalità,GIS per spazi interni': '/capabilities/indoor-gis/overview',
-    'Funzionalità,Mappatura': '/capabilities/mapping/overview',
-    'Funzionalità,Visualizzazione in tempo reale a analisi': '/capabilities/real-time/overview',
-    'Funzionalità,Analisi spaziale e scienza dei dati': '/capabilities/spatial-analytics-data-science/overview',
-    'Intelligenza artificiale': '/artificial-intelligence/overview',
-    'About,Esri 정보,Europe': '/about/about-esri/europe',
-    기능: '/arcgis/geospatial-platform/overview',
-    '기능,3D GIS': '/capabilities/3d-gis/overview',
-    '기능,현장 작업': '/capabilities/field-operations/overview',
-    '기능,GeoAI': '/capabilities/geoai/overview',
-    '기능,영상 및 원격탐사': '/capabilities/imagery-remote-sensing/overview',
-    '기능,Indoor GIS': '/capabilities/indoor-gis/overview',
-    '기능,매핑': '/capabilities/mapping/overview',
-    '기능,실시간 시각화 및 분석': '/capabilities/real-time/overview',
-    '기능,공간 분석 및 데이터 사이언스': '/capabilities/spatial-analytics-data-science/overview',
-    '인공 지능': '/artificial-intelligence/overview',
-    '로케이션 인텔리전스': '/location-intelligence/overview',
-    'About,O firmie Esri,Europe': '/about/about-esri/europe',
-    Funkcje: '/arcgis/geospatial-platform/overview',
-    'Funkcje,3D GIS': '/capabilities/3d-gis/overview',
-    'Funkcje,Prace w terenie': '/capabilities/field-operations/overview',
-    'Funkcje,GeoAI': '/capabilities/geoai/overview',
-    'Funkcje,Zobrazowania i teledetekcja': '/capabilities/imagery-remote-sensing/overview',
-    'Funkcje,System GIS dla wnętrz': '/capabilities/indoor-gis/overview',
-    'Funkcje,Tworzenie map': '/capabilities/mapping/overview',
-    'Funkcje,Analizy i wizualizacje w czasie rzeczywistym': '/capabilities/real-time/overview',
-    'Funkcje,Analizy przestrzenne i naukowa analiza danych': '/capabilities/spatial-analytics-data-science/overview',
-    'Sztuczna inteligencja': '/artificial-intelligence/overview',
-    'Inteligentna geolokalizacja': '/location-intelligence/overview',
-    'About,Sobre a Esri,Europa': '/about/about-esri/europe',
-    Recursos: '/arcgis/geospatial-platform/overview',
-    'Recursos,3D GIS': '/capabilities/3d-gis/overview',
-    'Recursos,Operações de Campo': '/capabilities/field-operations/overview',
-    'Recursos,GeoAI': '/capabilities/geoai/overview',
-    'Recursos,Imagens e Sensoriamento Remoto': '/capabilities/imagery-remote-sensing/overview',
-    'Recursos,Indoor GIS': '/capabilities/indoor-gis/overview',
-    'Recursos,Mapeamento': '/capabilities/mapping/overview',
-    'Recursos,Análise e Visualização em Tempo Real': '/capabilities/real-time/overview',
-    'Recursos,Análise Espacial e Ciência de Dados': '/capabilities/spatial-analytics-data-science/overview',
-    'Inteligência Artificial': '/artificial-intelligence/overview',
-    'Inteligência de Localização': '/location-intelligence/overview',
-  };
-
+async function createBreadcrumbs() {
   const breadcrumbs = getMetadata('breadcrumbs')
     .split(',')
     .map((breadcrumb) => breadcrumb.trim());
 
-  const urlSegments = window.location.pathname.split('/').slice(2);
+  const filteredBreadcrumbs = (await ffetch('/breadcrumbs.json').all()).filter((entry) => {
+    for (let i = 0; i < breadcrumbs.length && breadcrumbs[i] !== ''; i += 1) {
+      const level = entry[`level_${i + 1}`];
+      if (!level) {
+        return true;
+      }
+
+      if (level !== breadcrumbs[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+  const breadcrumbsPathByLength = filteredBreadcrumbs
+    .map((entry) => {
+      // count how many entries prefixed with level_ have a value !== ''
+      const { length } = Object.keys(entry).filter((key) => key.startsWith('level_') && entry[key] !== '');
+      const { path } = entry;
+
+      return { length, path };
+    })
+    .reduce((acc, { length, path }) => {
+      const position = length - 1;
+      if (acc.length >= position) {
+        // resize acc to be able to add the new entry
+        acc.length = position + 1;
+      }
+
+      acc[position] = path;
+
+      return acc;
+    }, []);
+
+  const urlSegments = window.location.pathname.split('/')
+    .slice(2);
 
   const language = getMetadata('og:locale');
 
@@ -248,7 +129,7 @@ function createBreadcrumbs() {
     accUrl += `/${urlSegments[index]}`;
     accBreadcrumbs.push(breadcrumb);
 
-    const breadcrumbsDictionaryElement = breadcrumbsDictionary[accBreadcrumbs.join(',')];
+    const breadcrumbsDictionaryElement = breadcrumbsPathByLength[index];
 
     let breadcrumbsSchemaUrl = accUrl;
     if (breadcrumbsDictionaryElement) {
@@ -311,7 +192,7 @@ function createSchema() {
  */
 export default async function decorate() {
   createSchema();
-  createBreadcrumbs();
+  await createBreadcrumbs();
   setLocaleAndDirection();
   await alternateHeaders()
     .then(async () => {
