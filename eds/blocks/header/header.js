@@ -1,6 +1,24 @@
-import { loadCSS, loadScript } from '../../scripts/aem.js';
+import {
+  getMetadata,
+  loadCSS,
+  loadScript,
+} from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
-import { link } from '../../scripts/dom-helpers.js';
+import { link, script } from '../../scripts/dom-helpers.js';
+
+/**
+  * Use getMetadata to get the locale of the page
+  * * Update the html lang attribute to the locale
+  * If the language is Arabic, Hebrew or Kuwaiti Arabic, set the direction to rtl
+  */
+function setLocaleAndDirection() {
+  const locale = getMetadata('og:locale') || 'en-us';
+  const dir = (locale === 'ar-sa' || locale === 'he-il' || locale === 'ar-kw') ? 'rtl' : 'ltr';
+  document.querySelector('html').setAttribute('dir', dir);
+
+  const lang = (locale === 'en-us') ? 'en' : locale;
+  document.querySelector('html').setAttribute('lang', lang);
+}
 
 /**
  * get all entries from the index
@@ -58,13 +76,130 @@ async function alternateHeaders() {
   head.appendChild(xDefaultLink);
 }
 
+async function createBreadcrumbs() {
+  const breadcrumbs = getMetadata('breadcrumbs')
+    .split(',')
+    .map((breadcrumb) => breadcrumb.trim());
+
+  const filteredBreadcrumbs = (await ffetch('/breadcrumbs.json').all()).filter((entry) => {
+    for (let i = 0; i < breadcrumbs.length && breadcrumbs[i] !== ''; i += 1) {
+      const level = entry[`level_${i + 1}`];
+      if (!level) {
+        return true;
+      }
+
+      if (level !== breadcrumbs[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+  const breadcrumbsPathByLength = filteredBreadcrumbs
+    .map((entry) => {
+      // count how many entries prefixed with level_ have a value !== ''
+      const { length } = Object.keys(entry).filter((key) => key.startsWith('level_') && entry[key] !== '');
+      const { path } = entry;
+
+      return { length, path };
+    })
+    .reduce((acc, { length, path }) => {
+      const position = length - 1;
+      if (acc.length >= position) {
+        // resize acc to be able to add the new entry
+        acc.length = position + 1;
+      }
+
+      acc[position] = path;
+
+      return acc;
+    }, []);
+
+  const urlSegments = window.location.pathname.split('/')
+    .slice(2);
+
+  const language = getMetadata('og:locale');
+
+  const urlPrefix = `/${language}`;
+  let accUrl = '';
+  const accBreadcrumbs = [];
+
+  let lastBreadcrumbsDictionaryElement;
+  const breadcrumbsSchema = breadcrumbs.map((breadcrumb, index) => {
+    accUrl += `/${urlSegments[index]}`;
+    accBreadcrumbs.push(breadcrumb);
+
+    const breadcrumbsDictionaryElement = breadcrumbsPathByLength[index];
+
+    let breadcrumbsSchemaUrl = accUrl;
+    if (breadcrumbsDictionaryElement) {
+      lastBreadcrumbsDictionaryElement = breadcrumbsDictionaryElement;
+      breadcrumbsSchemaUrl = breadcrumbsDictionaryElement;
+    } else if (lastBreadcrumbsDictionaryElement) {
+      breadcrumbsSchemaUrl = lastBreadcrumbsDictionaryElement;
+    }
+    const position = index + 1;
+    return {
+      '@type': 'ListItem',
+      position,
+      name: breadcrumb,
+      item: urlPrefix + breadcrumbsSchemaUrl,
+    };
+  });
+
+  document.head.appendChild(script(
+    {
+      type: 'application/ld+json',
+      id: 'breadcrumbs',
+    },
+    JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbsSchema,
+    }),
+  ));
+}
+
+function createSchema() {
+  const schema = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    name: document.title,
+    sourceOrganization: {
+      '@type': 'Organization',
+      name: 'Esri',
+    },
+    url: document.querySelector('link[rel="canonical"]').href,
+    image: getMetadata('og:image'),
+    inLanguage: {
+      '@type': 'Language',
+      name: getMetadata('og:locale'),
+    },
+    description: document.querySelector('meta[name="description"]').content,
+  };
+
+  const jsonElement = document.createElement('script');
+  jsonElement.type = 'application/ld+json';
+  jsonElement.classList.add('schema-graph');
+
+  jsonElement.innerHTML = JSON.stringify(schema);
+  document.head.appendChild(jsonElement);
+}
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate() {
-  await alternateHeaders().then(async () => {
-    window.gnav_jsonPath = '/2022-nav-config.25.json';
-    await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
-  });
+  createSchema();
+  await createBreadcrumbs();
+  setLocaleAndDirection();
+  await alternateHeaders()
+    .then(async () => {
+      window.gnav_jsonPath = '/2022-nav-config.25.json';
+      await Promise.all([
+        loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
+        loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),
+      ]);
+    });
 }

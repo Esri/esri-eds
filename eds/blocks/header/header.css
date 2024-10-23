@@ -7,3 +7,7 @@
 .gnav_top-nav_language-chooser-button:focus {
     background-color: unset;
 }
+
+div#globalfooter {
+    color: var(--calcite-ui-text-1);
+}

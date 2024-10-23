@@ -10,7 +10,7 @@ sampleRUM('cwv');
  * Loads analytic attributes to all links inside a block.
  * @param {Element} doc The container element
  */
-function loadAnalytics() {
+function loadAnalytics(dataLayer) {
   document.querySelectorAll('.block').forEach((block) => {
     block.querySelectorAll('[href]').forEach((link) => {
       if ((link.tagName === 'A') || (link.tagName === 'CALCITE-BUTTON')) {
@@ -23,9 +23,28 @@ function loadAnalytics() {
       }
     });
   });
-}
 
-loadAnalytics();
+  if (typeof dataLayer !== 'undefined') {
+    document.querySelectorAll('.block').forEach((block) => {
+      block.querySelectorAll('[href]').forEach((link) => {
+        if ((link.tagName === 'A') || (link.tagName === 'CALCITE-BUTTON')) {
+          link.addEventListener('click', () => {
+            dataLayer.push({
+              event: 'onClick',
+              component: {
+                tagName: link.tagName.toLowerCase(),
+                name: block.getAttribute('data-block-name'),
+                url: link.href,
+                linkType: link.getAttribute('data-component-link-type'),
+                linkText: link.innerHTML,
+              },
+            });
+          });
+        }
+      });
+    });
+  }
+}
 
 // Launch script
 loadScript('https://assets.adobedtm.com/2d251f50426c/e52f833be42a/launch-bdb68bbb4cf5-development.min.js');
@@ -42,3 +61,5 @@ window.dataLayer.push({
     locale: document.documentElement.lang,
   },
 });
+
+loadAnalytics(window.dataLayer);
