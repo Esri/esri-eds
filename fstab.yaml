@@ -1,4 +1,6 @@
 mountpoints:
-  /: https://adobe.sharepoint.com/sites/HelixProjects/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FHelixProjects%2FShared%20Documents%2Fsites%2Fesri&viewid=124ad5f1%2D60ba%2D476c%2Dade8%2D7c1df274ee95
+  /: https://esriis-my.sharepoint.com/shared?id=%2Fsites%2FEsriMarketingPublic%2FShared%20Documents%2Fsites%2Fesri&listurl=https%3A%2F%2Fesriis%2Esharepoint%2Ecom%2Fsites%2FEsriMarketingPublic%2FShared%20Documents&viewid=646d13d0%2Dbc57%2D41ae%2D855a%2D804a11f5ac5c
+  
+# Adobe:  https://adobe.sharepoint.com/sites/HelixProjects/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FHelixProjects%2FShared%20Documents%2Fsites%2Fesri&viewid=124ad5f1%2D60ba%2D476c%2Dade8%2D7c1df274ee95
 # Esri: https://esriis-my.sharepoint.com/shared?id=%2Fsites%2FEsriMarketingPublic%2FShared%20Documents%2Fsites%2Fesri&listurl=https%3A%2F%2Fesriis%2Esharepoint%2Ecom%2Fsites%2FEsriMarketingPublic%2FShared%20Documents&viewid=646d13d0%2Dbc57%2D41ae%2D855a%2D804a11f5ac5c
 
