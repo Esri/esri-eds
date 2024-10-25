@@ -54,9 +54,6 @@
     --esri-ui-opacity90-inverse: rgb(53 53 53 / 90%);
     --esri-ui-opacity95-inverse: rgb(53 53 53 / 95%);
     --esri-ui-opacity97-inverse: rgb(53 53 53 / 97%);
-
-    background-color: #2b2b2b;
-    color: white;
   }
 
   /* fonts */
@@ -116,6 +113,9 @@ body.appear {
 }
 
 main {
+  background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
+
   *,
   *::before,
   *::after {
@@ -311,7 +311,7 @@ main {
   /* sections */
 
   .section > .default-content-wrapper {
-    text-align: center;
+    /* text-align: center; */
   }
 
   .section > div > div {
