@@ -55,7 +55,7 @@
     --esri-ui-opacity95-inverse: rgb(53 53 53 / 95%);
     --esri-ui-opacity97-inverse: rgb(53 53 53 / 97%);
   }
-  
+
   /* fonts */
   --calcite-code-family: "Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace;
   --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
@@ -113,6 +113,9 @@ body.appear {
 }
 
 main {
+  background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
+
   *,
   *::before,
   *::after {
@@ -306,6 +309,10 @@ main {
   }
 
   /* sections */
+
+  .section > .default-content-wrapper {
+    /* text-align: center; */
+  }
 
   .section > div > div {
     background-color: var(--calcite-ui-foreground-1);
