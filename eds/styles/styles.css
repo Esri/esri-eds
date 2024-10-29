@@ -310,8 +310,8 @@ main {
 
   /* sections */
 
-  .section > .default-content-wrapper {
-    /* text-align: center; */
+  .section:where(.center, .centered) > .default-content-wrapper {
+    text-align: center;
   }
 
   .section > div > div {
