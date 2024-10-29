@@ -35,10 +35,10 @@ export default function decorate(block) {
   heroLeft.prepend(heroContentWrapper);
   block.prepend(heroLeft, heroRight);
 
-  children.forEach(child => {
+  children.forEach((child) => {
     if (!child.classList.contains('foreground-img')) {
-      heroContentWrapper.appendChild(child); // Move each child to left container except .foreground-img
-    }else{
+      heroContentWrapper.appendChild(child); // Move each child to left container except fg image
+    } else {
       heroRight.appendChild(child); // Move .foreground-img to right container
     }
   });
