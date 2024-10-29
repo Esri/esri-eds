@@ -40,20 +40,20 @@ main .hero-container {
   flex: 1;
 }
 
-.hero .hero-left{
+.hero .hero-content{
   flex-direction: column;
   block-size: auto;
   justify-content: center;
   align-items: flex-end;
 }
 
-.hero .hero-right .foreground-img {
+.hero .hero-fg-image .foreground-img {
   inline-size: 700px;
   block-size: 700px;
   margin: 0;
 }
 
-.hero .hero-right .foreground-img img{
+.hero .hero-fg-image .foreground-img img{
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
@@ -61,24 +61,24 @@ main .hero-container {
   aspect-ratio: 1 / 1;
 }
 
-.hero .hero-left .hero-content-wrapper{
+.hero .hero-content .hero-content-wrapper{
   inline-size: 720px;
   margin: 0; 
   align-items: flex-start;
   justify-content: center;
 }
 
-.hero .hero-left .hero-content-wrapper > *{
+.hero .hero-content .hero-content-wrapper > *{
   inline-size: 90%;
   margin: 0; 
 }
 
-.hero .hero-left .hero-content-wrapper h1{
+.hero .hero-content .hero-content-wrapper h1{
   margin-block-end: 0.6rem;
   line-height: 1.375;
 }
 
-.hero .hero-left picture img{
+.hero .hero-content picture img{
   inline-size: 100%;
   block-size: 100%;
   position: absolute;
@@ -163,20 +163,20 @@ main .hero-container {
 }
 
 @media (width <= 1479px) {
-  .hero .hero-left {
+  .hero .hero-content {
     margin-inline-start: 2vw;
     align-items: flex-start;
   }
 
-  .hero .hero-left .hero-content-wrapper {
+  .hero .hero-content .hero-content-wrapper {
     inline-size: 90%;
   }
 
-  .hero .hero-left .hero-content-wrapper > * {
+  .hero .hero-content .hero-content-wrapper > * {
     inline-size: 98%;
   }
 
-  .hero .hero-right .foreground-img {
+  .hero .hero-fg-image .foreground-img {
     inline-size: 100%;
     block-size: 100%;
   }
@@ -187,16 +187,16 @@ main .hero-container {
     flex-direction: column;
   }
 
-  .hero .hero-left .hero-content-wrapper {
+  .hero .hero-content .hero-content-wrapper {
     inline-size: 100%;
     padding: var(--space-16) 0;
   }
 
-  .hero .hero-left .hero-content-wrapper > * {
+  .hero .hero-content .hero-content-wrapper > * {
     inline-size: 90%;
   }
 
-  .hero > div.hero-left {
+  .hero > div.hero-content {
     inline-size: 90vw;
     display: flex;
     justify-content: flex-end;
@@ -204,7 +204,7 @@ main .hero-container {
     margin: 0 auto;
   }
 
-  .hero > div.hero-right {
+  .hero > div.hero-fg-image {
     inline-size: 100vw;
   }
 

@@ -29,17 +29,17 @@ export default function decorate(block) {
   const contentChildDiv = contentDiv.querySelector('div');
   const children = [...contentChildDiv.children];
 
-  const heroLeft = domEl('div', { class: 'hero-left' });
+  const heroContent = domEl('div', { class: 'hero-content' });
   const heroContentWrapper = domEl('div', { class: 'hero-content-wrapper' });
-  const heroRight = domEl('div', { class: 'hero-right' });
-  heroLeft.prepend(heroContentWrapper);
-  block.prepend(heroLeft, heroRight);
+  const heroFgImage = domEl('div', { class: 'hero-fg-image' });
+  heroContent.prepend(heroContentWrapper);
+  block.prepend(heroContent, heroFgImage);
 
   children.forEach((child) => {
     if (!child.classList.contains('foreground-img')) {
       heroContentWrapper.appendChild(child); // Move each child to left container except fg image
     } else {
-      heroRight.appendChild(child); // Move .foreground-img to right container
+      heroFgImage.appendChild(child); // Move .foreground-img to right container
     }
   });
   contentDiv.remove(); // Remove the empty div
