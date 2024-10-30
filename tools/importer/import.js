@@ -350,7 +350,14 @@ function cards(main, document) {
         blockName = 'Video cards';
       }
 
-      createBlock(container, document, blockName, cells);
+      const variants = [];
+      container.classList.forEach((className) => {
+        if (className.startsWith('cardsPerRow-')) {
+          variants.push(className.toLowerCase());
+        }
+      });
+
+      createBlock(container, document, blockName, cells, variants);
     });
 }
 
