@@ -161,8 +161,12 @@ function videos(main, document) {
 function calciteButton(main, document) {
   main.querySelectorAll('calcite-button')
     .forEach((button) => {
-      const link = document.createElement('a');
       const href = button.getAttribute('href');
+      if (!href) {
+        return;
+      }
+
+      const link = document.createElement('a');
       link.setAttribute('href', href);
 
       link.textContent = button.textContent;
