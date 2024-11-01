@@ -20,7 +20,7 @@ export default async function decorate(block) {
             while (buttonContainer.firstChild) {
                 // if firstchild is <a> then construct calciteButton
                 if (buttonContainer.firstChild.tagName === 'A') {
-                    newDiv.appendChild(calciteButton({ 
+                    newDiv.appendChild(calciteButton({
                         appearance: 'solid',
                         color: 'blue',
                         kind: 'brand',
@@ -30,9 +30,7 @@ export default async function decorate(block) {
                         type: 'button',
                         width: 'auto',
                     }, buttonContainer.firstChild.textContent));
-                }
-                // if firstchild is <em> then construct calciteButton with appearance outline
-                else if (buttonContainer.firstChild.tagName === 'EM') {
+                } else if (buttonContainer.firstChild.tagName === 'EM') {
                     newDiv.appendChild(calciteButton({ 
                         appearance: 'outline',
                         color: 'blue',
@@ -45,9 +43,9 @@ export default async function decorate(block) {
                     }, buttonContainer.firstChild.textContent));
                 }
 
-                ctaItem.splice(ctaItem.indexOf(buttonContainer.firstChild), 1, buttonContainer.firstChild);
-                buttonContainer.removeChild(buttonContainer.firstChild);
-            }
+        ctaItem.splice(ctaItem.indexOf(buttonContainer.firstChild), 1, buttonContainer.firstChild);
+        buttonContainer.removeChild(buttonContainer.firstChild);
+    }
             buttonContainer.replaceWith(newDiv);
         } 
     });
