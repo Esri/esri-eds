@@ -19,7 +19,7 @@ function isMP4(vidUrls) {
 
 /**
  * Set the foreground container for mp4 video.
- * @returns {element} The block element
+ * @returns {element} The block element test
  */
 function setforegroundContainers(block) {
   const vids = block.querySelectorAll('a');
