@@ -8,8 +8,6 @@ export default async function decorate(block) {
 
     // get all cta contents
     let ctaContents = ctaItems.flatMap((ctaItem) => ctaItem);
-    console.log(ctaContents[0]);
-    console.log(ctaContents[1]);
 
     ctaContents.forEach((cta) => {
         // create array out of each cta item
@@ -22,14 +20,18 @@ export default async function decorate(block) {
             let newDiv = div({ class: 'button-container' });
             while (buttonContainer.firstChild) {
                 // if firstchild is <a> then construct calciteButton
-                
-                newDiv.appendChild(buttonContainer.firstChild);
+                if (buttonContainer.firstChild.tagName === 'A') {
+                    newDiv.appendChild(calciteButton({ href: buttonContainer.firstChild.href, 'aria-label': buttonContainer.firstChild.getAttribute('aria-label'), class: 'button primary' }, buttonContainer.firstChild.textContent));
+                }
+                // if firstchild is <em> then construct calciteButton with appearance outline
+                else if (buttonContainer.firstChild.tagName === 'EM') {
+                    newDiv.appendChild(calciteButton({ href: buttonContainer.firstChild.href, 'aria-label': buttonContainer.firstChild.getAttribute('aria-label'), class: 'button primary', appearance: 'outline' }, buttonContainer.firstChild.textContent));
+                }
+
+                ctaItem.splice(ctaItem.indexOf(buttonContainer.firstChild), 1, buttonContainer.firstChild);
+                buttonContainer.removeChild(buttonContainer.firstChild);
             }
             buttonContainer.replaceWith(newDiv);
-            buttonContainer = newDiv;
-        }
-        
-        console.log(buttonContainer);
+        } 
     });
-
 }
