@@ -67,7 +67,7 @@ export default async function decorate(block) {
   }
 
   if (!tabsContainFragments) {
-    tabContents.forEach((content) => {    
+    tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
       const textWrapper = div({ class: 'text-wrapper' }, ...text);
       content.splice(1, 3, textWrapper);
