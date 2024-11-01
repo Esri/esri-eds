@@ -112,13 +112,13 @@ function decorateLinkBtn(block) {
   anchorElements.forEach((anchorElement) => {
     if (!anchorElement.classList.contains('hidden')) {
       const calciteButton = document.createElement('calcite-button');
-      calciteButton.innerHTML = anchorElement.innerHTML; 
+      calciteButton.innerHTML = anchorElement.innerHTML;
       if (anchorElement.getAttribute('href')) {
-          calciteButton.setAttribute('href', anchorElement.getAttribute('href'));
+        calciteButton.setAttribute('href', anchorElement.getAttribute('href'));
       }
       if (!calciteButton.getAttribute('scale')) {
-          calciteButton.setAttribute('scale', 'l');
-      } 
+        calciteButton.setAttribute('scale', 'l');
+      }
       anchorElement.replaceWith(calciteButton);
     }
   });
