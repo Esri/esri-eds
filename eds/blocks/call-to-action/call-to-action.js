@@ -31,7 +31,7 @@ export default async function decorate(block) {
             width: 'auto',
           }, buttonContainer.firstChild.textContent));
         } else if (buttonContainer.firstChild.tagName === 'EM') {
-            newDiv.appendChild(calciteButton({
+          newDiv.appendChild(calciteButton({
             appearance: 'outline',
             color: 'blue',
             kind: 'brand',
