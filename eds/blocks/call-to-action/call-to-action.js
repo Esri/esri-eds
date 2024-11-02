@@ -21,31 +21,31 @@ export default async function decorate(block) {
       // if firstchild is <a> then construct calciteButton
         if (buttonContainer.firstChild.tagName === 'A') {
           newDiv.appendChild(calciteButton({
-          appearance: 'solid',
-          color: 'blue',
-          kind: 'brand',
-          scale: 'm',
-          href: buttonContainer.firstChild.href,
-          alignment: 'center',
-          type: 'button',
-          width: 'auto',
+            appearance: 'solid',
+            color: 'blue',
+            kind: 'brand',
+            scale: 'm',
+            href: buttonContainer.firstChild.href,
+            alignment: 'center',
+            type: 'button',
+            width: 'auto',
           }, buttonContainer.firstChild.textContent));
         } else if (buttonContainer.firstChild.tagName === 'EM') {
-          newDiv.appendChild(calciteButton({
-          appearance: 'outline',
-          color: 'blue',
-          kind: 'brand',
-          scale: 'm',
-          href: buttonContainer.firstChild.href,
-          alignment: 'center',
-          type: 'button',
-          width: 'auto',
+            newDiv.appendChild(calciteButton({
+            appearance: 'outline',
+            color: 'blue',
+            kind: 'brand',
+            scale: 'm',
+            href: buttonContainer.firstChild.href,
+            alignment: 'center',
+            type: 'button',
+            width: 'auto',
           }, buttonContainer.firstChild.textContent));
         }
 
-      ctaItem.splice(ctaItem.indexOf(buttonContainer.firstChild), 1, buttonContainer.firstChild);
-      buttonContainer.removeChild(buttonContainer.firstChild);
-    }
+        ctaItem.splice(ctaItem.indexOf(buttonContainer.firstChild), 1, buttonContainer.firstChild);
+        buttonContainer.removeChild(buttonContainer.firstChild);
+      }
       buttonContainer.replaceWith(newDiv);
     }
   });
