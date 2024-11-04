@@ -4,22 +4,14 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 export default async function decorate(block) {
-  const ctaItems = [...block.children].map((child) => [...child.children]);
-
-  // get all cta contents
-  const ctaContents = ctaItems.flatMap((ctaItem) => ctaItem);
-
-  ctaContents.forEach((cta) => {
-    // create array out of each cta item
-    const ctaItem = [...cta.children];
-
-    // get p.button-container and change p to div
-    const buttonContainer = ctaItem.find((item) => item.tagName === 'P' && item.classList.contains('button-container'));
-    if (buttonContainer) {
-      const newDiv = div({ class: 'button-container' });
+  block.querySelectorAll('p.button-container').forEach((buttonContainer) => {
+    console.log('buttonContainer', buttonContainer);
+    const newDiv = div({ class: 'button-container' });
       while (buttonContainer.firstChild) {
+        console.log('buttonContainer.firstChild', buttonContainer.firstChild);
       // if firstchild is <a> then construct calciteButton
         if (buttonContainer.firstChild.tagName === 'A') {
+          console.log('buttonContainer.firstChild.tagName', buttonContainer.firstChild.tagName);
           newDiv.appendChild(calciteButton({
             appearance: 'solid',
             color: 'blue',
@@ -42,11 +34,8 @@ export default async function decorate(block) {
             width: 'auto',
           }, buttonContainer.firstChild.textContent));
         }
-
-        ctaItem.splice(ctaItem.indexOf(buttonContainer.firstChild), 1, buttonContainer.firstChild);
         buttonContainer.removeChild(buttonContainer.firstChild);
       }
       buttonContainer.replaceWith(newDiv);
-    }
-  });
+    });
 }
