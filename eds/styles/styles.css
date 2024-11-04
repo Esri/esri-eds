@@ -29,7 +29,7 @@
   --esri-ui-opacity90-inverse: rgb(53 53 53 / 90%);
   --esri-ui-opacity95-inverse: rgb(53 53 53 / 95%);
   --esri-ui-opacity97-inverse: rgb(53 53 53 / 97%);
-  
+
   /* image filters */
   --image-white-filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(1857%) hue-rotate(0deg) brightness(109%) contrast(108%);
 
@@ -39,7 +39,7 @@
     --esri-ui-opacity00: rgb(53 53 53 / 0%);
     --esri-ui-opacity20: rgb(53 53 53 / 20%);
     --esri-ui-opacity40: rgb(53 53 53 / 40%);
-    --esri-ui-opacity60: rgb(53 53 53 / 50%);
+    --esri-ui-opacity50: rgb(53 53 53 / 50%);
     --esri-ui-opacity80: rgb(53 53 53 / 80%);
     --esri-ui-opacity85: rgb(53 53 53 / 85%);
     --esri-ui-opacity90: rgb(53 53 53 / 90%);
