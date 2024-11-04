@@ -108,12 +108,16 @@ main .hero-container {
   inline-size: 100%;
 }
 
-.hero .video-src {
+.hero .hidden {
   display: none;
 }
 
 .hero video {
   display: none;
+}
+
+.hero .hero-content .hero-content-wrapper .button-container {
+  margin-block-start: var(--space-4);
 }
 
 @media (width >= 768px) {

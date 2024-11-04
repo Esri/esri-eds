@@ -243,6 +243,27 @@ async function loadPage() {
   loadDelayed();
 }
 
+/**
+* convert link button to calcite button
+* @param {element} block The block element
+*/
+export function decorateToCalciteBtn(block) {
+ const anchorElements = block.querySelectorAll('a');
+ anchorElements.forEach((anchorElement) => {
+   if (!anchorElement.classList.contains('hidden')) {
+     const calciteButton = document.createElement('calcite-button');
+     calciteButton.innerHTML = anchorElement.innerHTML;
+     if (anchorElement.getAttribute('href')) {
+       calciteButton.setAttribute('href', anchorElement.getAttribute('href'));
+     }
+     if (!calciteButton.getAttribute('scale')) {
+       calciteButton.setAttribute('scale', 'l');
+     }
+     anchorElement.replaceWith(calciteButton);
+   }
+ });
+}
+
 export function decorateInnerHrefButtonsWithArrowIcon(block) {
   block.querySelectorAll('a').forEach((a) => {
     const icon = domEl('calcite-icon', { class: 'default-arrow-right', icon: 'arrowRight', scale: 's' });
