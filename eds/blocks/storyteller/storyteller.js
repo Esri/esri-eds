@@ -10,6 +10,7 @@ function isMP4(vidUrls) {
   vidUrls.forEach((url) => {
     if (mp4Regex.test(url)) {
       url.parentNode.classList.add('foreground-container');
+      url.classList.add('hidden');
       mp4Video = true;
     }
   });
@@ -102,6 +103,27 @@ function getMP4(block) {
   return mp4Urls;
 }
 
+/**
+ * convert link button to calcite button
+ * @param {element} block The block element
+ */
+function decorateLinkBtn(block) {
+  const anchorElements = block.querySelectorAll('a');
+  anchorElements.forEach((anchorElement) => {
+    if (!anchorElement.classList.contains('hidden')) {
+      const calciteButton = document.createElement('calcite-button');
+      calciteButton.innerHTML = anchorElement.innerHTML;
+      if (anchorElement.getAttribute('href')) {
+        calciteButton.setAttribute('href', anchorElement.getAttribute('href'));
+      }
+      if (!calciteButton.getAttribute('scale')) {
+        calciteButton.setAttribute('scale', 'l');
+      }
+      anchorElement.replaceWith(calciteButton);
+    }
+  });
+}
+
 export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
@@ -161,4 +183,6 @@ export default async function decorate(block) {
   videoBtn.addEventListener('click', () => {
     toggleVideo(videoBtn);
   });
+
+  decorateLinkBtn(block);
 }
