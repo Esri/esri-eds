@@ -173,7 +173,20 @@ function calciteButton(main, document) {
       if (!button.textContent.trim()) {
         link.textContent = href;
       }
-      button.replaceWith(link);
+      switch (button.getAttribute('appearance')) {
+        case 'solid':
+          button.replaceWith(link);
+          break;
+        case 'outline':
+          // eslint-disable-next-line no-case-declarations
+          const em = document.createElement('em');
+          em.append(link);
+          button.replaceWith(em);
+          break;
+        default:
+          console.error('Unknown calcite-button appearance', button.outerHTML);
+          throw new Error('Unknown calcite-button appearance');
+      }
     });
 }
 
