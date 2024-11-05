@@ -13,7 +13,7 @@ import {
   loadScript,
 } from './aem.js';
 
-import { div, iframe, domEl } from './dom-helpers.js';
+import { calciteButton, div, iframe, domEl } from './dom-helpers.js';
 
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
 
@@ -179,6 +179,45 @@ export function decorateTemplateAndTheme() {
 }
 
 /**
+* convert link button to calcite button
+* @param {element} block The block element
+*/
+function decorateToCalcite(main) {
+  main.querySelectorAll('p.button-container').forEach((buttonContainer) => {
+    // create a new div to replace the buttonContainer
+    const newDiv = div({ class: 'button-container' });
+    while (buttonContainer.firstChild) {
+    // if firstchild is <a> then construct calciteButton
+      if (buttonContainer.firstChild.tagName === 'A') {
+        newDiv.appendChild(calciteButton({
+          appearance: 'solid',
+          color: 'blue',
+          kind: 'brand',
+          scale: 'm',
+          href: buttonContainer.firstChild.href,
+          alignment: 'center',
+          type: 'button',
+          width: 'auto',
+        }, buttonContainer.firstChild.textContent));
+      } else if (buttonContainer.firstChild.tagName === 'EM') {
+        newDiv.appendChild(calciteButton({
+          appearance: 'outline',
+          color: 'blue',
+          kind: 'brand',
+          scale: 'm',
+          href: buttonContainer.firstChild.firstChild.href,
+          alignment: 'center',
+          type: 'button',
+          width: 'auto',
+        }, buttonContainer.firstChild.textContent));
+      }
+      buttonContainer.removeChild(buttonContainer.firstChild);
+    }
+    buttonContainer.replaceWith(newDiv);
+  });
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -191,6 +230,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    decorateToCalcite(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
@@ -241,27 +281,6 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-}
-
-/**
-* convert link button to calcite button
-* @param {element} block The block element
-*/
-export function decorateToCalciteBtn(block) {
- const anchorElements = block.querySelectorAll('a');
- anchorElements.forEach((anchorElement) => {
-   if (!anchorElement.classList.contains('hidden')) {
-     const calciteButton = document.createElement('calcite-button');
-     calciteButton.innerHTML = anchorElement.innerHTML;
-     if (anchorElement.getAttribute('href')) {
-       calciteButton.setAttribute('href', anchorElement.getAttribute('href'));
-     }
-     if (!calciteButton.getAttribute('scale')) {
-       calciteButton.setAttribute('scale', 'l');
-     }
-     anchorElement.replaceWith(calciteButton);
-   }
- });
 }
 
 export function decorateInnerHrefButtonsWithArrowIcon(block) {

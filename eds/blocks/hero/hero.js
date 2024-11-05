@@ -1,6 +1,4 @@
 import { domEl } from '../../scripts/dom-helpers.js';
-import { decorateToCalciteBtn } from '../../scripts/scripts.js';
-
 
 export default function decorate(block) {
   block.querySelectorAll('picture > img').forEach((img, i) => {
@@ -19,10 +17,8 @@ export default function decorate(block) {
     videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
     videoAssets[1].classList.add('hidden');
   } else {
-    if (videoAssets[0] !== undefined) {
-      videoSrc.setAttribute('src', videoAssets[0].getAttribute('title'));
-      videoAssets[0].classList.add('hidden');
-    }
+    videoSrc.setAttribute('src', videoAssets[0].getAttribute('title'));
+    videoAssets[0].classList.add('hidden');
   }
   videoSrc.setAttribute('type', 'video/mp4');
 
@@ -47,5 +43,4 @@ export default function decorate(block) {
     }
   });
   contentDiv.remove(); // Remove the empty div
-  decorateToCalciteBtn(block);
 }

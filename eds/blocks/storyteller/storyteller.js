@@ -1,4 +1,4 @@
-import { decorateToCalciteBtn } from '../../scripts/scripts.js';
+// import { decorateToCalciteBtn } from '../../scripts/scripts.js';
 
 /**
  * Determine if mp4 resource is available. Add selector 'foreground-container' to p tag.
@@ -165,5 +165,5 @@ export default async function decorate(block) {
     toggleVideo(videoBtn);
   });
 
-  decorateToCalciteBtn(block);
+  // decorateToCalciteBtn(block);
 }

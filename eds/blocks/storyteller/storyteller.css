@@ -104,6 +104,11 @@
   padding-inline: 0;
 }
 
+.storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) > .button-container {
+  inline-size: 0;
+  padding-inline: 0;
+}
+
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
   block-size: 100%;
   position: absolute;
@@ -183,11 +188,15 @@
     padding-inline: 0;
   }
   
-  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) p {
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) .button-container, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) p {
     margin-inline-start: auto;
-    max-inline-size: 660px
+    max-inline-size: 660px;
   }
-  
+
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) .button-container {
+    inline-size: 660px;
+  }
+
   .storyteller div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
   }
@@ -196,7 +205,7 @@
     margin-inline: 0;
   }
 
-  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) p {
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) div.button-container, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) p {
     padding-inline: var(--space-32) var(--space-8);
   }
 
@@ -240,6 +249,11 @@
     block-size: auto;
     inline-size: 50%;
     padding: var(--space-20) 0 var(--space-20) var(--space-16) ;
+  }
+
+  .storyteller.content-right div div:nth-of-type(2) .button-container {
+    padding: var(--space-2) 0 var(--space-2) 0 ;
+    cursor: pointer;
   }
 
   .storyteller .foreground-content .content-wrapper, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
