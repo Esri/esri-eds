@@ -13,7 +13,12 @@ import {
   loadScript,
 } from './aem.js';
 
-import { calciteButton, div, iframe, domEl } from './dom-helpers.js';
+import { 
+  calciteButton, 
+  div, 
+  iframe, 
+  domEl
+} from './dom-helpers.js';
 
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
 
