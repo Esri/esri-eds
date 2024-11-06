@@ -13,12 +13,14 @@ export default function decorate(block) {
   videoElement.toggleAttribute('loop', true);
   videoElement.toggleAttribute('playsinline', true);
   videoElement.toggleAttribute('autoplay', true);
-  if (videoAssets.length === 2) {
-    videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
-    videoAssets[1].classList.add('video-src');
-  } else {
-    videoSrc.setAttribute('src', videoAssets[0].getAttribute('title'));
-    videoAssets[0].classList.add('video-src');
+  if ((videoAssets !== null) && (videoAssets !== undefined) && (videoAssets.length > 0)) {
+    if (videoAssets.length === 2) {
+      videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
+      videoAssets[1].classList.add('hidden');
+    } else {
+      videoSrc.setAttribute('src', videoAssets[0].getAttribute('title'));
+      videoAssets[0].classList.add('hidden');
+    }
   }
   videoSrc.setAttribute('type', 'video/mp4');
 
