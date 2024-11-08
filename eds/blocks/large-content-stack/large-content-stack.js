@@ -55,15 +55,16 @@ export default function decorate(block) {
   convertToCalciteButton(button);
 
   // TODO background picture quality is low, fix it
-  const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
-console.log('Background Picture: ' + backgroundPicture);
-  const backgroundPictureSrc = backgroundPicture
-    .querySelector('source')
-    .srcset
-    .replace('optimize=medium', 'optimize=false');
+  const backgroundPicture = mainCell.querySelector(':scope > p:last-child:has(+ p > picture) > picture');
+  if (backgroundPicture) {
+    const backgroundPictureSrc = backgroundPicture
+      .querySelector('source')
+      .srcset
+      .replace('optimize=medium', 'optimize=false');
 
-  block.style.backgroundImage = `url(${backgroundPictureSrc})`;
-  backgroundPicture.parentElement.remove();
+    block.style.backgroundImage = `url(${backgroundPictureSrc})`;
+    backgroundPicture.parentElement.remove();
+  }
 
   const picture = block.querySelector('p > picture');
   console.log('Picture: ' + picture);
