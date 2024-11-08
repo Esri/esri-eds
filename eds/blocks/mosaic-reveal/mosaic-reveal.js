@@ -19,8 +19,6 @@ export default function decorate(block) {
     const buttonContainer = content.querySelector('div.button-container > calcite-button');
     const linkText = buttonContainer.textContent;
     const url = buttonContainer.href;
-    console.log('buttonContainer', url);
-
     const link = domEl('calcite-link', {
       href: url,
       'icon-end': 'arrowRight',
