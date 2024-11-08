@@ -37,11 +37,10 @@
   flex-direction: column-reverse;
 }
 
-
 .storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper {
   opacity: 0.85;
   align-self: end;
-  inline-size: auto;
+  inline-size: 450px;
   position: absolute;
   color: var(--calcite-ui-text-1);
   background-color: var(--calcite-ui-background);
@@ -131,10 +130,6 @@
   padding-inline-start: var(--space-24);
 }
 
-.storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper {
-  inline-size: 450px;
-}
-
 .storyteller.content-right div div p:nth-of-type(2) picture {
   inset-block-start: 50%;
   transform: translateY(-50%);
@@ -161,6 +156,7 @@
 
   .storyteller div div:nth-of-type(2) .foreground-content, .storyteller div p:nth-of-type(2) video, .storyteller .foreground-container, .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture img {
     inline-size: 500px;
+    block-size: 625px;
   }
   
   .storyteller.content-right .foreground-container {
