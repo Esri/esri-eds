@@ -57,7 +57,7 @@ export default function decorate(block) {
   // TODO background picture quality is low, fix it
   // If one image, use as foreground image
   // If two images, second image is background image
-  const pictures = document.querySelectorAll('p > picture');
+  const pictures = mainCell.querySelectorAll('p > picture');
   pictures.forEach((picture) => {
     const parentP = picture.parentElement;
 
@@ -94,7 +94,7 @@ export default function decorate(block) {
     }
   });
 
-  // if (videoElement) {
-  //   mediaWrapper.appendChild(videoElement);
-  // }
+  if (videoElement) {
+    mediaWrapper.appendChild(videoElement);
+  }
 }
