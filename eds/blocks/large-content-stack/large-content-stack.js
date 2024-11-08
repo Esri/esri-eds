@@ -94,7 +94,7 @@ export default function decorate(block) {
     }
   });
 
-  if (videoElement) {
-    mediaWrapper.appendChild(videoElement);
-  }
+  // if (videoElement) {
+  //   mediaWrapper.appendChild(videoElement);
+  // }
 }
