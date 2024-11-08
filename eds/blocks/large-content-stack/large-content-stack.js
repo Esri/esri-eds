@@ -1,6 +1,7 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
 function convertToCalciteButton(button) {
+  if (!button) return;
   const isVideo = button.classList.contains('video-link');
   button.replaceChildren(calciteButton({
     'icon-end': (isVideo) ? 'play-f' : 'arrowRight',
@@ -55,7 +56,7 @@ export default function decorate(block) {
 
   // TODO background picture quality is low, fix it
   const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
-
+console.log('Background Picture: ' + backgroundPicture);
   const backgroundPictureSrc = backgroundPicture
     .querySelector('source')
     .srcset
@@ -65,6 +66,7 @@ export default function decorate(block) {
   backgroundPicture.parentElement.remove();
 
   const picture = block.querySelector('p > picture');
+  console.log('Picture: ' + picture);
   const pictureWrapper = picture.parentElement;
   const mediaWrapper = div(
     { class: 'media-wrapper' },
