@@ -297,10 +297,6 @@
     display: block;
   }
 
-  .storyteller .foreground-container a, .storyteller picture.hide-poster {
-    display: none;
-  }
-
   .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture, .storyteller.content-right div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
     position: absolute;
     inset-block-start: 50%;
