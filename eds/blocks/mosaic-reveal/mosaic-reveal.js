@@ -16,10 +16,9 @@ export default function decorate(block) {
     content.classList.add('mosaic-reveal-content');
     content.setAttribute('aria-hidden', 'true');
 
-    const buttonContainer = content.querySelector('p.button-container > a');
+    const buttonContainer = content.querySelector('div.button-container > calcite-button');
     const linkText = buttonContainer.textContent;
     const url = buttonContainer.href;
-
     const link = domEl('calcite-link', {
       href: url,
       'icon-end': 'arrowRight',
