@@ -156,7 +156,7 @@ export default async function decorate(block) {
       source.setAttribute('src', vidUrls[0].href);
       videoTag.appendChild(source);
     }
-    block.classList.add('content-right');
+    block.classList.add('primary-content');
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tag);
