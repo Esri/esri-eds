@@ -85,7 +85,8 @@ function createMetadata(main, document, pathname, html) {
 }
 
 function hasCalciteMode(container, mode) {
-  return container.closest(`.calcite-mode-${mode}`);
+  const modeClass = `.calcite-mode-${mode}`;
+  return container.closest(modeClass) || container.querySelector(modeClass);
 }
 
 function getCalciteMode(container) {
