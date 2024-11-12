@@ -578,12 +578,23 @@ function mosaicReveal(main, document) {
 }
 
 function sections(main, document) {
-  main.querySelectorAll('.aem-GridColumn:not(:last-child)').forEach((container) => {
-    if (container.textContent.trim() === '') {
-      container.remove();
+  main.querySelectorAll('.aem-GridColumn').forEach((section) => {
+    if (section.children.length === 1) {
+      const child = section.firstElementChild;
+      if (child.classList.contains('text-center')) {
+        section.append(WebImporter.Blocks.getMetadataBlock(document, {
+          Style: ['centered'],
+        }));
+      }
+    }
+  });
+
+  main.querySelectorAll('.aem-GridColumn:not(:last-child)').forEach((section) => {
+    if (section.textContent.trim() === '') {
+      section.remove();
     } else {
       const hr = document.createElement('hr');
-      container.after(hr);
+      section.after(hr);
     }
   });
 }
