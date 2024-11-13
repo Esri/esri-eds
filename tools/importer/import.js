@@ -109,6 +109,20 @@ function createBlock(container, document, name, cells, variants = []) {
   const blockReport = report[name];
   variants.forEach((variant) => blockReport.add(variant));
 
+  const hasEmbeddedBlock = container.querySelector('table');
+  const closestBlock = container.closest('table');
+  if (hasEmbeddedBlock || closestBlock) {
+    if (!report.embeddedBlocks) {
+      report.embeddedBlocks = [];
+    }
+    report.embeddedBlocks.push(name);
+    if (hasEmbeddedBlock) {
+      console.error(`Block "${name}" has block embedded in it`, hasEmbeddedBlock, cells);
+    } else {
+      console.error(`Block "${name}" is embedded in another block`, closestBlock, cells);
+    }
+  }
+
   container.replaceWith(WebImporter.Blocks.createBlock(document, {
     name,
     cells,
