@@ -184,7 +184,7 @@ export default async function decorate(block) {
       foregroundWrapper.appendChild(foregroundContentContainer);
     }
   }
-
+  
   if ((pictureTagLeft === null) && (vidUrls.length > 0)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
@@ -195,11 +195,7 @@ export default async function decorate(block) {
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
-    if (pTags.length > 5) {
-      foregroundContent.appendChild(pTags[pTags.length - 1]);
-    } else {
-      foregroundContent.appendChild(pTags[4]);
-    }
+    foregroundContent.appendChild(pTags[pTags.length - 1]);
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
     foregroundWrapper.appendChild(videoBtn);
