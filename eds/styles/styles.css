@@ -97,8 +97,14 @@
   --nav-height: 64px;
 }
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	border: 0;
+}
+
 body {
-  box-sizing: border-box;
   font-size: var(--font-0);
   margin: 0;
   font-family: var(--calcite-sans-family);
@@ -115,12 +121,6 @@ body.appear {
 main {
   background-color: var(--calcite-ui-foreground-1);
   color: var(--calcite-ui-text-1);
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
-  }
 
   h1,
   h2,
