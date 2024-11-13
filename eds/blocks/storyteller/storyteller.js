@@ -184,7 +184,7 @@ export default async function decorate(block) {
       foregroundWrapper.appendChild(foregroundContentContainer);
     }
   }
-  
+
   if ((pictureTagLeft === null) && (vidUrls.length > 0)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
