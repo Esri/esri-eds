@@ -582,8 +582,9 @@ function sections(main, document) {
     if (section.children.length === 1) {
       const child = section.firstElementChild;
       if (child.classList.contains('text-center')) {
-        section.append(WebImporter.Blocks.getMetadataBlock(document, {
-          Style: ['centered'],
+        section.append(WebImporter.Blocks.createBlock(document, {
+          name: 'Section Metadata',
+          cells: { Style: ['centered'] },
         }));
       }
     }
