@@ -284,10 +284,9 @@ function tabs(main, document, pathname) {
             const url = edsUrl + tabPathname;
             link.setAttribute('href', url);
             link.textContent = url;
-            tabContentTable.replaceWith(link);
-
             const wrapper = document.createElement('div');
-            wrapper.append(tabContentTable);
+            wrapper.append(...tabContent.children);
+            tabContent.replaceChildren(link);
 
             fragmentPages.push({
               element: wrapper,
