@@ -1,41 +1,55 @@
-.columns > div {
-  display: flex;
-  flex-direction: column;
-}
+.columns {
+  & > div {
+    display: flex;
+    flex-direction: column;
 
-.columns img {
-  inline-size: 100%;
-}
+    & > div {
+      order: 1;
 
-.columns > div > div {
-  order: 1;
-}
+      &:last-child {
+        padding-block-end: 32px;
+      }
 
-.columns > div > div:last-child > * {
-  padding-inline-start: 32px;
-}
+      &:last-child > * {
+        padding-inline: 6.7%;
+      }
+    }
 
-.columns > div > .columns-img-col {
-  order: 0;
-}
+    & > .columns-img-col {
+      order: 2;
+      display: block;
+      block-size: 100%;
 
-.columns > div > .columns-img-col img {
-  display: block;
-}
+      @media (width >= 900px) {
+        order: 0;
+      }
 
-.columns.calcite-mode-gray {
-  background-color: var(--calcite-ui-foreground-2);
-}
-
-@media (width >= 900px) {
-  .columns > div {
-    align-items: center;
-    flex-direction: unset;
+      & img {
+        display: block;
+        block-size: 100%;
+        object-fit: cover;
+      }
+    }
   }
 
-  .columns > div > div {
-    flex: 1;
-    order: unset;
+  & img {
+    inline-size: 100%;
   }
 
+  &.calcite-mode-gray {
+    background-color: var(--calcite-ui-foreground-2);
+  }
+
+  @media (width >= 900px) {
+    & > div {
+      align-items: center;
+      flex-direction: unset;
+      block-size: 600px;
+
+      & > div {
+        flex: 1;
+        order: unset;
+      }
+    }
+  }
 }
