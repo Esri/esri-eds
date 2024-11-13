@@ -1,6 +1,7 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
 function convertToCalciteButton(button) {
+  if (!button) return;
   const isVideo = button.classList.contains('video-link');
   button.replaceChildren(calciteButton({
     'icon-end': (isVideo) ? 'play-f' : 'arrowRight',
@@ -54,24 +55,47 @@ export default function decorate(block) {
   convertToCalciteButton(button);
 
   // TODO background picture quality is low, fix it
-  const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
+  // If one image, use as foreground image
+  // If two images, second image is background image
+  const pictures = mainCell.querySelectorAll('p > picture');
+  pictures.forEach((picture) => {
+    const parentP = picture.parentElement;
 
-  const backgroundPictureSrc = backgroundPicture
-    .querySelector('source')
-    .srcset
-    .replace('optimize=medium', 'optimize=false');
+    // Check if the parent p element is the last child
+    const isLastChild = parentP === parentP.parentElement.lastElementChild;
 
-  block.style.backgroundImage = `url(${backgroundPictureSrc})`;
-  backgroundPicture.parentElement.remove();
+    // Check if the parent p element has a preceding sibling that contains a picture element
+    let hasPrecedingSiblingWithPicture = false;
 
-  const picture = block.querySelector('p > picture');
-  const pictureWrapper = picture.parentElement;
-  const mediaWrapper = div(
-    { class: 'media-wrapper' },
-    picture,
-  );
+    let sibling = parentP.previousElementSibling;
+    while (sibling) {
+      if (sibling.querySelector('picture')) {
+        hasPrecedingSiblingWithPicture = true;
+        break;
+      }
+      sibling = sibling.previousElementSibling;
+    }
+
+    if (isLastChild && hasPrecedingSiblingWithPicture) {
+      const backgroundPictureSrc = picture
+        .querySelector('source')
+        .srcset
+        .replace('optimize=medium', 'optimize=false');
+
+      block.style.backgroundImage = `url(${backgroundPictureSrc})`;
+      parentP.remove();
+    } else {
+      const pictureWrapper = picture.parentElement;
+      const mediaWrapper = div(
+        { class: 'media-wrapper' },
+        picture,
+      );
+      pictureWrapper.replaceWith(mediaWrapper);
+    }
+  });
+
   if (videoElement) {
-    mediaWrapper.appendChild(videoElement);
+    // to do: add video element
+    // mediaWrapper.appendChild(videoElement);
   }
-  pictureWrapper.replaceWith(mediaWrapper);
 }

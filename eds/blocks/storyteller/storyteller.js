@@ -35,6 +35,14 @@ function setforegroundContainers(block) {
   }
 }
 
+function setforegroundContainersNoVideo(block) {
+  const picTags = block.querySelectorAll('picture');
+  if (picTags.length > 1) {
+    const picTag = picTags[1];
+    picTag.parentNode.classList.add('foreground-container');
+  }
+}
+
 /**
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
@@ -148,7 +156,7 @@ export default async function decorate(block) {
       source.setAttribute('src', vidUrls[0].href);
       videoTag.appendChild(source);
     }
-    block.classList.add('content-right');
+    block.classList.add('primary-content');
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tag);
@@ -160,7 +168,24 @@ export default async function decorate(block) {
     }
   }
 
-  if ((pictureTagLeft === null) && (vidUrls.length >= 1)) {
+  if ((pictureTagLeft === null) && (vidUrls.length === 0)) {
+    const h2Tags = block.querySelectorAll('h2');
+    if (h2Tags.length > 1) {
+      setforegroundContainersNoVideo(block);
+      const foregroundWrapper = block.querySelector('.foreground-container');
+      foregroundContentContainer.classList.add('foreground-content');
+      foregroundContent.appendChild(h2Tags[1]);
+      if (pTags.length > 5) {
+        foregroundContent.appendChild(pTags[pTags.length - 1]);
+      } else {
+        foregroundContent.appendChild(pTags[4]);
+      }
+      foregroundContentContainer.appendChild(foregroundContent);
+      foregroundWrapper.appendChild(foregroundContentContainer);
+    }
+  }
+
+  if ((pictureTagLeft === null) && (vidUrls.length > 0)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
     if (vidUrls.length >= 1) {
@@ -170,11 +195,7 @@ export default async function decorate(block) {
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
-    if (pTags.length > 5) {
-      foregroundContent.appendChild(pTags[pTags.length - 1]);
-    } else {
-      foregroundContent.appendChild(pTags[4]);
-    }
+    foregroundContent.appendChild(pTags[pTags.length - 1]);
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
     foregroundWrapper.appendChild(videoBtn);

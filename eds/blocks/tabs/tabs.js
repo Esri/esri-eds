@@ -124,7 +124,7 @@ export default async function decorate(block) {
       label: 'Previous Tab',
       'icon-end': 'chevronLeft',
       scale: 'l',
-      kind: 'neutral',
+      kind: 'inverse',
       round: '',
     },
   );
@@ -135,7 +135,7 @@ export default async function decorate(block) {
       label: 'Next Tab',
       'icon-end': 'chevronRight',
       scale: 'l',
-      kind: 'neutral',
+      kind: 'inverse',
       round: '',
     },
   );
