@@ -13,8 +13,8 @@ import {
 } from '../fragment/fragment.js';
 
 export default async function decorate(block) {
-  block.querySelectorAll('img').forEach((img) => img
-    .closest('picture')
+  block.querySelectorAll('picture > img').forEach((img) => img
+    .parentElement
     .replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
