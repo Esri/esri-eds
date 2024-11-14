@@ -590,9 +590,7 @@ function mosaicReveal(main, document) {
 }
 
 function sections(main, document) {
-  console.log('processing sections', main);
   main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn').forEach((section) => {
-    console.log('iterating gridcolumn', section);
     if (section.children.length === 1) {
       const child = section.firstElementChild;
       if (child.classList.contains('text-center')) {
