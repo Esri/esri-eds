@@ -567,7 +567,7 @@ function columns(main, document) {
     if (children.length !== 2) {
       throw new Error('media-text-split expected 2 children');
     }
-    createBlock(container, document, 'columns', [children]);
+    createBlock(container, document, 'columns', [children], ['Media split']);
   });
 }
 
