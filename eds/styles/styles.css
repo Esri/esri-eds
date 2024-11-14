@@ -295,6 +295,11 @@ main {
     inline-size: 24px;
   }
 
+  .icon[class$="-48"] {
+    block-size: 48px;
+    inline-size: 48px;
+  }
+
   .icon img {
     block-size: 100%;
     inline-size: 100%;
