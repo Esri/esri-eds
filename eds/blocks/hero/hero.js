@@ -25,7 +25,7 @@ export default function decorate(block) {
   videoSrc.setAttribute('type', 'video/mp4');
 
   if (videoElement) videoElement.append(videoSrc);
-  if (videoAssets) block.prepend(videoElement);
+  // if (videoAssets) block.prepend(videoElement);
 
   const contentDiv = block.querySelector('div:last-child');
   const contentChildDiv = contentDiv.querySelector('div');
@@ -34,6 +34,12 @@ export default function decorate(block) {
   const heroContent = domEl('div', { class: 'hero-content' });
   const heroContentWrapper = domEl('div', { class: 'hero-content-wrapper' });
   const heroFgImage = domEl('div', { class: 'hero-fg-image' });
+
+  // If there is no image, assume video is the foreground image
+  if (heroFgImage.children.length === 0) {
+    heroFgImage.appendChild(videoElement)
+  }
+  
   heroContent.prepend(heroContentWrapper);
   block.prepend(heroContent, heroFgImage);
 
