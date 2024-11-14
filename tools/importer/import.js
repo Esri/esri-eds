@@ -497,7 +497,7 @@ function inlineIcons(main, html) {
   const foundIcons = [];
   const notFoundIcons = [];
 
-  main.querySelectorAll('.esri-text__iconContainer > svg, .ecs__panel__icon > svg')
+  main.querySelectorAll('.esri-text__iconContainer > svg, .esri-text__iconContainer > span > svg, .ecs__panel__icon > svg')
     .forEach((icon) => {
       const path = icon.querySelector('path');
       let color = path.style.fill;
@@ -508,7 +508,6 @@ function inlineIcons(main, html) {
       icon.removeAttribute('class');
 
       let iconName = findIcon(icon);
-      // let iconName = iconNames[iconHash];
       if (!iconName) {
         const iconHash = hashCode(icon.outerHTML);
         console.error('Unknown icon hash', iconHash, icon);
@@ -591,7 +590,9 @@ function mosaicReveal(main, document) {
 }
 
 function sections(main, document) {
-  main.querySelectorAll('.aem-GridColumn').forEach((section) => {
+  console.log('processing sections', main);
+  main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn').forEach((section) => {
+    console.log('iterating gridcolumn', section);
     if (section.children.length === 1) {
       const child = section.firstElementChild;
       if (child.classList.contains('text-center')) {
@@ -603,7 +604,7 @@ function sections(main, document) {
     }
   });
 
-  main.querySelectorAll('.aem-GridColumn:not(:last-child)').forEach((section) => {
+  main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn:not(:last-child)').forEach((section) => {
     if (section.textContent.trim() === '') {
       section.remove();
     } else {
@@ -775,9 +776,7 @@ function transformers(main, document, html, pathname) {
 }
 
 export default {
-  transform: ({
-    document, html, url,
-  }) => {
+  transform: ({ document, url, html }) => {
     const { pathname } = new URL(url);
 
     report = {
