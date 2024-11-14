@@ -1,25 +1,25 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
-  createOptimizedPicture,
-} from '../../scripts/aem.js';
-import {
-  calciteButton,
-  div,
-  ul,
-  li,
-  button,
+  button, calciteButton, div, li, ul,
 } from '../../scripts/dom-helpers.js';
-import {
-  loadFragment,
-} from '../fragment/fragment.js';
+import { loadFragment } from '../fragment/fragment.js';
+
+function urlEncodeTitle(tabTitle) {
+  return tabTitle
+    .querySelector('button > div > p:last-child')
+    .textContent
+    .toLowerCase()
+    .replace(' ', '-');
+}
 
 export default async function decorate(block) {
-  block.querySelectorAll('img').forEach((img) => img
-    .closest('picture')
+  block.querySelectorAll('picture > img').forEach((img) => img
+    .parentElement
     .replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
 
-  const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+  const tabTitles = [...block.children].map((child) => child.children[0]);
   let tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
   const tabsContainFragments = tabContents.every((content) => {
@@ -113,10 +113,9 @@ export default async function decorate(block) {
   }
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
-    id: title.toLowerCase().replace(' ', '-'),
     role: 'tab',
     'aria-hidden': true,
-  }, button(...title)));
+  }, button(title)));
 
   const arrowLeft = calciteButton(
     {
@@ -140,7 +139,7 @@ export default async function decorate(block) {
     },
   );
 
-  const titleIndex = tabTitles.findIndex((el) => el.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
+  const titleIndex = tabTitles.findIndex((el) => el.textContent.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
   const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;
   let selectedIdx = window.location.hash !== '' ? realTitleIndex : 0;
 
@@ -150,7 +149,8 @@ export default async function decorate(block) {
     if (newSelectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
     arrowRight.setAttribute('aria-hidden', 'false');
 
-    titles[selectedIdx].setAttribute('aria-hidden', 'true');
+    const tabTitle = titles[selectedIdx];
+    tabTitle.setAttribute('aria-hidden', 'true');
     titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
 
     contents[selectedIdx].setAttribute('aria-hidden', 'true');
@@ -158,7 +158,7 @@ export default async function decorate(block) {
 
     selectedIdx = newSelectedIdx;
 
-    window.history.pushState(null, null, `#${titles[selectedIdx].textContent.toLowerCase().replace(' ', '-')}`);
+    window.history.pushState(null, null, `#${urlEncodeTitle(tabTitle)}`);
   });
 
   arrowRight.addEventListener('click', () => {
@@ -167,7 +167,8 @@ export default async function decorate(block) {
     if (newSelectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
     arrowLeft.setAttribute('aria-hidden', 'false');
 
-    titles[selectedIdx].setAttribute('aria-hidden', 'true');
+    const tabTitle = titles[selectedIdx];
+    tabTitle.setAttribute('aria-hidden', 'true');
     titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
 
     contents[selectedIdx].setAttribute('aria-hidden', 'true');
@@ -175,7 +176,7 @@ export default async function decorate(block) {
 
     selectedIdx = newSelectedIdx;
 
-    window.history.pushState(null, null, `#${titles[selectedIdx].textContent.toLowerCase().replace(' ', '-')}`);
+    window.history.pushState(null, null, `#${urlEncodeTitle(tabTitle)}`);
   });
 
   const tabComponent = div(
@@ -201,9 +202,10 @@ export default async function decorate(block) {
     title.addEventListener('click', (e) => {
       e.preventDefault();
 
-      if (titles[selectedIdx].hasAttribute('aria-selected')) {
-        titles[selectedIdx].setAttribute('aria-selected', 'false');
-        titles[index].setAttribute('aria-selected', 'true');
+      const tabTitle = titles[index];
+      if (tabTitle.hasAttribute('aria-selected')) {
+        tabTitle.setAttribute('aria-selected', 'false');
+        tabTitle.setAttribute('aria-selected', 'true');
       }
 
       contents[selectedIdx].setAttribute('aria-hidden', 'true');
@@ -211,7 +213,7 @@ export default async function decorate(block) {
 
       selectedIdx = index;
 
-      window.history.pushState(null, null, `#${titles[index].textContent.toLowerCase().replace(' ', '-')}`);
+      window.history.pushState(null, null, `#${urlEncodeTitle(tabTitle)}`);
     });
   });
 
