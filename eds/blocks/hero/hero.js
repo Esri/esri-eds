@@ -37,9 +37,9 @@ export default function decorate(block) {
 
   // If there is no image, assume video is the foreground image
   if (heroFgImage.children.length === 0) {
-    heroFgImage.appendChild(videoElement)
+    heroFgImage.appendChild(videoElement);
   }
-  
+
   heroContent.prepend(heroContentWrapper);
   block.prepend(heroContent, heroFgImage);
 
