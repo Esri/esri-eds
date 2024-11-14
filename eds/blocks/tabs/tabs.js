@@ -1,16 +1,8 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
-  createOptimizedPicture,
-} from '../../scripts/aem.js';
-import {
-  calciteButton,
-  div,
-  ul,
-  li,
-  button,
+  button, calciteButton, div, li, ul,
 } from '../../scripts/dom-helpers.js';
-import {
-  loadFragment,
-} from '../fragment/fragment.js';
+import { loadFragment } from '../fragment/fragment.js';
 
 function urlEncodeTitle(tabTitle) {
   return tabTitle
@@ -151,13 +143,13 @@ export default async function decorate(block) {
   const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;
   let selectedIdx = window.location.hash !== '' ? realTitleIndex : 0;
 
-  const tabTitle = titles[selectedIdx];
   arrowLeft.addEventListener('click', () => {
     const newSelectedIdx = selectedIdx - 1;
     if (newSelectedIdx < 0) return;
     if (newSelectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
     arrowRight.setAttribute('aria-hidden', 'false');
 
+    const tabTitle = titles[selectedIdx];
     tabTitle.setAttribute('aria-hidden', 'true');
     titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
 
@@ -175,6 +167,7 @@ export default async function decorate(block) {
     if (newSelectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
     arrowLeft.setAttribute('aria-hidden', 'false');
 
+    const tabTitle = titles[selectedIdx];
     tabTitle.setAttribute('aria-hidden', 'true');
     titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
 
@@ -241,7 +234,7 @@ export default async function decorate(block) {
       if (selectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
       if (selectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
 
-      tabTitle.setAttribute('aria-hidden', 'false');
+      titles[selectedIdx].setAttribute('aria-hidden', 'false');
       titles.forEach((title, index) => {
         title.removeAttribute('aria-selected');
         if (index !== selectedIdx) {
