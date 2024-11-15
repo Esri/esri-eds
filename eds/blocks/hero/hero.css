@@ -1,3 +1,7 @@
+main .hero {
+  border: 10px solid blue;
+}
+
 main .hero-container {
   padding: 0;
 }
@@ -8,8 +12,9 @@ main .hero-container {
 
 .hero {
   display: flex;
-  inline-size: 100%;
-  block-size: 100%;
+  
+  /* inline-size: 100%;
+  block-size: 100%; */
   flex-direction: row;
   position: relative;
   z-index: 1;
@@ -150,9 +155,9 @@ main .hero-container {
     flex-direction: column;
   }
  
-  .hero { 
+  /* .hero { 
     block-size: auto;
-  }
+  } */
 
   .hero.medium {
     block-size: 576px;
@@ -170,7 +175,7 @@ main .hero-container {
   }
 }
 
-@media (width <= 1479px) {
+/* @media (width <= 1479px) {
   .hero .hero-content {
     margin-inline-start: 2vw;
     align-items: flex-start;
@@ -188,9 +193,9 @@ main .hero-container {
     inline-size: 100%;
     block-size: 100%;
   }
-}
+} */
 
-@media (width <= 1024px) {
+/* @media (width <= 1024px) {
   .hero {
     flex-direction: column;
   }
@@ -219,4 +224,4 @@ main .hero-container {
   .hero .foreground-img > picture {
     inline-size: 100%;
   }
-}
+} */
