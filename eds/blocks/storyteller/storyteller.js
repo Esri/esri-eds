@@ -132,6 +132,43 @@ function decorateLinkBtn(block) {
   });
 }
 
+function decorateIcons(block) {
+  const iconWrapper = document.createElement('div');
+  iconWrapper.classList.add('icon-wrapper');
+
+  block.querySelectorAll('picture').forEach((picture, indx) => {
+    picture.classList.add('icon-picture');
+    let iconHTML = picture.closest('p').innerHTML;
+    if (indx === 0) {
+      let iconParentWrapper = picture.closest('p').parentNode;
+      iconParentWrapper.insertBefore(iconWrapper, iconParentWrapper.lastElementChild);
+    }
+    if (picture.classList.contains('hide-poster')) {
+      picture.classList.remove('hide-poster');
+    }
+    if (/<\/picture>[a-z|A-Z]+/.test(picture.closest('p').innerHTML)) {
+      let iconTitle = iconHTML.match(/<\/picture>\s*([a-z|A-Z| ]+)/);
+      let storytellerGroup = document.createElement('div');
+      let storytellerTitle = document.createElement('div');
+      let storytellerContent = document.createElement('div');
+      let imgPicture = picture.querySelector('img');
+      picture.closest('p').classList.add('hidden');
+      imgPicture.classList.add('icon-48');
+      storytellerGroup.classList.add('storyteller-row');
+      storytellerContent.classList.add('storyteller-content');
+      storytellerTitle.innerHTML = iconTitle[1];
+      let iconParagraph = picture.closest('p').nextElementSibling;
+      iconParagraph.classList.add('icon-paragraph');
+      storytellerTitle.classList.add('icon-title');
+      storytellerGroup.appendChild(picture);
+      storytellerContent.append(storytellerTitle);
+      storytellerContent.append(iconParagraph);
+      storytellerGroup.appendChild(storytellerContent);
+      iconWrapper.appendChild(storytellerGroup);
+    }
+  });
+}
+
 export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
@@ -206,4 +243,5 @@ export default async function decorate(block) {
   });
 
   decorateLinkBtn(block);
+  decorateIcons(block);
 }
