@@ -89,6 +89,7 @@ async function setVideoTag(foregroundSrc) {
   const videoTag = document.createElement('video');
   videoTag.muted = true;
   videoTag.toggleAttribute('autoplay', 'true');
+  videoTag.toggleAttribute('loop', true);
   videoTag.toggleAttribute('playsinline', true);
   videoTag.setAttribute('type', 'video/mp4');
   videoTag.setAttribute('poster', foregroundSrc);
