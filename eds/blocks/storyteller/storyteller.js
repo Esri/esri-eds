@@ -138,28 +138,30 @@ function decorateIcons(block) {
 
   block.querySelectorAll('picture').forEach((picture, indx) => {
     picture.classList.add('icon-picture');
-    let iconHTML = picture.closest('p').innerHTML;
+    const iconHTML = picture.closest('p').innerHTML;
     if (indx === 0) {
-      let iconParentWrapper = picture.closest('p').parentNode;
+      const iconParentWrapper = picture.closest('p').parentNode;
       iconParentWrapper.insertBefore(iconWrapper, iconParentWrapper.lastElementChild);
     }
     if (picture.classList.contains('hide-poster')) {
       picture.classList.remove('hide-poster');
     }
     if (/<\/picture>[a-z|A-Z]+/.test(picture.closest('p').innerHTML)) {
-      let iconTitle = iconHTML.match(/<\/picture>\s*([a-z|A-Z| ]+)/);
-      let storytellerGroup = document.createElement('div');
-      let storytellerTitle = document.createElement('div');
-      let storytellerContent = document.createElement('div');
-      let imgPicture = picture.querySelector('img');
+      const iconTitle = iconHTML.match(/<\/picture>\s*([a-z|A-Z| ]+)/);
+      const storytellerGroup = document.createElement('div');
+      const storytellerTitle = document.createElement('div');
+      const storytellerContent = document.createElement('div');
+      const imgPicture = picture.querySelector('img');
+      const iconParagraph = picture.closest('p').nextElementSibling;
+    
       picture.closest('p').classList.add('hidden');
       imgPicture.classList.add('icon-48');
       storytellerGroup.classList.add('storyteller-row');
       storytellerContent.classList.add('storyteller-content');
       storytellerTitle.innerHTML = iconTitle[1];
-      let iconParagraph = picture.closest('p').nextElementSibling;
       iconParagraph.classList.add('icon-paragraph');
       storytellerTitle.classList.add('icon-title');
+    
       storytellerGroup.appendChild(picture);
       storytellerContent.append(storytellerTitle);
       storytellerContent.append(iconParagraph);
