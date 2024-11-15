@@ -152,8 +152,7 @@ function decorateIcons(block) {
       const storytellerTitle = document.createElement('div');
       const storytellerContent = document.createElement('div');
       const imgPicture = picture.querySelector('img');
-      const iconParagraph = picture.closest('p').nextElementSibling;
-    
+      const iconParagraph = picture.closest('p').nextElementSibling;    
       picture.closest('p').classList.add('hidden');
       imgPicture.classList.add('icon-48');
       storytellerGroup.classList.add('storyteller-row');
@@ -161,7 +160,6 @@ function decorateIcons(block) {
       storytellerTitle.innerHTML = iconTitle[1];
       iconParagraph.classList.add('icon-paragraph');
       storytellerTitle.classList.add('icon-title');
-    
       storytellerGroup.appendChild(picture);
       storytellerContent.append(storytellerTitle);
       storytellerContent.append(iconParagraph);
