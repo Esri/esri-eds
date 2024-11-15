@@ -214,11 +214,7 @@ export default async function decorate(block) {
       const foregroundWrapper = block.querySelector('.foreground-container');
       foregroundContentContainer.classList.add('foreground-content');
       foregroundContent.appendChild(h2Tags[1]);
-      if (pTags.length > 5) {
-        foregroundContent.appendChild(pTags[pTags.length - 1]);
-      } else {
-        foregroundContent.appendChild(pTags[4]);
-      }
+      foregroundContent.appendChild(pTags[pTags.length - 1]);
       foregroundContentContainer.appendChild(foregroundContent);
       foregroundWrapper.appendChild(foregroundContentContainer);
     }
