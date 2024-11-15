@@ -153,11 +153,12 @@ function decorateIcons(block) {
       const storytellerContent = document.createElement('div');
       const imgPicture = picture.querySelector('img');
       const iconParagraph = picture.closest('p').nextElementSibling;
+      const [, secondTitle] = iconTitle;
       picture.closest('p').classList.add('hidden');
       imgPicture.classList.add('icon-48');
       storytellerGroup.classList.add('storyteller-row');
       storytellerContent.classList.add('storyteller-content');
-      storytellerTitle.innerHTML = iconTitle[1];
+      storytellerTitle.innerHTML = secondTitle;
       iconParagraph.classList.add('icon-paragraph');
       storytellerTitle.classList.add('icon-title');
       storytellerGroup.appendChild(picture);
