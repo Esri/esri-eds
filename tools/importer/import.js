@@ -392,7 +392,8 @@ function cards(main, document) {
     });
 }
 
-function callToAction(main, document) {
+function callToAction(main, document, pathname) {
+
   main.querySelectorAll('.cta-questions')
     .forEach((container) => {
       const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container');
@@ -403,7 +404,24 @@ function callToAction(main, document) {
         }
         createBlock(primaryDblContainer, document, 'Call to action', [[children[0], children[2]]]);
       } else {
-        createBlock(container, document, 'Call to action', [[container.firstElementChild]]);
+        const hasEmbeddedBlock = container.querySelector('table');
+        if (hasEmbeddedBlock) {
+          const fragmentPathname = `${pathname}/call-to-action`;
+
+          const link = document.createElement('a');
+          const url = edsUrl + fragmentPathname;
+          link.setAttribute('href', url);
+          link.textContent = url;
+          const wrapper = document.createElement('div');
+          wrapper.append(...container.children);
+          container.replaceChildren(link);
+
+          fragmentPages.push({
+            element: wrapper,
+            path: fragmentPathname,
+          });
+        }
+        createBlock(container, document, 'Call to action', [...container.children].map((child) => [child]));
       }
     });
 }
@@ -762,7 +780,7 @@ function transformers(main, document, html, pathname) {
   switchers(main, document);
   mediaGallery(main, document);
   cards(main, document);
-  callToAction(main, document);
+  callToAction(main, document, pathname);
   elasticContentStrip(main, document);
   map(main, document, pathname);
   quote(main, document);
