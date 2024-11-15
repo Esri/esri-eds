@@ -141,14 +141,20 @@ function hero(main, document) {
   const backgroundImage = heroInner.querySelector('picture.hbg-container--large--backgroundImage');
 
   const videoContainer = heroInner.querySelector('.video-container');
-  if (videoContainer) {
-    heroInner.append(videoContainer);
-    backgroundImage.remove();
-  } else if (backgroundImage) {
-    heroInner.append(backgroundImage);
-  }
+  videoContainer.querySelector('img').remove();
 
-  createBlock(heroContainer, document, 'hero', [[heroInner]]);
+  const heroParts = {
+    content: heroInner.querySelector('.hbg-container--large--left'),
+    image: heroInner.querySelector('.hbg-container--large--right'),
+    video: videoContainer,
+    backgroundImage,
+  };
+
+  const cells = Object.entries(heroParts).map(([key, value]) => {
+    return [[key], [value]];
+  });
+
+  createBlock(heroContainer, document, 'hero', cells);
 }
 
 function videos(main, document) {
