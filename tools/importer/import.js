@@ -530,7 +530,10 @@ function inlineIcons(main, html) {
         const iconHash = hashCode(icon.outerHTML);
         console.error('Unknown icon hash', iconHash, icon);
         iconName = `pending-${iconHash}`;
-        notFoundIcons.push(color);
+        notFoundIcons.push({
+          name: iconName,
+          icon: icon.outerHTML,
+        });
       } else {
         foundIcons.push({
           name: iconName,
@@ -540,10 +543,10 @@ function inlineIcons(main, html) {
       icon.outerHTML = `:${iconName}:`;
     });
 
-  return {
-    foundIcons,
-    notFoundIcons,
-  };
+  report.amountFoundIcons = foundIcons.length;
+  report.foundIcons = foundIcons;
+  report.amountNofFoundIcons = notFoundIcons.length;
+  report.notFoundIcons = notFoundIcons;
 }
 
 function quote(main, document) {
@@ -766,7 +769,7 @@ function largeContentStack(main, document) {
 }
 
 function transformers(main, document, html, pathname) {
-  report.icons = inlineIcons(main, html);
+  inlineIcons(main, html);
 
   newsletter(main, document);
   createMetadata(main, document, pathname, html);
