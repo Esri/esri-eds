@@ -42,6 +42,8 @@ main .hero-container {
 .hero video {
   position: absolute;
   z-index: -2;
+  inset: 0;
+  block-size: 100%;
 }
 
 .hero .hero-background {
@@ -72,12 +74,14 @@ main .hero-container {
   inline-size: 90vw;
 }
 
-.hero .hero-image img {
+.hero .hero-image :is(img, video) {
   inline-size: 100%;
   block-size: 100%;
+  padding-inline-end: 2vw;
   object-fit: cover;
   object-position: center;
   aspect-ratio: 1 / 1;
+  position: initial;
 }
 
 .hero .hero-content picture img {
@@ -90,10 +94,6 @@ main .hero-container {
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
-
-/* .hero video {
-  display: none;
-} */
 
 @media (width >= 1024px) {
   .hero {
@@ -110,96 +110,4 @@ main .hero-container {
     inline-size: 50%;
     max-inline-size: 700px;
   }
-
-
-  /* .hero video {
-    display: block;
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    z-index: -1;
-  } */
-
-  /* .hero .hero-fg-image video {
-    position: initial;
-  } */
-  
-  /* .hero > div > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  } */
- 
-  /* .hero { 
-    block-size: auto;
-  } */
-
-  /* .hero.medium {
-    block-size: 576px;
-    min-block-size: 28vw;
-  }
-
-  .hero.small {
-    block-size: 360px;
-    min-block-size: 21vw;
-  }
-
-  .hero.xsmall {
-    block-size: auto;
-    min-block-size: 170px;
-  } */
 }
-
-/* @media (width <= 1479px) {
-  .hero .hero-content {
-    margin-inline-start: 2vw;
-    align-items: flex-start;
-  }
-
-  .hero .hero-content .hero-content-wrapper {
-    inline-size: 90%;
-  }
-
-  .hero .hero-content .hero-content-wrapper > * {
-    inline-size: 98%;
-  }
-
-  .hero .hero-fg-image .foreground-img {
-    inline-size: 100%;
-    block-size: 100%;
-  }
-} */
-
-/* @media (width <= 1024px) {
-  .hero {
-    flex-direction: column;
-  }
-
-  .hero .hero-content .hero-content-wrapper {
-    inline-size: 100%;
-    padding: var(--space-16) 0;
-  }
-
-  .hero .hero-content .hero-content-wrapper > * {
-    inline-size: 90%;
-  }
-
-  .hero > div.hero-content {
-    inline-size: 90vw;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 0 auto;
-  }
-
-  .hero > div.hero-fg-image {
-    inline-size: 100vw;
-  }
-
-  .hero .foreground-img > picture {
-    inline-size: 100%;
-  }
-} */

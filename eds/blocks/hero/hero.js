@@ -1,5 +1,3 @@
-import { domEl } from '../../scripts/dom-helpers.js';
-
 export default function decorate(block) {
   // Find all children of the block
   const blockChildren = [...block.children];
@@ -58,15 +56,12 @@ secondChildren.forEach((child) => {
   videoSrc.setAttribute('type', 'video/mp4');
 
   if (videoElement) videoElement.append(videoSrc);
-  if (videoAssets) block.append(videoElement);
-
-  const heroImage = block.querySelector('.hero-image');
-  const heroVideo = block.querySelector('.hero-video');
-  if (heroVideo && heroVideo.children.length === 1) {
+  if (videoAssets) {
+    const heroImage = block.querySelector('.hero-image');
     if (heroImage && heroImage.children.length === 0) {
-      heroImage.append(heroVideo.children[0]);
+      heroImage.append(videoElement);
+    } else {
+      block.append(videoElement);
     }
-  } else {
-    console.log('video and image');
   }
 }
