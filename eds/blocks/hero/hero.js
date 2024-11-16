@@ -3,22 +3,25 @@ export default function decorate(block) {
   const blockChildren = [...block.children];
 
   // Iterate over each child of the block
+  // Remove the first child
+  // Return the second child
   const secondChildren = blockChildren.map((child) => {
-    // Remove the first child
     if (child.children.length > 0) {
       child.removeChild(child.children[0]);
     }
-    // Return the second child
     return child.children[0];
   });
-// Remove the outer <div> for each secondChildren
-secondChildren.forEach((child) => {
-  if (child) {
-    const parentDiv = child.parentElement;
-    parentDiv.replaceWith(child);
-  }
-});
-  // For each secondChildren, set the first to banner-content, the second to banner-image, third to banner-video, last to banner-background
+
+  secondChildren.forEach((child) => {
+    if (child) {
+      const parentDiv = child.parentElement;
+      parentDiv.replaceWith(child);
+    }
+  });
+
+  // For each secondChildren, set the first to hero-content,
+  // the second to hero-image, third to hero-video,
+  // last to hero-background
   secondChildren.forEach((child, i) => {
     if (child) {
       if (i === 0) {
@@ -37,7 +40,7 @@ secondChildren.forEach((child) => {
   imgCollection.forEach((img) => {
     img.setAttribute('loading', 'eager');
   });
-  
+
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
   const videoAssets = block.querySelectorAll('a');
