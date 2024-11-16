@@ -132,6 +132,44 @@ function decorateLinkBtn(block) {
   });
 }
 
+function decorateIcons(block) {
+  const iconWrapper = document.createElement('div');
+  iconWrapper.classList.add('icon-wrapper');
+
+  block.querySelectorAll('picture').forEach((picture, indx) => {
+    picture.classList.add('icon-picture');
+    const iconHTML = picture.closest('p').innerHTML;
+    if (indx === 0) {
+      const iconParentWrapper = picture.closest('p').parentNode;
+      iconParentWrapper.insertBefore(iconWrapper, iconParentWrapper.lastElementChild);
+    }
+    if (picture.classList.contains('hide-poster')) {
+      picture.classList.remove('hide-poster');
+    }
+    if (/<\/picture>[a-z|A-Z]+/.test(picture.closest('p').innerHTML)) {
+      const iconTitle = iconHTML.match(/<\/picture>\s*([a-z|A-Z| ]+)/);
+      const storytellerGroup = document.createElement('div');
+      const storytellerTitle = document.createElement('div');
+      const storytellerContent = document.createElement('div');
+      const imgPicture = picture.querySelector('img');
+      const iconParagraph = picture.closest('p').nextElementSibling;
+      const [, secondTitle] = iconTitle;
+      picture.closest('p').classList.add('hidden');
+      imgPicture.classList.add('icon-48');
+      storytellerGroup.classList.add('storyteller-row');
+      storytellerContent.classList.add('storyteller-content');
+      storytellerTitle.innerHTML = secondTitle;
+      iconParagraph.classList.add('icon-paragraph');
+      storytellerTitle.classList.add('icon-title');
+      storytellerGroup.appendChild(picture);
+      storytellerContent.append(storytellerTitle);
+      storytellerContent.append(iconParagraph);
+      storytellerGroup.appendChild(storytellerContent);
+      iconWrapper.appendChild(storytellerGroup);
+    }
+  });
+}
+
 export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
@@ -175,11 +213,7 @@ export default async function decorate(block) {
       const foregroundWrapper = block.querySelector('.foreground-container');
       foregroundContentContainer.classList.add('foreground-content');
       foregroundContent.appendChild(h2Tags[1]);
-      if (pTags.length > 5) {
-        foregroundContent.appendChild(pTags[pTags.length - 1]);
-      } else {
-        foregroundContent.appendChild(pTags[4]);
-      }
+      foregroundContent.appendChild(pTags[pTags.length - 1]);
       foregroundContentContainer.appendChild(foregroundContent);
       foregroundWrapper.appendChild(foregroundContentContainer);
     }
@@ -206,4 +240,5 @@ export default async function decorate(block) {
   });
 
   decorateLinkBtn(block);
+  decorateIcons(block);
 }
