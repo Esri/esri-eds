@@ -35,13 +35,10 @@ secondChildren.forEach((child) => {
     }
   });
 
-  // const imgCollection = block.querySelectorAll('picture > img');
-  // imgCollection.forEach((img, i) => {
-  //   img.setAttribute('loading', 'eager');
-  //   if (i === 0) {
-  //     img.closest('p').classList.add('foreground-img');
-  //   }
-  // });
+  const imgCollection = block.querySelectorAll('picture > img');
+  imgCollection.forEach((img) => {
+    img.setAttribute('loading', 'eager');
+  });
   
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
@@ -63,23 +60,13 @@ secondChildren.forEach((child) => {
   if (videoElement) videoElement.append(videoSrc);
   if (videoAssets) block.append(videoElement);
 
-  //const contentDiv = block.querySelector('div.banner-content');
-  //const contentChildDiv = contentDiv.querySelector('div');
-  //const children = [...contentChildDiv.children];
-
-  //const heroContent = domEl('div', { class: 'hero-content' });
-  //const heroContentWrapper = domEl('div', { class: 'hero-content-wrapper' });
-  //const heroFgImage = domEl('div', { class: 'hero-fg-image' });
-
-  //heroContent.prepend(heroContentWrapper);
-  //block.prepend(heroContent, heroFgImage);
-
-  // children.forEach((child) => {
-  //   if (!child.classList.contains('foreground-img')) {
-  //     heroContentWrapper.appendChild(child); // Move each child to left container except fg image
-  //   } else {
-  //     heroFgImage.appendChild(child); // Move .foreground-img to right container
-  //   }
-  // });
-  //contentDiv.remove(); // Remove the empty div
+  const heroImage = block.querySelector('.hero-image');
+  const heroVideo = block.querySelector('.hero-video');
+  if (heroVideo && heroVideo.children.length === 1) {
+    if (heroImage && heroImage.children.length === 0) {
+      heroImage.append(heroVideo.children[0]);
+    }
+  } else {
+    console.log('video and image');
+  }
 }

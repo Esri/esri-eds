@@ -6,6 +6,10 @@ main .hero-container {
   overflow: hidden;
 }
 
+.hero-video {
+  display: none;
+}
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -35,7 +39,12 @@ main .hero-container {
   margin-block-start: var(--space-8);
 }
 
-.hero-background {
+.hero video {
+  position: absolute;
+  z-index: -2;
+}
+
+.hero .hero-background {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -50,9 +59,6 @@ main .hero-container {
   block-size: 100%;
 }
 
-.hero-video, video {
-  display: none !important;
-}
 
 .hero.medium h1 {
   font-size: var(--font-7);
@@ -74,10 +80,6 @@ main .hero-container {
   aspect-ratio: 1 / 1;
 }
 
-.hero .hero-content {
-
-}
-
 .hero .hero-content picture img {
   inline-size: 100%;
   block-size: 100%;
@@ -89,10 +91,9 @@ main .hero-container {
   aspect-ratio: 1 / 1;
 }
 
-.hero video {
+/* .hero video {
   display: none;
-}
-
+} */
 
 @media (width >= 1024px) {
   .hero {
