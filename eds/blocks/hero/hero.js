@@ -44,7 +44,7 @@ secondChildren.forEach((child) => {
   videoElement.toggleAttribute('loop', true);
   videoElement.toggleAttribute('playsinline', true);
   videoElement.toggleAttribute('autoplay', true);
-  if ((videoAssets !== null) && (videoAssets !== undefined) && (videoAssets.length > 0)) {
+  if (videoAssets && videoAssets.length > 0) {
     if (videoAssets.length === 2) {
       videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
       videoAssets[1].classList.add('hidden');
@@ -56,7 +56,7 @@ secondChildren.forEach((child) => {
   videoSrc.setAttribute('type', 'video/mp4');
 
   if (videoElement) videoElement.append(videoSrc);
-  if (videoAssets) {
+  if (videoElement && videoAssets.length > 0) {
     const heroImage = block.querySelector('.hero-image');
     if (heroImage && heroImage.children.length === 0) {
       heroImage.append(videoElement);
