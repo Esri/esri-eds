@@ -2,38 +2,16 @@ export default function decorate(block) {
   // Find all children of the block
   const blockChildren = [...block.children];
 
-  // Iterate over each child of the block
-  // Remove the first child
-  // Return the second child
-  const secondChildren = blockChildren.map((child) => {
-    if (child.children.length > 0) {
-      child.removeChild(child.children[0]);
-    }
-    return child.children[0];
-  });
-
-  secondChildren.forEach((child) => {
-    if (child) {
-      const parentDiv = child.parentElement;
-      parentDiv.replaceWith(child);
-    }
-  });
-
-  // For each secondChildren, set the first to hero-content,
-  // the second to hero-image, third to hero-video,
-  // last to hero-background
-  secondChildren.forEach((child, i) => {
-    if (child) {
-      if (i === 0) {
-        child.classList.add('hero-content');
-      } else if (i === 1) {
-        child.classList.add('hero-image');
-      } else if (i === 2) {
-        child.classList.add('hero-video');
-      } else {
-        child.classList.add('hero-background');
-      }
-    }
+  // for each blockChildren, find children
+  blockChildren.forEach((child) => {
+    const contentBlocks = [...child.children];
+    // get first child, use as class for second, remove it
+    const blockClass = contentBlocks[0].textContent.toLowerCase();
+    child.removeChild(contentBlocks[0]);
+  
+    // add blockClass to the second child, remove parent
+    contentBlocks[1].classList.add(blockClass);
+    child.replaceWith(contentBlocks[1]);
   });
 
   const imgCollection = block.querySelectorAll('picture > img');
@@ -44,6 +22,7 @@ export default function decorate(block) {
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
   const videoAssets = block.querySelectorAll('a');
+  console.log('videoAssets', videoAssets);
   videoElement.toggleAttribute('loop', true);
   videoElement.toggleAttribute('playsinline', true);
   videoElement.toggleAttribute('autoplay', true);
@@ -59,8 +38,11 @@ export default function decorate(block) {
   videoSrc.setAttribute('type', 'video/mp4');
 
   if (videoElement) videoElement.append(videoSrc);
-  if (videoElement && videoAssets.length > 0) {
-    const heroImage = block.querySelector('.hero-image');
+
+  // If there is no hero image, but there is a video
+  // Move video into hero block
+  if (videoElement) {
+    const heroImage = block.querySelector('.image');
     if (heroImage && heroImage.children.length === 0) {
       heroImage.append(videoElement);
     } else {

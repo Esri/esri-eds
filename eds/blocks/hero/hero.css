@@ -6,7 +6,7 @@ main .hero-container {
   overflow: hidden;
 }
 
-.hero-video {
+.video {
   display: none;
 }
 
@@ -19,7 +19,7 @@ main .hero-container {
   align-items: center;
 }
 
-.hero .hero-content {
+.hero .content {
   inline-size: 90vw;
   padding-block: var(--space-16);
 }
@@ -46,7 +46,7 @@ main .hero-container {
   block-size: 100%;
 }
 
-.hero .hero-background {
+.hero .backgroundimage {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -56,7 +56,7 @@ main .hero-container {
   z-index: -3;
 }
 
-.hero-background img {
+.hero .backgroundimage img {
   inline-size: 100%;
   block-size: 100%;
 }
@@ -74,7 +74,7 @@ main .hero-container {
   inline-size: 90vw;
 }
 
-.hero .hero-image :is(img, video) {
+.hero .image :is(img, video) {
   inline-size: 100%;
   block-size: 100%;
   padding-inline-end: 2vw;
@@ -84,7 +84,7 @@ main .hero-container {
   position: initial;
 }
 
-.hero .hero-content picture img {
+.hero .content picture img {
   inline-size: 100%;
   block-size: 100%;
   position: absolute;
@@ -102,11 +102,11 @@ main .hero-container {
     align-items: center;
   }
 
-  .hero .hero-content {
+  .hero .content {
     padding-inline-start: 2vw;
   }
 
-  .hero :is(.hero-image, .hero-content) {
+  .hero :is(.image, .content) {
     inline-size: 50%;
     max-inline-size: 700px;
   }
