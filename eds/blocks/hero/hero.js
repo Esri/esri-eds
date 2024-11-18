@@ -8,7 +8,7 @@ export default function decorate(block) {
     // get first child, use as class for second, remove it
     const blockClass = contentBlocks[0].textContent.toLowerCase();
     child.removeChild(contentBlocks[0]);
-  
+
     // add blockClass to the second child, remove parent
     contentBlocks[1].classList.add(blockClass);
     child.replaceWith(contentBlocks[1]);
@@ -22,7 +22,6 @@ export default function decorate(block) {
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
   const videoAssets = block.querySelectorAll('a');
-  console.log('videoAssets', videoAssets);
   videoElement.toggleAttribute('loop', true);
   videoElement.toggleAttribute('playsinline', true);
   videoElement.toggleAttribute('autoplay', true);
