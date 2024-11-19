@@ -315,6 +315,11 @@ main {
 
   /* sections */
 
+  .default-content-wrapper {
+    max-inline-size: 1440px;
+    padding-inline: var(--space-6);
+  }
+
   .section:where(.center, .centered) > .default-content-wrapper {
     text-align: center;
   }
@@ -386,6 +391,12 @@ main {
       .video-iframe-wrapper {
         inline-size: 65%;
       }
+    }
+  }
+
+  @media (width >= 1488px) {
+    .default-content-wrapper {
+      padding-inline: 0;
     }
   }
 
