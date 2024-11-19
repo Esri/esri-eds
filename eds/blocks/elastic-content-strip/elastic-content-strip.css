@@ -35,10 +35,6 @@
     inline-size: 48px;
   }
 
-  img {
-    filter: var(--image-white-filter);
-  }
-
   > div {
     text-align: center;
     flex: 1 0 100%;
