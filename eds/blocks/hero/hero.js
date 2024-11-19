@@ -1,19 +1,31 @@
-import { domEl } from '../../scripts/dom-helpers.js';
-
 export default function decorate(block) {
-  block.querySelectorAll('picture > img').forEach((img, i) => {
-    img.setAttribute('loading', 'eager');
-    if (i === 0) {
-      img.closest('p').classList.add('foreground-img');
-    }
+  // Find all children of the block
+  const blockChildren = [...block.children];
+
+  // for each blockChildren, find children
+  blockChildren.forEach((child) => {
+    const contentBlocks = [...child.children];
+    // get first child, use as class for second, remove it
+    const blockClass = contentBlocks[0].textContent.toLowerCase();
+    child.removeChild(contentBlocks[0]);
+
+    // add blockClass to the second child, remove parent
+    contentBlocks[1].classList.add(blockClass);
+    child.replaceWith(contentBlocks[1]);
   });
+
+  const imgCollection = block.querySelectorAll('picture > img');
+  imgCollection.forEach((img) => {
+    img.setAttribute('loading', 'eager');
+  });
+
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
   const videoAssets = block.querySelectorAll('a');
   videoElement.toggleAttribute('loop', true);
   videoElement.toggleAttribute('playsinline', true);
   videoElement.toggleAttribute('autoplay', true);
-  if ((videoAssets !== null) && (videoAssets !== undefined) && (videoAssets.length > 0)) {
+  if (videoAssets && videoAssets.length > 0) {
     if (videoAssets.length === 2) {
       videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
       videoAssets[1].classList.add('hidden');
@@ -25,30 +37,15 @@ export default function decorate(block) {
   videoSrc.setAttribute('type', 'video/mp4');
 
   if (videoElement) videoElement.append(videoSrc);
-  // if (videoAssets) block.prepend(videoElement);
 
-  const contentDiv = block.querySelector('div:last-child');
-  const contentChildDiv = contentDiv.querySelector('div');
-  const children = [...contentChildDiv.children];
-
-  const heroContent = domEl('div', { class: 'hero-content' });
-  const heroContentWrapper = domEl('div', { class: 'hero-content-wrapper' });
-  const heroFgImage = domEl('div', { class: 'hero-fg-image' });
-
-  // If there is no image, assume video is the foreground image
-  if (heroFgImage.children.length === 0) {
-    heroFgImage.appendChild(videoElement);
-  }
-
-  heroContent.prepend(heroContentWrapper);
-  block.prepend(heroContent, heroFgImage);
-
-  children.forEach((child) => {
-    if (!child.classList.contains('foreground-img')) {
-      heroContentWrapper.appendChild(child); // Move each child to left container except fg image
+  // If there is no hero image, but there is a video
+  // Move video into hero block
+  if (videoElement) {
+    const heroImage = block.querySelector('.image');
+    if (heroImage && heroImage.children.length === 0) {
+      heroImage.append(videoElement);
     } else {
-      heroFgImage.appendChild(child); // Move .foreground-img to right container
+      block.append(videoElement);
     }
-  });
-  contentDiv.remove(); // Remove the empty div
+  }
 }
