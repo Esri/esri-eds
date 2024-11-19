@@ -1,21 +1,31 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
-function convertToCalciteButton(button) {
+/**
+ * Decorates a Calcite button with the appropriate icon based on its class.
+ *
+ * This method checks if the given button has the 'video-link' class.
+ * If it does, it sets the 'icon-end' attribute to 'play-f'.
+ * Otherwise, it sets the 'icon-end' attribute to 'arrowRight'.
+ *
+ * @param {HTMLElement} button - The button element to be decorated.
+ * @return {void}
+ */
+function decorateCalciteButton(button) {
   if (!button) return;
   const isVideo = button.classList.contains('video-link');
-  button.replaceChildren(calciteButton({
-    'icon-end': (isVideo) ? 'play-f' : 'arrowRight',
-    href: button.href,
-    appearance: 'outline',
-    alignment: 'center',
-    scale: 'm',
-    type: 'button',
-    width: 'auto',
-    kind: 'inverse',
-  }, button.textContent));
-  button.classList.remove('button');
+  button.setAttribute('icon-end', isVideo ? 'play-f' : 'arrowRight');
 }
 
+/**
+ * Generates and returns a video interaction element based on the provided video anchor.
+ *
+ * @param {HTMLElement} videoAnchor - The anchor element that links to the video.
+ *                                    It should contain the href attribute with the video URL.
+ *
+ * @return {HTMLElement} The video interaction element.
+ *                       If the videoAnchor is not provided or lacks an href attribute, an empty
+ *   div is returned. Otherwise, a div containing a customized 'Play' button is returned.
+ */
 function getVideoInteractionElement(videoAnchor) {
   if (!videoAnchor || !videoAnchor.href) {
     // variant without video
@@ -41,6 +51,16 @@ function getVideoInteractionElement(videoAnchor) {
   return div(videoAnchor);
 }
 
+/**
+ * Decorates a block element by modifying its content based on specific rules:
+ * - Extracts and processes a video link.
+ * - Enhances a Calcite button.
+ * - Adjusts the background image based on the presence and number of images.
+ *
+ * @param {HTMLElement} block - The block element to be decorated.
+ *
+ * @return {void}
+ */
 export default function decorate(block) {
   const mainCell = block.querySelector(':scope > div > div');
 
@@ -51,8 +71,9 @@ export default function decorate(block) {
     videoElement = getVideoInteractionElement(videoAnchor);
   }
 
-  const button = block.querySelector('a');
-  convertToCalciteButton(button);
+  // Decorate the Calcite button with the appropriate icon
+  const button = block.querySelector('calcite-button');
+  decorateCalciteButton(button);
 
   // TODO background picture quality is low, fix it
   // If one image, use as foreground image
