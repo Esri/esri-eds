@@ -26,6 +26,7 @@ export default function decorate(block) {
         loop: true,
         playsinline: true,
         autoplay: true,
+        muted: true,
         type: 'video/mp4',
         src: videoAsset.getAttribute('title'),
       },
