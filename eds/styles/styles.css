@@ -407,3 +407,8 @@ main {
     background-color: var(--calcite-ui-foreground-2);
   }
 }
+
+/* dark mode for icons */
+.calcite-mode-dark .icon img {
+  filter: var(--image-white-filter);
+ }
