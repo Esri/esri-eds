@@ -1,55 +1,42 @@
-.columns {
-  & > div {
-    display: flex;
-    flex-direction: column;
+.columns > div {
+  display: flex;
+  flex-direction: column;
+}
 
-    & > div {
-      order: 1;
+.columns > div > div:last-child {
+  padding-block-end: 32px;
+}
 
-      &:last-child {
-        padding-block-end: 32px;
-      }
+.columns > div > div:last-child > * {
+  padding-inline: 6.7%;
+}
 
-      &:last-child > * {
-        padding-inline: 6.7%;
-      }
-    }
+.columns > div > .columns-img-col {
+  display: block;
+  block-size: 100%;
+}
 
-    & > .columns-img-col {
-      order: 2;
-      display: block;
-      block-size: 100%;
+.columns > div > .columns-img-col img {
+  display: block;
+  block-size: 100%;
+  object-fit: cover;
+}
 
-      @media (width >= 900px) {
-        order: 0;
-      }
+.columns.calcite-mode-gray {
+  background-color: var(--calcite-ui-foreground-2);
+}
 
-      & img {
-        display: block;
-        block-size: 100%;
-        object-fit: cover;
-      }
-    }
+@media (width >= 900px) {
+  .columns > div {
+    align-items: center;
+    flex-direction: row;
   }
 
-  & img {
-    inline-size: 100%;
+  .columns:not(.media-split) > div {
+    block-size: 600px;
   }
 
-  &.calcite-mode-gray {
-    background-color: var(--calcite-ui-foreground-2);
-  }
-
-  @media (width >= 900px) {
-    & > div {
-      align-items: center;
-      flex-direction: unset;
-      block-size: 600px;
-
-      & > div {
-        flex: 1;
-        order: unset;
-      }
-    }
+  .columns > div > div {
+    flex: 1;
   }
 }
