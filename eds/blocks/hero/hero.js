@@ -31,7 +31,7 @@ export default function decorate(block) {
       },
     );
 
-    videoAsset.remove();
+    videoAsset.classList.add('hidden');
 
     const heroImage = block.querySelector('.image');
     if (heroImage && heroImage.children.length === 0) {
