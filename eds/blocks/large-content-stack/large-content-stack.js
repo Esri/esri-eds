@@ -1,7 +1,7 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
 /**
- * Decorates a Calcite button with the appropriate icon based on its class.
+ * Decorates a Calcite button with the appropriate icon and kind based on its class.
  *
  * This method checks if the given button has the 'video-link' class.
  * If it does, it sets the 'icon-end' attribute to 'play-f'.
@@ -14,6 +14,7 @@ function decorateCalciteButton(button) {
   if (!button) return;
   const isVideo = button.classList.contains('video-link');
   button.setAttribute('icon-end', isVideo ? 'play-f' : 'arrowRight');
+  button.setAttribute('kind', 'inverse');
 }
 
 /**
@@ -71,7 +72,7 @@ export default function decorate(block) {
     videoElement = getVideoInteractionElement(videoAnchor);
   }
 
-  // Decorate the Calcite button with the appropriate icon
+  // Decorate the Calcite button with the appropriate icon and kind
   const button = block.querySelector('calcite-button');
   decorateCalciteButton(button);
 
