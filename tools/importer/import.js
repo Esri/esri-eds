@@ -620,14 +620,23 @@ function mosaicReveal(main, document) {
 
 function sections(main, document) {
   main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn').forEach((section) => {
+    const sectionStyles = [];
     if (section.children.length === 1) {
       const child = section.firstElementChild;
       if (child.classList.contains('text-center')) {
-        section.append(WebImporter.Blocks.createBlock(document, {
-          name: 'Section Metadata',
-          cells: { Style: ['centered'] },
-        }));
+        sectionStyles.push('centered');
       }
+    }
+
+    if (section.classList.contains('centered-text')) {
+      sectionStyles.push('centered-text');
+    }
+
+    if (sectionStyles.length >= 0) {
+      section.append(WebImporter.Blocks.createBlock(document, {
+        name: 'Section Metadata',
+        cells: { Style: sectionStyles },
+      }));
     }
   });
 
