@@ -407,3 +407,8 @@ main {
     background-color: var(--calcite-ui-foreground-2);
   }
 }
+
+/* dark mode for icons */
+.calcite-mode-dark .icon img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(2%) hue-rotate(5deg) brightness(105%) contrast(101%);
+ }
