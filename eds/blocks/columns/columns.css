@@ -40,3 +40,22 @@
     flex: 1;
   }
 }
+
+.columns.media-split {
+  & > div > div:first-child {
+    padding-inline: 0;
+    margin-block: 0;
+  }
+
+  & > div > div p:first-child {
+    font-weight: var(--calcite-font-weight-bold);
+    text-transform: uppercase;
+    color: var(--calcite-ui-text-2);
+    font-size: var(--font-minus-2);
+    margin-block-end: var(--space-2);
+  }
+
+  & > div > div h2 {
+    margin-block-end: var(--space-2);
+  }
+}
