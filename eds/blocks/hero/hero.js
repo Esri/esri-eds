@@ -1,51 +1,48 @@
+import { source, video } from '../../scripts/dom-helpers.js';
+
 export default function decorate(block) {
-  // Find all children of the block
-  const blockChildren = [...block.children];
+  const newChildren = [...block.children].map((entry) => {
+    const entryKey = entry.firstElementChild.textContent.toLowerCase();
 
-  // for each blockChildren, find children
-  blockChildren.forEach((child) => {
-    const contentBlocks = [...child.children];
-    // get first child, use as class for second, remove it
-    const blockClass = contentBlocks[0].textContent.toLowerCase();
-    child.removeChild(contentBlocks[0]);
+    const entryContent = entry.lastElementChild;
+    entryContent.classList.add(entryKey);
 
-    // add blockClass to the second child, remove parent
-    contentBlocks[1].classList.add(blockClass);
-    child.replaceWith(contentBlocks[1]);
+    return entryContent;
   });
+  block.replaceChildren(...newChildren);
 
   const imgCollection = block.querySelectorAll('picture > img');
   imgCollection.forEach((img) => {
     img.setAttribute('loading', 'eager');
   });
 
-  const videoElement = document.createElement('video');
-  const videoSrc = document.createElement('source');
+  const videoSrc = source({ type: 'video/mp4' });
   const videoAssets = block.querySelectorAll('a');
-  videoElement.toggleAttribute('loop', true);
-  videoElement.toggleAttribute('playsinline', true);
-  videoElement.toggleAttribute('autoplay', true);
+
   if (videoAssets && videoAssets.length > 0) {
+    let videoAsset = videoAssets[0];
     if (videoAssets.length === 2) {
-      videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
-      videoAssets[1].classList.add('hidden');
-    } else {
-      videoSrc.setAttribute('src', videoAssets[0].getAttribute('title'));
-      videoAssets[0].classList.add('hidden');
+      // eslint-disable-next-line prefer-destructuring
+      videoAsset = videoAssets[1];
     }
+
+    videoSrc.setAttribute('src', videoAsset.getAttribute('title'));
+    videoAsset.classList.add('hidden');
   }
-  videoSrc.setAttribute('type', 'video/mp4');
 
-  if (videoElement) videoElement.append(videoSrc);
+  const videoElement = video(
+    {
+      loop: true,
+      playsinline: true,
+      autoplay: true,
+    },
+    videoSrc,
+  );
 
-  // If there is no hero image, but there is a video
-  // Move video into hero block
-  if (videoElement) {
-    const heroImage = block.querySelector('.image');
-    if (heroImage && heroImage.children.length === 0) {
-      heroImage.append(videoElement);
-    } else {
-      block.append(videoElement);
-    }
+  const heroImage = block.querySelector('.image');
+  if (heroImage && heroImage.children.length === 0) {
+    heroImage.append(videoElement);
+  } else {
+    block.append(videoElement);
   }
 }
