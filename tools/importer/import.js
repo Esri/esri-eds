@@ -137,22 +137,25 @@ function hero(main, document) {
     return;
   }
   const heroInner = heroContainer.querySelector('.hbg-container');
+  const sizeClass = Array.from(heroInner.classList).find((className) => className.startsWith('hbg-container--'));
 
-  const backgroundImage = heroInner.querySelector('picture.hbg-container--large--backgroundImage');
+  const backgroundImage = heroInner.querySelector(`picture.${sizeClass}--backgroundImage`);
 
   const videoContainer = heroInner.querySelector('.video-container');
-  videoContainer.querySelector('img').remove();
+  videoContainer?.querySelector('img').remove();
 
   const heroParts = {
-    content: heroInner.querySelector('.hbg-container--large--left'),
-    image: heroInner.querySelector('.hbg-container--large--right'),
-    video: videoContainer,
+    content: heroInner.querySelector(`.${sizeClass}--left`),
+    image: heroInner.querySelector(`.${sizeClass}--right`) ?? '',
+    video: videoContainer ?? '',
     backgroundImage,
   };
+  if (!heroParts.content) {
+    console.log('Hero parts not found', heroParts);
+    throw new Error('Hero parts not found');
+  }
 
-  const cells = Object.entries(heroParts).map(([key, value]) => {
-    return [[key], [value]];
-  });
+  const cells = Object.entries(heroParts).map(([key, value]) => [[key], [value]]);
 
   createBlock(heroContainer, document, 'hero', cells);
 }
@@ -399,7 +402,6 @@ function cards(main, document) {
 }
 
 function callToAction(main, document, pathname) {
-
   main.querySelectorAll('.cta-questions')
     .forEach((container) => {
       const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container');
