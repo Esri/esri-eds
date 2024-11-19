@@ -1,13 +1,5 @@
-main .hero-container {
-  padding: 0;
-}
-
 .hero-wrapper {
   overflow: hidden;
-}
-
-.video {
-  display: none;
 }
 
 .hero {
@@ -19,6 +11,10 @@ main .hero-container {
   align-items: center;
 }
 
+.hero .video {
+  display: none;
+}
+
 .hero .content {
   inline-size: 90vw;
   padding-block: var(--space-16);
@@ -28,6 +24,14 @@ main .hero-container {
   font-size: var(--font-8);
   margin-block-end: var(--space-4);
   line-height: 1.375;
+}
+
+.hero.medium h1 {
+  font-size: var(--font-7);
+}
+
+.hero.small h1 {
+  font-size: var(--font-6);
 }
 
 .hero :where(h1, p) {
@@ -61,16 +65,7 @@ main .hero-container {
   block-size: 100%;
 }
 
-
-.hero.medium h1 {
-  font-size: var(--font-7);
-}
-
-.hero.small h1 {
-  font-size: var(--font-6);
-}
-
-.hero .hero-image {
+.hero .image {
   inline-size: 90vw;
 }
 
@@ -82,17 +77,6 @@ main .hero-container {
   object-position: center;
   aspect-ratio: 1 / 1;
   position: initial;
-}
-
-.hero .content picture img {
-  inline-size: 100%;
-  block-size: 100%;
-  position: absolute;
-  z-index: -2;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
 }
 
 @media (width >= 1024px) {
