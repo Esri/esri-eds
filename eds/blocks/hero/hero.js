@@ -19,12 +19,8 @@ export default function decorate(block) {
   const videoSrc = source({ type: 'video/mp4' });
   const videoAssets = block.querySelectorAll('a');
 
-  if (videoAssets && videoAssets.length > 0) {
-    let videoAsset = videoAssets[0];
-    if (videoAssets.length === 2) {
-      // eslint-disable-next-line prefer-destructuring
-      videoAsset = videoAssets[1];
-    }
+  if (videoAssets.length > 0) {
+    const videoAsset = videoAssets.lastElementChild;
 
     videoSrc.setAttribute('src', videoAsset.getAttribute('title'));
     videoAsset.classList.add('hidden');
