@@ -16,29 +16,28 @@ export default function decorate(block) {
     img.setAttribute('loading', 'eager');
   });
 
-  const videoSrc = source({ type: 'video/mp4' });
   const videoAssets = block.querySelectorAll('a');
 
   if (videoAssets.length > 0) {
-    const videoAsset = videoAssets.lastElementChild;
+    const videoAsset = videoAssets[videoAssets.length - 1];
 
-    videoSrc.setAttribute('src', videoAsset.getAttribute('title'));
-    videoAsset.classList.add('hidden');
-  }
+    const videoElement = video(
+      {
+        loop: true,
+        playsinline: true,
+        autoplay: true,
+        type: 'video/mp4',
+        src: videoAsset.getAttribute('title'),
+      },
+    );
 
-  const videoElement = video(
-    {
-      loop: true,
-      playsinline: true,
-      autoplay: true,
-    },
-    videoSrc,
-  );
+    videoAsset.remove();
 
-  const heroImage = block.querySelector('.image');
-  if (heroImage && heroImage.children.length === 0) {
-    heroImage.append(videoElement);
-  } else {
-    block.append(videoElement);
+    const heroImage = block.querySelector('.image');
+    if (heroImage && heroImage.children.length === 0) {
+      heroImage.append(videoElement);
+    } else {
+      block.append(videoElement);
+    }
   }
 }
