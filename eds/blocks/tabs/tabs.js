@@ -203,10 +203,8 @@ export default async function decorate(block) {
       e.preventDefault();
 
       const tabTitle = titles[index];
-      if (tabTitle.hasAttribute('aria-selected')) {
-        tabTitle.setAttribute('aria-selected', 'false');
-        tabTitle.setAttribute('aria-selected', 'true');
-      }
+      titles.forEach((t) => t.setAttribute('aria-selected', 'false'));
+      tabTitle.setAttribute('aria-selected', 'true');
 
       contents[selectedIdx].setAttribute('aria-hidden', 'true');
       contents[index].setAttribute('aria-hidden', 'false');
