@@ -275,9 +275,9 @@ function tabs(main, document, pathname) {
               const iconName = svgFileName
                 .split('/')
                 .pop()
-                .split('-')
+                .split('.')
                 .slice(0, -1)
-                .join('-');
+                .join('.');
               const icon = document.createElement('p');
               icon.append(createIcon(iconName, tabIcon.getAttribute('data-asset')));
               tabIcon.remove();
