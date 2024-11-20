@@ -202,8 +202,9 @@ export default async function decorate() {
       } else if (window.location.hostname === 'www.esri.com') {
         gnavJsonPath = '/content/experience-fragments/esri-sites/en-us/site-settings/global-navigation-config/2022-nav-config.25.json';
       } else {
-        gnavJsonPath = '/2022-nav-config.25.json'; // temporary. Prefer the path below for .page / .live URLs
-        //gnavJsonPath = 'https://www.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/global-navigation-config/2022-nav-config.25.json';
+        // gnavJsonPath = '/2022-nav-config.25.json';
+        // temporary. Prefer the path below for .page / .live URLs
+        gnavJsonPath = 'https://www.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/global-navigation-config/2022-nav-config.25.json';
       }
       window.gnav_jsonPath = gnavJsonPath;
       await Promise.all([
