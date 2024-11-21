@@ -168,21 +168,6 @@ function decorateIcons(block) {
   });
 }
 
-function bindFeatures(videoContainers, playButtonContainers, playPauseButtons) {
-  if ((videoContainers !== null)) {
-    playButtonContainers.forEach((playButton) => {
-      const video = document.createElement('video');
-      const videoContainer = playButton.parentNode;
-      const videoElmt = videoContainer.querySelector('video');
-      video.src = videoElmt.querySelector('video > source').src;
-
-      video.addEventListener('loadedmetadata', () => {
-        setupVideoControl(playButton, videoElmt);
-      });
-    });
-  } 
-}
-
 function setupVideoControl(playButtonElement, videoElement) {
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   
@@ -219,6 +204,21 @@ function setupVideoControl(playButtonElement, videoElement) {
   });
 }
 
+function bindFeatures(videoContainers, playButtonContainers) {
+  if ((videoContainers !== null)) {
+    playButtonContainers.forEach((playButton) => {
+      const video = document.createElement('video');
+      const videoContainer = playButton.parentNode;
+      const videoElmt = videoContainer.querySelector('video');
+      video.src = videoElmt.querySelector('video > source').src;
+
+      video.addEventListener('loadedmetadata', () => {
+        setupVideoControl(playButton, videoElmt);
+      });
+    });
+  }
+}
+
 function playPromises(videoElement) {
   let playPromise = videoElement.play();
   if (playPromise !== undefined) {
@@ -232,9 +232,8 @@ function playPromises(videoElement) {
 function enableVideoControls(block) {
   const videoContainers = block.querySelectorAll('.foreground-container');
   const playButtonContainers = block.querySelectorAll('.video-container');
-  const playButtons = block.querySelectorAll('.video-playbutton');
 
-  bindFeatures(videoContainers, playButtonContainers, playButtons);
+  bindFeatures(videoContainers, playButtonContainers);
 }
 
 export default async function decorate(block) {
