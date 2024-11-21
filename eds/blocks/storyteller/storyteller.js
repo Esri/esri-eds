@@ -52,8 +52,8 @@ async function getVideoBtn() {
   const buttonContainer = document.createElement('div');
   const videoButton = document.createElement('button');
   const playProgressCircle = document.createElement('svg');
-  const progressBackground = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  const progressCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  const progressBackground = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  const progressCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
   videoContainer.classList.add('video-container');
   buttonContainer.classList.add('button-container');
@@ -170,80 +170,83 @@ function decorateIcons(block) {
 
 function bindFeatures(videoContainers, playButtonContainers, playPauseButtons) {
   if ((videoContainers !== null)) {
-      playPauseButtons.forEach((playPauseButton) => {
-          playPauseButton.addEventListener('keydown', (evt) => {
-              let key = evt.which || evt.keyCode
-              let playOrder = playPauseButton.getAttribute('attr-play-order');
-              if (key === 9) {
-                  scrollNextBanner (playPauseButtons, playOrder, true);
-              }
-              if ( (evt.shiftKey) && (key === 9) ) {
-                  scrollNextBanner (playPauseButtons, playOrder, false);
-              }
+    playPauseButtons.forEach((playPauseButton) => {
+      playPauseButton.addEventListener('keydown', (evt) => {
+        let key = evt.which || evt.keyCode
+        let playOrder = playPauseButton.getAttribute('attr-play-order');
+        if (key === 9) {
+          scrollNextBanner (playPauseButtons, playOrder, true);
+        }
+        if ( (evt.shiftKey) && (key === 9) ) {
+          scrollNextBanner (playPauseButtons, playOrder, false);
+        }
+      })
 
-          })
-
-          playPauseButton.addEventListener('keypress', (evt) => {
-              let key = evt.which || evt.keyCode
-              let labelMsg = playPauseButton.getAttribute('attr-label');
-              if (( key === 13) || (key === 32) ){
-                  toggleAriaLabel(playPauseButton, labelMsg);
-              }
-            
-          });
+      playPauseButton.addEventListener('keypress', (evt) => {
+        let key = evt.which || evt.keyCode
+        let labelMsg = playPauseButton.getAttribute('attr-label');
+        if (( key === 13) || (key === 32) ){
+          toggleAriaLabel(playPauseButton, labelMsg);
+        }
       });
-      
-      playButtonContainers.forEach((playButton) => {
-        const video = document.createElement('video');
-        const videoContainer = playButton.parentNode;
-        const videoElmt = videoContainer.querySelector('video');
-        video.src = videoElmt.querySelector('video > source').src;
+    });
+    
+    playButtonContainers.forEach((playButton) => {
+      const video = document.createElement('video');
+      const videoContainer = playButton.parentNode;
+      const videoElmt = videoContainer.querySelector('video');
+      video.src = videoElmt.querySelector('video > source').src;
 
-        video.addEventListener('loadedmetadata', () => {
-          setupVideoControl(playButton, videoElmt);
-        });
+      video.addEventListener('loadedmetadata', () => {
+        setupVideoControl(playButton, videoElmt);
       });
+    });
   } 
 }
 
 function setupVideoControl(playButtonElement, videoElement) {
-    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!isReducedMotion.matches) {
-        playButtonElement.addEventListener('click', function () {
-          videoElement.loop = true;
-            if (videoElement.paused) {
-                playPromises(videoElement);
-                togglePlayButton(videoElement);
-            } else {
-                videoElement.pause();
-                togglePlayButton(videoElement);
-            }
-        });
-    }
-
-    function togglePlayButton(videoElement) {
-      const videoContainer = videoElement.closest('.foreground-container');
-      const buttonContainer = videoContainer.querySelector('.video-container');
-      const playButton = buttonContainer.querySelector('.video-playbutton');
-
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  
+  if (!isReducedMotion.matches) {
+    playButtonElement.addEventListener('click', () => {
+    videoElement.loop = true;
       if (videoElement.paused) {
-          playButton.classList.add('paused');
+        playPromises(videoElement);
+        togglePlayButton(videoElement);
       } else {
-          playButton.classList.remove('paused');
+        videoElement.pause();
+        togglePlayButton(videoElement);
       }
+    });
+  }
+
+  function togglePlayButton(videoElement) {
+    const videoContainer = videoElement.closest('.foreground-container');
+    const buttonContainer = videoContainer.querySelector('.video-container');
+    const playButton = buttonContainer.querySelector('.video-playbutton');
+
+    if (videoElement.paused) {
+        playButton.classList.add('paused');
+    } else {
+        playButton.classList.remove('paused');
     }
-    
-    videoElement.addEventListener('play', function () {togglePlayButton(videoElement);});
-    videoElement.addEventListener('pause', function () {togglePlayButton(videoElement);});
+  }
+  
+  videoElement.addEventListener('play', () => {
+    togglePlayButton(videoElement);
+  });
+  videoElement.addEventListener('pause', () => {
+    togglePlayButton(videoElement);
+  });
 }
 
 function playPromises(videoElement) {
   let playPromise = videoElement.play();
   if (playPromise !== undefined) {
-      playPromise.then(_ => {
-          videoElement.play();
-      })
-      .catch(() => null);
+    playPromise.then(_ => {
+      videoElement.play();
+    })
+    .catch(() => null);
   }
 }
 
