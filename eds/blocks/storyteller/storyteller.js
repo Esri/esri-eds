@@ -44,41 +44,38 @@ function setforegroundContainersNoVideo(block) {
 }
 
 /**
- * Toggle playhead to play or pause mp4 video.
- * @param {element} videoBtn The playhead control element for mp4 video
- */
-function toggleVideo(videoBtn) {
-  const foregroundWrapper = videoBtn.closest('.foreground-container');
-  const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
-  const vidSrc = videoWrapper.querySelector('video');
-  const vidBtn = foregroundWrapper.querySelector('.video-playbutton');
-  const calciteIconPlayBtn = vidBtn.querySelector('calcite-icon');
-  if (vidSrc.paused === true) {
-    vidSrc.play();
-    calciteIconPlayBtn.setAttribute('icon', 'play-f');
-  } else {
-    vidSrc.pause();
-    calciteIconPlayBtn.setAttribute('icon', 'pause-f');
-  }
-}
-
-/**
  * Produce a calcite play button icon with appropriate attributes.
  * @returns {element} play pause button
  */
 async function getVideoBtn() {
+  const videoContainer = document.createElement('div');
+  const buttonContainer = document.createElement('div');
   const videoButton = document.createElement('button');
+  const playProgressCircle = document.createElement('svg');
+  const progressBackground = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  const progressCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+  videoContainer.classList.add('video-container');
+  buttonContainer.classList.add('button-container');
   videoButton.classList.add('video-playbutton');
-  videoButton.setAttribute('aria-label', 'play or pause video');
+  videoButton.setAttribute('aria-label', 'Playing Animation');
+  videoButton.setAttribute('tabindex', '0');
+  playProgressCircle.classList.add('play-progress-circle');
+  playProgressCircle.setAttribute('viewBox', '0 0 100 100');
+  progressBackground.classList.add('progress-background');
+  progressBackground.setAttribute('r', '45');
+  progressBackground.setAttribute('cy', '50');
+  progressBackground.setAttribute('cx', '50');
+  progressCircle.classList.add('progress-circle');
+  progressCircle.setAttribute('r', '45');
+  progressCircle.setAttribute('cy', '50');
+  progressCircle.setAttribute('cx', '50');
+  playProgressCircle.appendChild(progressBackground);
+  playProgressCircle.appendChild(progressCircle);
+  videoButton.appendChild(playProgressCircle);
+  videoContainer.appendChild(videoButton);
 
-  const calciteIconPlayBtn = document.createElement('calcite-icon');
-  calciteIconPlayBtn.setAttribute('scale', 's');
-  calciteIconPlayBtn.setAttribute('appearance', 'solid');
-  calciteIconPlayBtn.setAttribute('icon', 'play-f');
-  calciteIconPlayBtn.setAttribute('aria-hidden', 'true');
-  videoButton.appendChild(calciteIconPlayBtn);
-
-  return videoButton;
+  return videoContainer;
 }
 
 /**
@@ -89,9 +86,10 @@ async function setVideoTag(foregroundSrc) {
   const videoTag = document.createElement('video');
   videoTag.muted = true;
   videoTag.toggleAttribute('autoplay', 'true');
-  videoTag.toggleAttribute('loop', true);
+  videoTag.setAttribute('preload', 'metadata');
   videoTag.toggleAttribute('playsinline', true);
   videoTag.setAttribute('type', 'video/mp4');
+  videoTag.setAttribute('muted', '');
   videoTag.setAttribute('poster', foregroundSrc);
   return videoTag;
 }
@@ -170,6 +168,93 @@ function decorateIcons(block) {
   });
 }
 
+function bindFeatures(videoContainers, playButtonContainers, playPauseButtons) {
+  if ((videoContainers !== null)) {
+      playPauseButtons.forEach((playPauseButton) => {
+          playPauseButton.addEventListener('keydown', (evt) => {
+              let key = evt.which || evt.keyCode
+              let playOrder = playPauseButton.getAttribute('attr-play-order');
+              if (key === 9) {
+                  scrollNextBanner (playPauseButtons, playOrder, true);
+              }
+              if ( (evt.shiftKey) && (key === 9) ) {
+                  scrollNextBanner (playPauseButtons, playOrder, false);
+              }
+
+          })
+
+          playPauseButton.addEventListener('keypress', (evt) => {
+              let key = evt.which || evt.keyCode
+              let labelMsg = playPauseButton.getAttribute('attr-label');
+              if (( key === 13) || (key === 32) ){
+                  toggleAriaLabel(playPauseButton, labelMsg);
+              }
+            
+          });
+      });
+      
+      playButtonContainers.forEach((playButton) => {
+        const video = document.createElement('video');
+        const videoContainer = playButton.parentNode;
+        const videoElmt = videoContainer.querySelector('video');
+        video.src = videoElmt.querySelector('video > source').src;
+
+        video.addEventListener('loadedmetadata', () => {
+          setupVideoControl(playButton, videoElmt);
+        });
+      });
+  } 
+}
+
+function setupVideoControl(playButtonElement, videoElement) {
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!isReducedMotion.matches) {
+        playButtonElement.addEventListener('click', function () {
+          videoElement.loop = true;
+            if (videoElement.paused) {
+                playPromises(videoElement);
+                togglePlayButton(videoElement);
+            } else {
+                videoElement.pause();
+                togglePlayButton(videoElement);
+            }
+        });
+    }
+
+    function togglePlayButton(videoElement) {
+      const videoContainer = videoElement.closest('.foreground-container');
+      const buttonContainer = videoContainer.querySelector('.video-container');
+      const playButton = buttonContainer.querySelector('.video-playbutton');
+
+      if (videoElement.paused) {
+          playButton.classList.add('paused');
+      } else {
+          playButton.classList.remove('paused');
+      }
+    }
+    
+    videoElement.addEventListener('play', function () {togglePlayButton(videoElement);});
+    videoElement.addEventListener('pause', function () {togglePlayButton(videoElement);});
+}
+
+function playPromises(videoElement) {
+  let playPromise = videoElement.play();
+  if (playPromise !== undefined) {
+      playPromise.then(_ => {
+          videoElement.play();
+      })
+      .catch(() => null);
+  }
+}
+
+function enableVideoControls(block) {
+  const videoContainers = block.querySelectorAll('.foreground-container');
+  const playButtonContainers = block.querySelectorAll('.video-container');
+  const playButtons = block.querySelectorAll('.video-playbutton');
+
+  bindFeatures(videoContainers, playButtonContainers, playButtons);
+}
+
 export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
@@ -235,10 +320,7 @@ export default async function decorate(block) {
     foregroundWrapper.appendChild(videoBtn);
   }
 
-  videoBtn.addEventListener('click', () => {
-    toggleVideo(videoBtn);
-  });
-
   decorateLinkBtn(block);
   decorateIcons(block);
+  enableVideoControls(block);
 }
