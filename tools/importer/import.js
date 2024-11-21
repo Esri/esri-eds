@@ -428,7 +428,7 @@ function callToAction(main, document, pathname) {
 
   newCta.append(...ctaSections);
 
-  ctaSections.forEach((container) => {
+  const cells = ctaSections.map((container) => {
     const hasEmbeddedBlock = container.querySelector('table');
     if (hasEmbeddedBlock) {
       const fragmentPathname = `${pathname}/call-to-action`;
@@ -446,41 +446,23 @@ function callToAction(main, document, pathname) {
         path: fragmentPathname,
       });
     }
-  });
-  createBlock(newCta, document, 'Call to action', ctaSections.map((cta) => [cta]));
 
-  return;
+    const ctaQuestions = container.querySelector('.cta-questions');
 
-  main.querySelectorAll('.cta-questions')
-    .forEach((container) => {
-      const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container');
+    if (ctaQuestions) {
+      const primaryDblContainer = ctaQuestions.querySelector('.cta-questions_primary-dbl-button-column-container');
       if (primaryDblContainer) {
         const children = [...primaryDblContainer.children];
         if (children.length !== 3) {
           throw new Error('callToAction expected 3 children', primaryDblContainer.outerHTML);
         }
-        createBlock(primaryDblContainer, document, 'Call to action', [[children[0], children[2]]]);
-      } else {
-        const hasEmbeddedBlock = container.querySelector('table');
-        if (hasEmbeddedBlock) {
-          const fragmentPathname = `${pathname}/call-to-action`;
-
-          const link = document.createElement('a');
-          const url = edsUrl + fragmentPathname;
-          link.setAttribute('href', url);
-          link.textContent = url;
-          const wrapper = document.createElement('div');
-          wrapper.append(...container.children);
-          container.replaceChildren(link);
-
-          fragmentPages.push({
-            element: wrapper,
-            path: fragmentPathname,
-          });
-        }
-        createBlock(container, document, 'Call to action', [...container.children].map((child) => [child]));
+        return [primaryDblContainer.firstElementChild, primaryDblContainer.lastElementChild];
       }
-    });
+    }
+
+    return [container];
+  });
+  createBlock(newCta, document, 'Call to action', cells);
 }
 
 function transformUrls(main) {
