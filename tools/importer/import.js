@@ -402,6 +402,55 @@ function cards(main, document) {
 }
 
 function callToAction(main, document, pathname) {
+  const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
+  if (!ctaSection) {
+    return;
+  }
+
+  const ctaSections = [ctaSection];
+
+  const form = main.querySelector('.esri-one-form');
+  if (form) {
+    let nextSibling = form.nextElementSibling;
+    const siblings = [];
+    while (nextSibling && nextSibling !== ctaSection) {
+      siblings.push(nextSibling);
+      nextSibling = nextSibling.nextElementSibling;
+    }
+
+    ctaSections.unshift(...siblings);
+  }
+  console.log('ctaSections', ctaSections, form);
+
+  const newCta = document.createElement('div');
+  // append newCta right before ctaSection
+  ctaSection.before(newCta);
+
+  newCta.append(...ctaSections);
+
+  ctaSections.forEach((container) => {
+    const hasEmbeddedBlock = container.querySelector('table');
+    if (hasEmbeddedBlock) {
+      const fragmentPathname = `${pathname}/call-to-action`;
+
+      const link = document.createElement('a');
+      const url = edsUrl + fragmentPathname;
+      link.setAttribute('href', url);
+      link.textContent = url;
+      const wrapper = document.createElement('div');
+      wrapper.append(...container.children);
+      container.replaceChildren(link);
+
+      fragmentPages.push({
+        element: wrapper,
+        path: fragmentPathname,
+      });
+    }
+  });
+  createBlock(newCta, document, 'Call to action', ctaSections.map((cta) => [cta]));
+
+  return;
+
   main.querySelectorAll('.cta-questions')
     .forEach((container) => {
       const primaryDblContainer = container.querySelector('.cta-questions_primary-dbl-button-column-container');
@@ -550,6 +599,20 @@ function inlineIcons(main, html) {
       }
       icon.outerHTML = `:${iconName}:`;
     });
+
+  main.querySelectorAll('.esri-image > div[data-asset]').forEach((icon) => {
+    const iconPath = icon.getAttribute('data-asset');
+    const iconName = iconPath
+      .split('/')
+      .pop()
+      .split('.')
+      .slice(0, -1)
+      .join('.');
+    if (!svgs.find(({ name }) => name === iconName)) {
+      throw new Error(`Unknown icon ${iconName}`);
+    }
+    icon.outerHTML = `:${iconName}:`;
+  });
 
   report.amountFoundIcons = foundIcons.length;
   report.foundIcons = foundIcons;
