@@ -647,8 +647,7 @@ function sections(main, document) {
 
     const spacingDiv = sectionDivs[0];
 
-    spacingDiv.classList.forEach((className) => {
-
+    spacingDiv?.classList.forEach((className) => {
       classPrefixes.forEach((prefix) => {
         if (classHasPrefix(className, prefix)) {
           sectionStyles.push(className);
@@ -664,9 +663,14 @@ function sections(main, document) {
       'post-',
     ];
 
-    const columnsDiv = spacingDiv.querySelector('[data-aem-columnsys]');
+    // remove the cta container logic after implementing cta block
+    const columnsDivs = spacingDiv?.querySelectorAll(':not(.cta-container) [data-aem-columnsys]') ?? [];
+    if (columnsDivs?.length > 1) {
+      console.error('Section has multiple columns', columnsDivs);
+      throw new Error('Section has multiple columns');
+    }
 
-    columnsDiv?.classList.forEach((className) => {
+    columnsDivs[0]?.classList?.forEach((className) => {
       columnPrefixes.forEach((prefix) => {
         if (classHasPrefix(className, prefix)) {
           sectionStyles.push(className);
@@ -836,8 +840,6 @@ function transformers(main, document, html, pathname) {
   calciteButton(main, document);
   links(main, document);
   localNavigation(main, document);
-  sections(main, document);
-  hero(main, document);
   storyteller(main, document);
   switchers(main, document);
   mediaGallery(main, document);
@@ -850,6 +852,8 @@ function transformers(main, document, html, pathname) {
   mosaicReveal(main, document);
   largeContentStack(main, document);
   tabs(main, document, pathname);
+  sections(main, document);
+  hero(main, document);
   transformUrls(main);
 }
 
