@@ -169,12 +169,24 @@ function decorateIcons(block) {
 }
 
 function playPromises(videoElement) {
-  let playPromise = videoElement.play();
+  const playPromise = videoElement.play();
   if (playPromise !== undefined) {
-    playPromise.then(_ => {
+    playPromise.then(() => {
       videoElement.play();
     })
-    .catch(() => null);
+      .catch(() => null);
+  }
+}
+
+function togglePlayButton(videoElement) {
+  const videoContainer = videoElement.closest('.foreground-container');
+  const buttonContainer = videoContainer.querySelector('.video-container');
+  const playButton = buttonContainer.querySelector('.video-playbutton');
+
+  if (videoElement.paused) {
+    playButton.classList.add('paused');
+  } else {
+    playButton.classList.remove('paused');
   }
 }
 
@@ -183,7 +195,7 @@ function setupVideoControl(playButtonElement, videoElement) {
 
   if (!isReducedMotion.matches) {
     playButtonElement.addEventListener('click', () => {
-    videoElement.loop = true;
+      videoElement.loop = true;
       if (videoElement.paused) {
         playPromises(videoElement);
         togglePlayButton(videoElement);
@@ -194,18 +206,6 @@ function setupVideoControl(playButtonElement, videoElement) {
     });
   }
 
-  function togglePlayButton(videoElement) {
-    const videoContainer = videoElement.closest('.foreground-container');
-    const buttonContainer = videoContainer.querySelector('.video-container');
-    const playButton = buttonContainer.querySelector('.video-playbutton');
-
-    if (videoElement.paused) {
-      playButton.classList.add('paused');
-    } else {
-      playButton.classList.remove('paused');
-    }
-  }
-  
   videoElement.addEventListener('play', () => {
     togglePlayButton(videoElement);
   });
