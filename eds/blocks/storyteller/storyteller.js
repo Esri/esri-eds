@@ -170,27 +170,6 @@ function decorateIcons(block) {
 
 function bindFeatures(videoContainers, playButtonContainers, playPauseButtons) {
   if ((videoContainers !== null)) {
-    playPauseButtons.forEach((playPauseButton) => {
-      playPauseButton.addEventListener('keydown', (evt) => {
-        let key = evt.which || evt.keyCode
-        let playOrder = playPauseButton.getAttribute('attr-play-order');
-        if (key === 9) {
-          scrollNextBanner (playPauseButtons, playOrder, true);
-        }
-        if ( (evt.shiftKey) && (key === 9) ) {
-          scrollNextBanner (playPauseButtons, playOrder, false);
-        }
-      })
-
-      playPauseButton.addEventListener('keypress', (evt) => {
-        let key = evt.which || evt.keyCode
-        let labelMsg = playPauseButton.getAttribute('attr-label');
-        if (( key === 13) || (key === 32) ){
-          toggleAriaLabel(playPauseButton, labelMsg);
-        }
-      });
-    });
-    
     playButtonContainers.forEach((playButton) => {
       const video = document.createElement('video');
       const videoContainer = playButton.parentNode;
