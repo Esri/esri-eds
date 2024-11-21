@@ -628,14 +628,37 @@ function sections(main, document) {
       }
     }
 
-    if (section.classList.contains('centered-text')) {
-      sectionStyles.push('centered-text');
+    const sectionDivs = [...section.querySelectorAll(':scope > div')];
+    if (sectionDivs.length > 1) {
+      console.error('Section has multiple divs', sectionDivs);
+      throw new Error('Section has multiple divs');
     }
 
-    if (sectionStyles.length >= 0) {
+    const classPrefixes = [
+      'leader-',
+      'trailer-',
+      'padding-leader-',
+      'padding-trailer-',
+      'column-',
+      'pre-',
+      'post-',
+    ];
+
+    const firstDiv = sectionDivs[0];
+
+    const { classList } = firstDiv;
+    classPrefixes.forEach((prefix) => {
+      classList.forEach((className) => {
+        if (className.startsWith(prefix) && className.length > prefix.length) {
+          sectionStyles.push(className);
+        }
+      });
+    });
+
+    if (sectionStyles.length > 0) {
       section.append(WebImporter.Blocks.createBlock(document, {
         name: 'Section Metadata',
-        cells: { Style: sectionStyles },
+        cells: { Style: sectionStyles.join(', ') },
       }));
     }
   });
