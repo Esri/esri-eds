@@ -618,6 +618,10 @@ function mosaicReveal(main, document) {
     });
 }
 
+function classHasPrefix(className, prefix) {
+  return className.startsWith(prefix) && className.length > prefix.length;
+}
+
 function sections(main, document) {
   main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn').forEach((section) => {
     const sectionStyles = [];
@@ -639,17 +643,32 @@ function sections(main, document) {
       'trailer-',
       'padding-leader-',
       'padding-trailer-',
+    ];
+
+    const spacingDiv = sectionDivs[0];
+
+    spacingDiv.classList.forEach((className) => {
+
+      classPrefixes.forEach((prefix) => {
+        if (classHasPrefix(className, prefix)) {
+          sectionStyles.push(className);
+        }
+      });
+    });
+
+    const columnPrefixes = [
       'column-',
+      'tablet-column-',
+      'phone-column-',
       'pre-',
       'post-',
     ];
 
-    const firstDiv = sectionDivs[0];
+    const columnsDiv = spacingDiv.querySelector('[data-aem-columnsys]');
 
-    const { classList } = firstDiv;
-    classPrefixes.forEach((prefix) => {
-      classList.forEach((className) => {
-        if (className.startsWith(prefix) && className.length > prefix.length) {
+    columnsDiv?.classList.forEach((className) => {
+      columnPrefixes.forEach((prefix) => {
+        if (classHasPrefix(className, prefix)) {
           sectionStyles.push(className);
         }
       });
