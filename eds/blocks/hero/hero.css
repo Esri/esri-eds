@@ -1,26 +1,29 @@
-main .hero-container {
-  padding: 0;
-}
-
 .hero-wrapper {
   overflow: hidden;
 }
 
 .hero {
   display: flex;
-  inline-size: 100%;
-  block-size: 100%;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   z-index: 1;
-  align-items: stretch;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero .video {
+  display: none;
+}
+
+.hero .content {
+  inline-size: 90vw;
+  padding-block: var(--space-16);
 }
 
 .hero h1 {
-  margin-block: var(--space-20) .6rem;
-  display: flex;
-  margin-inline: 4vw;
-  font-size: var(--font-8)
+  font-size: var(--font-8);
+  margin-block-end: var(--space-4);
+  line-height: 1.375;
 }
 
 .hero.medium h1 {
@@ -31,192 +34,64 @@ main .hero-container {
   font-size: var(--font-6);
 }
 
-.hero > div {
-  display: flex;
-  inline-size: 50%;
-  block-size: 100%;
-  align-items: center;
-  color: var(--calcite-ui-text-1);
-  flex: 1;
-}
-
-.hero .hero-content{
-  flex-direction: column;
-  block-size: auto;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.hero .hero-fg-image :is(.foreground-img, video) {
-  inline-size: 700px;
-  block-size: 700px;
-  margin: 0;
-}
-
-.hero .hero-fg-image .foreground-img img{
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  object-position: center;
-  aspect-ratio: 1 / 1;
-}
-
-.hero .hero-content .hero-content-wrapper{
-  inline-size: 720px;
-  margin: 0; 
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.hero .hero-content .hero-content-wrapper > *{
+.hero :where(h1, p) {
+  margin-block-start: 0;
   inline-size: 90%;
-  margin: 0; 
 }
 
-.hero .hero-content .hero-content-wrapper h1{
-  margin-block-end: 0.6rem;
-  line-height: 1.375;
-}
-
-.hero .hero-content picture img{
-  inline-size: 100%;
-  block-size: 100%;
-  position: absolute;
-  z-index: -2;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  object-fit: cover;
-}
-
-.hero p {
-  display: flex;
-  margin-inline: 4vw;
-}
-
-.hero .video-src picture {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  display: flex;
-  z-index: -2;
-}
-
-.hero .video-src picture img {
-  inline-size: 100%;
-}
-
-.hero .hidden {
-  display: none;
+.hero .button-container {
+  margin-block-start: var(--space-8);
 }
 
 .hero video {
-  display: none;
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  block-size: 100%;
 }
 
-.hero .hero-content .hero-content-wrapper .button-container {
-  margin-block-start: var(--space-4);
+.hero .backgroundimage {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  z-index: -3;
 }
 
-@media (width >= 768px) {
-  .hero.small .foreground-img > picture  {
-    aspect-ratio: 1 / 1;
-  }
-
-  .hero h1, .hero p {
-    inline-size: 50%;
-  }
-
-  .hero video {
-    display: block;
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-
-  .hero .hero-fg-image video {
-    position: initial;
-  }
-  
-  .hero > div > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
- 
-  .hero { 
-    block-size: auto;
-  }
-
-  .hero.medium {
-    block-size: 576px;
-    min-block-size: 28vw;
-  }
-
-  .hero.small {
-    block-size: 360px;
-    min-block-size: 21vw;
-  }
-
-  .hero.xsmall {
-    block-size: auto;
-    min-block-size: 170px;
-  }
+.hero .backgroundimage img {
+  inline-size: 100%;
+  block-size: 100%;
 }
 
-@media (width <= 1479px) {
-  .hero .hero-content {
-    margin-inline-start: 2vw;
-    align-items: flex-start;
-  }
-
-  .hero .hero-content .hero-content-wrapper {
-    inline-size: 90%;
-  }
-
-  .hero .hero-content .hero-content-wrapper > * {
-    inline-size: 98%;
-  }
-
-  .hero .hero-fg-image .foreground-img {
-    inline-size: 100%;
-    block-size: 100%;
-  }
+.hero .image {
+  inline-size: 90vw;
 }
 
-@media (width <= 1024px) {
+.hero .image :is(img, video) {
+  inline-size: 100%;
+  block-size: 100%;
+  padding-inline-end: 2vw;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1 / 1;
+  position: initial;
+}
+
+@media (width >= 1024px) {
   .hero {
-    flex-direction: column;
-  }
-
-  .hero .hero-content .hero-content-wrapper {
-    inline-size: 100%;
-    padding: var(--space-16) 0;
-  }
-
-  .hero .hero-content .hero-content-wrapper > * {
-    inline-size: 90%;
-  }
-
-  .hero > div.hero-content {
-    inline-size: 90vw;
-    display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    margin: 0 auto;
   }
 
-  .hero > div.hero-fg-image {
-    inline-size: 100vw;
+  .hero .content {
+    padding-inline-start: 2vw;
   }
 
-  .hero .foreground-img > picture {
-    inline-size: 100%;
+  .hero :is(.image, .content) {
+    inline-size: 50%;
+    max-inline-size: 700px;
   }
 }

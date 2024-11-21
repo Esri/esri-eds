@@ -129,9 +129,9 @@ main {
   h5,
   h6 {
     font-family: var(--calcite-sans-family);
-    font-weight: 600;
-    line-height: 1.25;
-    margin-block: 1em 0.5em;
+    font-weight: var(--calcite-font-weight-normal);
+    line-height: 1.375;
+    margin-block: 0 var(--space-4);
     scroll-margin: calc(var(--nav-height) + 1em);
   }
 
@@ -143,7 +143,6 @@ main {
 
   h2 {
     font-size: var(--font-4);
-    line-height: 1.375;
   }
 
   h3 {
@@ -168,7 +167,7 @@ main {
   ul,
   pre,
   blockquote {
-    margin-block: 1em;
+    margin-block: 0 var(--space-4);
   }
 
   code,
@@ -315,6 +314,11 @@ main {
 
   /* sections */
 
+  .default-content-wrapper {
+    max-inline-size: 1440px;
+    padding-inline: var(--space-6);
+  }
+
   .section:where(.center, .centered) > .default-content-wrapper {
     text-align: center;
   }
@@ -389,6 +393,12 @@ main {
     }
   }
 
+  @media (width >= 1488px) {
+    .default-content-wrapper {
+      padding-inline: 0;
+    }
+  }
+
   /* section metadata */
 
   .section.light,
@@ -396,3 +406,8 @@ main {
     background-color: var(--calcite-ui-foreground-2);
   }
 }
+
+/* dark mode for icons */
+.calcite-mode-dark .icon img {
+  filter: var(--image-white-filter);
+ }

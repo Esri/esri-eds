@@ -21,18 +21,6 @@
         margin-block-start: var(--space-5);
       }
     }
-
-    h2, p {
-      font-weight: 400;
-    }
-
-    h2 {
-      margin-block-end: var(--space-2);
-    }
-
-    p {
-      margin-block-start: 0;
-    }
   }
 
   .cards ul {
