@@ -16,22 +16,6 @@
   position: relative;
 }
 
-.storyteller button.video-playbutton {
-  z-index: 1;
-  border: none;
-  color: white;
-  line-height: 0;
-  cursor: pointer;
-  position: absolute;
-  inset-inline-end: 0;
-  background-color: black;
-  border-radius: var(--space-2);
-  margin-inline-end: var(--space-4);
-  inset-block-start: var(--space-2);
-  margin-block-start: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-}
-
 .storyteller.primary-content > div {
   display: flex;
   flex-direction: column-reverse;
@@ -111,17 +95,30 @@
   position: relative;
 }
 
+.storyteller div div .foreground-container picture {
+  display: block;
+  position: absolute 
+}
+
 .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
   margin-inline: var(--space-6);
   margin-block-start: var(--space-8)
 }
+
+.storyteller.primary-content div div:nth-of-type(1).button-container {
+  margin-block-end: var(--space-4);
+}
+
+.storyteller.primary-content div div:nth-of-type(2).button-container {
+  padding-inline: 0;
+} 
 
 .storyteller.primary-content .foreground-content, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
   padding-inline: 0;
 }
 
 .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) > .button-container {
-  inline-size: 0;
+  padding-inline-start: 0;
 }
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
@@ -145,8 +142,8 @@
   position: relative;
 }
 
-.storyteller.primary-content button.video-playbutton {
-  margin-inline-end: var(--space-4); 
+.storyteller button.video-playbutton {
+  margin-block-start: var(--space-4);
 }
 
 .storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
@@ -186,11 +183,60 @@
   display: none;
 }
 
-@media (width >= 510px) {
-  .storyteller button.video-playbutton {
-    margin-inline-end: var(--space-4); 
-  }
+.storyteller .play-progress-circle {
+  opacity: 1;
+  stroke: var(--calcite-ui-foreground-1);
+  inline-size: 8px;
+  block-size: 35px;
+  stroke-width: 6px;
+  position: relative;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+}
 
+.storyteller .play-progress-circle .progress-background {
+  stroke: var(--calcite-ui-text-3);
+  stroke-width: 1px;
+}
+
+.storyteller .foreground-container .video-container .video-playbutton {
+  border: 1px solid #fff;
+  display: flex;
+  cursor: pointer;
+  padding: 0 14px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.storyteller .foreground-container .video-container .video-playbutton.paused::after {
+  mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
+}
+
+.storyteller .foreground-container .video-container .video-playbutton::after {
+  content: '';
+  position: absolute;
+  inline-size: 20px;
+  block-size: 20px;
+  display: inline-block;
+  background-size: 20px 20px;
+  background-color: #fff;
+  mask: url('data:image/svg+xml;base64,PHN2ZyBpZD0iRXhwb3J0YWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMWQxZDFmfTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJwYXVzZSI+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzLjc1IiB5PSIzIiB3aWR0aD0iNC41IiBoZWlnaHQ9IjE0IiByeD0iMS41Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMS43NSIgeT0iMyIgd2lkdGg9IjQuNSIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPjwvZz48L3N2Zz4=');
+}
+
+.storyteller div div p.foreground-container .video-container {
+    position: absolute;
+    z-index: 2;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: auto;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    inline-size: 60px;
+}
+
+@media (width >= 510px) {
   .storyteller div div:nth-of-type(2) .foreground-content, .storyteller div p:nth-of-type(2) video, .storyteller .foreground-container, .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture img {
     inline-size: 500px;
     block-size: 625px;
@@ -213,6 +259,10 @@
     inline-size: 100%;
     position: relative;
     min-block-size: 1100px;
+  }
+
+  .storyteller div div .foreground-container picture {
+    display: block;
   }
 
   .storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
@@ -331,7 +381,7 @@
   }
   
   .storyteller button.video-playbutton {
-    margin-inline-end: var(--space-4); 
+    /* margin-inline-end: var(--space-4);  */
   }
 
   .storyteller p:nth-of-type(1) picture {
