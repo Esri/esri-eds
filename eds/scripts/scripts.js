@@ -67,7 +67,7 @@ function decorateVideoLinks(element) {
 
     if (
       a.href.startsWith('https://mediaspace.esri.com/')
-   || a.href.startsWith('https://www.youtube.com/')
+      || a.href.startsWith('https://www.youtube.com/')
     ) {
       a.classList.add('video-link');
       const closeButton = div(
@@ -155,15 +155,15 @@ function decorateMode(element) {
 }
 
 /**
-* convert link button to calcite button
-* @param {element} block The block element
-*/
+ * convert link button to calcite button
+ * @param {element} block The block element
+ */
 function decorateToCalcite(main) {
   main.querySelectorAll('p.button-container').forEach((buttonContainer) => {
     // create a new div to replace the buttonContainer
     const newDiv = div({ class: 'button-container' });
     while (buttonContainer.firstChild) {
-    // if firstchild is <a> then construct calciteButton
+      // if firstchild is <a> then construct calciteButton
       if (buttonContainer.firstChild.tagName === 'A') {
         newDiv.appendChild(calciteButton({
           appearance: 'solid',
