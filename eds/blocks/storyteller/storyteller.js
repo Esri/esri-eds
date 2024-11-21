@@ -168,9 +168,19 @@ function decorateIcons(block) {
   });
 }
 
+function playPromises(videoElement) {
+  let playPromise = videoElement.play();
+  if (playPromise !== undefined) {
+    playPromise.then(_ => {
+      videoElement.play();
+    })
+    .catch(() => null);
+  }
+}
+
 function setupVideoControl(playButtonElement, videoElement) {
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  
+
   if (!isReducedMotion.matches) {
     playButtonElement.addEventListener('click', () => {
     videoElement.loop = true;
@@ -190,9 +200,9 @@ function setupVideoControl(playButtonElement, videoElement) {
     const playButton = buttonContainer.querySelector('.video-playbutton');
 
     if (videoElement.paused) {
-        playButton.classList.add('paused');
+      playButton.classList.add('paused');
     } else {
-        playButton.classList.remove('paused');
+      playButton.classList.remove('paused');
     }
   }
   
@@ -216,16 +226,6 @@ function bindFeatures(videoContainers, playButtonContainers) {
         setupVideoControl(playButton, videoElmt);
       });
     });
-  }
-}
-
-function playPromises(videoElement) {
-  let playPromise = videoElement.play();
-  if (playPromise !== undefined) {
-    playPromise.then(_ => {
-      videoElement.play();
-    })
-    .catch(() => null);
   }
 }
 
