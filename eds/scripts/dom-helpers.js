@@ -122,6 +122,12 @@ export function i(...items) {
 export function img(...items) {
   return domEl('img', ...items);
 }
+export function video(...items) {
+  return domEl('video', ...items);
+}
+export function source(...items) {
+  return domEl('source', ...items);
+}
 export function span(...items) {
   return domEl('span', ...items);
 }
