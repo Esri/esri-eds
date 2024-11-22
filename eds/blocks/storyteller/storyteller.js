@@ -1,3 +1,5 @@
+import { source, video } from '../../scripts/dom-helpers.js';
+
 /**
  * Determine if mp4 resource is available. Add selector 'foreground-container' to p tag.
  * @param {string} vidUrls array with href property
@@ -78,20 +80,17 @@ async function getVideoBtn() {
   return videoContainer;
 }
 
-/**
- * Produce a video tag with appropriate attributes.
- * @returns {element} foregroundSrc The source of the video
- */
-async function setVideoTag(foregroundSrc) {
-  const videoTag = document.createElement('video');
-  videoTag.muted = true;
-  videoTag.toggleAttribute('autoplay', 'true');
-  videoTag.setAttribute('preload', 'metadata');
-  videoTag.toggleAttribute('playsinline', true);
-  videoTag.setAttribute('type', 'video/mp4');
-  videoTag.setAttribute('muted', '');
-  videoTag.setAttribute('poster', foregroundSrc);
-  return videoTag;
+function createVideo(posterSrc) {
+  return video(
+    {
+      autoplay: '',
+      preload: 'metadata',
+      playsinline: '',
+      type: 'video/mp4',
+      muted: '',
+      poster: posterSrc,
+    },
+  );
 }
 
 /**
@@ -217,12 +216,11 @@ function setupVideoControl(playButtonElement, videoElement) {
 function bindFeatures(videoContainers, playButtonContainers) {
   if ((videoContainers !== null)) {
     playButtonContainers.forEach((playButton) => {
-      const video = document.createElement('video');
       const videoContainer = playButton.parentNode;
       const videoElmt = videoContainer.querySelector('video');
-      video.src = videoElmt.querySelector('video > source').src;
+      const newVideo = video({ src: videoElmt.querySelector('video > source').src });
 
-      video.addEventListener('loadedmetadata', () => {
+      newVideo.addEventListener('loadedmetadata', () => {
         setupVideoControl(playButton, videoElmt);
       });
     });
@@ -244,9 +242,8 @@ export default async function decorate(block) {
   const foregroundPicture = block.querySelectorAll('picture')[1];
   const foregroundSrc = foregroundPicture.querySelector('img').src;
   const foregroundContent = document.createElement('div');
-  const source = document.createElement('source');
   const videoBtn = await getVideoBtn();
-  const videoTag = await setVideoTag(foregroundSrc);
+  const videoTag = createVideo(foregroundSrc);
 
   foregroundContent.classList.add('content-wrapper');
   if (isMP4(vidUrls) === true) {
@@ -257,8 +254,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tag = block.querySelector('h2');
     if (vidUrls.length >= 1) {
-      source.setAttribute('src', vidUrls[0].href);
-      videoTag.appendChild(source);
+      videoTag.appendChild(source({ src: vidUrls[0].href }));
     }
     block.classList.add('primary-content');
     foregroundContentContainer.classList.add('foreground-content');
@@ -289,8 +285,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
     if (vidUrls.length >= 1) {
-      source.setAttribute('src', vidUrls[0].href);
-      videoTag.appendChild(source);
+      videoTag.appendChild(source({ src: vidUrls[0].href }));
     }
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
