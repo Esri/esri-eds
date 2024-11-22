@@ -35,6 +35,8 @@
 .storyteller > div {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-20);
   padding-inline: var(--space-8);
 }
 
@@ -80,7 +82,7 @@
 }
 
 .storyteller .foreground-container a, 
-.storyteller p:nth-of-type(1) picture, 
+/* .storyteller p:nth-of-type(1) picture,  */
 .storyteller picture.hide-poster {
   display: none;
 }
@@ -110,7 +112,8 @@
   block-size: 100%;
 }
 
-.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img, .storyteller.primary-content div:nth-of-type(1) p:nth-of-type(1) picture img {
+.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img, 
+.storyteller.primary-content div:nth-of-type(1) p:nth-of-type(1) picture img {
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
@@ -160,9 +163,11 @@
 } */
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
-  block-size: 100%;
   position: absolute;
-  padding-inline-start: var(--space-24);
+  inset-block: 0;
+  z-index: -1;
+
+  /* padding-inline-start: var(--space-24); */
 }
 
 .storyteller.primary-content div div p:nth-of-type(2) picture {
@@ -345,9 +350,9 @@
     margin-inline-end: var(--space-20);
   } */
 
-  .storyteller div div p:not(.button-container) {
+  /* .storyteller div div p:not(.button-container) {
     padding-inline: 0;
-  }
+  } */
 
   /* .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
     padding-inline-start: 0;
@@ -434,11 +439,15 @@
     padding-inline: var(--space-4);
   }
 
-  .storyteller div p:nth-of-type(2) video, .storyteller.primary-content div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
+  .storyteller div p:nth-of-type(2) video, 
+  .storyteller.primary-content div p:nth-of-type(2) video, 
+  .storyteller .foreground-content .content-wrapper, 
+  .storyteller.primary-content .foreground-content .content-wrapper {
     position: absolute;
   }
 
-  .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture, .storyteller.primary-content div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
+  /* .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture,  */
+  .storyteller.primary-content div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
     position: absolute;
     inset-block-start: 50%;
     transform: translateY(-50%);
