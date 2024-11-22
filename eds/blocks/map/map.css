@@ -1,159 +1,158 @@
 
 .section.map-container {
-    background-position-x: center;
-    background-position-y: center;
-    padding-block: 3rem;
-    margin-block: 0;
+  background-position-x: center;
+  background-position-y: center;
+  padding-block: 3rem;
+  margin-block: 0;
 
-    --bg-gradient-dir: to right;
-    --bg-gradient-start: var(--bg-color);
-    --bg-gradient-end: transparent;
-    --bg-gradient-transition: min(20vw, 60%);
-    --bg-gradient: linear-gradient(var(--bg-gradient-dir), var(--bg-gradient-start), var(--bg-gradient-start) var(--bg-gradient-transition), var(--bg-gradient-end));
-    --bg-img: url("/assets/streets-background-blue.jpg");
-    --posY: center;
-    --posX: right;
-    --bg-img-position: var(--posY) var(--posX);
-    --bg-img-repeat: no-repeat;
-    --bg-img-size: initial;
-    --bg-img-attachment: initial;
-    --bg-overlay-dir: to right;
-    --bg-overlay-start-color: var(--esri-ui-opacity00-inverse);
-    --bg-overlay-end-color: var(--esri-ui-opacity00-inverse);
-    --bg-overlay-transition: min(20vw, 50%);
-    --bg-overlay: linear-gradient(var(--bg-overlay-dir), var(--bg-overlay-start-color), var(--bg-overlay-start-color) var(--bg-overlay-transition), var(--bg-overlay-end-color));
+  --bg-gradient-dir: to right;
+  --bg-gradient-start: var(--bg-color);
+  --bg-gradient-end: transparent;
+  --bg-gradient-transition: min(20vw, 60%);
+  --bg-gradient: linear-gradient(var(--bg-gradient-dir), var(--bg-gradient-start), var(--bg-gradient-start) var(--bg-gradient-transition), var(--bg-gradient-end));
+  --bg-img: url("/assets/streets-background-blue.jpg");
+  --posY: center;
+  --posX: right;
+  --bg-img-position: var(--posY) var(--posX);
+  --bg-img-repeat: no-repeat;
+  --bg-img-size: initial;
+  --bg-img-attachment: initial;
+  --bg-overlay-dir: to right;
+  --bg-overlay-start-color: var(--esri-ui-opacity00-inverse);
+  --bg-overlay-end-color: var(--esri-ui-opacity00-inverse);
+  --bg-overlay-transition: min(20vw, 50%);
+  --bg-overlay: linear-gradient(var(--bg-overlay-dir), var(--bg-overlay-start-color), var(--bg-overlay-start-color) var(--bg-overlay-transition), var(--bg-overlay-end-color));
 
-    background-image: var(--bg-overlay),var(--bg-img);
-    background-repeat: var(--bg-img-repeat);
-    background-position: var(--bg-img-position);
-    background-attachment: var(--bg-img-attachment);
-    background-size: var(--bg-img-size);
+  background-image: var(--bg-overlay), var(--bg-img);
+  background-repeat: var(--bg-img-repeat);
+  background-position: var(--bg-img-position);
+  background-attachment: var(--bg-img-attachment);
+  background-size: var(--bg-img-size);
 }
 
 .grid-container {
-    inline-size: 1440px;
-    max-inline-size: 96vw;
-    padding-inline:0 0;
-    margin-inline: auto auto;
+  inline-size: 1440px;
+  max-inline-size: 96vw;
+  padding-inline: 0;
+  margin-inline: auto;
 }
 
-
 #map-default-content-wrapper:not(.section) {
-    color: #fff;
-    background-color: transparent;
-    padding-inline: 0.5rem 0.5rem;
-    text-align: center;
-    padding: 0
+  color: #fff;
+  background-color: transparent;
+  padding-inline: 0.5rem;
+  text-align: center;
+  padding: 0;
 }
 
 #map-default-content-wrapper > h2 {
-    font-weight: var(--calcite-font-weight-normal);
-    margin: 0 0 var(--space-4);
-    line-height: 1.375;
+  font-weight: var(--calcite-font-weight-normal);
+  margin: 0 0 var(--space-4);
+  line-height: 1.375;
 }
 
 .map.block:not(.section) {
-    background-color: transparent;
-    padding: 0
+  background-color: transparent;
+  padding: 0;
 }
 
 .iframe-map-placeholder {
-    inline-size: 100%;
-    block-size: 100%;
-    display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
 }
 
 hr.separator {
-    border-block-start: none;
-    inline-size: 40px;
-    block-size: 2px;
-    background-color: #0079c1;
+  border-block-start: none;
+  inline-size: 40px;
+  block-size: 2px;
+  background-color: #0079c1;
 }
 
 hr.center, .text-center hr {
-    margin-inline: auto;
+  margin-inline: auto;
 }
 
-#map-default-content-wrapper > div > p    { 
-    font-weight: var(--calcite-font-weight-normal);
-    font-size: var(--font-4);
-    margin: 0 0 var(--space-4);
-    line-height: 1.375;
+#map-default-content-wrapper > div > p {
+  font-weight: var(--calcite-font-weight-normal);
+  font-size: var(--font-4);
+  margin: 0 0 var(--space-4);
+  line-height: 1.375;
 }
 
 #map-frame {
-    inline-size: 100%;
-    block-size: 100vh;
-    border: none;
+  inline-size: 100%;
+  block-size: 100vh;
+  border: none;
 }
 
 #map-text-content {
-    margin-block: 0 var(--space-4);
+  margin-block: 0 var(--space-4);
 }
 
 #frame-wrapper.is-fullscreen {
-    inset-block-start: 0%;
-    inset-inline-start: 0%;
-    margin: 0;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  margin: 0;
 
-    /* block-size: 100%; */
-    inline-size: 100%;
-    max-inline-size: 100vw;
-    block-size: 100%;
-    position:fixed;
-    padding: 0;
-    z-index: 11110;
+  /* block-size: 100%; */
+  inline-size: 100%;
+  max-inline-size: 100vw;
+  block-size: 100%;
+  position: fixed;
+  padding: 0;
+  z-index: 11110;
 }
 
 #frame-wrapper {
-    block-size: 775px;
+  block-size: 775px;
+  inline-size: 1440px;
+  max-inline-size: 96vw;
+  padding: 0;
+  transition: all 0.25s ease-in;
+}
+
+@media (width > 480px) {
+  #map-default-content-wrapper {
+    margin-inline: 8vw;
+    inline-size: 1200px;
+    max-inline-size: 80vw;
+
+  }
+
+  #frame-wrapper {
     inline-size: 1440px;
     max-inline-size: 96vw;
-    padding: 0%;
-    transition: all 0.25s ease-in;
+  }
 }
 
-@media (width > 480px)  {
-    #map-default-content-wrapper {
-        margin-inline: 8vw 8vw;
-        inline-size: 1200px;
-        max-inline-size: 80vw;
+@media (width > 860px) {
+  #map-default-content-wrapper {
+    margin-inline: 20vw;
+    inline-size: 840px;
+    max-inline-size: 56vw;
 
-    }
+  }
 
-    #frame-wrapper {
-        inline-size: 1440px;
-        max-inline-size: 96vw;
-    }
-}
-
-@media  (width > 860px) {
-    #map-default-content-wrapper {
-        margin-inline: 20vw 20vw;
-        inline-size: 840px;
-        max-inline-size: 56vw;
-
-    }
-
-    #frame-wrapper {
-        margin-inline: 12vw 12vw;
-        inline-size: 1080px;
-        max-inline-size: 72vw;
-    }
+  #frame-wrapper {
+    margin-inline: 12vw;
+    inline-size: 1080px;
+    max-inline-size: 72vw;
+  }
 
 }
 
-@media  (width > 1500px) {
-    #map-default-content-wrapper {
-        margin-inline: 299px 299px;
-        inline-size: 840px;
-        max-inline-size: 56vw;
-    }
+@media (width > 1500px) {
+  #map-default-content-wrapper {
+    margin-inline: 299px;
+    inline-size: 840px;
+    max-inline-size: 56vw;
+  }
 
-    #frame-wrapper {
-        margin-inline: 179px 179px;
-        inline-size: 1080px;
-        max-inline-size: 72vw;
-    }
+  #frame-wrapper {
+    margin-inline: 179px;
+    inline-size: 1080px;
+    max-inline-size: 72vw;
+  }
 
 }
