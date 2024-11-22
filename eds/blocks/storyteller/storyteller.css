@@ -135,7 +135,6 @@
 }
 
 /* .storyteller div div .foreground-container picture {
-  display: block;
   position: absolute 
 } */
 
@@ -321,16 +320,12 @@
     inline-size: calc(50% - var(--space-20));
   }
 
-  .storyteller div div:nth-of-type(2) {
+  /* .storyteller div div:nth-of-type(2) {
     block-size: 100%;
-  }
+  } */
 
   .storyteller.primary-content div {
     flex-direction: row;
-  }
-
-  .storyteller div div .foreground-container picture {
-    display: block;
   }
 
   /* .storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
@@ -380,10 +375,10 @@
     margin-inline: var(--space-6);
   }
 
-  .storyteller div div p:nth-of-type(2).foreground-container, 
+  /* .storyteller div div p:nth-of-type(2).foreground-container, 
   .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
     margin-inline: 0;
-  }
+  } */
 
   /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) h2, 
   .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) div.button-container, 
@@ -391,7 +386,7 @@
     padding-inline: var(--space-32) var(--space-8);
   } */
 
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), 
+  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2),  */
   .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
     margin-block-start: 0;
@@ -441,14 +436,6 @@
 
   .storyteller div p:nth-of-type(2) video, .storyteller.primary-content div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
     position: absolute;
-  }
-
-  .storyteller p:nth-of-type(1) picture {
-    display: block;
-  }
-
-  .storyteller .foreground-container picture, .storyteller p:nth-of-type(1) picture {
-    display: block;
   }
 
   .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture, .storyteller.primary-content div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
