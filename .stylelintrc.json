@@ -1,17 +1,28 @@
 {
-  "extends": ["stylelint-config-standard"],
-  "plugins": ["stylelint-use-logical"],
+  "extends": [ "stylelint-config-standard" ],
+  "plugins": [ "stylelint-use-logical" ],
   "rules": {
     "custom-property-pattern": null,
     "keyframes-name-pattern": null,
     "no-empty-source": null,
     "no-descending-specificity": null,
     "declaration-no-important": true,
-    "max-nesting-depth": [3,
+    "max-nesting-depth": [
+      3,
       {
         "message": "Please keep the nesting depth 3 or less."
       }
     ],
-    "csstools/use-logical": ["always", {"except": ["float", "inset-block"]}]
+    "selector-class-pattern": null,
+    "selector-id-pattern": null,
+    "selector-nested-pattern": null,
+    "csstools/use-logical": [
+      "always", {
+        "except": [
+          "float",
+          "inset-block"
+        ]
+      }
+    ]
   }
 }
