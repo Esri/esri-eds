@@ -379,11 +379,11 @@ main {
     }
   }
 
-  @media (width >= 900px) {
+  /* @media (width >= 900px) {
     .section > div {
-      margin: auto;
+      margin-inline: auto;
     }
-  }
+  } */
 
   @media (width >= 1024px) {
     .video-iframe-box {
