@@ -80,7 +80,7 @@ async function getVideoBtn() {
   return videoContainer;
 }
 
-function createVideo(posterSrc) {
+function createVideo(posterSrc, sourceSrc) {
   return video(
     {
       autoplay: '',
@@ -90,6 +90,7 @@ function createVideo(posterSrc) {
       muted: '',
       poster: posterSrc,
     },
+    source({ src: sourceSrc }),
   );
 }
 
@@ -243,7 +244,7 @@ export default async function decorate(block) {
   const foregroundSrc = foregroundPicture.querySelector('img').src;
   const foregroundContent = document.createElement('div');
   const videoBtn = await getVideoBtn();
-  const videoTag = createVideo(foregroundSrc);
+  let videoTag = video();
 
   foregroundContent.classList.add('content-wrapper');
   if (isMP4(vidUrls) === true) {
@@ -254,7 +255,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tag = block.querySelector('h2');
     if (vidUrls.length >= 1) {
-      videoTag.appendChild(source({ src: vidUrls[0].href }));
+      videoTag = createVideo(foregroundSrc, vidUrls[0].href);
     }
     block.classList.add('primary-content');
     foregroundContentContainer.classList.add('foreground-content');
@@ -285,7 +286,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
     if (vidUrls.length >= 1) {
-      videoTag.appendChild(source({ src: vidUrls[0].href }));
+      videoTag = video(foregroundSrc, vidUrls[0].href);
     }
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
