@@ -17,7 +17,7 @@ import {
   div,
   iframe,
   domEl,
-  calciteButton,
+  calciteButton, video, source,
 } from './dom-helpers.js';
 
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
@@ -195,6 +195,25 @@ function decorateToCalcite(main) {
 
 export function decorateBlockMode(block) {
   decorateMode(block);
+}
+
+export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
+  const videoElem = video(
+    {
+      autoplay: '',
+      preload: 'metadata',
+      playsinline: '',
+      type: 'video/mp4',
+      muted: '',
+    },
+    source({ src: sourceSrc }),
+  );
+
+  if (posterSrc) {
+    videoElem.setAttribute('poster', posterSrc);
+  }
+
+  return videoElem;
 }
 
 function decorateModes(main) {

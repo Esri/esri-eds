@@ -1,17 +1,39 @@
 {
-  "extends": ["stylelint-config-standard"],
-  "plugins": ["stylelint-use-logical"],
+  "extends": [ "stylelint-config-standard" ],
+  "plugins": [ "stylelint-use-logical" ],
   "rules": {
     "custom-property-pattern": null,
-    "keyframes-name-pattern": null,
     "no-empty-source": null,
     "no-descending-specificity": null,
     "declaration-no-important": true,
-    "max-nesting-depth": [3,
+    "max-nesting-depth": [
+      3,
       {
         "message": "Please keep the nesting depth 3 or less."
       }
     ],
-    "csstools/use-logical": ["always", {"except": ["float", "inset-block"]}]
+    "selector-class-pattern": [
+      "^(?:[a-z0-9]+)(?:-[a-z0-9]+)*(?:__(?:[a-z0-9]+)(?:-[a-z0-9]+)*)?(?:--(?:[a-z0-9]+)(?:-[a-z0-9]+)*)?$",
+      {
+        "message": "Selector class name violates the BEM Convention.",
+        "resolveNestedSelectors": true,
+        "url": "https://getbem.com/naming"
+      }
+    ],
+    "selector-id-pattern": [
+      "^(?:[a-z0-9]+)(?:-[a-z0-9]+)*(?:__(?:[a-z0-9]+)(?:-[a-z0-9]+)*)?(?:--(?:[a-z0-9]+)(?:-[a-z0-9]+)*)?$",
+      {
+        "message": "Selector ID name violates the BEM Convention.",
+        "url": "https://getbem.com/naming"
+      }
+    ],
+    "csstools/use-logical": [
+      "always", {
+        "except": [
+          "float",
+          "inset-block"
+        ]
+      }
+    ]
   }
 }
