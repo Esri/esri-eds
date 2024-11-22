@@ -14,7 +14,7 @@ export default function decorate(block) {
   block.querySelectorAll('img').forEach((image) => image
     .closest('picture')
     .replaceWith(
-      createOptimizedPicture(image.src, image.alt, false, [{ width: '750' }]),
+      createOptimizedPicture(image.src, image.alt, false, [{ width: '2560' }]),
     ));
 
   let selectedIdx = 0;
