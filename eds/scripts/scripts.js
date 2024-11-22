@@ -223,6 +223,49 @@ export function decorateTemplateAndTheme() {
 }
 
 /**
+ * Creates an IntersectionObserver to apply animations to elements when they become visible in the
+ * viewport.
+ *
+ * @param {Array} elements - A list of DOM elements to be observed and animated.
+ * @return {void} No return value.
+ */
+export function createObserverAnimation(elements) {
+  if (elements == null || !elements.length > 0) return;
+
+  elements.forEach((element) => {
+    const elementHeight = element.offsetHeight;
+    const windowHeight = window.innerHeight;
+    let threshold = 0.20;
+    let isHidden = '';
+
+    if (elementHeight >= windowHeight) {
+      threshold = (windowHeight * 0.2) / elementHeight;
+    }
+
+    const config = {
+      root: null,
+      rootMargin: '0px',
+      threshold,
+    };
+    const observer = new IntersectionObserver(((entries) => {
+      entries.forEach((entry) => {
+        isHidden = entry.target.getAttribute('is-hidden');
+
+        if (entry.isIntersecting && isHidden === 'false') {
+          entry.target.setAttribute('is-hidden', 'false');
+          entry.target.setAttribute('aria-hidden', 'false');
+          entry.target.classList.add('calcite-animate');
+          entry.target.classList.add('calcite-animate__in-up');
+          entry.target.classList.add('animate-slow');
+          entry.target.classList.add('animate-delay__2x');
+        }
+      });
+    }), config);
+    observer.observe(element);
+  });
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
