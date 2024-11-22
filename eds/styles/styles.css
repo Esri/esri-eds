@@ -282,6 +282,10 @@ main {
     color: var(--calcite-ui-text-1);
   }
 
+  .hidden {
+    display: none;
+  }
+  
   img {
     max-inline-size: 100%;
     inline-size: auto;

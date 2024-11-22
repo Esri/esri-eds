@@ -1,64 +1,73 @@
 /* Basics for content */
+.storyteller-container {
+  margin-block: var(--space-20);
+}
+
 .storyteller-wrapper {
     display: flex;
   }
-  
+
   .storyteller {
-    overflow: hidden;
-    margin-block: var(--space-20);
-  }
+  overflow: hidden;
+}
   
-  .storyteller h2 {
-    font-size: var(--font-5);
-  }
+.storyteller h2 {
+  font-size: var(--font-5);
+}
   
-  .storyteller p {
-    font-size: var(--font-1);
-  }
+.storyteller p {
+  font-size: var(--font-1);
+}
   
-  .storyteller img {
-    inline-size: 100%;
-    max-inline-size: 576px;
-    aspect-ratio: 4 /5;
-  }
+.storyteller img {
+  inline-size: 100%;
+  max-inline-size: 576px;
+  aspect-ratio: 4 /5;
+}
   
-  .storyteller .foreground-container {
-    inline-size: auto;
-    position: relative;
-  }
+.storyteller .foreground-container {
+  inline-size: auto;
+  position: relative;
+}
   
-  /* Main box for the layout */
-  .storyteller > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--space-20);
-    padding-inline: var(--space-8);
-  }
-  
-  /* Alternate if image authored first */
-  .storyteller.primary-content > div {
-    flex-direction: column-reverse;
-  }
-  
-  /* Inside the content section */
-  .storyteller .content-wrapper {
-    align-self: end;
-    inline-size: 100%;
-    max-inline-size: 450px;
-    padding: var(--space-6);
-    position: absolute;
-    color: var(--calcite-ui-text-1);
-    background-color: var(--esri-ui-opacity85);
-  }
-  
-  .storyteller .content-wrapper h2 {
-    font-size: var(--font-1);
-    margin-block-end: var(--space-2);
-    font-weight: var(--calcite-font-weight-bold);
-  }
-  
-  .storyteller .content-wrapper p {
-    font-size: var(--font-0);
-    margin: 0;
-  }
+/* Main box for the layout */
+.storyteller > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-20);
+  padding-inline: var(--space-8);
+}
+
+/* Alternate if image authored first */
+.storyteller.primary-content > div {
+  flex-direction: column-reverse;
+}
+
+/* Hide the first image on mobile */
+.storyteller :is(p:first-of-type img, .foreground-container img) {
+  display: none;
+}
+
+/* Inside the content section */
+.storyteller .content-wrapper {
+  align-self: end;
+  inline-size: 100%;
+  max-inline-size: 450px;
+  padding: var(--space-6);
+
+  /* position: absolute; */
+  color: var(--calcite-ui-text-1);
+  background-color: var(--esri-ui-opacity85);
+}
+
+.storyteller .content-wrapper h2 {
+  font-size: var(--font-1);
+  margin-block-end: var(--space-2);
+  font-weight: var(--calcite-font-weight-bold);
+}
+
+.storyteller .content-wrapper p {
+  font-size: var(--font-0);
+  margin: 0;
+}

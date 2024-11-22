@@ -383,6 +383,7 @@
   } */
 
   /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2),  */
+
   /* .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
     margin-block-start: 0;
@@ -436,6 +437,7 @@
   } */
 
   /* .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture,  */
+  
   /* .storyteller.primary-content div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
     position: absolute;
     inset-block-start: 50%;
