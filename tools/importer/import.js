@@ -258,7 +258,6 @@ function getCardArrayFromContainer(container, document) {
 function tabs(main, document, pathname) {
   main.querySelectorAll('.esri-carousel,.esri-tabs')
     .forEach((container) => {
-      const withIcons = container.classList.contains('tab-icons');
       const withCards = false;
 
       const cells = [...container.querySelectorAll('[role="tabpanel"]')]
@@ -268,21 +267,25 @@ function tabs(main, document, pathname) {
           const tabLabel = document.createElement('div');
           tabLabel.innerHTML = tabName.innerHTML;
 
-          if (withIcons) {
-            const tabIcon = tabContent.querySelector('.tab--icon > div');
-            if (tabIcon) {
-              const svgFileName = tabIcon.getAttribute('data-asset');
-              const iconName = svgFileName
-                .split('/')
-                .pop()
-                .split('.')
-                .slice(0, -1)
-                .join('.');
-              const icon = document.createElement('p');
-              icon.append(createIcon(iconName, tabIcon.getAttribute('data-asset')));
-              tabIcon.remove();
-              tabLabel.prepend(icon);
-            }
+          // this is most likely no longer needed
+          const tabIcon = tabContent.querySelector('.tab--icon > div');
+          if (tabIcon) {
+            const svgFileName = tabIcon.getAttribute('data-asset');
+            const iconName = svgFileName
+              .split('/')
+              .pop()
+              .split('.')
+              .slice(0, -1)
+              .join('.');
+            const icon = document.createElement('p');
+            icon.append(createIcon(iconName, tabIcon.getAttribute('data-asset')));
+            tabIcon.remove();
+            tabLabel.prepend(icon);
+          }
+
+          const aemIcon = tabContent.querySelector('.aem-icon');
+          if (aemIcon) {
+            tabLabel.prepend(aemIcon, ' ');
           }
 
           const tabContentTable = tabContent.querySelector('table');
@@ -420,7 +423,6 @@ function callToAction(main, document, pathname) {
 
     ctaSections.unshift(...siblings);
   }
-  console.log('ctaSections', ctaSections, form);
 
   const newCta = document.createElement('div');
   // append newCta right before ctaSection
@@ -579,7 +581,8 @@ function inlineIcons(main, html) {
           color,
         });
       }
-      icon.outerHTML = `:${iconName}:`;
+      const newIcon = createIcon(iconName, '');
+      icon.replaceWith(newIcon);
     });
 
   main.querySelectorAll('.esri-image > div[data-asset]').forEach((icon) => {
@@ -593,7 +596,8 @@ function inlineIcons(main, html) {
     if (!svgs.find(({ name }) => name === iconName)) {
       throw new Error(`Unknown icon ${iconName}`);
     }
-    icon.outerHTML = `:${iconName}:`;
+    const newIcon = createIcon(iconName, '');
+    icon.replaceWith(newIcon);
   });
 
   report.amountFoundIcons = foundIcons.length;
