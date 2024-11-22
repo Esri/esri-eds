@@ -197,18 +197,23 @@ export function decorateBlockMode(block) {
   decorateMode(block);
 }
 
-export function createAutoplayedVideo(posterSrc, sourceSrc) {
-  return video(
+export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
+  const videoElem = video(
     {
       autoplay: '',
       preload: 'metadata',
       playsinline: '',
       type: 'video/mp4',
       muted: '',
-      poster: posterSrc,
     },
     source({ src: sourceSrc }),
   );
+
+  if (posterSrc) {
+    videoElem.setAttribute('poster', posterSrc);
+  }
+
+  return videoElem;
 }
 
 function decorateModes(main) {

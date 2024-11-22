@@ -1,4 +1,5 @@
 import { source, video } from '../../scripts/dom-helpers.js';
+import { createAutoplayedVideo } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const newChildren = [...block.children].map((entry) => {
@@ -21,16 +22,8 @@ export default function decorate(block) {
   if (videoAssets.length > 0) {
     const videoAsset = videoAssets[videoAssets.length - 1];
 
-    const videoElement = video(
-      {
-        loop: true,
-        playsinline: true,
-        autoplay: true,
-        muted: true,
-        type: 'video/mp4',
-        src: videoAsset.getAttribute('title'),
-      },
-    );
+    const src = videoAsset.getAttribute('title');
+    const videoElement = createAutoplayedVideo(src, '');
 
     videoAsset.classList.add('hidden');
 

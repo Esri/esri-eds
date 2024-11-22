@@ -244,7 +244,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tag = block.querySelector('h2');
     if (vidUrls.length >= 1) {
-      videoTag = createAutoplayedVideo(foregroundSrc, vidUrls[0].href);
+      videoTag = createAutoplayedVideo(vidUrls[0].href, foregroundSrc);
     }
     block.classList.add('primary-content');
     foregroundContentContainer.classList.add('foreground-content');
@@ -275,7 +275,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
     if (vidUrls.length >= 1) {
-      videoTag = video(foregroundSrc, vidUrls[0].href);
+      videoTag = createAutoplayedVideo(vidUrls[0].href, foregroundSrc);
     }
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
