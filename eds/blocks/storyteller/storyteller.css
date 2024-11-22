@@ -1,3 +1,4 @@
+/* Basics for content */
 .storyteller {
   overflow: hidden;
 }
@@ -30,16 +31,19 @@
   position: relative;
 }
 
+/* Main box for the layout */
 .storyteller > div {
   display: flex;
   flex-direction: column;
   padding-inline: var(--space-8);
 }
 
+/* Alternate if image authored first */
 .storyteller.primary-content > div {
   flex-direction: column-reverse;
 }
 
+/* Inside the content section */
 .storyteller .content-wrapper {
   align-self: end;
   inline-size: 100%;
@@ -235,8 +239,8 @@
   stroke-width: 1px;
 }
 
-.storyteller .foreground-container .video-container .video-playbutton {
-  border: 1px solid #fff;
+.storyteller .video-playbutton {
+  border: 1px solid var(--calcite-ui-text-1);
   display: flex;
   cursor: pointer;
   padding: 0 14px;
@@ -246,19 +250,17 @@
   background-color: transparent;
 }
 
-.storyteller .foreground-container .video-container .video-playbutton.paused::after {
-  mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
-}
-
-.storyteller .foreground-container .video-container .video-playbutton::after {
+.storyteller .video-playbutton::after {
   content: '';
   position: absolute;
   inline-size: 20px;
   block-size: 20px;
-  display: inline-block;
-  background-size: 20px 20px;
-  background-color: #fff;
+  background-color: var(--calcite-ui-text-1);
   mask: url('data:image/svg+xml;base64,PHN2ZyBpZD0iRXhwb3J0YWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMWQxZDFmfTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJwYXVzZSI+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzLjc1IiB5PSIzIiB3aWR0aD0iNC41IiBoZWlnaHQ9IjE0IiByeD0iMS41Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMS43NSIgeT0iMyIgd2lkdGg9IjQuNSIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPjwvZz48L3N2Zz4=');
+}
+
+.storyteller .video-playbutton.paused::after {
+  mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
 }
 
 .storyteller div div p.foreground-container .video-container {
@@ -306,6 +308,7 @@
     min-block-size: 1100px;
   }
 
+  /* Main box for the layout */
   .storyteller > div {
     block-size: 100%;
     inline-size: 100%;
@@ -313,8 +316,13 @@
     flex-direction: row;
   }
 
-  .storyteller > div div:first-child {
+  .storyteller:not(.primary-content) > div > div:first-child,
+  .storyteller.primary-content > div > div:last-child {
     inline-size: calc(50% - var(--space-20));
+  }
+
+  .storyteller div div:nth-of-type(2) {
+    block-size: 100%;
   }
 
   .storyteller.primary-content div {
@@ -325,22 +333,22 @@
     display: block;
   }
 
-  .storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
+  /* .storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
   inline-size: 100%;
   padding-inline-start: var(--space-32);
   margin-block-start: var(--space-4);
   max-inline-size: 660px;
   margin-inline-start: auto;
-}
+} */
 
   /* .section > div.storyteller-wrapper, .storyteller .foreground-content .content-wrapper h2 {
     margin-block-end: 0;
   } */
 
-  .storyteller.primary-content div div:nth-of-type(2) > h2 {
+  /* .storyteller.primary-content div div:nth-of-type(2) > h2 {
     max-inline-size: 600px;
     margin-inline-end: var(--space-20);
-  }
+  } */
 
   .storyteller div div p:not(.button-container) {
     padding-inline: 0;
@@ -350,19 +358,19 @@
     padding-inline-start: 0;
   }  */
 
-  .storyteller.primary-content div:nth-of-type(2) p {
+  /* .storyteller.primary-content div:nth-of-type(2) p {
     inline-size: 75%;
     max-inline-size: 575px;
-  }
+  } */
 
   /* .storyteller.primary-content div .foreground-content .content-wrapper p {
     padding-inline: var(--space-4);
   } */
   
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) .button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) p {
+  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) .button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) p {
     margin-inline-start: auto;
     max-inline-size: 660px;
-  }
+  } */
 
   .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) .button-container {
     inline-size: 660px;
@@ -372,22 +380,24 @@
     margin-inline: var(--space-6);
   }
 
-  .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
+  .storyteller div div p:nth-of-type(2).foreground-container, 
+  .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
     margin-inline: 0;
   }
 
-  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) div.button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) p {
+  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) h2, 
+  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) div.button-container, 
+  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) p {
     padding-inline: var(--space-32) var(--space-8);
   } */
 
-  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
+  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), 
+  .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
     margin-block-start: 0;
-  } */
-    
-  .storyteller div div:nth-of-type(2) {
-    block-size: 100%;
   }
+    
+
 
   .storyteller .foreground-container {
     position: absolute;
@@ -406,25 +416,28 @@
     position: relative;
   }
 
-  .storyteller.primary-content div div:nth-of-type(2) {
+  /* .storyteller.primary-content div div:nth-of-type(2) {
     display: block;
     block-size: auto;
     inline-size: 50%;
     padding: var(--space-20) 0 var(--space-20) var(--space-16) ;
-  }
+  } */
 
   .storyteller.primary-content div div:nth-of-type(2) .button-container {
     padding: var(--space-2) 0 var(--space-2) 0 ;
     cursor: pointer;
   }
 
-  /* .storyteller .foreground-content .content-wrapper, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.primary-content) div div:nth-of-type(2) p.foreground-container .foreground-content p {
+  /* .storyteller .foreground-content .content-wrapper, 
+  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1), 
+  .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content h2, 
+  .storyteller:not(.primary-content) div div:nth-of-type(2) p.foreground-container .foreground-content p {
     padding-inline: 0;
   } */
 
-  /* .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content  .content-wrapper > * {
+  .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content  .content-wrapper > * {
     padding-inline: var(--space-4);
-  } */
+  }
 
   .storyteller div p:nth-of-type(2) video, .storyteller.primary-content div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
     position: absolute;
