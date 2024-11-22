@@ -450,26 +450,26 @@ main {
   animation-duration: calc(var(--calcite-animation-timing) - 200ms);
 }
 
-.animate-delay__1x {
+.animate-delay--1x {
   animation-delay: calc(var(--calcite-animation-delay) * 1);
 }
 
-.animate-delay__2x {
+.animate-delay--2x {
   animation-delay: calc(var(--calcite-animation-delay) * 2);
 }
 
-.animate-delay__3x {
+.animate-delay--3x {
   animation-delay: calc(var(--calcite-animation-delay) * 3);
 }
 
-.animate-delay__4x {
+.animate-delay--4x {
   animation-delay: calc(var(--calcite-animation-delay) * 4);
 }
 
-.animate-delay__5x {
+.animate-delay--5x {
   animation-delay: calc(var(--calcite-animation-delay) * 5);
 }
 
-.animate-delay__6x {
+.animate-delay--6x {
   animation-delay: calc(var(--calcite-animation-delay) * 6);
 }
