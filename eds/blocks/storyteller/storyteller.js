@@ -1,4 +1,5 @@
-import { source, video } from '../../scripts/dom-helpers.js';
+import { video } from '../../scripts/dom-helpers.js';
+import { createAutoplayedVideo } from '../../scripts/scripts.js';
 
 /**
  * Determine if mp4 resource is available. Add selector 'foreground-container' to p tag.
@@ -78,20 +79,6 @@ async function getVideoBtn() {
   videoContainer.appendChild(videoButton);
 
   return videoContainer;
-}
-
-function createVideo(posterSrc, sourceSrc) {
-  return video(
-    {
-      autoplay: '',
-      preload: 'metadata',
-      playsinline: '',
-      type: 'video/mp4',
-      muted: '',
-      poster: posterSrc,
-    },
-    source({ src: sourceSrc }),
-  );
 }
 
 /**
@@ -244,6 +231,8 @@ export default async function decorate(block) {
   const foregroundSrc = foregroundPicture.querySelector('img').src;
   const foregroundContent = document.createElement('div');
   const videoBtn = await getVideoBtn();
+
+  // this shouldn't be needed, but there's more to unravel
   let videoTag = video();
 
   foregroundContent.classList.add('content-wrapper');
@@ -255,7 +244,7 @@ export default async function decorate(block) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tag = block.querySelector('h2');
     if (vidUrls.length >= 1) {
-      videoTag = createVideo(foregroundSrc, vidUrls[0].href);
+      videoTag = createAutoplayedVideo(foregroundSrc, vidUrls[0].href);
     }
     block.classList.add('primary-content');
     foregroundContentContainer.classList.add('foreground-content');
