@@ -1,4 +1,3 @@
-import { source, video } from '../../scripts/dom-helpers.js';
 import { createAutoplayedVideo } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
