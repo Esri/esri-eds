@@ -1,14 +1,28 @@
+.storyteller {
+  overflow: hidden;
+}
+
 .storyteller-wrapper {
   display: flex;
   margin-block-end: var(--space-20);
 }
 
-.storyteller {
-  overflow: hidden;
+.storyteller h2 {
+  font-size: var(--font-5);
 }
 
-.storyteller h2 {
-  font-size: var(--font-6);
+.storyteller p {
+  font-size: var(--font-1);
+}
+
+.storyteller img {
+  inline-size: 100%;
+  max-inline-size: 576px;
+  aspect-ratio: 4 /5;
+}
+
+.storyteller .foreground-container picture:has(+ .foreground-content) {
+  display: none;
 }
 
 .storyteller .foreground-container {
@@ -16,33 +30,54 @@
   position: relative;
 }
 
-.storyteller.primary-content > div {
+.storyteller > div {
   display: flex;
+  flex-direction: column;
+  padding-inline: var(--space-8);
+}
+
+.storyteller.primary-content > div {
   flex-direction: column-reverse;
 }
 
-.storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
-  opacity: 0.85;
+.storyteller .content-wrapper {
   align-self: end;
-  inline-size: 450px;
+  inline-size: 100%;
+  max-inline-size: 450px;
+  padding: var(--space-6);
   position: absolute;
   color: var(--calcite-ui-text-1);
-  background-color: var(--calcite-ui-background);
+  background-color: var(--esri-ui-opacity85);
 }
 
-.storyteller.primary-content h2, .storyteller.primary-content p:nth-of-type(1), .storyteller.storyteller.primary-content p.button-container {
+.storyteller .content-wrapper h2 {
+  font-size: var(--font-1);
+  margin-block-end: var(--space-2);
+  font-weight: var(--calcite-font-weight-bold);
+}
+
+.storyteller .content-wrapper p {
+  font-size: var(--font-0);
+  margin: 0;
+}
+
+/* .storyteller.primary-content h2, 
+.storyteller.primary-content p:nth-of-type(1), 
+.storyteller.storyteller.primary-content p.button-container {
   padding-inline-start: 0;
-}
+} */
 
-.storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .content-wrapper {
+/* .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .content-wrapper {
   padding-inline: 0;
-}
+} */
 
-.storyteller .foreground-container picture, .storyteller p:nth-of-type(1) picture {
+.storyteller picture {
   display: block;
 }
 
-.storyteller .foreground-container a, .storyteller p:nth-of-type(1) picture, .storyteller picture.hide-poster {
+.storyteller .foreground-container a, 
+.storyteller p:nth-of-type(1) picture, 
+.storyteller picture.hide-poster {
   display: none;
 }
 
@@ -62,9 +97,9 @@
   padding-inline: var(--space-4);
 }
 
-.storyteller.primary-content .foreground-content .content-wrapper > * {
+/* .storyteller.primary-content .foreground-content .content-wrapper > * {
   padding-inline: var(--space-4);
-}
+} */
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img {
   max-inline-size: 100%;
@@ -80,14 +115,14 @@
   block-size: revert-layer;
 }
 
-.storyteller.primary-content div div:nth-of-type(2) {
+/* .storyteller.primary-content div div:nth-of-type(2) {
   block-size: auto;
   padding-inline: var(--space-6);
-}
+} */
 
-.storyteller:not(.primary-content) div:nth-of-type(1) > div:nth-of-type(1) {
+/* .storyteller:not(.primary-content) div:nth-of-type(1) > div:nth-of-type(1) {
   padding-inline: var(--space-6);
-}
+} */
 
 .storyteller .foreground-content {
   display: flex;
@@ -95,21 +130,21 @@
   position: relative;
 }
 
-.storyteller div div .foreground-container picture {
+/* .storyteller div div .foreground-container picture {
   display: block;
   position: absolute 
-}
+} */
 
-.storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
+/* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
   margin-inline: var(--space-6);
   margin-block-start: var(--space-8)
-}
+} */
 
 .storyteller.primary-content div div:nth-of-type(1).button-container {
   margin-block-end: var(--space-4);
 }
 
-.storyteller.primary-content div div:nth-of-type(2).button-container {
+/* .storyteller.primary-content div div:nth-of-type(2).button-container {
   padding-inline: 0;
 } 
 
@@ -119,7 +154,7 @@
 
 .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) > .button-container {
   padding-inline-start: 0;
-}
+} */
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
   block-size: 100%;
@@ -139,6 +174,7 @@
  
 .storyteller div p:nth-of-type(2) video {
   inline-size: 100%;
+  max-inline-size: 576px;
   position: relative;
 }
 
@@ -237,28 +273,52 @@
 }
 
 @media (width >= 510px) {
-  .storyteller div div:nth-of-type(2) .foreground-content, .storyteller div p:nth-of-type(2) video, .storyteller .foreground-container, .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture img {
+  /* .storyteller div div:nth-of-type(2) .foreground-content, 
+  .storyteller div p:nth-of-type(2) video, 
+  .storyteller .foreground-container, 
+  .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture img {
     inline-size: 500px;
     block-size: 625px;
-  }
+  } */
   
-  .storyteller.primary-content .foreground-container {
+  /* .storyteller.primary-content .foreground-container {
     margin-inline-start: var(--space-6);
+  } */
+}
+
+@media (width >= 769px) {
+  .storyteller > div {
+    padding-inline: var(--space-10);
   }
 }
 
-@media (width >= 900px) {
+/* @media (width >= 900px) {
   .section > div.storyteller-wrapper {
     margin-block-end: var(--space-20);
   }
-}
+} */
+
 
 @media (width >= 1152px) { 
   .storyteller {
-    padding: 0 ;
     inline-size: 100%;
     position: relative;
     min-block-size: 1100px;
+  }
+
+  .storyteller > div {
+    block-size: 100%;
+    inline-size: 100%;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .storyteller > div div:first-child {
+    inline-size: calc(50% - var(--space-20));
+  }
+
+  .storyteller.primary-content div {
+    flex-direction: row;
   }
 
   .storyteller div div .foreground-container picture {
@@ -273,9 +333,9 @@
   margin-inline-start: auto;
 }
 
-  .section > div.storyteller-wrapper, .storyteller .foreground-content .content-wrapper h2 {
+  /* .section > div.storyteller-wrapper, .storyteller .foreground-content .content-wrapper h2 {
     margin-block-end: 0;
-  }
+  } */
 
   .storyteller.primary-content div div:nth-of-type(2) > h2 {
     max-inline-size: 600px;
@@ -286,18 +346,18 @@
     padding-inline: 0;
   }
 
-  .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
+  /* .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
     padding-inline-start: 0;
-  } 
+  }  */
 
   .storyteller.primary-content div:nth-of-type(2) p {
     inline-size: 75%;
     max-inline-size: 575px;
   }
 
-  .storyteller.primary-content div .foreground-content .content-wrapper p {
+  /* .storyteller.primary-content div .foreground-content .content-wrapper p {
     padding-inline: var(--space-4);
-  }
+  } */
   
   .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) .button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) p {
     margin-inline-start: auto;
@@ -316,26 +376,14 @@
     margin-inline: 0;
   }
 
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) div.button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) p {
+  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) div.button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) p {
     padding-inline: var(--space-32) var(--space-8);
-  }
+  } */
 
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
+  /* .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
     margin-block-start: 0;
-  }
-
-  .storyteller > div {
-    display: flex;
-    block-size: 100%;
-    inline-size: 100%;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  .storyteller.primary-content div {
-    flex-direction: row;
-  }
+  } */
     
   .storyteller div div:nth-of-type(2) {
     block-size: 100%;
@@ -348,9 +396,11 @@
     transform: translateY(-50%);
   }
 
-  .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2), .storyteller.primary-content .foreground-container {
+  /* .storyteller div div:nth-of-type(1), 
+  .storyteller div div:nth-of-type(2), 
+  .storyteller.primary-content .foreground-container {
     inline-size: 50%;
-  }
+  } */
   
   .storyteller.primary-content div div:nth-of-type(1) {
     position: relative;
@@ -368,20 +418,16 @@
     cursor: pointer;
   }
 
-  .storyteller .foreground-content .content-wrapper, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.primary-content) div div:nth-of-type(2) p.foreground-container .foreground-content p {
+  /* .storyteller .foreground-content .content-wrapper, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.primary-content) div div:nth-of-type(2) p.foreground-container .foreground-content p {
     padding-inline: 0;
-  }
+  } */
 
-  .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content  .content-wrapper > * {
+  /* .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content  .content-wrapper > * {
     padding-inline: var(--space-4);
-  }
+  } */
 
   .storyteller div p:nth-of-type(2) video, .storyteller.primary-content div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
     position: absolute;
-  }
-  
-  .storyteller button.video-playbutton {
-    /* margin-inline-end: var(--space-4);  */
   }
 
   .storyteller p:nth-of-type(1) picture {
