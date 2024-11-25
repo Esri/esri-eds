@@ -30,8 +30,9 @@
   --esri-ui-opacity95-inverse: rgb(53 53 53 / 95%);
   --esri-ui-opacity97-inverse: rgb(53 53 53 / 97%);
 
-  /* image filters */
-  --image-white-filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(1857%) hue-rotate(0deg) brightness(109%) contrast(108%);
+  /* icon filters */
+  --image-icon-filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(19%) hue-rotate(330deg) brightness(93%) contrast(91%); 
+
 
   -webkit-font-smoothing: antialiased;
 
@@ -54,6 +55,9 @@
     --esri-ui-opacity90-inverse: rgb(255 255 255/ 90%);
     --esri-ui-opacity95-inverse: rgb(255 255 255/ 95%);
     --esri-ui-opacity97-inverse: rgb(255 255 255/ 97%);
+
+    /* icon filter */
+    --image-icon-filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(1857%) hue-rotate(0deg) brightness(109%) contrast(108%);
   }
 
   /* fonts */
@@ -302,6 +306,7 @@ main {
   .icon img {
     block-size: 100%;
     inline-size: 100%;
+    filter: var(--image-icon-filter);
   }
 
   /* arrow right icon ->
@@ -406,8 +411,3 @@ main {
     background-color: var(--calcite-ui-foreground-2);
   }
 }
-
-/* dark mode for icons */
-.calcite-mode-dark .icon img {
-  filter: var(--image-white-filter);
- }
