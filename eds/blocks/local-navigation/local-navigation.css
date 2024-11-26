@@ -1,12 +1,13 @@
 .local-navigation-wrapper,
 .local-navigation-wrapper :is(nav, div) {
   background-color:  #2b2b2b;
+  color: #fff;
 }
 
 .local-navigation-container {
   position: sticky;
   inset-block-start: 0;
-  z-index: 2;
+  z-index: 3;
 }
 
 .local-navigation {
@@ -28,7 +29,7 @@
   text-decoration: none;
   padding: var(--space-4);
   padding-inline: var(--space-8);
-  color: var(--calcite-ui-text-1, #fff);
+  color: #fff;
 }
 
 .local-navigation .navigation-title a {
@@ -61,7 +62,7 @@
 
 .local-navigation ul li a:hover {
   box-shadow: none;
-  background-color: var(--calcite-ui-foreground-2, #202020);
+  background-color: #202020;
 }
 
 .local-navigation nav .button-container p a {
@@ -69,12 +70,12 @@
   margin-inline-end: 0;
   padding: var(--space-3);
   align-self: center;
-  color: var(--calcite-ui-text-1, #fff);
+  color: #fff;
 }
 
 .local-navigation .navigation-title a:hover {
-  background-color: var(--calcite-ui-foreground-1, #2b2b2b);
-  box-shadow: inset 0 -3px 0 0 var(--calcite-ui-foreground-1, #2b2b2b);
+  background-color: #2b2b2b;
+  box-shadow: inset 0 -3px 0 0 #2b2b2b;
 }
 
 .local-navigation calcite-icon {
@@ -89,7 +90,7 @@
   display: block;
   position: relative;
   inset-block-start: var(--space-10);
-  background-color: var(--calcite-ui-foreground-1, #2b2b2b);
+  background-color: #2b2b2b;
 }
 
 .local-navigation ul {
@@ -105,7 +106,7 @@
 
 .local-navigation ul li a[aria-current='true'] {
   box-shadow: inset 3px 0 0 0 var(--calcite-ui-brand-hover);
-  background-color: var(--calcite-ui-foreground-2, #202020);
+  background-color: #202020;
 }
 
 @media (width >= 616px) {
