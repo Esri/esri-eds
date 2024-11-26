@@ -7,18 +7,19 @@
 .local-navigation-container {
   position: sticky;
   inset-block-start: 0;
-  z-index: 3;
+  z-index: 10;
 }
 
 .local-navigation {
   margin-inline: auto;
-  min-block-size: 56px;
   inline-size: 92vw;
   max-inline-size: 1440px;
 }
   
-.local-navigation nav#main {
+.local-navigation nav {
   display: flex;
+  min-block-size: 56px;
+  border-bottom: 1px solid red;
 }
 
 .local-navigation ul li a {
@@ -55,7 +56,6 @@
 
 .local-navigation .navigation-title {
   flex: 1;
-  z-index: 3001;
   white-space: nowrap;
   padding: 14px 14px 14px 0;
 }
@@ -79,7 +79,6 @@
 }
 
 .local-navigation calcite-icon {
-  z-index: 3001;
   cursor: pointer;
   position: relative;
   inset-block-start: var(--space-4);
@@ -90,11 +89,10 @@
   display: block;
   position: relative;
   inset-block-start: var(--space-10);
-  background-color: #2b2b2b;
 }
 
 .local-navigation ul {
-  z-index: 3001;
+  z-index: 11;
   position: fixed;
   inline-size: 100%;
   inset-inline-end: 0;
@@ -111,8 +109,8 @@
 
 @media (width >= 616px) {
   .local-navigation ul {
-    position: absolute;
-    inline-size: 320px;
+    /* position: absolute; */
+    /* inline-size: 320px; */
   }
 
   .local-navigation nav .button-container p a {
@@ -125,12 +123,12 @@
     margin: 0;
     display: flex;
     position: relative;
-    font-size: 1.3vw;
+    /* font-size: 1.3vw; */
     justify-content: end;
   }
 
   .local-navigation ul li.page-title {
-    position: static;
+    /* position: static; */
   }
 
   .local-navigation ul li a[aria-current='true'] {
