@@ -1,7 +1,7 @@
-/* organization of CSS properties 
- group rules in logical order 
- alphabetize properties within rules 
- example: multiple selectors for <a> elements 
+/* Organization of CSS properties:
+ - group rules in logical order 
+ - alphabetize properties within rules
+ example: multiple selectors for <a> elements
  group them and simplify */
 
 .local-navigation-wrapper,
