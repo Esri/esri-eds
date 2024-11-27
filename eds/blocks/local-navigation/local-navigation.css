@@ -1,3 +1,9 @@
+/* organization of CSS properties 
+ group rules in logical order 
+ alphabetize properties within rules 
+ example: multiple selectors for <a> elements 
+ group them and simplify */
+
 .local-navigation-wrapper,
 .local-navigation-wrapper :is(nav, div) {
   background-color:  #2b2b2b;
@@ -19,7 +25,7 @@
 .local-navigation nav {
   display: flex;
   min-block-size: 56px;
-  border-bottom: 1px solid red;
+  border-block-end: 1px solid red; /* test code; remove */
 }
 
 .local-navigation ul li a {
@@ -28,31 +34,35 @@
   line-height: 25px;
   font-size: var(--font-0);
   text-decoration: none;
-  padding: var(--space-4);
+  padding: var(--space-4); /* simplify padding */
   padding-inline: var(--space-8);
   color: #fff;
 }
 
 .local-navigation .navigation-title a {
   font-size: var(--font-2);
-  color: var(--calcite-ui-text-1);
-  text-decoration: none;
+  /* color: var(--calcite-ui-text-1); */
+  /* text-decoration: none; */
 }
 
 .local-navigation .navigation-title a.button {
+  /* doesn't exist */
   padding: 0;
   margin-inline-end: 0;
   margin-block-start: 0;
   background-color: transparent
 }
 
+/* doesn't exist */
 .local-navigation .navigation-title p {
   margin: 0;
 }
 
+/* doesn't exist */
 .local-navigation div div.button-container {
   display: none;
 }
+
 
 .local-navigation .navigation-title {
   flex: 1;
@@ -65,6 +75,7 @@
   background-color: #202020;
 }
 
+/* no button-container */
 .local-navigation nav .button-container p a {
   display: inline;
   margin-inline-end: 0;
@@ -113,6 +124,7 @@
     /* inline-size: 320px; */
   }
 
+  /* doesn't exist */
   .local-navigation nav .button-container p a {
     display: inline;
   }
@@ -123,7 +135,7 @@
     margin: 0;
     display: flex;
     position: relative;
-    /* font-size: 1.3vw; */
+    /* font-size: 1.3vw; */ /* why? */
     justify-content: end;
   }
 
