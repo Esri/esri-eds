@@ -133,7 +133,7 @@ export default function decorate(block) {
 
     tab.setAttribute('style', `background-image: url(${imgUrl})`);
 
-    const anchor = tab.querySelector('a');
+    const anchor = tab.querySelector('calcite-button,a');
     const innerText = tab.innerText.split('\n').map((el) => el.trim().toLowerCase());
     const hasVideo = innerText.includes('video');
 

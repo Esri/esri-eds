@@ -7,7 +7,7 @@ import {
 
 export default function decorate(block) {
   block.querySelectorAll('.elastic-content-strip > div > div').forEach((div) => {
-    const linkHref = div.querySelector('a').href;
+    const linkHref = div.querySelector('a,calcite-button').href;
 
     const elasticContentWrapper = a({
       class: 'elastic-content-link-wrapper',
