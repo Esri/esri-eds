@@ -405,6 +405,40 @@ function cards(main, document) {
 }
 
 function callToAction(main, document, pathname) {
+  const dataManagement = [
+    '/capabilities/data-management',
+    '/capabilities/field-operations/get-started',
+    '/capabilities/field-operations/overview',
+    '/capabilities/mapping/overview',
+    '/capabilities/mapping/smart-mapping',
+  ];
+  if (dataManagement.some((path) => pathname.endsWith(path))) {
+    const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
+    const formSection = ctaSection.previousElementSibling;
+
+    const ctaQuestions = ctaSection.querySelector('.cta-questions > .twosections > .cta-questions_social');
+    // console.log('ctaQuestions', ctaQuestions.outerHTML);
+    const tmhBlockGroups = ctaQuestions.querySelectorAll('.tmh-block-group');
+    tmhBlockGroups.forEach((tmhBlockGroup) => {
+      const newChildren = [...tmhBlockGroup.children].map((child) => {
+        const liElem = document.createElement('li');
+        liElem.append(child);
+        return liElem;
+      });
+      tmhBlockGroup.replaceChildren(...newChildren);
+    });
+
+    const children = [...ctaQuestions.children];
+    if (children.length !== 3) {
+      throw new Error('callToAction expected 3 children', ctaQuestions.outerHTML);
+    }
+    const leftChild = children[0];
+    const rightChild = children[2];
+    //console.log('cta children', leftChild.outerHTML, rightChild.outerHTML);
+    const ctaCells = [[leftChild, rightChild]];
+    createBlock(ctaSection, document, 'Call to action', ctaCells);
+  }
+
   const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
   if (!ctaSection) {
     return;
@@ -556,7 +590,7 @@ function inlineIcons(main, html) {
   const foundIcons = [];
   const notFoundIcons = [];
 
-  main.querySelectorAll('.esri-text__iconContainer > svg, .esri-text__iconContainer > span > svg, .ecs__panel__icon > svg')
+  main.querySelectorAll('.esri-text__iconContainer > svg, .esri-text__iconContainer > span > svg, .ecs__panel__icon > svg, .cta-questions svg')
     .forEach((icon) => {
       const path = icon.querySelector('path');
       let color = path.style.fill;
@@ -576,6 +610,7 @@ function inlineIcons(main, html) {
           icon: icon.outerHTML,
         });
       } else {
+        console.log('Found icon', iconName);
         foundIcons.push({
           name: iconName,
           color,
@@ -881,7 +916,7 @@ function largeContentStack(main, document) {
 }
 
 function transformers(main, document, html, pathname) {
-  inlineIcons(main, html);
+  // inlineIcons(main, html);
 
   newsletter(main, document);
   createMetadata(main, document, pathname, html);
@@ -892,8 +927,8 @@ function transformers(main, document, html, pathname) {
   storyteller(main, document);
   switchers(main, document);
   mediaGallery(main, document);
-  cards(main, document);
   callToAction(main, document, pathname);
+  cards(main, document);
   elasticContentStrip(main, document);
   map(main, document, pathname);
   quote(main, document);
@@ -907,6 +942,9 @@ function transformers(main, document, html, pathname) {
 }
 
 export default {
+  preprocess: ({ document, html }) => {
+    inlineIcons(document.querySelector('main'), html);
+  },
   transform: ({ document, url, html }) => {
     const { pathname } = new URL(url);
 
@@ -915,7 +953,10 @@ export default {
     };
     fragmentPages = [];
 
+    const parsedHtml = new DOMParser().parseFromString(html, 'text/html');
+
     const main = document.querySelector('main');
+    console.log('*Before* svgs amount in questions', main.querySelectorAll('.cta-questions svg').length, parsedHtml.querySelectorAll('.cta-questions svg').length);
     WebImporter.DOMUtils.remove(main, [
       'header',
       'footer',
@@ -924,6 +965,7 @@ export default {
       'button.paginate-container.icon-ui-down',
       '.paginate-container',
     ]);
+    console.log('*After* svgs amount in questions', main.querySelectorAll('.cta-questions svg').length);
 
     transformers(main, document, html, pathname);
 
