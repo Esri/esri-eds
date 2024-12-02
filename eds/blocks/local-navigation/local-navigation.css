@@ -1,116 +1,60 @@
-/* Organization of CSS properties:
- - group rules in logical order 
- - alphabetize properties within rules
- example: multiple selectors for <a> elements
- group them and simplify */
-
-.local-navigation-wrapper,
-.local-navigation-wrapper :is(nav, div) {
-  background-color:  #2b2b2b;
-  color: #fff;
+.local-navigation-container {
+  background-color: #2b2b2b;
 }
 
-.local-navigation-container {
+.local-navigation-wrapper {
+  z-index: 3000;
+  display: flex;
   position: sticky;
+  block-size: 60px;
+  align-items: center;
   inset-block-start: 0;
-  z-index: 10;
 }
 
 .local-navigation {
-  margin-inline: auto;
-  inline-size: 92vw;
-  max-inline-size: 1440px;
+  inline-size: 1440px;
+  margin-inline: var(--space-8);
 }
   
 .local-navigation nav {
   display: flex;
-  min-block-size: 56px;
-  border-block-end: 1px solid red; /* test code; remove */
 }
 
-.local-navigation ul li a {
-  display: block;
-  cursor: pointer;
-  line-height: 25px;
-  font-size: var(--font-0);
-  text-decoration: none;
-  padding: var(--space-4); /* simplify padding */
-  padding-inline: var(--space-8);
-  color: #fff;
+.local-navigation .navigation-title {
+  white-space: nowrap;
+  font-size: var(--font-2);
 }
 
 .local-navigation .navigation-title a {
-  font-size: var(--font-2);
-  /* color: var(--calcite-ui-text-1); */
-  /* text-decoration: none; */
-}
-
-.local-navigation .navigation-title a.button {
-  /* doesn't exist */
-  padding: 0;
-  margin-inline-end: 0;
-  margin-block-start: 0;
-  background-color: transparent
-}
-
-/* doesn't exist */
-.local-navigation .navigation-title p {
-  margin: 0;
-}
-
-/* doesn't exist */
-.local-navigation div div.button-container {
-  display: none;
-}
-
-
-.local-navigation .navigation-title {
-  flex: 1;
-  white-space: nowrap;
-  padding: 14px 14px 14px 0;
-}
-
-.local-navigation ul li a:hover {
-  box-shadow: none;
-  background-color: #202020;
-}
-
-/* no button-container */
-.local-navigation nav .button-container p a {
-  display: inline;
-  margin-inline-end: 0;
-  padding: var(--space-3);
-  align-self: center;
   color: #fff;
 }
 
 .local-navigation .navigation-title a:hover {
-  background-color: #2b2b2b;
   box-shadow: inset 0 -3px 0 0 #2b2b2b;
 }
 
-.local-navigation calcite-icon {
-  cursor: pointer;
-  position: relative;
-  inset-block-start: var(--space-4);
-  inset-inline-end: var(--space-6);
-}
-
-.local-navigation ul li.page-title {
-  display: block;
-  position: relative;
-  inset-block-start: var(--space-10);
-}
-
 .local-navigation ul {
-  z-index: 11;
-  position: fixed;
+  padding: 0;
   inline-size: 100%;
+  position: absolute;
   inset-inline-end: 0;
+  list-style-type: none;
+  margin-block-start: 42px;
 }
 
-.local-navigation ul.mobile-menu[aria-expanded='false'] {
-  display: none;
+.local-navigation ul li a {
+  color: #fff;
+  display: flex;
+  cursor: pointer;
+  block-size: 60px;
+  align-items: center;
+  text-decoration: none;
+  background-color: #2b2b2b;
+  padding-inline: var(--space-8);
+}
+
+.local-navigation ul li a:hover {
+  background-color: #202020;
 }
 
 .local-navigation ul li a[aria-current='true'] {
@@ -118,29 +62,35 @@
   background-color: #202020;
 }
 
+.local-navigation ul.mobile-menu[aria-expanded='false'] {
+  display: none;
+}
+
+.local-navigation calcite-icon {
+  z-index: 3001;
+  color: #fff;
+  cursor: pointer;
+  margin-inline-start: auto;
+}
+
 @media (width >= 616px) {
   .local-navigation ul {
-    /* position: absolute; */
-    /* inline-size: 320px; */
-  }
-
-  /* doesn't exist */
-  .local-navigation nav .button-container p a {
-    display: inline;
+    inline-size: 320px;
   }
 }
 
 @media (width >= 975px) {
-  .local-navigation ul {
-    margin: 0;
-    display: flex;
-    position: relative;
-    /* font-size: 1.3vw; */ /* why? */
-    justify-content: end;
+  .local-navigation-wrapper {
+    max-inline-size: 1440px;
   }
 
-  .local-navigation ul li.page-title {
-    /* position: static; */
+  .local-navigation nav {
+    align-items: center;
+  }
+
+  .local-navigation ul {
+    margin: 0;
+    justify-content: end;
   }
 
   .local-navigation ul li a[aria-current='true'] {
