@@ -130,6 +130,11 @@ function createBlock(container, document, name, cells, variants = []) {
   }));
 }
 
+function cellsFromDictionary(dictionary) {
+  return Object.entries(dictionary)
+    .map(([key, value]) => [[key], [value]]);
+}
+
 function hero(main, document) {
   const heroContainer = document
     .querySelector('div.hero-banner-global-v2.aem-GridColumn');
@@ -155,7 +160,7 @@ function hero(main, document) {
     throw new Error('Hero parts not found');
   }
 
-  const cells = Object.entries(heroParts).map(([key, value]) => [[key], [value]]);
+  const cells = cellsFromDictionary(heroParts);
 
   createBlock(heroContainer, document, 'hero', cells);
 }
@@ -404,7 +409,52 @@ function cards(main, document) {
     });
 }
 
-function callToAction(main, document, pathname) {
+function looseJsParse(obj) {
+  return eval(`(${obj})`);
+}
+
+function form(main) {
+  console.log('container');
+  const formEl = main.querySelector('.esri-one-form');
+  if (!formEl) {
+    return;
+  }
+
+  const secondScript = formEl.querySelector('script:nth-of-type(2)');
+  const regex = /window\.initOneForm\('([^']+)',\s*({[\s\S]+?})\);/;
+
+  const match = secondScript.textContent.match(regex);
+
+  if (match) {
+    const jsString = match[2];
+
+    const formProps = looseJsParse(jsString);
+
+    const fields = {
+      divId: formProps.divId,
+      formName: formProps.formName,
+      formModalLookup: formProps.formModalLookup,
+      pardotHandler: formProps.pardotHandler,
+      organicSfId: formProps.organicSfId,
+      thankYouFormType: formProps.thankYouFormType,
+      mqlBehavior: formProps.mqlBehavior,
+      gdprMode: formProps.gdprMode,
+      sideDrawerWidth: formProps.sideDrawerWidth,
+    };
+
+    Object.keys(fields).forEach((key) => {
+      if (!fields[key]) {
+        delete fields[key];
+      }
+    });
+
+    createBlock(formEl, document, 'form', cellsFromDictionary(fields));
+  } else {
+    throw new Error('No match found for form initOneForm call');
+  }
+}
+
+function callToAction(main, document, html, pathname) {
   const dataManagement = [
     '/capabilities/data-management',
     '/capabilities/field-operations/get-started',
@@ -415,6 +465,7 @@ function callToAction(main, document, pathname) {
   if (dataManagement.some((path) => pathname.endsWith(path))) {
     const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
     const formSection = ctaSection.previousElementSibling;
+    // processForm(formSection, document);
 
     const ctaQuestions = ctaSection.querySelector('.cta-questions > .twosections > .cta-questions_social');
     // console.log('ctaQuestions', ctaQuestions.outerHTML);
@@ -927,7 +978,7 @@ function transformers(main, document, html, pathname) {
   storyteller(main, document);
   switchers(main, document);
   mediaGallery(main, document);
-  callToAction(main, document, pathname);
+  callToAction(main, document, html, pathname);
   cards(main, document);
   elasticContentStrip(main, document);
   map(main, document, pathname);
@@ -943,7 +994,9 @@ function transformers(main, document, html, pathname) {
 
 export default {
   preprocess: ({ document, html }) => {
-    inlineIcons(document.querySelector('main'), html);
+    const main = document.querySelector('main');
+    inlineIcons(main, html);
+    form(main);
   },
   transform: ({ document, url, html }) => {
     const { pathname } = new URL(url);
