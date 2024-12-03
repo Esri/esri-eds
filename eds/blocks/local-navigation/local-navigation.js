@@ -6,7 +6,7 @@ import { domEl } from '../../scripts/dom-helpers.js';
  */
 function updateURL(url) {
   const ISLOCAL = /localhost/gm;
-  const currDomain = ISLOCAL.test(window.location.href) ? 'http://localhost:3000' : '';
+  const currDomain = ISLOCAL.test(window.location.href) ? window.location.origin : '';
   return url.replace(/^https?:\/\/[^/]+/, currDomain);
 }
 
