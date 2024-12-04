@@ -415,12 +415,12 @@ function cards(main, document) {
 }
 
 function looseJsParse(obj) {
+  // eslint-disable-next-line no-eval
   return eval(`(${obj})`);
 }
 
 function form(main) {
-  console.log('container');
-  const formEl = main.querySelector('.esri-one-form');
+  const formEl = main.querySelector('.esri-one-form,.one-form-sites-form-component');
   if (!formEl) {
     return;
   }
@@ -501,18 +501,6 @@ function callToAction(main, document, html, pathname) {
   }
 
   const ctaSections = [ctaSection];
-
-  const form = main.querySelector('.esri-one-form');
-  if (form) {
-    let nextSibling = form.nextElementSibling;
-    const siblings = [];
-    while (nextSibling && nextSibling !== ctaSection) {
-      siblings.push(nextSibling);
-      nextSibling = nextSibling.nextElementSibling;
-    }
-
-    ctaSections.unshift(...siblings);
-  }
 
   const newCta = document.createElement('div');
   // append newCta right before ctaSection
