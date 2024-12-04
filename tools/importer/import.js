@@ -505,7 +505,6 @@ function form(main, pathname) {
 
   const formParent = formEl.parentElement;
 
-
   const ctaGroup = getPageCTAGroup(pathname);
   if (ctaGroup !== 'real-time') {
     createBlock(formEl, document, 'form', cellsFromDictionary(fields));
@@ -513,17 +512,18 @@ function form(main, pathname) {
   }
 
   const lastPart = formParent.lastElementChild;
-  const formColumns = lastPart.querySelectorAll('.columnsystem > .column-8');
+  const formColumns = lastPart.querySelectorAll('.columnsystem > .column-8,#getstarted > *');
   if (formColumns.length !== 3) {
     console.error('Expected 3 columns', formColumns);
     throw new Error('Expected 3 columns');
   }
   // column 2 has display none
   const secondColumn = formColumns[2];
-  formColumns[1].textContent = '';
-  const visibleColumns = formColumns;
+  const visibleColumns = [formColumns[0], secondColumn];
+  console.log('secondColumn', secondColumn);
+  console.log('form columns', formColumns);
 
-  const cardContent = secondColumn.querySelector('.card-content');
+  const cardContent = (secondColumn.classList.contains('sales-contact')) ? secondColumn.cloneNode(true) : secondColumn.querySelector('.card-content');
 
   const cells = cellsFromDictionary(fields);
   cells.unshift(['cardContent', cardContent]);
