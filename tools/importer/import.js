@@ -420,47 +420,7 @@ function looseJsParse(obj) {
   return eval(`(${obj})`);
 }
 
-function form(main) {
-  const formEl = main.querySelector('.esri-one-form,.one-form-sites-form-component');
-  if (!formEl) {
-    return;
-  }
-
-  const secondScript = formEl.querySelector('script:nth-of-type(2)');
-  const regex = /window\.initOneForm\('([^']+)',\s*({[\s\S]+?})\);/;
-
-  const match = secondScript.textContent.match(regex);
-
-  if (match) {
-    const jsString = match[2];
-
-    const formProps = looseJsParse(jsString);
-
-    const fields = {
-      divId: formProps.divId,
-      formName: formProps.formName,
-      formModalLookup: formProps.formModalLookup,
-      pardotHandler: formProps.pardotHandler,
-      organicSfId: formProps.organicSfId,
-      thankYouFormType: formProps.thankYouFormType,
-      mqlBehavior: formProps.mqlBehavior,
-      gdprMode: formProps.gdprMode,
-      sideDrawerWidth: formProps.sideDrawerWidth,
-    };
-
-    Object.keys(fields).forEach((key) => {
-      if (!fields[key]) {
-        delete fields[key];
-      }
-    });
-
-    createBlock(formEl, document, 'form', cellsFromDictionary(fields));
-  } else {
-    throw new Error('No match found for form initOneForm call');
-  }
-}
-
-function getCtaGroup(pathname) {
+function getPageCTAGroup(pathname) {
   const threeDGis = [
     '/capabilities/3d-gis/overview',
     '/capabilities/3d-gis/features/3d-data-management',
@@ -484,7 +444,92 @@ function getCtaGroup(pathname) {
     return 'data-management';
   }
 
+  const realTime = [
+    '/capabilities/real-time/features/actuation',
+    '/capabilities/real-time/features/analysis',
+    '/capabilities/real-time/features/dissemination',
+    '/capabilities/real-time/features/ingestion',
+    '/capabilities/real-time/features/storage',
+    '/capabilities/real-time/features/visualization',
+    '/capabilities/real-time/get-started',
+    '/capabilities/real-time/overview',
+    '/capabilities/real-time/partners/cloud-iot-platforms',
+    '/capabilities/real-time/partners/data',
+    '/capabilities/real-time/partners/service',
+  ];
+
+  if (realTime.some((path) => pathname.endsWith(path))) {
+    return 'real-time';
+  }
+
   return null;
+}
+
+function form(main, pathname) {
+  const formEl = main.querySelector('.esri-one-form,.one-form-sites-form-component');
+  if (!formEl) {
+    return;
+  }
+
+  const secondScript = formEl.querySelector('script:nth-of-type(2)');
+  const regex = /window\.initOneForm\('([^']+)',\s*({[\s\S]+?})\);/;
+
+  const match = secondScript.textContent.match(regex);
+
+  if (!match) {
+    throw new Error('No match found for form initOneForm call');
+  }
+
+  const jsString = match[2];
+
+  const formProps = looseJsParse(jsString);
+
+  const fields = {
+    divId: formProps.divId,
+    formName: formProps.formName,
+    formModalLookup: formProps.formModalLookup,
+    pardotHandler: formProps.pardotHandler,
+    organicSfId: formProps.organicSfId,
+    thankYouFormType: formProps.thankYouFormType,
+    mqlBehavior: formProps.mqlBehavior,
+    gdprMode: formProps.gdprMode,
+    sideDrawerWidth: formProps.sideDrawerWidth,
+  };
+
+  Object.keys(fields)
+    .forEach((key) => {
+      if (!fields[key]) {
+        delete fields[key];
+      }
+    });
+
+  const formParent = formEl.parentElement;
+
+
+  const ctaGroup = getPageCTAGroup(pathname);
+  if (ctaGroup !== 'real-time') {
+    createBlock(formEl, document, 'form', cellsFromDictionary(fields));
+    return;
+  }
+
+  const lastPart = formParent.lastElementChild;
+  const formColumns = lastPart.querySelectorAll('.columnsystem > .column-8');
+  if (formColumns.length !== 3) {
+    console.error('Expected 3 columns', formColumns);
+    throw new Error('Expected 3 columns');
+  }
+  // column 2 has display none
+  const secondColumn = formColumns[2];
+  formColumns[1].textContent = '';
+  const visibleColumns = formColumns;
+
+  const cardContent = secondColumn.querySelector('.card-content');
+
+  const cells = cellsFromDictionary(fields);
+  cells.unshift(['cardContent', cardContent]);
+  createBlock(secondColumn.firstElementChild, document, 'form', cells, ['Card modal']);
+
+  lastPart.replaceChildren(...visibleColumns);
 }
 
 function processBlockGroupElement(originalAnchor) {
@@ -505,7 +550,7 @@ function processBlockGroupElement(originalAnchor) {
 }
 
 function callToAction(main, document, html, pathname) {
-  const ctaGroup = getCtaGroup(pathname);
+  const ctaGroup = getPageCTAGroup(pathname);
   if (ctaGroup) {
     const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
 
@@ -855,17 +900,16 @@ function sections(main, document) {
     // remove the cta container logic after implementing cta block
     const columnsDivs = spacingDiv?.querySelectorAll(':not(.cta-container) [data-aem-columnsys]') ?? [];
     if (columnsDivs?.length > 1) {
-      console.error('Section has multiple columns', columnsDivs);
-      throw new Error('Section has multiple columns');
-    }
-
-    columnsDivs[0]?.classList?.forEach((className) => {
-      columnPrefixes.forEach((prefix) => {
-        if (classHasPrefix(className, prefix)) {
-          sectionStyles.push(className);
-        }
+      sectionStyles.push(`column-section-${columnsDivs.length}`);
+    } else {
+      columnsDivs[0]?.classList?.forEach((className) => {
+        columnPrefixes.forEach((prefix) => {
+          if (classHasPrefix(className, prefix)) {
+            sectionStyles.push(className);
+          }
+        });
       });
-    });
+    }
 
     if (sectionStyles.length > 0) {
       section.append(WebImporter.Blocks.createBlock(document, {
@@ -1039,10 +1083,12 @@ function transformers(main, document, html, pathname) {
 }
 
 export default {
-  preprocess: ({ document, html }) => {
+  preprocess: ({ document, url, html }) => {
+    const { pathname } = new URL(url);
+
     const main = document.querySelector('main');
     inlineIcons(main, html);
-    form(main);
+    form(main, pathname);
   },
   transform: ({ document, url, html }) => {
     const { pathname } = new URL(url);
