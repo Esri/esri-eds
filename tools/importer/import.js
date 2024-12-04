@@ -85,7 +85,6 @@ function createMetadata(main, document, pathname, html) {
     meta.localNavigation = true;
   }
 
-
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 }
@@ -491,7 +490,7 @@ function callToAction(main, document, html, pathname) {
     }
     const leftChild = children[0];
     const rightChild = children[2];
-    //console.log('cta children', leftChild.outerHTML, rightChild.outerHTML);
+    // console.log('cta children', leftChild.outerHTML, rightChild.outerHTML);
     const ctaCells = [[leftChild, rightChild]];
     createBlock(ctaSection, document, 'Call to action', ctaCells);
   }
