@@ -80,6 +80,12 @@ function createMetadata(main, document, pathname, html) {
   meta.Description = document.querySelector('meta[property="og:description"]').content;
   meta.Breadcrumbs = getBreadcrumbs(html, pathname).join(', ');
 
+  const container = document.querySelector('.local-navigation.aem-GridColumn');
+  if (container) {
+    meta.localNavigation = true;
+  }
+
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 }
@@ -846,13 +852,6 @@ function links(main, document) {
     });
 }
 
-function localNavigation(main, document) {
-  const container = document.querySelector('.local-navigation.aem-GridColumn');
-  if (container) {
-    createBlock(container, document, 'Local navigation', [['']]);
-  }
-}
-
 function newsletter(main, document) {
   const newsletterContainer = document.querySelector('aside#side-drawer');
   if (newsletterContainer) {
@@ -974,7 +973,6 @@ function transformers(main, document, html, pathname) {
   videos(main, document);
   calciteButton(main, document);
   links(main, document);
-  localNavigation(main, document);
   storyteller(main, document);
   switchers(main, document);
   mediaGallery(main, document);
