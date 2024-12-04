@@ -10,7 +10,7 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
-  loadScript,
+  loadScript, getMetadata,
 } from './aem.js';
 
 import {
@@ -33,6 +33,14 @@ function buildHeroBlock(main) {
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
     section.append(buildBlock('hero', { elems: [picture, h1] }));
+    main.prepend(section);
+  }
+}
+
+function buildLocalNavigation(main) {
+  if (getMetadata('localnavigation') === 'true') {
+    const section = document.createElement('div');
+    section.append(buildBlock('local-navigation', ''));
     main.prepend(section);
   }
 }
@@ -126,6 +134,7 @@ function decorateVideoLinks(element) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildLocalNavigation(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
