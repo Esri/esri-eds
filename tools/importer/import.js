@@ -6,6 +6,7 @@ let report = {};
 let fragmentPages = [];
 let theme = '';
 const edsUrl = 'https://main--esri--aemsites.aem.live';
+const esriUrlRoot = 'https://www.esri.com';
 
 function toClassName(name) {
   return typeof name === 'string'
@@ -459,7 +460,19 @@ function form(main) {
   }
 }
 
-function callToAction(main, document, html, pathname) {
+function getCtaGroup(pathname) {
+  const threeDGis = [
+    '/capabilities/3d-gis/overview',
+    '/capabilities/3d-gis/features/3d-data-management',
+    '/capabilities/3d-gis/features/3d-analysis',
+    '/capabilities/3d-gis/features/3d-visualization',
+    '/capabilities/3d-gis/features/3d-immersive-experiences',
+  ];
+
+  if (threeDGis.some((path) => pathname.endsWith(path))) {
+    return '3d-gis';
+  }
+
   const dataManagement = [
     '/capabilities/data-management',
     '/capabilities/field-operations/get-started',
@@ -468,31 +481,78 @@ function callToAction(main, document, html, pathname) {
     '/capabilities/mapping/smart-mapping',
   ];
   if (dataManagement.some((path) => pathname.endsWith(path))) {
-    const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
-    const formSection = ctaSection.previousElementSibling;
-    // processForm(formSection, document);
+    return 'data-management';
+  }
 
-    const ctaQuestions = ctaSection.querySelector('.cta-questions > .twosections > .cta-questions_social');
-    // console.log('ctaQuestions', ctaQuestions.outerHTML);
-    const tmhBlockGroups = ctaQuestions.querySelectorAll('.tmh-block-group');
-    tmhBlockGroups.forEach((tmhBlockGroup) => {
-      const newChildren = [...tmhBlockGroup.children].map((child) => {
-        const liElem = document.createElement('li');
-        liElem.append(child);
-        return liElem;
-      });
-      tmhBlockGroup.replaceChildren(...newChildren);
+  return null;
+}
+
+function processBlockGroupElement(originalAnchor) {
+  const href = originalAnchor
+    .getAttribute('href');
+  const linkUrl = (href.startsWith('tel:')) ? href : esriUrlRoot + href;
+  const link = document.createElement('a');
+  link.setAttribute('href', linkUrl);
+  link.textContent = linkUrl;
+
+  const newChildInnerDiv = document.createElement('div');
+  newChildInnerDiv.append(...originalAnchor.children);
+
+  const newChild = document.createElement('div');
+  newChild.append(link, newChildInnerDiv);
+
+  return newChild;
+}
+
+function callToAction(main, document, html, pathname) {
+  const ctaGroup = getCtaGroup(pathname);
+  if (ctaGroup) {
+    const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
+
+    const ctaQuestions = ctaSection.querySelector('.cta-questions .cta-questions_social');
+
+    ctaQuestions.querySelectorAll('.tmh-block-group').forEach((tmhBlockGroup) => {
+      const cells = [...tmhBlockGroup.children]
+        .map((child) => [processBlockGroupElement(child.querySelector('a'))]);
+
+      createBlock(tmhBlockGroup, document, 'Cards', cells);
+    });
+
+    ctaQuestions.querySelectorAll('.questions-contact').forEach((questionsContact) => {
+      const cells = [...questionsContact.children]
+        .map((child) => [processBlockGroupElement(child)]);
+
+      createBlock(questionsContact, document, 'Cards', cells);
     });
 
     const children = [...ctaQuestions.children];
-    if (children.length !== 3) {
-      throw new Error('callToAction expected 3 children', ctaQuestions.outerHTML);
+    if (children.length !== 3 && children.length !== 1) {
+      throw new Error('callToAction expected 3 or 1 children', ctaQuestions.outerHTML);
     }
     const leftChild = children[0];
     const rightChild = children[2];
-    // console.log('cta children', leftChild.outerHTML, rightChild.outerHTML);
-    const ctaCells = [[leftChild, rightChild]];
-    createBlock(ctaSection, document, 'Call to action', ctaCells);
+
+    const ctaColumns = [leftChild];
+    if (rightChild) {
+      ctaColumns.push(document.createElement('hr'), rightChild);
+    }
+
+    const language = pathname.split('/')[1];
+
+    const fragmentPathname = `/${language}/call-to-action/${ctaGroup}`;
+
+    const link = document.createElement('a');
+    const url = edsUrl + fragmentPathname;
+    link.setAttribute('href', url);
+    link.textContent = url;
+    const wrapper = document.createElement('div');
+    wrapper.append(...ctaColumns);
+    ctaQuestions.replaceChildren(link);
+
+    fragmentPages.push({
+      element: wrapper,
+      path: fragmentPathname,
+    });
   }
 
   const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
@@ -556,7 +616,7 @@ function transformUrls(main) {
       }
 
       if (!urlPathnames.includes(href)) {
-        const newUrl = `https://www.esri.com${href}`;
+        const newUrl = `${esriUrlRoot}${href}`;
         a.setAttribute('href', newUrl);
         const trimmedContent = a.textContent.trim();
         if (trimmedContent === '' || trimmedContent === href) {
@@ -660,6 +720,7 @@ function inlineIcons(main, html) {
           color,
         });
       }
+
       const newIcon = createIcon(iconName, '');
       icon.replaceWith(newIcon);
     });
