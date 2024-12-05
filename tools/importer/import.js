@@ -651,7 +651,7 @@ function callToAction(main, document, html, pathname) {
     ctaLink.setAttribute('href', fragmentUrl);
     ctaLink.textContent = fragmentUrl;
 
-    createBlock(newCta, document, 'Call to action', [[ctaLink]]);
+    createBlock(newCta, document, 'Call to action', [[ctaLink]], ['fragment']);
     return;
   }
 
@@ -668,7 +668,7 @@ function callToAction(main, document, html, pathname) {
     ctaLink.setAttribute('href', fragmentUrl);
     ctaLink.textContent = fragmentUrl;
 
-    createBlock(experienceFragment, document, 'Call to action', [[ctaLink]]);
+    createBlock(experienceFragment, document, 'Call to action', [[ctaLink]], ['fragment']);
     return;
   }
 
@@ -723,7 +723,7 @@ function callToAction(main, document, html, pathname) {
       path: fragmentPathname,
     });
 
-    createBlock(ctaQuestions, document, 'Call to action', [[link]]);
+    createBlock(ctaQuestions, document, 'Call to action', [[link]], ['fragment']);
     return;
   }
 
@@ -743,6 +743,7 @@ function callToAction(main, document, html, pathname) {
   const cells = ctaSections.map((container) => {
     const hasEmbeddedBlock = container.querySelector('table');
     if (hasEmbeddedBlock) {
+      throw new Error('callToAction has embedded block in default case');
       const fragmentPathname = `${pathname}/call-to-action`;
 
       const link = document.createElement('a');
