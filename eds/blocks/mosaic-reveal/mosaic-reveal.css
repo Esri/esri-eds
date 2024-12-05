@@ -6,7 +6,6 @@
 }
 
 .mosaic-reveal-container h2 {
-  color: var(--calcite-ui-text-1);
   font-size: calc(100% + 6vw);
   line-height: 1.1;
   font-weight: var(--calcite-font-weight-medium);
@@ -44,7 +43,7 @@
   inline-size: 100%;
   block-size: 100%;
   inset-inline-start: 0;
-  background-color: #0079c1;
+  background-color: var(--calcite-ui-foreground-1);
   z-index: 5;
   display: flex;
   align-items: center;
@@ -56,12 +55,7 @@
   opacity: 1;
 }
 
-.mosaic-reveal .mosaic-reveal-content > h3,
-.mosaic-reveal .mosaic-reveal-content > p,
-.mosaic-reveal .mosaic-reveal-content > p > a,
-.mosaic-reveal .mosaic-reveal-content > .button-container {
-  margin-block-start: 0;
-  color: var(--calcite-ui-text-1);
+.mosaic-reveal .mosaic-reveal-content > :is(h3, p, p > a, .button-container) {
   inline-size: 80%;
 }
 
@@ -69,7 +63,6 @@
   font-size: 1.414rem;
   margin: 0 0 var(--space-4) 0;
   line-height: 1.375;
-  font-weight: var(--calcite-font-weight-normal);
 }
 
 .mosaic-reveal .mosaic-reveal-content > p:nth-child(3) {
@@ -162,7 +155,7 @@
   }
 
   .mosaic-reveal .title {
-    padding: var(--space-3) var(--space-12) var(--space-12) var(--space-12);
+    padding: var(--space-3) var(--space-12) var(--space-12);
   }
 }
 
@@ -198,6 +191,6 @@
 
 @media (width >= 1450px) {
   .mosaic-reveal .title {
-    padding: var(--space-3) var(--space-12) var(--space-12) var(--space-12);
+    padding: var(--space-3) var(--space-12) var(--space-12);
   }
 }
