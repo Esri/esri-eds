@@ -10,10 +10,28 @@ export default async function decorate(block) {
   block.closest('.section').classList.add('calcite-mode-dark', 'dark');
   block.classList.add('calcite-mode-dark', 'dark');
   const config = readBlockConfig(block);
-  const divId = getMetadata('formdivid') || config.divId;
-  config.divId = divId;
+  const divId = getMetadata('formdivid') || config.divid;
+  config.divid = divId;
 
-  block.replaceChildren(div({ id: divId }));
+  const formDiv = div({
+    id: divId,
+    class: 'one-form',
+  });
+  if (block.classList.contains('card-modal')) {
+    delete config.cardcontent;
+    // we need to find it "again" because the html is not preserved in readBlockConfig
+    const cardContent = [...block.querySelectorAll(':scope > div')]
+      .find((el) => el.firstElementChild.textContent === 'cardContent')
+      .lastElementChild;
+    block.replaceChildren(
+      formDiv,
+      div({ class: 'card-modal-content' }, cardContent),
+    );
+  } else {
+    block.replaceChildren(formDiv);
+  }
+
+  // TODO get card if modals
 
   await Promise.all([
     loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
@@ -68,5 +86,16 @@ export default async function decorate(block) {
   // merge config and baseFormProps
   const formProps = { ...baseFormProps, ...config };
 
-  window.initOneForm(divId, formProps);
+  // workaround for initOneForm requiring the form div to be in the DOM,
+  // which it is not when loaded as a fragment
+  const observer = new MutationObserver((mutationsList) => {
+    mutationsList.forEach((mutation) => {
+      if (mutation.type === 'childList' && document.getElementById(divId)) {
+        window.initOneForm(divId, formProps);
+        observer.disconnect();
+      }
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
