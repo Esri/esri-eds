@@ -5,7 +5,7 @@ import svgs from './svgs.js';
 let report = {};
 let fragmentPages = [];
 let theme = '';
-const edsUrl = 'https://main--esri--aemsites.aem.live';
+const edsUrl = 'https://main--esri-eds--esri.aem.live';
 const esriUrlRoot = 'https://www.esri.com';
 
 function toClassName(name) {
@@ -722,6 +722,9 @@ function callToAction(main, document, html, pathname) {
       element: wrapper,
       path: fragmentPathname,
     });
+
+    createBlock(ctaQuestions, document, 'Call to action', [[link]]);
+    return;
   }
 
   const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
