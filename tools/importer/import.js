@@ -70,8 +70,10 @@ function getBreadcrumbs(html, pathname) {
   return breadcrumbs;
 }
 
+const preprocessMetadata = {};
+
 function createMetadata(main, document, pathname, html) {
-  const meta = {};
+  const meta = preprocessMetadata;
 
   const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
   meta.Theme = urlInfo.Theme;
@@ -451,15 +453,29 @@ function getPageCTAGroup(pathname) {
     '/capabilities/real-time/features/ingestion',
     '/capabilities/real-time/features/storage',
     '/capabilities/real-time/features/visualization',
-    '/capabilities/real-time/get-started',
-    '/capabilities/real-time/overview',
+  ];
+
+  if (realTime.some((path) => pathname.endsWith(path))) {
+    return 'real-time';
+  }
+
+  const realTimeOmitFragment = [
     '/capabilities/real-time/partners/cloud-iot-platforms',
     '/capabilities/real-time/partners/data',
     '/capabilities/real-time/partners/service',
   ];
 
-  if (realTime.some((path) => pathname.endsWith(path))) {
-    return 'real-time';
+  if (realTimeOmitFragment.some((path) => pathname.endsWith(path))) {
+    return 'real-time-omit-fragment';
+  }
+
+  const realTimeOmitFragmentSpecial = [
+    '/capabilities/real-time/get-started',
+    '/capabilities/real-time/overview',
+  ];
+
+  if (realTimeOmitFragmentSpecial.some((path) => pathname.endsWith(path))) {
+    return 'real-time-omit-fragment-special';
   }
 
   return null;
@@ -505,6 +521,9 @@ function form(main, pathname) {
 
   const formParent = formEl.parentElement;
 
+  // TODO only add to metadata when moving form to a fragment => and then remove it from the fragment divId
+  preprocessMetadata.formDivId = fields.divId;
+
   const ctaGroup = getPageCTAGroup(pathname);
   if (ctaGroup !== 'real-time') {
     createBlock(formEl, document, 'form', cellsFromDictionary(fields));
@@ -512,18 +531,17 @@ function form(main, pathname) {
   }
 
   const lastPart = formParent.lastElementChild;
-  const formColumns = lastPart.querySelectorAll('.columnsystem > .column-8,#getstarted > *');
+  const formColumns = lastPart.querySelectorAll('.columnsystem > .column-8');
   if (formColumns.length !== 3) {
     console.error('Expected 3 columns', formColumns);
     throw new Error('Expected 3 columns');
   }
   // column 2 has display none
   const secondColumn = formColumns[2];
-  const visibleColumns = [formColumns[0], secondColumn];
-  console.log('secondColumn', secondColumn);
-  console.log('form columns', formColumns);
+  formColumns[1].textContent = '';
+  const visibleColumns = [formColumns[0], formColumns[2]];
 
-  const cardContent = (secondColumn.classList.contains('sales-contact')) ? secondColumn.cloneNode(true) : secondColumn.querySelector('.card-content');
+  const cardContent = secondColumn.querySelector('.card-content');
 
   const cells = cellsFromDictionary(fields);
   cells.unshift(['cardContent', cardContent]);
@@ -549,8 +567,111 @@ function processBlockGroupElement(originalAnchor) {
   return newChild;
 }
 
+function classHasPrefix(className, prefix) {
+  return className.startsWith(prefix) && className.length > prefix.length;
+}
+
+function processSection(section) {
+  const sectionStyles = [];
+  if (section.children.length === 1) {
+    const child = section.firstElementChild;
+    if (child.classList.contains('text-center')) {
+      sectionStyles.push('centered');
+    }
+  }
+
+  const sectionDivs = [...section.querySelectorAll(':scope > div')];
+  if (sectionDivs.length > 1) {
+    console.error('Section has multiple divs', sectionDivs);
+    throw new Error('Section has multiple divs');
+  }
+
+  const classPrefixes = [
+    'leader-',
+    'trailer-',
+    'padding-leader-',
+    'padding-trailer-',
+  ];
+
+  const spacingDiv = sectionDivs[0];
+
+  spacingDiv?.classList.forEach((className) => {
+    classPrefixes.forEach((prefix) => {
+      if (classHasPrefix(className, prefix)) {
+        sectionStyles.push(className);
+      }
+    });
+  });
+
+  const columnPrefixes = [
+    'column-',
+    'tablet-column-',
+    'phone-column-',
+    'pre-',
+    'post-',
+  ];
+
+  // remove the cta container logic after implementing cta block
+  const columnsDivs = spacingDiv?.querySelectorAll(':not(.cta-container) [data-aem-columnsys]') ?? [];
+  if (columnsDivs?.length > 1) {
+    sectionStyles.push(`column-section-${columnsDivs.length}`);
+  } else {
+    columnsDivs[0]?.classList?.forEach((className) => {
+      columnPrefixes.forEach((prefix) => {
+        if (classHasPrefix(className, prefix)) {
+          sectionStyles.push(className);
+        }
+      });
+    });
+  }
+
+  if (sectionStyles.length > 0) {
+    section.append(WebImporter.Blocks.createBlock(document, {
+      name: 'Section Metadata',
+      cells: { Style: sectionStyles.join(', ') },
+    }));
+  }
+}
+
 function callToAction(main, document, html, pathname) {
+  const language = pathname.split('/')[1];
+
   const ctaGroup = getPageCTAGroup(pathname);
+  console.log('ctaGroup', ctaGroup);
+  if (ctaGroup === 'real-time-omit-fragment') {
+    main.querySelectorAll('.experiencefragment').forEach((fragment) => {
+      fragment.remove();
+    });
+    const newCta = document.createElement('div');
+    main.append(newCta);
+
+    const fragmentPathname = `/${language}/call-to-action/real-time`;
+    const fragmentUrl = edsUrl + fragmentPathname;
+    const ctaLink = document.createElement('a');
+    ctaLink.setAttribute('href', fragmentUrl);
+    ctaLink.textContent = fragmentUrl;
+
+    createBlock(newCta, document, 'Call to action', [[ctaLink]]);
+    return;
+  }
+
+  // TODO check if this works in other languages
+  if (ctaGroup === 'real-time-omit-fragment-special') {
+    const experienceFragment = main.querySelector('.experiencefragment');
+    experienceFragment.previousElementSibling.remove();
+    experienceFragment.previousElementSibling.remove();
+    experienceFragment.previousElementSibling.remove();
+
+    const fragmentPathname = `/${language}/call-to-action/real-time`;
+    const fragmentUrl = edsUrl + fragmentPathname;
+    const ctaLink = document.createElement('a');
+    ctaLink.setAttribute('href', fragmentUrl);
+    ctaLink.textContent = fragmentUrl;
+
+    createBlock(experienceFragment, document, 'Call to action', [[ctaLink]]);
+    return;
+  }
+
   if (ctaGroup) {
     const ctaSection = main.querySelector('.aem-GridColumn:has(.cta-container)');
 
@@ -577,12 +698,15 @@ function callToAction(main, document, html, pathname) {
     const leftChild = children[0];
     const rightChild = children[2];
 
-    const ctaColumns = [leftChild];
+    const ctaSections = [leftChild];
     if (rightChild) {
-      ctaColumns.push(document.createElement('hr'), rightChild);
+      ctaSections.push(document.createElement('hr'), rightChild);
     }
-
-    const language = pathname.split('/')[1];
+    if (ctaGroup === 'real-time') {
+      const previousSection = ctaSection.closest('.experiencefragment').previousElementSibling;
+      processSection(previousSection, document, pathname);
+      ctaSections.unshift(previousSection, document.createElement('hr'));
+    }
 
     const fragmentPathname = `/${language}/call-to-action/${ctaGroup}`;
 
@@ -591,7 +715,7 @@ function callToAction(main, document, html, pathname) {
     link.setAttribute('href', url);
     link.textContent = url;
     const wrapper = document.createElement('div');
-    wrapper.append(...ctaColumns);
+    wrapper.append(...ctaSections);
     ctaQuestions.replaceChildren(link);
 
     fragmentPages.push({
@@ -852,72 +976,8 @@ function mosaicReveal(main, document) {
     });
 }
 
-function classHasPrefix(className, prefix) {
-  return className.startsWith(prefix) && className.length > prefix.length;
-}
-
 function sections(main, document) {
-  main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn').forEach((section) => {
-    const sectionStyles = [];
-    if (section.children.length === 1) {
-      const child = section.firstElementChild;
-      if (child.classList.contains('text-center')) {
-        sectionStyles.push('centered');
-      }
-    }
-
-    const sectionDivs = [...section.querySelectorAll(':scope > div')];
-    if (sectionDivs.length > 1) {
-      console.error('Section has multiple divs', sectionDivs);
-      throw new Error('Section has multiple divs');
-    }
-
-    const classPrefixes = [
-      'leader-',
-      'trailer-',
-      'padding-leader-',
-      'padding-trailer-',
-    ];
-
-    const spacingDiv = sectionDivs[0];
-
-    spacingDiv?.classList.forEach((className) => {
-      classPrefixes.forEach((prefix) => {
-        if (classHasPrefix(className, prefix)) {
-          sectionStyles.push(className);
-        }
-      });
-    });
-
-    const columnPrefixes = [
-      'column-',
-      'tablet-column-',
-      'phone-column-',
-      'pre-',
-      'post-',
-    ];
-
-    // remove the cta container logic after implementing cta block
-    const columnsDivs = spacingDiv?.querySelectorAll(':not(.cta-container) [data-aem-columnsys]') ?? [];
-    if (columnsDivs?.length > 1) {
-      sectionStyles.push(`column-section-${columnsDivs.length}`);
-    } else {
-      columnsDivs[0]?.classList?.forEach((className) => {
-        columnPrefixes.forEach((prefix) => {
-          if (classHasPrefix(className, prefix)) {
-            sectionStyles.push(className);
-          }
-        });
-      });
-    }
-
-    if (sectionStyles.length > 0) {
-      section.append(WebImporter.Blocks.createBlock(document, {
-        name: 'Section Metadata',
-        cells: { Style: sectionStyles.join(', ') },
-      }));
-    }
-  });
+  main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn').forEach(processSection);
 
   main.querySelectorAll(':scope > .aem-Grid > .aem-GridColumn:not(:last-child)').forEach((section) => {
     if (section.textContent.trim() === '') {
@@ -1098,10 +1158,7 @@ export default {
     };
     fragmentPages = [];
 
-    const parsedHtml = new DOMParser().parseFromString(html, 'text/html');
-
     const main = document.querySelector('main');
-    console.log('*Before* svgs amount in questions', main.querySelectorAll('.cta-questions svg').length, parsedHtml.querySelectorAll('.cta-questions svg').length);
     WebImporter.DOMUtils.remove(main, [
       'header',
       'footer',
@@ -1110,7 +1167,6 @@ export default {
       'button.paginate-container.icon-ui-down',
       '.paginate-container',
     ]);
-    console.log('*After* svgs amount in questions', main.querySelectorAll('.cta-questions svg').length);
 
     transformers(main, document, html, pathname);
 
