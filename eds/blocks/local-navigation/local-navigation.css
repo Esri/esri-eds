@@ -6,7 +6,7 @@
 }
 
 .local-navigation-container:has(nav.calcite-mode-dark) {
-  background-color: var(--calcite-foreground-1);
+  background-color: var(--calcite-ui-foreground-1);
 }
 .local-navigation-wrapper {
   display: flex;
