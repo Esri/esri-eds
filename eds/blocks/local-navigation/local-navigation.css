@@ -1,7 +1,7 @@
 .local-navigation-container {
   background-color: #2b2b2b;
   inset-block-start: 0;
-  /* position: sticky; */
+  position: sticky;
   z-index: 3000;
 }
 
