@@ -17,7 +17,7 @@
   inline-size: 1440px;
   margin-inline: var(--space-8);
 }
-  
+
 .local-navigation nav {
   display: flex;
 }
