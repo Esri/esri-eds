@@ -1,48 +1,51 @@
 import { div } from '../../scripts/dom-helpers.js';
-import { loadScript, loadCSS } from '../../scripts/aem.js';
+import {
+  loadScript,
+  loadCSS,
+  readBlockConfig,
+  getMetadata,
+} from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  const divId = 'one-form-target-div';
+  block.closest('.section').classList.add('calcite-mode-dark', 'dark');
+  block.classList.add('calcite-mode-dark', 'dark');
+  const config = readBlockConfig(block);
+  const divId = getMetadata('formdivid') || config.divId;
+  config.divId = divId;
+  console.log('config', config, divId);
 
-  block.appendChild(div({ id: divId }));
+  block.replaceChildren(div({ id: divId }));
 
-  const section = document.querySelector('.form-container');
-  const metadata = {
-    mode: section.getAttribute('data-mode'),
-    formName: section.getAttribute('data-form-name'),
-    thankYouFormType: section.getAttribute('data-thank-you-form-type'),
-    customFormConfig: section.getAttribute('data-custom-form-config'),
-    mqlBehavior: section.getAttribute('data-mql-behavior'),
-    gdprMode: section.getAttribute('data-gdpr-mode'),
-  };
+  // const section = document.querySelector('.form-container');
 
-  const calciteModeClassName = metadata.mode === 'dark' ? 'calcite-mode-dark' : 'calcite-mode-light';
-  block.classList.add(calciteModeClassName);
-  section.classList.add(calciteModeClassName);
+  // TODO get card if modalds
+
+  // const calciteModeClassName = metadata.mode === 'dark' ? 'calcite-mode-dark' : 'calcite-mode-light';
+  // block.classList.add(calciteModeClassName);
+  // section.classList.add(calciteModeClassName);
 
   await Promise.all([
     loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
     loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
   ]);
 
-  const formProps = {
+  config.aemEditMode = false;
+
+  const baseFormProps = {
     divId,
     aemFieldServiceBasePath: '/content/experience\u002Dfragments/esri\u002Dsites/en\u002Dus/site\u002Dsettings/one\u002Dform\u002Dadmin/master',
     aemEditMode: 'false',
     mode: 'basic-progressive-form',
-    formName: metadata.formName,
     formOpensInAModal: '',
     modalTitle: '',
-    formModalLookup: metadata.formName,
     leftAligned: '',
-    darkMode: metadata.mode === 'dark',
+    darkMode: true, // metadata.mode === 'dark',
     transparentBackground: '',
     pardotHandler: 'https://go.esri.com/l/82202/2022\u002D05\u002D31/pnykw9',
     organicSfId: '7015x000001PKGoAAO',
     isolation: '',
     disablePersonalization: '' === 'true',
     inlineThankYouPage: '',
-    thankYouFormType: metadata.thankYouFormType,
     thankYouBannerImage: '',
     thankYouAssetTitle: '',
     thankYouAssetType: 'Brochure',
@@ -51,9 +54,9 @@ export default async function decorate(block) {
     thankYouHeader: '',
     thankYouMessage: '',
     mqlComment: 'Please review the \x27What Prompted Your Interest?\x27 field for follow up.',
-    mqlBehavior: metadata.mqlBehavior,
+    mqlBehavior: null,
     mqlFormHandler: '',
-    gdprMode: metadata.gdprMode,
+    gdprMode: config.gdprMode,
     showEventConsentCheckBoxes: '' === 'true',
     marketingConsentRequired: '',
     marketingConsentRequiredMessage: '',
@@ -61,7 +64,7 @@ export default async function decorate(block) {
     customMarketingConsentRequiredMessage: '',
     customContactConsentLabel: '',
     customContactConsentRequiredMessage: '',
-    customFormConfig: metadata.customFormConfig,
+    customFormConfig: config.customFormConfig,
     thankyouPageUrl: '',
     thankyouPageParams: '',
     sendEmail: '' === 'true',
@@ -71,6 +74,8 @@ export default async function decorate(block) {
     emailSubject: '',
     emailBody: '',
   };
+  // merge config and baseFormProps
+  const formProps = { ...baseFormProps, ...config };
 
   window.initOneForm(divId, formProps);
 }

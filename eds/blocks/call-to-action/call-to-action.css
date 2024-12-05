@@ -12,6 +12,11 @@
   position: relative;
 }
 
+.call-to-action.fragment {
+  /* to be addressed on a follow-up PR */
+  display: block;
+}
+
 .call-to-action > div {
   display: flex;
   inline-size: 100%;
