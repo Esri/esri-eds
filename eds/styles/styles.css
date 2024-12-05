@@ -11,50 +11,49 @@
  */
 :root {
   /* esri.com colors with opacity */
-  --esri-ui-opacity00: rgb(255 255 255/ 0%);
-  --esri-ui-opacity20: rgb(255 255 255/ 20%);
-  --esri-ui-opacity40: rgb(255 255 255/ 40%);
-  --esri-ui-opacity50: rgb(255 255 255/ 50%);
-  --esri-ui-opacity80: rgb(255 255 255/ 80%);
-  --esri-ui-opacity85: rgb(255 255 255/ 85%);
-  --esri-ui-opacity90: rgb(255 255 255/ 90%);
-  --esri-ui-opacity95: rgb(255 255 255/ 95%);
-  --esri-ui-opacity97: rgb(255 255 255/ 97%);
-  --esri-ui-opacity00-inverse: rgb(53 53 53 / 0%);
-  --esri-ui-opacity20-inverse: rgb(53 53 53 / 2%);
-  --esri-ui-opacity40-inverse: rgb(53 53 53 / 4%);
-  --esri-ui-opacity50-inverse: rgb(53 53 53 / 5%);
-  --esri-ui-opacity80-inverse: rgb(53 53 53 / 80%);
-  --esri-ui-opacity85-inverse: rgb(53 53 53 / 85%);
-  --esri-ui-opacity90-inverse: rgb(53 53 53 / 90%);
-  --esri-ui-opacity95-inverse: rgb(53 53 53 / 95%);
-  --esri-ui-opacity97-inverse: rgb(53 53 53 / 97%);
+  --esri-ui-opacity00: rgb(53 53 53 / 0%);
+  --esri-ui-opacity20: rgb(53 53 53 / 20%);
+  --esri-ui-opacity40: rgb(53 53 53 / 40%);
+  --esri-ui-opacity50: rgb(53 53 53 / 50%);
+  --esri-ui-opacity80: rgb(53 53 53 / 80%);
+  --esri-ui-opacity85: rgb(53 53 53 / 85%);
+  --esri-ui-opacity90: rgb(53 53 53 / 90%);
+  --esri-ui-opacity95: rgb(53 53 53 / 95%);
+  --esri-ui-opacity97: rgb(53 53 53 / 97%);
+  --esri-ui-opacity00-inverse: rgb(255 255 255/ 0%);
+  --esri-ui-opacity20-inverse: rgb(255 255 255/ 2%);
+  --esri-ui-opacity40-inverse: rgb(255 255 255/ 4%);
+  --esri-ui-opacity50-inverse: rgb(255 255 255/ 5%);
+  --esri-ui-opacity80-inverse: rgb(255 255 255/ 80%);
+  --esri-ui-opacity85-inverse: rgb(255 255 255/ 85%);
+  --esri-ui-opacity90-inverse: rgb(255 255 255/ 90%);
+  --esri-ui-opacity95-inverse: rgb(255 255 255/ 95%);
+  --esri-ui-opacity97-inverse: rgb(255 255 255/ 97%);
 
   /* icon filters */
   --image-icon-filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(19%) hue-rotate(330deg) brightness(93%) contrast(91%); 
 
-
   -webkit-font-smoothing: antialiased;
 
   .calcite-mode-dark {
-    --esri-ui-opacity00: rgb(53 53 53 / 0%);
-    --esri-ui-opacity20: rgb(53 53 53 / 20%);
-    --esri-ui-opacity40: rgb(53 53 53 / 40%);
-    --esri-ui-opacity50: rgb(53 53 53 / 50%);
-    --esri-ui-opacity80: rgb(53 53 53 / 80%);
-    --esri-ui-opacity85: rgb(53 53 53 / 85%);
-    --esri-ui-opacity90: rgb(53 53 53 / 90%);
-    --esri-ui-opacity95: rgb(53 53 53 / 95%);
-    --esri-ui-opacity97: rgb(53 53 53 / 97%);
-    --esri-ui-opacity00-inverse: rgb(255 255 255/ 0%);
-    --esri-ui-opacity20-inverse: rgb(255 255 255/ 2%);
-    --esri-ui-opacity40-inverse: rgb(255 255 255/ 4%);
-    --esri-ui-opacity50-inverse: rgb(255 255 255/ 5%);
-    --esri-ui-opacity80-inverse: rgb(255 255 255/ 80%);
-    --esri-ui-opacity85-inverse: rgb(255 255 255/ 85%);
-    --esri-ui-opacity90-inverse: rgb(255 255 255/ 90%);
-    --esri-ui-opacity95-inverse: rgb(255 255 255/ 95%);
-    --esri-ui-opacity97-inverse: rgb(255 255 255/ 97%);
+    --esri-ui-opacity00: rgb(255 255 255/ 0%);
+    --esri-ui-opacity20: rgb(255 255 255/ 20%);
+    --esri-ui-opacity40: rgb(255 255 255/ 40%);
+    --esri-ui-opacity50: rgb(255 255 255/ 50%);
+    --esri-ui-opacity80: rgb(255 255 255/ 80%);
+    --esri-ui-opacity85: rgb(255 255 255/ 85%);
+    --esri-ui-opacity90: rgb(255 255 255/ 90%);
+    --esri-ui-opacity95: rgb(255 255 255/ 95%);
+    --esri-ui-opacity97: rgb(255 255 255/ 97%);
+    --esri-ui-opacity00-inverse: rgb(53 53 53 / 0%);
+    --esri-ui-opacity20-inverse: rgb(53 53 53 / 2%);
+    --esri-ui-opacity40-inverse: rgb(53 53 53 / 4%);
+    --esri-ui-opacity50-inverse: rgb(53 53 53 / 5%);
+    --esri-ui-opacity80-inverse: rgb(53 53 53 / 80%);
+    --esri-ui-opacity85-inverse: rgb(53 53 53 / 85%);
+    --esri-ui-opacity90-inverse: rgb(53 53 53 / 90%);
+    --esri-ui-opacity95-inverse: rgb(53 53 53 / 95%);
+    --esri-ui-opacity97-inverse: rgb(53 53 53 / 97%);
 
     /* icon filter */
     --image-icon-filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(1857%) hue-rotate(0deg) brightness(109%) contrast(108%);
@@ -109,13 +108,13 @@
 }
 
 body {
-  font-size: var(--font-0);
-  margin: 0;
-  font-family: var(--calcite-sans-family);
-  line-height: 1.5;
-  color: var(--calcite-ui-text-1);
   background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
   display: none;
+  font-family: var(--calcite-sans-family);
+  font-size: var(--font-0);
+  line-height: 1.5;
+  margin: 0;
 }
 
 body.appear {
@@ -181,17 +180,17 @@ main {
   }
 
   code {
-    color: var(--calcite-ui-text-2);
     background-color: var(--esri-ui-opacity85-inverse);
+    color: var(--calcite-ui-text-2);
     padding: 0 0.2rem;
   }
 
   pre {
-    overflow: scroll;
     background-color: var(--calcite-ui-foreground-2);
-    padding: 1em;
     border-radius: 0.25em;
+    overflow: scroll;
     overflow-x: auto;
+    padding: 1em;
     white-space: pre;
   }
 
@@ -202,11 +201,11 @@ main {
   }
 
   blockquote {
+    border-inline-start: 2px solid var(--calcite-ui-border-1);
     color: var(--calcite-ui-text-2);
-    margin: var(--space-4) 0;
     font-size: var(--font-1);
     line-height: 1.375;
-    border-inline-start: 2px solid var(--calcite-ui-border-1);
+    margin: var(--space-4) 0;
     padding-inline-start: 1rem;
   }
 
@@ -223,60 +222,60 @@ main {
   }
 
   a:hover, a:focus {
-    text-decoration: underline;
     color: var(--calcite-ui-text-link);
+    text-decoration: underline;
   }
 
   /* horizontal rule */
 
   hr {
-    margin: var(--space-4) 0;
     border: none;
     border-block-start: 1px solid var(--calcite-ui-border-1);
+    margin: var(--space-4) 0;
   }
 
   /* buttons */
 
   a.button:any-link,
   button {
-    font-family: var(--calcite-sans-family);
-    display: inline-block;
-    box-sizing: border-box;
-    text-decoration: none;
-    border: 1px solid transparent;
-    padding: 5px 30px;
-    text-align: center;
-    font-style: normal;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     background-color: var(--calcite-ui-brand);
+    border: 1px solid transparent;
+    box-sizing: border-box;
     color: var(--calcite-ui-text-inverse);
+    cursor: pointer;
+    display: inline-block;
+    font-family: var(--calcite-sans-family);
     font-size: var(--calcite-font-size--1);
+    font-style: normal;
     font-weight: var(--calcite-font-weight-normal);
     line-height: 1rem;
     margin-block-start: var(--space-8);
     margin-inline-end: var(--space-2);
+    overflow: hidden;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   a.button[kind="inverse"] {
-    color: var(--calcite-ui-text-inverse);
     background-color: var(--calcite-ui-inverse);
+    color: var(--calcite-ui-text-inverse);
   }
 
   a.button:hover,
   a.button:focus,
   button:hover,
   button:focus {
-    cursor: pointer;
     background-color: var(--calcite-ui-brand-hover);
+    cursor: pointer;
   }
 
   button:disabled,
   button:disabled:hover {
-    opacity: var(--calcite-ui-opacity-disabled);
     cursor: unset;
+    opacity: var(--calcite-ui-opacity-disabled);
   }
 
   a.button.secondary,
@@ -287,14 +286,14 @@ main {
   }
 
   img {
-    max-inline-size: 100%;
-    inline-size: auto;
     block-size: auto;
+    inline-size: auto;
+    max-inline-size: 100%;
   }
 
   .icon {
-    display: inline-block;
     block-size: 24px;
+    display: inline-block;
     inline-size: 24px;
   }
 
@@ -305,8 +304,8 @@ main {
 
   .icon img {
     block-size: 100%;
-    inline-size: 100%;
     filter: var(--image-icon-filter);
+    inline-size: 100%;
   }
 
   /* arrow right icon ->
@@ -334,53 +333,52 @@ main {
   }
 
   .video-iframe-box {
-    position: fixed;
-    z-index: 5;
-    inline-size: 100vw;
-    block-size: 100vh;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    display: flex;
-    justify-content: center;
     align-items: center;
     background-color: var(--esri-ui-opacity80);
+    block-size: 100vh;
+    display: flex;
+    inline-size: 100vw;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    justify-content: center;
     overscroll-behavior: contain;
+    position: fixed;
+    z-index: 5;
 
     .video-iframe-wrapper {
-      position: relative;
-      inline-size: 85%;
       aspect-ratio: 16/9;
+      inline-size: 85%;
+      position: relative;
 
       .video-close-button {
-        position: absolute;
-        inset-block-start: -20px;
-        inset-inline-end: -20px;
-        inline-size: 50px;
-        block-size: 50px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
         align-items: center;
-        transition: .15s ease-in-out;
         background: var(--calcite-ui-text-1);
         background-color: var(--calcite-ui-text-inverse);
+        block-size: 50px;
         border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        inline-size: 50px;
+        inset-block-start: -20px;
+        inset-inline-end: -20px;
+        justify-content: center;
+        position: absolute;
+        transition: .15s ease-in-out;
       }
 
       .video-close-button:hover {
-        background-color: var(--calcite-ui-brand);
         color: var(--calcite-ui-text-inverse);
-
+        background-color: var(--calcite-ui-brand);
       }
     }
 
     .video-iframe {
+      block-size: 100%;
       border: none;
       inline-size: 100%;
-      block-size: 100%;
-      position: absolute;
       inset-block-start: 0;
       inset-inline-start: 0;
+      position: absolute;
     }
   }
 
