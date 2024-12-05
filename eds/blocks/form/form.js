@@ -12,17 +12,8 @@ export default async function decorate(block) {
   const config = readBlockConfig(block);
   const divId = getMetadata('formdivid') || config.divId;
   config.divId = divId;
-  console.log('config', config, divId);
 
   block.replaceChildren(div({ id: divId }));
-
-  // const section = document.querySelector('.form-container');
-
-  // TODO get card if modalds
-
-  // const calciteModeClassName = metadata.mode === 'dark' ? 'calcite-mode-dark' : 'calcite-mode-light';
-  // block.classList.add(calciteModeClassName);
-  // section.classList.add(calciteModeClassName);
 
   await Promise.all([
     loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
