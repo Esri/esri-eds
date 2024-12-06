@@ -125,6 +125,7 @@ function initNavWrapper(block) {
   mobileButton.setAttribute('aria-label', 'menu');
   htmlNavTag.setAttribute('aria-label', 'main');
   htmlNavTag.setAttribute('aria-expanded', 'false');
+  htmlNavTag.setAttribute('class', 'calcite-mode-dark');
   htmlNavTag.id = 'main';
   ul.classList.add('mobile-menu');
   ul.setAttribute('aria-labelledby', 'nav-title');

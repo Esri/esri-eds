@@ -55,6 +55,7 @@
 
 .local-navigation ul li a:hover {
   background-color: #202020;
+  box-shadow: inset 0 -3px 0 0 var(--calcite-link-blue-underline);
 }
 
 .local-navigation ul li a[aria-current='true'] {
