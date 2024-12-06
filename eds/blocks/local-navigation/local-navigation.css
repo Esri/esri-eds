@@ -11,7 +11,9 @@
   align-items: center;
 }
 
-.local-navigation {
+.local-navigation.block {
+  background-color: inherit;
+  color: inherit;
   inline-size: 1440px;
   margin-inline: var(--space-8);
 }
