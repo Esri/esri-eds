@@ -68,14 +68,23 @@ export default function decorate(block) {
       cardContent.appendChild(startButton);
     }
 
-    const cardTitle = card.children[0];
-    const cardDescription = card.children[1];
+    // Check if there is a category
+    let cardCategory, cardTitle, cardDescription;
+    if (card.children.length === 5) {
+      cardCategory = card.children[0];
+      cardTitle = card.children[1];
+      cardDescription = card.children[2];
+    } else {
+      cardTitle = card.children[0];
+      cardDescription = card.children[1];
+    }
 
-    cardTitle.classList.add('card-title');
-    cardDescription.classList.add('card-description');
-
-    cardContent.appendChild(cardTitle);
-    cardContent.appendChild(cardDescription);
+    [cardCategory, cardTitle, cardDescription].forEach((el, index) => {
+      if (el) {
+        el.classList.add(['card-category', 'card-title', 'card-description'][index]);
+        cardContent.appendChild(el);
+      }
+    });
 
     card.appendChild(cardContent);
   }
