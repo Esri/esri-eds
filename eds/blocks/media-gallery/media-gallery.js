@@ -6,14 +6,18 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
+    while (row.firstElementChild) {
+      li.append(row.firstElementChild);
+    }
     [...li.children].forEach((divElement) => {
       if (
         divElement.children.length === 1
         && divElement.querySelector('picture')
       ) {
         divElement.className = 'cards-card-image';
-      } else divElement.className = 'cards-card-body';
+      } else {
+        divElement.className = 'cards-card-body';
+      }
     });
     ul.append(li);
   });
@@ -73,13 +77,10 @@ export default function decorate(block) {
     let cardTitle;
     let cardDescription;
 
-    if (card.children.length === 5) { /* eslint-disable prefer-destructuring */
-      cardCategory = card.children[0];
-      cardTitle = card.children[1];
-      cardDescription = card.children[2];
+    if (card.children.length === 5) {
+      [cardCategory, cardTitle, cardDescription] = card.children;
     } else {
-      cardTitle = card.children[0];
-      cardDescription = card.children[1];
+      [cardTitle, cardDescription] = card.children;
     }
 
     [cardCategory, cardTitle, cardDescription].forEach((el, index) => {
