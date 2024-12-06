@@ -69,8 +69,11 @@ export default function decorate(block) {
     }
 
     // Check if there is a category
-    let cardCategory, cardTitle, cardDescription;
-    if (card.children.length === 5) {
+    let cardCategory;
+    let cardTitle;
+    let cardDescription;
+
+    if (card.children.length === 5) { /* eslint-disable prefer-destructuring */
       cardCategory = card.children[0];
       cardTitle = card.children[1];
       cardDescription = card.children[2];
