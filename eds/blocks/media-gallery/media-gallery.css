@@ -54,15 +54,29 @@
         justify-content: flex-end;
     }
 
+    .card-category {
+        background-color: var(--esri-ui-opacity85-inverse);
+        color: var(--calcite-ui-text-2);
+        font-size: var(--font-minus-2);
+        font-weight: var(--calcite-font-weight-bold);
+        inline-size: fit-content;
+        line-height: 1;
+        margin-block-end: var(--space-2);
+        margin-inline-start: -1.5rem;
+        padding: var(--space-2);
+        padding-inline-start: 1.5rem;
+        text-transform: uppercase;
+    }
+
     .card-title {
-        pointer-events: none;
         color: white;
-        font-weight: var(--calcite-font-weight-normal);
         font-family: var(--calcite-sans-family);
-        line-height: 1.2;
         font-size: var(--font-2);
-        text-align: start;
+        font-weight: var(--calcite-font-weight-normal);
+        line-height: 1.2;
         margin: 0;
+        pointer-events: none;
+        text-align: start;
     }
 
     .card-description {
