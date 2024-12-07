@@ -7,17 +7,26 @@
   cursor: default;
   text-decoration: none;
 
-  h2 {
-    margin-block: var(--space-8);
-    color: var(--calcite-ui-text-1);
+  .elastic-content-link-wrapper:hover {
+    text-decoration: none;
+  }
 
+  .elastic-content-link-wrapper > div {
+    inline-size: 85%;
+    margin-inline: auto;
+  }
+
+  h2 {
     --title-size: var(--font-3);
 
+    color: var(--calcite-ui-text-1);
     font-size: var(--title-size);
     font-weight: var(--calcite-font-weight-normal);
+    margin-block: var(--space-8);
   }
 
   p {
+    color: var(--calcite-ui-text-1);
     font-size: var(--font-0);
   }
 
@@ -46,7 +55,7 @@
     inline-size: 100%;
 
     --bg-color: var(--calcite-ui-foreground-1);
-    --shadow-color: var(--calcite-ui-text-1);
+    --shadow-color: var(--esri-ui-opacity80);
 
     background-image: url("/assets/location-overview-programs-background.jpeg");
     background-size: cover;
@@ -62,6 +71,7 @@
 
   > div:hover {
     box-shadow: 0 0 0 10px inset var(--shadow-color);
+    text-decoration: none;
   }
 
   .learn-more-icon-container {
