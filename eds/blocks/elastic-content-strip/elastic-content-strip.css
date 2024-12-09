@@ -6,114 +6,112 @@
   inline-size: 100%;
   cursor: default;
   text-decoration: none;
+}
 
-  .elastic-content-link-wrapper:hover {
-    text-decoration: none;
-  }
+.elastic-content-link-wrapper:hover {
+  text-decoration: none;
+}
 
-  .elastic-content-link-wrapper > div {
-    inline-size: 85%;
-    margin-inline: auto;
-  }
+.elastic-content-link-wrapper > div {
+  inline-size: 85%;
+  margin-inline: auto;
+}
 
-  h2 {
-    --title-size: var(--font-3);
+.elastic-content-strip.block h2 {
+  --title-size: var(--font-3);
 
-    color: var(--calcite-ui-text-1);
-    font-size: var(--title-size);
-    font-weight: var(--calcite-font-weight-normal);
-    margin-block: var(--space-8);
-  }
+  color: var(--calcite-ui-text-1);
+  font-size: var(--title-size);
+  font-weight: var(--calcite-font-weight-normal);
+  margin-block: var(--space-8);
+}
 
-  p {
-    color: var(--calcite-ui-text-1);
-    font-size: var(--font-0);
-  }
+.elastic-content-strip.block p {
+  /* Add the styles for the <p> element here */
+}
 
-  span {
-    display: flex;
-    align-items: center;
-    margin: auto;
-    background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-    background-position: 0 100%, 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px, 100% 1px;
-    transition: all .3s ease-in-out;
-    color: var(--calcite-ui-text-1);
-    block-size: 48px;
-    inline-size: 48px;
-  }
+.elastic-content-strip.block span {
+  display: flex;
+  align-items: center;
+  margin: auto;
 
-  > div {
-    text-align: center;
-    flex: 1 0 100%;
-    background-position: center;
-    transition: all .25s ease-in-out;
-    color: var(--calcite-ui-text-1);
-    padding-block: var(--space-20);
-    padding-inline: var(--space-5);
-    inline-size: 100%;
+  /* background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
+  background-position: 0 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px, 100% 1px;
+  transition: all .3s ease-in-out;
+  color: var(--calcite-ui-text-1); */
+}
 
-    --bg-color: var(--calcite-ui-foreground-1);
-    --shadow-color: var(--esri-ui-opacity80);
+.elastic-content-strip.block > div {
+  text-align: center;
+  flex: 1 0 100%;
+  background-position: center;
+  transition: all .25s ease-in-out;
+  color: var(--calcite-ui-text-1);
+  padding-block: var(--space-20);
+  padding-inline: var(--space-5);
+  inline-size: 100%;
 
-    background-image: url("/assets/location-overview-programs-background.jpeg");
-    background-size: cover;
+  --bg-color: var(--calcite-ui-foreground-1);
+  --shadow-color: var(--esri-ui-opacity80);
 
-    > div {
-      inline-size: 85%;
-      align-self: center;
-      position: relative;
-      z-index: 3;
-      margin: auto;
-    }
-  }
+  background-image: url("/assets/location-overview-programs-background.jpeg");
+  background-size: cover;
+}
 
-  > div:hover {
-    box-shadow: 0 0 0 10px inset var(--shadow-color);
-    text-decoration: none;
-  }
+.elastic-content-strip.block > div > div {
+  inline-size: 85%;
+  align-self: center;
+  position: relative;
+  z-index: 3;
+  margin: auto;
+}
 
-  .learn-more-icon-container {
-    display: flex;
-    align-items: center;
-    inline-size: fit-content;
-    margin: auto;
-    background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-    background-position: 0 100%, 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px, 100% 1px;
-    transition: all .3s ease-in-out;
-  }
+.elastic-content-strip.block > div:hover {
+  box-shadow: 0 0 0 10px inset var(--shadow-color);
+  text-decoration: none;
+}
 
-  .learn-more-icon-container:any-link {
-    color: var(--calcite-ui-text-1);
-  }
+.elastic-content-strip.block .learn-more-icon-container {
+  display: flex;
+  align-items: center;
+  inline-size: fit-content;
+  margin: auto;
+  background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
+  background-position: 0 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px, 100% 1px;
+  transition: all .3s ease-in-out;
+}
 
-  > div:is(:focus-within,:focus,:hover) .learn-more-icon-container {
-    background-size: 100% 1px, 100% 1px;
-  }
+.elastic-content-strip.block .learn-more-icon-container:any-link {
+  color: var(--calcite-ui-text-1);
+}
+
+.elastic-content-strip.block > div:is(:focus-within,:focus,:hover) .learn-more-icon-container {
+  background-size: 100% 1px, 100% 1px;
 }
 
 @media (width > 640px) {
-  .elastic-content-strip > div {
+  .elastic-content-strip.block > div {
     flex: 0 0 50%;
     max-inline-size: 50%;
   }
 
-  .elastic-content-strip > div:last-child {
+  .elastic-content-strip.block > div:last-child {
     flex: 0 0 100%;
     max-inline-size: 100%;
   }
 }
 
 @media (width > 900px) {
-  .elastic-content-strip > div {
+  .elastic-content-strip.block > div {
     flex: 0 0 33.33%;
     max-inline-size: 33.33%;
   }
 
-  .elastic-content-strip > div:last-child {
+  .elastic-content-strip.block > div:last-child {
     flex: 0 0 33.33%;
     max-inline-size: 33.33%;
   }
