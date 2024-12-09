@@ -37,7 +37,7 @@ function buildHeroBlock(main) {
   }
 }
 
-function buildLocalNavigation(main) {
+function decorateLocalNavigation(main) {
   if (getMetadata('localnavigation') === 'true') {
     const section = document.createElement('div');
     section.append(buildBlock('local-navigation', ''));
@@ -134,7 +134,6 @@ function decorateVideoLinks(element) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
-    buildLocalNavigation(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -262,6 +261,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    decorateLocalNavigation(main);
     decorateMain(main);
     decorateToCalcite(main);
     document.body.classList.add('appear');
