@@ -1,26 +1,26 @@
 .tabs {
   .columns {
-    padding: 0 var(--space-6);
     inline-size: 96vw;
-    max-inline-size: 1440px;
     margin: auto;
+    max-inline-size: 1440px;
+    padding: 0 var(--space-6);
     text-align: center;
+  }
 
-    & > div {
-      gap: 25px;
+  .columns > div {
+    gap: 25px;
+  }
 
-      & > div {
-        order: 0;
-      }
+  .columns > div > div {
+    order: 0;
+  }
 
-      & > div:first-child {
-        margin-block-end: var(--space-6);
-      }
+  .columns > div > div:first-child {
+    margin-block-end: var(--space-6);
+  }
 
-      & > div:nth-child(2) {
-        margin-block-start: var(--space-5);
-      }
-    }
+  .columns > div > div:nth-child(2) {
+    margin-block-start: var(--space-5);
   }
 
   .cards ul {
@@ -28,56 +28,44 @@
   }
 
   .cards li {
-    flex: 0 0 100%;
     block-size: 100%;
+    flex: 0 0 100%;
   }
 
   .cards a {
     block-size: 100%;
+    color: var(--calcite-ui-text-1);
     display: block;
     text-decoration: none;
-    color: var(--calcite-ui-text-1);
   }
 
-  .cards-card-body picture, .cards-card-body img {
+  .cards-card-body :is(picture, img) {
     aspect-ratio: 342 / 192;
   }
 
   p:last-child {
-    margin-block-end: 0;
+    align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-
-    picture {
-      display: block;
-      position: relative;
-      inline-size: 90vw;
-      aspect-ratio: 1/1;
-    }
-
-    img {
-      position: absolute;
-      inset-block-end: 0;
-      inline-size: 100%;
-      block-size: 100%;
-    }
+    margin-block-end: 0;
   }
 
   .text-wrapper {
     padding: 0 5vw;
     padding-block-start: 4rem;
 
-    p, h2 {
+p, h2 {
       inline-size: 90%;
     }
 
     p:first-child {
+      color: var(--calcite-ui-text-2);
       font-size: var(--font-0);
       font-weight: 600;
-      text-transform: uppercase;
-      color: var(--calcite-ui-text-2);
       margin: 0;
       margin-block-end: 0.5rem;
+      text-transform: uppercase;
     }
 
     p:last-child {
@@ -94,62 +82,62 @@
   }
 
   .cards-card-body {
-    margin: var(--space-2);
     border: solid 1px var(--calcite-ui-border-1);
+    margin: var(--space-2);
 
     & > p:first-child {
       margin-block-end: 0;
     }
 
     & > p:nth-child(2) {
-      margin-inline: var(--space-5);
       color: var(--calcite-ui-text-1);
       font-size: var(--font-2);
       margin-block-end: var(--space-2);
+      margin-inline: var(--space-5);
     }
 
     & > p:last-child {
-      margin-inline: var(--space-5);
       color: var(--calcite-ui-text-1);
+      display: block;
       font-size: var(--font-minus-1);
       margin-block-end: var(--space-6);
+      margin-inline: var(--space-5);
       padding: 0;
-      display: block;
     }
 
     & > p:nth-child(3):not(:last-child) {
-      margin-inline: var(--space-5);
       color: var(--calcite-ui-text-2);
       font-size: var(--font-minus-1);
       margin-block-end: var(--space-2);
+      margin-inline: var(--space-5);
     }
   }
 
   .tab-component {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     inline-size: 100vw;
+    justify-content: flex-end;
   }
 
   .tab-nav {
-    position: relative;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    inline-size: 96vw;
-    padding: 0;
-    margin: 0 auto;
     border-block-end: 1px solid var(--calcite-ui-text-1);
+    display: flex;
+    inline-size: 96vw;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
 
     .tab-titles {
-      padding: 0;
-      list-style-type: none;
-      display: flex;
       align-items: center;
-      justify-content: center;
-      margin-block-end: 0;
+      display: flex;
       inline-size: 100%;
+      justify-content: center;
+      list-style-type: none;
+      margin-block-end: 0;
+      padding: 0;
     }
 
     calcite-icon {
@@ -157,11 +145,11 @@
     }
 
     .arrow-button {
-      position: absolute;
       border: none;
-      padding: 0;
-      opacity: .96;
       margin: auto 0;
+      opacity: .96;
+      padding: 0;
+      position: absolute;
     }
 
     .arrow-button.left {
@@ -180,24 +168,19 @@
       display: block;
       transition: 0.3s ease;
     }
-    
+
     .tab-title button {
       background: none;
       color: var(--calcite-ui-text-1);
       font-size: var(--font-0);
       font-weight: 400;
-      padding: 1rem;
       margin: auto;
       max-inline-size: 286px;
+      padding: 1rem;
+    }
 
-      button {
-        background: none;
-        color: var(--calcite-ui-text-1);
-        font-size: var(--font-0);
-        font-weight: 400;
-        padding: 0.75rem;
-        margin: auto;
-      }
+    .tab-title .icon {
+      margin-block-end: 10px;
     }
 
     .tab-title[aria-hidden='true'] {
@@ -208,13 +191,18 @@
       border-block-end: 3px solid var(--calcite-ui-brand);
       padding-block-end: 0;
     }
+
+    .tab-title[aria-selected='true'] .icon {
+      --image-icon-filter: var(--image-icon-filter-brand);
+    }
+
   }
 
   .tab-content > .grid-container {
     display: block;
     inline-size: 100vw;
-    position: relative;
     padding: 0;
+    position: relative;
   }
 
   .tab-content[aria-hidden='true'] {
@@ -222,11 +210,11 @@
   }
 
   .grid-container > p:first-child img {
-    position: absolute;
-    object-fit: cover;
-    inset-block-start: 0;
-    inline-size: 100%;
     block-size: 100%;
+    inline-size: 100%;
+    inset-block-start: 0;
+    object-fit: cover;
+    position: absolute;
   }
 
   .buttons-wrapper {
@@ -235,21 +223,21 @@
     margin-block-start: 2rem;
 
     calcite-button {
-      padding-block-end: 0.75rem;
       margin-block-end: 0.5rem;
       margin-inline-end: 0.7rem;
+      padding-block-end: 0.75rem;
 
-      span {
+    span {
         color: var(--calcite-ui-text-1);
       }
     }
   }
 
   .tab-content .text-wrapper, .tab-content .buttons-wrapper {
-    animation-duration: 550ms;
     animation-delay: 50ms;
-    animation-timing-function: ease-in-out;
+    animation-duration: 550ms;
     animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
   }
 
   .tab-content[aria-hidden='false'] .text-wrapper, .tab-content[aria-hidden='false'] .buttons-wrapper {
@@ -260,10 +248,10 @@
 @media (width >= 900px) {
   .tabs {
     .columns {
-      text-align: start;
-      min-block-size: 480px;
-      display: flex;
       align-items: center;
+      display: flex;
+      min-block-size: 480px;
+      text-align: start;
     }
   }
 }
@@ -274,26 +262,26 @@
       flex: 0 0 33.33%;
     }
 
-    .tab-component { 
-      position: relative;
-    }
+    .tab-component {
+        position: relative;
+      }
 
     .tab-nav {
-      max-inline-size: 93vw;
+      box-sizing: content-box;
       inline-size: 1420px;
       inset-inline: 0;
       margin: 0 auto;
-      box-sizing: content-box;
+      max-inline-size: 93vw;
       z-index: 2;
 
       .tab-title {
-        display: block;
-        position: relative;
-        inset-block-start: 1px;
-        flex: 1;
         border-block-end: 1px solid var(--calcite-ui-text-1);
+        display: block;
+        flex: 1;
+        inset-block-start: 1px;
+        position: relative;
       }
-        
+
       .tab-title button {
         inline-size: 100%;
         padding: 1rem;
@@ -302,64 +290,64 @@
       .tab-title[aria-hidden='false'] {
         border-block-end: 3px solid transparent;
       }
-      
+
       .tab-title[aria-selected='false']:hover {
         border-block-end: 3px solid #0079c180;
       }
-        
+
       .tab-title[aria-selected='true'] {
         border-block-end: 3px solid var(--calcite-ui-brand);
       }
     }
-      
+
     .tab-content[aria-hidden='false'] {
       & > .grid-container {
-        min-block-size: 960px;
         display: grid;
+        min-block-size: 960px;
         grid-template: 
         "text img"
         "buttons img"
         auto / 1fr 1fr;
       }
-    
+
       .buttons-wrapper {
+        box-sizing: border-box;
         grid-area: buttons;
+        inline-size: 100%;
         margin-block-start: 0;
         padding-inline-start: 2vw;
-        box-sizing: border-box;
-        inline-size: 100%;
       }
-      
+
       .text-wrapper {
-        grid-area: text;
-        padding-inline: 2vw 0;
         display: flex;
         flex-direction: column;
+        grid-area: text;
         justify-content: flex-end;
+        padding-inline: 2vw 0;
       }
     }
-      
+
     .tab-content[aria-hidden='false'] p:last-child {
       grid-area: img;
     }
-      
+
     .tab-content[aria-hidden='false'] p:last-child picture {
       inline-size: 100%;
     }
-      
+
     .tab-content[aria-hidden='false'] p:last-child picture img {
+      block-size: 100%;
       object-fit: cover;
       object-position: center;
-      block-size: 100%;
     }
 
     .tab-content[aria-hidden='false'] > .grid-container > p:first-child {
-      position: absolute;
-      object-fit: cover;
-      inset-block-start: 0;
-      inline-size: 100%;
       block-size: 100%;
+      inline-size: 100%;
+      inset-block-start: 0;
       margin: 0;
+      object-fit: cover;
+      position: absolute;
       z-index: 0;
     }
   }
@@ -370,19 +358,17 @@
 }
 
 @media (width >= 1440px) {
-  .tabs {
-    .cards li {
-      flex: 0 0 25%;
-    }
+  .tabs .cards li {
+    flex: 0 0 25%;
+  }
 
-    .columns {
-      margin: auto;
-      
-      & > div > div:first-child {
-        padding-inline-start: var(--space-16);
-        inline-size: 100%;
-      }
-    }
+  .tabs .columns {
+    margin: auto;
+  }
+
+  .tabs .columns > div > div:first-child {
+    inline-size: 100%;
+    padding-inline-start: var(--space-16);
   }
 }
 
