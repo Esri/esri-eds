@@ -1,10 +1,10 @@
 .elastic-content-strip.block {
+  cursor: default;
   display: flex;
   flex-wrap: wrap;
+  inline-size: 100%;
   overflow: hidden;
   position: relative;
-  inline-size: 100%;
-  cursor: default;
   text-decoration: none;
 }
 
@@ -25,33 +25,24 @@
 }
 
 .elastic-content-strip.block span {
-  display: flex;
   align-items: center;
+  display: flex;
   margin: auto;
-
-  /* background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-  background-position: 0 100%, 100% 100%;
-  background-repeat: no-repeat;
-  background-size: 0 1px, 100% 1px;
-  transition: all .3s ease-in-out;
-  color: var(--calcite-ui-text-1); */
 }
 
 .elastic-content-strip.block > div {
-  text-align: center;
-  flex: 1 0 100%;
-  background-position: center;
-  transition: all .25s ease-in-out;
-  color: var(--calcite-ui-text-1);
-  padding-block: var(--space-20);
-  padding-inline: var(--space-5);
-  inline-size: 100%;
-
-  --bg-color: var(--calcite-ui-foreground-1);
   --shadow-color: var(--esri-ui-opacity80);
 
   background-image: url("/assets/location-overview-programs-background.jpeg");
+  background-position: center;
   background-size: cover;
+  color: var(--calcite-ui-text-1);
+  flex: 1 0 100%;
+  inline-size: 100%;
+  padding-block: var(--space-20);
+  padding-inline: var(--space-5);
+  text-align: center;
+  transition: all .25s ease-in-out;
 }
 
 .elastic-content-strip.block > div:hover {
@@ -60,32 +51,12 @@
 }
 
 .elastic-content-strip.block > div > div {
-  inline-size: 85%;
   align-self: center;
+  inline-size: 85%;
+  margin: auto;
   position: relative;
   z-index: 3;
-  margin: auto;
 }
-
-/* .elastic-content-strip.block .learn-more-icon-container {
-  display: flex;
-  align-items: center;
-  inline-size: fit-content;
-  margin: auto;
-  background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-  background-position: 0 100%, 100% 100%;
-  background-repeat: no-repeat;
-  background-size: 0 1px, 100% 1px;
-  transition: all .3s ease-in-out;
-} */
-
-/* .elastic-content-strip.block .learn-more-icon-container:any-link {
-  color: var(--calcite-ui-text-1);
-} */
-
-/* .elastic-content-strip.block > div:is(:focus-within,:focus,:hover) {
-  background-size: 100% 1px, 100% 1px;
-} */
 
 @media (width > 640px) {
   .elastic-content-strip.block > div {
