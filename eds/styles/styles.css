@@ -9,6 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
 :root {
   /* esri.com colors with opacity */
   --esri-ui-opacity00: rgb(53 53 53 / 0%);
@@ -32,6 +33,7 @@
 
   /* icon filters */
   --image-icon-filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(19%) hue-rotate(330deg) brightness(93%) contrast(91%); 
+  --image-icon-filter-brand: brightness(0) saturate(100%) invert(30%) sepia(98%) saturate(1143%) hue-rotate(177deg) brightness(95%) contrast(101%);
 
   -webkit-font-smoothing: antialiased;
 
