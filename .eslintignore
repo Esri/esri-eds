@@ -1,2 +1,4 @@
 helix-importer-ui
+tools/importer/urls.js
+tools/importer/svgs.js
 tools/importer/import.bundle.js
