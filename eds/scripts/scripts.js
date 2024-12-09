@@ -17,7 +17,8 @@ import {
   div,
   iframe,
   domEl,
-  calciteButton, video, source,
+  video, 
+  source,
 } from './dom-helpers.js';
 
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
@@ -161,7 +162,6 @@ function decorateMode(element) {
     }
   });
 }
-
 
 export function decorateBlockMode(block) {
   decorateMode(block);
