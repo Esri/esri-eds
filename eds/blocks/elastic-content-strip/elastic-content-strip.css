@@ -24,10 +24,6 @@
   margin-block: var(--space-8);
 }
 
-.elastic-content-strip.block p {
-  /* Add the styles for the <p> element here */
-}
-
 .elastic-content-strip.block span {
   display: flex;
   align-items: center;
@@ -58,6 +54,11 @@
   background-size: cover;
 }
 
+.elastic-content-strip.block > div:hover {
+  box-shadow: 0 0 0 10px inset var(--shadow-color);
+  text-decoration: none;
+}
+
 .elastic-content-strip.block > div > div {
   inline-size: 85%;
   align-self: center;
@@ -66,12 +67,7 @@
   margin: auto;
 }
 
-.elastic-content-strip.block > div:hover {
-  box-shadow: 0 0 0 10px inset var(--shadow-color);
-  text-decoration: none;
-}
-
-.elastic-content-strip.block .learn-more-icon-container {
+/* .elastic-content-strip.block .learn-more-icon-container {
   display: flex;
   align-items: center;
   inline-size: fit-content;
@@ -81,15 +77,15 @@
   background-repeat: no-repeat;
   background-size: 0 1px, 100% 1px;
   transition: all .3s ease-in-out;
-}
+} */
 
-.elastic-content-strip.block .learn-more-icon-container:any-link {
+/* .elastic-content-strip.block .learn-more-icon-container:any-link {
   color: var(--calcite-ui-text-1);
-}
+} */
 
-.elastic-content-strip.block > div:is(:focus-within,:focus,:hover) .learn-more-icon-container {
+/* .elastic-content-strip.block > div:is(:focus-within,:focus,:hover) {
   background-size: 100% 1px, 100% 1px;
-}
+} */
 
 @media (width > 640px) {
   .elastic-content-strip.block > div {
@@ -97,7 +93,7 @@
     max-inline-size: 50%;
   }
 
-  .elastic-content-strip.block > div:last-child {
+  .elastic-content-strip.block > div:last-child:nth-child(odd) {
     flex: 0 0 100%;
     max-inline-size: 100%;
   }
@@ -105,11 +101,13 @@
 
 @media (width > 900px) {
   .elastic-content-strip.block > div {
-    flex: 0 0 33.33%;
-    max-inline-size: 33.33%;
+    flex: 0 0 50%;
+    max-inline-size: 50%;
   }
+}
 
-  .elastic-content-strip.block > div:last-child {
+@media (width > 1024px) {
+  .elastic-content-strip.block > div:is(:first-child:nth-last-child(3), :first-child:nth-last-child(3)~div) {
     flex: 0 0 33.33%;
     max-inline-size: 33.33%;
   }
