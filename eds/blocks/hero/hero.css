@@ -3,12 +3,12 @@
 }
 
 .hero {
+  align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
   z-index: 1;
-  justify-content: center;
-  align-items: center;
 }
 
 .hero .video {
@@ -21,9 +21,9 @@
 }
 
 .hero h1 {
-  font-size: var(--font-8);
-  margin-block-end: var(--space-4);
-  line-height: 1.375;
+  font-size: var(--font-6);
+  font-weight: var(--calcite-font-weight-bold);
+  margin-block-end: .6rem;
 }
 
 .hero.medium h1 {
@@ -35,8 +35,13 @@
 }
 
 .hero :where(h1, p) {
-  margin-block-start: 0;
   inline-size: 90%;
+  margin-block-start: 0;
+}
+
+.hero p:has(+ p) {
+  color: var(--calcite-ui-text-2);
+  font-size: var(--font-2);
 }
 
 .hero .button-container {
@@ -44,25 +49,25 @@
 }
 
 .hero video {
+  block-size: 100%;
+  inset: 0;
   position: absolute;
   z-index: -2;
-  inset: 0;
-  block-size: 100%;
 }
 
 .hero .backgroundimage {
-  position: absolute;
+  block-size: 100%;
+  inline-size: 100%;
   inset-block-start: 0;
   inset-inline-start: 0;
-  inline-size: 100%;
-  block-size: 100%;
   object-fit: cover;
+  position: absolute;
   z-index: -3;
 }
 
 .hero .backgroundimage img {
-  inline-size: 100%;
   block-size: 100%;
+  inline-size: 100%;
 }
 
 .hero .image {
@@ -70,20 +75,21 @@
 }
 
 .hero .image :is(img, video) {
-  inline-size: 100%;
+  aspect-ratio: 1 / 1;
   block-size: 100%;
-  padding-inline-end: 2vw;
+  display: block;
+  inline-size: 100%;
   object-fit: cover;
   object-position: center;
-  aspect-ratio: 1 / 1;
+  padding-inline-end: 2vw;
   position: initial;
 }
 
 @media (width >= 1024px) {
   .hero {
+    align-items: center;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
   }
 
   .hero .content {
