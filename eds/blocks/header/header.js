@@ -175,7 +175,7 @@ function createSchema() {
       '@type': 'Language',
       name: getMetadata('og:locale'),
     },
-    description: document.querySelector('meta[name="description"]').content,
+    description: document.querySelector('meta[name="description"]')?.content,
   };
 
   const jsonElement = document.createElement('script');
