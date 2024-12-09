@@ -17,8 +17,7 @@ import {
   div,
   iframe,
   domEl,
-  video, 
-  source,
+  video, source,
 } from './dom-helpers.js';
 
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
