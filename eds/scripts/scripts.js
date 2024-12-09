@@ -162,44 +162,6 @@ function decorateMode(element) {
   });
 }
 
-/**
-* convert link button to calcite button
-* @param {element} block The block element
-*/
-function decorateToCalcite(main) {
-  main.querySelectorAll('p.button-container').forEach((buttonContainer) => {
-    // create a new div to replace the buttonContainer
-    const newDiv = div({ class: 'button-container' });
-    while (buttonContainer.firstChild) {
-    // if firstchild is <a> then construct calciteButton
-      if (buttonContainer.firstChild.tagName === 'A') {
-        newDiv.appendChild(calciteButton({
-          appearance: 'solid',
-          color: 'blue',
-          kind: 'brand',
-          scale: 'm',
-          href: buttonContainer.firstChild.href,
-          alignment: 'center',
-          type: 'button',
-          width: 'auto',
-        }, buttonContainer.firstChild.textContent));
-      } else if (buttonContainer.firstChild.tagName === 'EM') {
-        newDiv.appendChild(calciteButton({
-          appearance: 'outline',
-          color: 'blue',
-          kind: 'brand',
-          scale: 'm',
-          href: buttonContainer.firstChild.firstChild.href,
-          alignment: 'center',
-          type: 'button',
-          width: 'auto',
-        }, buttonContainer.firstChild.textContent));
-      }
-      buttonContainer.removeChild(buttonContainer.firstChild);
-    }
-    buttonContainer.replaceWith(newDiv);
-  });
-}
 
 export function decorateBlockMode(block) {
   decorateMode(block);
@@ -263,7 +225,6 @@ async function loadEager(doc) {
   if (main) {
     decorateLocalNavigation(main);
     decorateMain(main);
-    decorateToCalcite(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
