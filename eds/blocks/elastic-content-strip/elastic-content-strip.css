@@ -18,10 +18,8 @@
 }
 
 .elastic-content-strip.block h2 {
-  --title-size: var(--font-3);
-
   color: var(--calcite-ui-text-1);
-  font-size: var(--title-size);
+  font-size: var(--font-3);
   font-weight: var(--calcite-font-weight-normal);
   margin-block: var(--space-8);
 }
