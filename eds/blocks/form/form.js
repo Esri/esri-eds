@@ -24,7 +24,7 @@ export default async function decorate(block) {
 
   const baseFormProps = {
     divId,
-    aemFieldServiceBasePath: '/content/experience\u002Dfragments/esri\u002Dsites/en\u002Dus/site\u002Dsettings/one\u002Dform\u002Dadmin/master',
+    aemFieldServiceBasePath: 'https://assets.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/one-form-admin/master',
     aemEditMode: 'false',
     mode: 'basic-progressive-form',
     formOpensInAModal: '',
@@ -32,7 +32,7 @@ export default async function decorate(block) {
     leftAligned: '',
     darkMode: true, // metadata.mode === 'dark',
     transparentBackground: '',
-    pardotHandler: 'https://go.esri.com/l/82202/2022\u002D05\u002D31/pnykw9',
+    pardotHandler: 'https://go.esri.com/l/82202/2022-05-31/pnykw9',
     organicSfId: '7015x000001PKGoAAO',
     isolation: '',
     disablePersonalization: '' === 'true',
