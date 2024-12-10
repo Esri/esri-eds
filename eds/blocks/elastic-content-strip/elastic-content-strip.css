@@ -1,119 +1,84 @@
 .elastic-content-strip.block {
+  cursor: default;
   display: flex;
   flex-wrap: wrap;
+  inline-size: 100%;
   overflow: hidden;
   position: relative;
-  inline-size: 100%;
-  cursor: default;
   text-decoration: none;
+}
 
-  .elastic-content-link-wrapper:hover {
-    text-decoration: none;
-  }
+.elastic-content-link-wrapper:hover {
+  text-decoration: none;
+}
 
-  .elastic-content-link-wrapper > div {
-    inline-size: 85%;
-    margin-inline: auto;
-  }
+.elastic-content-link-wrapper > div {
+  inline-size: 85%;
+  margin-inline: auto;
+}
 
-  h2 {
-    --title-size: var(--font-3);
+.elastic-content-strip.block h2 {
+  color: var(--calcite-ui-text-1);
+  font-size: var(--font-3);
+  font-weight: var(--calcite-font-weight-normal);
+  margin-block: var(--space-8);
+}
 
-    color: var(--calcite-ui-text-1);
-    font-size: var(--title-size);
-    font-weight: var(--calcite-font-weight-normal);
-    margin-block: var(--space-8);
-  }
+.elastic-content-strip.block span {
+  align-items: center;
+  display: flex;
+  margin: auto;
+}
 
-  p {
-    color: var(--calcite-ui-text-1);
-    font-size: var(--font-0);
-  }
+.elastic-content-strip.block > div {
+  --shadow-color: var(--esri-ui-opacity80);
 
-  span {
-    display: flex;
-    align-items: center;
-    margin: auto;
-    background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-    background-position: 0 100%, 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px, 100% 1px;
-    transition: all .3s ease-in-out;
-    color: var(--calcite-ui-text-1);
-    block-size: 48px;
-    inline-size: 48px;
-  }
+  background-image: url("/assets/location-overview-programs-background.jpeg");
+  background-position: center;
+  background-size: cover;
+  color: var(--calcite-ui-text-1);
+  flex: 1 0 100%;
+  inline-size: 100%;
+  padding-block: var(--space-20);
+  padding-inline: var(--space-5);
+  text-align: center;
+  transition: all .25s ease-in-out;
+}
 
-  > div {
-    text-align: center;
-    flex: 1 0 100%;
-    background-position: center;
-    transition: all .25s ease-in-out;
-    color: var(--calcite-ui-text-1);
-    padding-block: var(--space-20);
-    padding-inline: var(--space-5);
-    inline-size: 100%;
+.elastic-content-strip.block > div:hover {
+  box-shadow: 0 0 0 10px inset var(--shadow-color);
+  text-decoration: none;
+}
 
-    --bg-color: var(--calcite-ui-foreground-1);
-    --shadow-color: var(--esri-ui-opacity80);
-
-    background-image: url("/assets/location-overview-programs-background.jpeg");
-    background-size: cover;
-
-    > div {
-      inline-size: 85%;
-      align-self: center;
-      position: relative;
-      z-index: 3;
-      margin: auto;
-    }
-  }
-
-  > div:hover {
-    box-shadow: 0 0 0 10px inset var(--shadow-color);
-    text-decoration: none;
-  }
-
-  .learn-more-icon-container {
-    display: flex;
-    align-items: center;
-    inline-size: fit-content;
-    margin: auto;
-    background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-    background-position: 0 100%, 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 0 1px, 100% 1px;
-    transition: all .3s ease-in-out;
-  }
-
-  .learn-more-icon-container:any-link {
-    color: var(--calcite-ui-text-1);
-  }
-
-  > div:is(:focus-within,:focus,:hover) .learn-more-icon-container {
-    background-size: 100% 1px, 100% 1px;
-  }
+.elastic-content-strip.block > div > div {
+  align-self: center;
+  inline-size: 85%;
+  margin: auto;
+  position: relative;
+  z-index: 3;
 }
 
 @media (width > 640px) {
-  .elastic-content-strip > div {
+  .elastic-content-strip.block > div {
     flex: 0 0 50%;
     max-inline-size: 50%;
   }
 
-  .elastic-content-strip > div:last-child {
+  .elastic-content-strip.block > div:last-child:nth-child(odd) {
     flex: 0 0 100%;
     max-inline-size: 100%;
   }
 }
 
 @media (width > 900px) {
-  .elastic-content-strip > div {
-    flex: 0 0 33.33%;
-    max-inline-size: 33.33%;
+  .elastic-content-strip.block > div {
+    flex: 0 0 50%;
+    max-inline-size: 50%;
   }
+}
 
-  .elastic-content-strip > div:last-child {
+@media (width > 1024px) {
+  .elastic-content-strip.block > div:is(:first-child:nth-last-child(3), :first-child:nth-last-child(3)~div) {
     flex: 0 0 33.33%;
     max-inline-size: 33.33%;
   }
