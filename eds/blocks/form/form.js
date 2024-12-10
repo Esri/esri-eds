@@ -1,4 +1,4 @@
-import { div } from '../../scripts/dom-helpers.js';
+import { div, a } from '../../scripts/dom-helpers.js';
 import {
   loadScript,
   loadCSS,
@@ -23,9 +23,13 @@ export default async function decorate(block) {
     const cardContent = [...block.querySelectorAll(':scope > div')]
       .find((el) => el.firstElementChild.textContent === 'cardContent')
       .lastElementChild;
+    const cardModalContent = a({ class: 'card-modal-content' }, cardContent);
+    cardModalContent.addEventListener('click', () => {
+      block.classList.add('modal-active');
+    });
     block.replaceChildren(
       formDiv,
-      div({ class: 'card-modal-content' }, cardContent),
+      cardModalContent,
     );
   } else {
     block.replaceChildren(formDiv);
@@ -41,7 +45,6 @@ export default async function decorate(block) {
   config.aemEditMode = false;
 
   const baseFormProps = {
-    divId,
     aemFieldServiceBasePath: 'https://assets.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/one-form-admin/master',
     aemEditMode: 'false',
     mode: 'basic-progressive-form',

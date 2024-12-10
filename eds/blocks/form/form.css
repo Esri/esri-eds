@@ -6,6 +6,10 @@
       display: none;
     }
 
+    &.modal-active > div.one-form {
+      display: block;
+    }
+
     .card-modal-content {
       p {
         color: white;
