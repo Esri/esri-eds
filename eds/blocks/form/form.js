@@ -48,7 +48,7 @@ export default async function decorate(block) {
     aemFieldServiceBasePath: 'https://assets.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/one-form-admin/master',
     aemEditMode: 'false',
     mode: 'basic-progressive-form',
-    formOpensInAModal: '',
+    formOpensInAModal: 'true',
     modalTitle: '',
     leftAligned: '',
     darkMode: true, // metadata.mode === 'dark',
