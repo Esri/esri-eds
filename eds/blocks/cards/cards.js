@@ -2,17 +2,19 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { div, domEl } from '../../scripts/dom-helpers.js';
 
 function processSimpleCard(listElem) {
-  console.log('list elem', listElem, listElem.outerHTML);
-  const anchorEl = listElem.querySelector('a');
+  const cardBody = listElem.querySelector('.cards-card-body');
+  console.log('list elem', listElem, cardBody, cardBody.outerHTML);
+  const anchorEl = cardBody.querySelector('a');
+  anchorEl.parentElement.remove();
   const cardBodyContent = div(
     { class: 'card-body-content' },
-    ...listElem.querySelectorAll('.cards-card-body > :not(.card-body-content, a)'),
+    ...cardBody.querySelectorAll(':scope > :not(a)'),
   );
   if (anchorEl) {
     anchorEl.replaceChildren(cardBodyContent);
-    listElem.replaceChildren = anchorEl;
+    cardBody.replaceChildren(anchorEl);
   } else {
-    listElem.append(cardBodyContent);
+    cardBody.append(cardBodyContent);
   }
 }
 
@@ -55,12 +57,13 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
-    if (block.classList.contains('simple')) processSimpleCard(li);
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
       else { div.className = 'cards-card-body'; }
       if (block.classList.contains('standard')) processStandardCard(div);
     });
+    if (block.classList.contains('simple')) processSimpleCard(li);
+
     ul.append(li);
   });
   ul.querySelectorAll('img').forEach((img) => img.closest('picture')?.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
