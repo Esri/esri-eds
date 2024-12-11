@@ -1,4 +1,5 @@
 import { loadFragment } from '../fragment/fragment.js';
+import { div } from '../../scripts/dom-helpers.js';
 
 function decorateBlockSectionMode(block) {
   block.classList.forEach((className) => {
@@ -23,6 +24,6 @@ export default async function decorate(block) {
         section.remove();
       }
     });
-    block.replaceChildren(...fragment.children);
+    block.replaceChildren(div(...fragment.children));
   }
 }
