@@ -22,8 +22,7 @@ function getVideoBtn() {
     class: 'progress-circle', r: '45', cy: '50', cx: '50',
   });
 
-  playProgressCircle.appendChild(progressBackground);
-  playProgressCircle.appendChild(progressCircle);
+  playProgressCircle.appendChild(progressBackground, progressCircle);
   videoButton.appendChild(playProgressCircle);
 
   return videoButton;
@@ -57,26 +56,17 @@ function getVideoUrls(block) {
  * @returns {void}
  */
 function decorateButtons(block) {
-  const anchorElements = block.querySelectorAll('a');
+  block.querySelectorAll('a').forEach((anchorElement) => {
+    const linkButton = calciteButton({
+      'aria-label': anchorElement.innerHTML,
+      tabindex: '0',
+      href: anchorElement.getAttribute('href'),
+      scale: anchorElement.getAttribute('scale') || 'l',
+    });
 
-  anchorElements.forEach((anchorElement) => {
-    if (!anchorElement.classList.contains('hidden')) {
-      const linkButton = calciteButton({
-        'aria-label': anchorElement.innerHTML, tabindex: '0',
-      });
+    linkButton.innerHTML = anchorElement.innerHTML;
 
-      linkButton.innerHTML = anchorElement.innerHTML;
-
-      if (anchorElement.getAttribute('href')) {
-        linkButton.setAttribute('href', anchorElement.getAttribute('href'));
-      }
-
-      if (!linkButton.getAttribute('scale')) {
-        linkButton.setAttribute('scale', 'l');
-      }
-
-      anchorElement.replaceWith(linkButton);
-    }
+    anchorElement.replaceWith(linkButton);
   });
 }
 
@@ -160,58 +150,51 @@ function bindVideoElement(videoContainer) {
 }
 
 /**
- * Decorates a block element with an image, video, and content.
+ * Enhances a block with media and content styling and interactions.
  *
  * @param {Element} block - The block element to decorate.
- *
  * @returns {Promise<void>} A promise that resolves when decoration is complete.
  */
 export default async function decorate(block) {
-  // Replace first div with children
+  // Flatten the first row and assign class names
   block.children[0].replaceWith(...block.children[0].childNodes);
-
-  // Add classes to the child divs
   [...block.children].forEach((row) => {
-    if (row.querySelector('p > picture')) {
-      row.className = 'media';
-    } else {
-      row.className = 'content';
-    }
+    row.className = row.querySelector('p > picture') ? 'media' : 'content';
   });
 
   const media = block.querySelector('.media');
-  const h2Tags = media.querySelectorAll('h2');
-  const pTags = media.querySelectorAll('p');
-  const picTags = media.querySelectorAll('picture');
-  const foregroundContainer = div({ class: 'foreground' });
+  const [h2] = media.querySelectorAll('h2');
+  const pictures = media.querySelectorAll('picture');
+  const paragraphs = media.querySelectorAll('p');
   const vidUrls = getVideoUrls(media);
-  const poster = media.querySelectorAll('picture')[1];
-  const posterSrc = poster?.querySelector('img').src;
+  const posterSrc = pictures[1]?.querySelector('img')?.src;
+  const foregroundContainer = div({ class: 'foreground' });
 
-  if (picTags.length > 0) {
-    const backgroundContainer = div({ class: 'background' }, picTags[0]);
-    pTags[0].replaceWith(backgroundContainer);
+  // Handle media background
+  if (pictures.length > 0) {
+    const backgroundContainer = div({ class: 'background' }, pictures[0]);
+    paragraphs[0].replaceWith(backgroundContainer);
   }
 
+  // Handle video decoration, fallback to second picture if no videos
   if (vidUrls.length > 0) {
     vidUrls.forEach((url) => {
-      const videoBtn = getVideoBtn();
       const videoTag = createAutoplayedVideo(url.href, posterSrc);
-      const videoOverlayHeading = h2Tags[0];
-      const videoOverlayParagraph = pTags[pTags.length - 1];
-      const videoOverlay = div({ class: 'overlay' }, videoOverlayHeading, videoOverlayParagraph);
+      const videoOverlay = div(
+        { class: 'overlay' },
+        h2,
+        paragraphs[paragraphs.length - 1],
+      );
 
-      foregroundContainer.appendChild(videoOverlay);
-      foregroundContainer.appendChild(videoTag);
-      foregroundContainer.appendChild(videoBtn);
+      const videoBtn = getVideoBtn();
+      foregroundContainer.append(videoOverlay, videoTag, videoBtn);
       url.parentElement.replaceWith(foregroundContainer);
       url.remove();
-
       bindVideoElement(foregroundContainer);
     });
-  } else {
-    foregroundContainer.appendChild(picTags[1]);
-    pTags[1].replaceWith(foregroundContainer);
+  } else if (pictures[1]) {
+    foregroundContainer.appendChild(pictures[1]);
+    paragraphs[1]?.replaceWith(foregroundContainer);
   }
 
   decorateButtons(block);
