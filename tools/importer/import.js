@@ -413,6 +413,10 @@ function cards(main, document) {
         }
       });
 
+      if (container.querySelector('.cards-simple')) {
+        variants.push('simple');
+      }
+
       createBlock(container, document, blockName, cells, variants);
     });
 }
