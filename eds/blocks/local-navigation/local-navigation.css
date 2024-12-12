@@ -76,10 +76,13 @@
   margin-inline-start: auto;
 }
 
-@media (width >= 616px) {
-  .local-navigation ul {
-    inline-size: 320px;
-  }
+.local-navigation calcite-button {
+  display: flex;
+  inline-size: 100%;
+  padding-inline: 30%;
+  align-items: center;
+  background-color: #2b2b2b;
+  padding-block: var(--space-4);
 }
 
 @media (width >= 975px) {
@@ -95,7 +98,6 @@
     margin: 0;
     justify-content: end;
     position: relative;
-    inline-size: 1440px;
   }
 
   .local-navigation ul li a[aria-current='true'] {
@@ -108,5 +110,11 @@
 
   .local-navigation calcite-icon {
     display: none;
+  }
+
+  .local-navigation calcite-button {
+    inline-size: auto;
+    padding-inline: 0;
+    padding-block: var(--space-3);
   }
 }
