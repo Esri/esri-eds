@@ -1,414 +1,89 @@
-.storyteller-wrapper {
-  display: flex;
-  margin-block-end: var(--space-20);
+/* Basics for content */
+.storyteller-container {
+  margin-block: var(--space-20);
 }
 
+/* Main container for the layout */
 .storyteller {
-  overflow: hidden;
-}
-
-.storyteller h2 {
-  font-size: var(--font-6);
-}
-
-.storyteller .foreground-container {
-  inline-size: auto;
-  position: relative;
-}
-
-.storyteller.primary-content > div {
   display: flex;
-  flex-direction: column-reverse;
-}
-
-.storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
-  opacity: 0.85;
-  align-self: end;
-  inline-size: 450px;
-  position: absolute;
-  color: var(--calcite-ui-text-1);
-  background-color: var(--calcite-ui-background);
-}
-
-.storyteller.primary-content h2, .storyteller.primary-content p:nth-of-type(1), .storyteller.storyteller.primary-content p.button-container {
-  padding-inline-start: 0;
-}
-
-.storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .content-wrapper {
-  padding-inline: 0;
-}
-
-.storyteller .foreground-container picture, .storyteller p:nth-of-type(1) picture {
-  display: block;
-}
-
-.storyteller .foreground-container a, .storyteller p:nth-of-type(1) picture, .storyteller picture.hide-poster {
-  display: none;
-}
-
-.storyteller.primary-content p picture {
-  padding-inline-end: var(--space-12);
-}
-
-.storyteller.primary-content div:nth-of-type(2) p { 
-  inline-size: 90%;
-}
-
-.storyteller.primary-content .foreground-content .content-wrapper h2, .storyteller:not(.primary-content) .foreground-content .content-wrapper h2 {
-  font-size: var(--font-2);
-}
-
-.storyteller:not(.primary-content) .foreground-content .content-wrapper h2, .storyteller:not(.primary-content) .foreground-content .content-wrapper p {
-  padding-inline: var(--space-4);
-}
-
-.storyteller.primary-content .foreground-content .content-wrapper > * {
-  padding-inline: var(--space-4);
-}
-
-.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img {
-  max-inline-size: 100%;
-  block-size: 100%;
-}
-
-.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img, .storyteller.primary-content div:nth-of-type(1) p:nth-of-type(1) picture img {
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
-}
-
-.storyteller.primary-content div:nth-of-type(1) p:nth-of-type(1) picture img {
-  block-size: revert-layer;
-}
-
-.storyteller.primary-content div div:nth-of-type(2) {
-  block-size: auto;
-  padding-inline: var(--space-6);
-}
-
-.storyteller:not(.primary-content) div:nth-of-type(1) > div:nth-of-type(1) {
-  padding-inline: var(--space-6);
-}
-
-.storyteller .foreground-content {
-  display: flex;
-  block-size: 100%;
-  position: relative;
-}
-
-.storyteller div div .foreground-container picture {
-  display: block;
-  position: absolute 
-}
-
-.storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
-  margin-inline: var(--space-6);
-  margin-block-start: var(--space-8)
-}
-
-.storyteller.primary-content div div:nth-of-type(1).button-container {
-  margin-block-end: var(--space-4);
-}
-
-.storyteller.primary-content div div:nth-of-type(2).button-container {
-  padding-inline: 0;
-} 
-
-.storyteller.primary-content .foreground-content, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
-  padding-inline: 0;
-}
-
-.storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) > .button-container {
-  padding-inline-start: 0;
-}
-
-.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
-  block-size: 100%;
-  position: absolute;
-  padding-inline-start: var(--space-24);
-}
-
-.storyteller.primary-content div div p:nth-of-type(2) picture {
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  inset-inline-end: 0;
-  inline-size: 500px;
-  margin: 0 auto;
-  padding: 0;
-}
- 
-.storyteller div p:nth-of-type(2) video {
-  inline-size: 100%;
-  position: relative;
-}
-
-.storyteller button.video-playbutton {
-  margin-block-start: var(--space-4);
-}
-
-.storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
-  padding-inline-start: 0;
-}
-
-.storyteller div:nth-of-type(1) div:nth-of-type(1) .icon-wrapper .storyteller-row {
-  display: flex;
-  inline-size: 100%;
   flex-direction: row;
-  padding-inline: 0;
-}
+  justify-content: space-between;
+  gap: var(--space-20);
+  padding-inline: var(--space-8);
+  overflow: hidden;
 
-.storyteller div:nth-of-type(1) div:nth-of-type(1) .icon-wrapper .storyteller-row .storyteller-content {
-  inline-size: 100%;
-  padding-inline: 0;
-}
-
-.storyteller .icon-wrapper .storyteller-row .storyteller-content .icon-paragraph {
-  padding-inline: 0;
-}
-
-.storyteller .icon-wrapper .storyteller-row picture.icon-picture {
-  padding-inline-end: var(--space-8);
-}
-
-.storyteller .icon-wrapper .storyteller-row picture.icon-picture img {
-  max-inline-size: max-content;
-  block-size: auto;
-}
-
-.storyteller div:nth-of-type(1) div:nth-of-type(1) .icon-wrapper .storyteller-row .icon-title {
-  padding-inline: 0;
-}
-
-.storyteller div div p.hidden {
-  display: none;
-}
-
-.storyteller .play-progress-circle {
-  opacity: 1;
-  stroke: var(--calcite-ui-foreground-1);
-  inline-size: 8px;
-  block-size: 35px;
-  stroke-width: 6px;
-  position: relative;
-  stroke-linecap: round;
-  transform: rotate(-90deg);
-}
-
-.storyteller .play-progress-circle .progress-background {
-  stroke: var(--calcite-ui-text-3);
-  stroke-width: 1px;
-}
-
-.storyteller .foreground-container .video-container .video-playbutton {
-  border: 1px solid #fff;
-  display: flex;
-  cursor: pointer;
-  padding: 0 14px;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-}
-
-.storyteller .foreground-container .video-container .video-playbutton.paused::after {
-  mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
-}
-
-.storyteller .foreground-container .video-container .video-playbutton::after {
-  content: '';
-  position: absolute;
-  inline-size: 20px;
-  block-size: 20px;
-  display: inline-block;
-  background-size: 20px 20px;
-  background-color: #fff;
-  mask: url('data:image/svg+xml;base64,PHN2ZyBpZD0iRXhwb3J0YWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMWQxZDFmfTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJwYXVzZSI+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzLjc1IiB5PSIzIiB3aWR0aD0iNC41IiBoZWlnaHQ9IjE0IiByeD0iMS41Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMS43NSIgeT0iMyIgd2lkdGg9IjQuNSIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPjwvZz48L3N2Zz4=');
-}
-
-.storyteller div div p.foreground-container .video-container {
-    position: absolute;
-    z-index: 2;
-    padding: 0;
-    cursor: pointer;
-    pointer-events: auto;
-    inset-inline-end: 0;
-    inset-block-start: 0;
-    inline-size: 60px;
-}
-
-@media (width >= 510px) {
-  .storyteller div div:nth-of-type(2) .foreground-content, .storyteller div p:nth-of-type(2) video, .storyteller .foreground-container, .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture img {
-    inline-size: 500px;
-    block-size: 625px;
+  h2 {
+    font-size: var(--font-5);
   }
-  
-  .storyteller.primary-content .foreground-container {
-    margin-inline-start: var(--space-6);
-  }
-}
 
-@media (width >= 900px) {
-  .section > div.storyteller-wrapper {
-    margin-block-end: var(--space-20);
+  p {
+    font-size: var(--font-1);
   }
-}
 
-@media (width >= 1152px) { 
-  .storyteller {
-    padding: 0 ;
+  img {
     inline-size: 100%;
+    max-inline-size: 576px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .content {
+    inline-size: 50%;
+  }
+
+  .media {
+    inline-size: 50%;
     position: relative;
-    min-block-size: 1100px;
   }
 
-  .storyteller div div .foreground-container picture {
-    display: block;
-  }
+  /* Hide the first image on mobile
+  :is(p:first-of-type img, .foreground-container img) {
+    display: none;
+  } */
 
-  .storyteller div:nth-of-type(1) div:nth-of-type(1) div.icon-wrapper {
-  inline-size: 100%;
-  padding-inline-start: var(--space-32);
-  margin-block-start: var(--space-4);
-  max-inline-size: 660px;
-  margin-inline-start: auto;
-}
-
-  .section > div.storyteller-wrapper, .storyteller .foreground-content .content-wrapper h2 {
-    margin-block-end: 0;
-  }
-
-  .storyteller.primary-content div div:nth-of-type(2) > h2 {
-    max-inline-size: 600px;
-    margin-inline-end: var(--space-20);
-  }
-
-  .storyteller div div p:not(.button-container) {
-    padding-inline: 0;
-  }
-
-  .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
-    padding-inline-start: 0;
-  } 
-
-  .storyteller.primary-content div:nth-of-type(2) p {
-    inline-size: 75%;
-    max-inline-size: 575px;
-  }
-
-  .storyteller.primary-content div .foreground-content .content-wrapper p {
-    padding-inline: var(--space-4);
-  }
-  
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) .button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-child(1) p {
-    margin-inline-start: auto;
-    max-inline-size: 660px;
-  }
-
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) .button-container {
-    inline-size: 660px;
-  }
-
-  .storyteller div div p:nth-of-type(2).foreground-container {
-    margin-inline: var(--space-6);
-  }
-
-  .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
-    margin-inline: 0;
-  }
-
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) div.button-container, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1) p {
-    padding-inline: var(--space-32) var(--space-8);
-  }
-
-  .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.primary-content div div p:nth-of-type(2).foreground-container {
-    margin-inline: var(--space-6);
-    margin-block-start: 0;
-  }
-
-  .storyteller > div {
-    display: flex;
-    block-size: 100%;
+  /* Inside the secondary content section */
+  .overlay {
+    align-self: end;
     inline-size: 100%;
+    max-inline-size: 450px;
+    padding: var(--space-6);
+    color: var(--calcite-ui-text-1);
+    background-color: var(--esri-ui-opacity85);
+
+    h2 {
+      font-size: var(--font-1);
+      margin-block-end: var(--space-2);
+      font-weight: var(--calcite-font-weight-bold);
+    }
+
+    p {
+      font-size: var(--font-0);
+      margin: 0;
+    }
+  }
+
+  .video-play-button {
+    border: 1px solid #fff;
+    display: flex;
+    cursor: pointer;
+    padding: 0 14px;
+    border-radius: 50%;
     align-items: center;
-    flex-direction: row;
-  }
+    justify-content: center;
+    background-color: transparent;
 
-  .storyteller.primary-content div {
-    flex-direction: row;
-  }
-    
-  .storyteller div div:nth-of-type(2) {
-    block-size: 100%;
-  }
+    &::after {
+      content: "";
+      position: absolute;
+      inline-size: 20px;
+      block-size: 20px;
+      display: inline-block;
+      background-size: 20px 20px;
+      background-color: #fff;
+      mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iRXhwb3J0YWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMWQxZDFmfTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJwYXVzZSI+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzLjc1IiB5PSIzIiB3aWR0aD0iNC41IiBoZWlnaHQ9IjE0IiByeD0iMS41Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMS43NSIgeT0iMyIgd2lkdGg9IjQuNSIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPjwvZz48L3N2Zz4=");
+    }
 
-  .storyteller .foreground-container {
-    position: absolute;
-    overflow: hidden;
-    inset-block: 50% 0;
-    transform: translateY(-50%);
-  }
-
-  .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2), .storyteller.primary-content .foreground-container {
-    inline-size: 50%;
-  }
-  
-  .storyteller.primary-content div div:nth-of-type(1) {
-    position: relative;
-  }
-
-  .storyteller.primary-content div div:nth-of-type(2) {
-    display: block;
-    block-size: auto;
-    inline-size: 50%;
-    padding: var(--space-20) 0 var(--space-20) var(--space-16) ;
-  }
-
-  .storyteller.primary-content div div:nth-of-type(2) .button-container {
-    padding: var(--space-2) 0 var(--space-2) 0 ;
-    cursor: pointer;
-  }
-
-  .storyteller .foreground-content .content-wrapper, .storyteller:not(.primary-content) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.primary-content) div div:nth-of-type(2) p.foreground-container .foreground-content p {
-    padding-inline: 0;
-  }
-
-  .storyteller:not(.primary-content) div div:nth-of-type(2) .foreground-container .foreground-content  .content-wrapper > * {
-    padding-inline: var(--space-4);
-  }
-
-  .storyteller div p:nth-of-type(2) video, .storyteller.primary-content div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.primary-content .foreground-content .content-wrapper {
-    position: absolute;
-  }
-  
-  .storyteller button.video-playbutton {
-    /* margin-inline-end: var(--space-4);  */
-  }
-
-  .storyteller p:nth-of-type(1) picture {
-    display: block;
-  }
-
-  .storyteller .foreground-container picture, .storyteller p:nth-of-type(1) picture {
-    display: block;
-  }
-
-  .storyteller div div:nth-of-type(2) p:nth-of-type(2) picture, .storyteller.primary-content div div:nth-of-type(1) p:nth-of-type(2):not(.foreground-container) picture {
-    position: absolute;
-    inset-block-start: 50%;
-    transform: translateY(-50%);
-  }
-
-  .storyteller.primary-content .foreground-container {
-    position: absolute;
-    overflow: visible clip;
-    inset-inline: 50% 0;
-  }
-
-  .storyteller.primary-content .foreground-content {
-    display: flex;
-    block-size: 100%;
-    inline-size: 100%;
-    position: relative;
-    justify-content: end;
+    &.paused::after {
+      mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
+    }
   }
 }
