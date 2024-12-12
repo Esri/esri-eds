@@ -52,7 +52,6 @@ function appendPageTitle(pgObj, block) {
   navTagUL.appendChild(li);
 }
 
-
 /**
  * Create CTA button for trial or register and append to the nav tag ul
  * @param {Object} xmlData.
