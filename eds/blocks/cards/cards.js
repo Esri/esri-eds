@@ -52,6 +52,9 @@ function processStandardCard(div) {
 }
 
 export default function decorate(block) {
+  if (block.classList.contains('questions')) {
+    block.classList.add('simple', 'centered');
+  }
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
