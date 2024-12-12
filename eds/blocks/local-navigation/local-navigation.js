@@ -58,19 +58,19 @@ function appendPageTitle(pgObj, block) {
  */
 function decorateBlueButton(value, block) {
   setTimeout(() => {
-      let href;
-      if (value.triallink.startsWith('#')) {
-        href = `${window.location.pathname}#trial`;
-      } else if (value.triallink.startsWith('/')) {
-        href = `${window.location.origin}${value.triallink}`;
-      } else if (value.triallink.startsWith('https://') || value.triallink.startsWith('http://')) {
-        href = value.triallink;
-      }
-      if (href) {
-        const trialBtn = domEl('calcite-button', { class: 'trial-button', href });
-        trialBtn.innerHTML = value.triallabel;
-        block.querySelector('nav > ul').appendChild(trialBtn);
-      }
+    let href;
+    if (value.triallink.startsWith('#')) {
+      href = `${window.location.pathname}#trial`;
+    } else if (value.triallink.startsWith('/')) {
+      href = `${window.location.origin}${value.triallink}`;
+    } else if (value.triallink.startsWith('https://') || value.triallink.startsWith('http://')) {
+      href = value.triallink;
+    }
+    if (href) {
+      const trialBtn = domEl('calcite-button', { class: 'trial-button', href });
+      trialBtn.innerHTML = value.triallabel;
+      block.querySelector('nav > ul').appendChild(trialBtn);
+    }
   }, 50);
 }
 
