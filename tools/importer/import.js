@@ -688,7 +688,7 @@ function callToAction(main, document, html, pathname) {
       const cells = [...questionsContact.children]
         .map((child) => [processBlockGroupElement(child)]);
 
-      createBlock(questionsContact, document, 'Cards', cells);
+      createBlock(questionsContact, document, 'Cards', cells, ['Questions']);
     });
 
     const children = [...ctaQuestions.children];
