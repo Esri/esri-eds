@@ -33,23 +33,66 @@ function navigationTitle(value, block) {
   navTitle.appendChild(aHref);
 }
 
+function listenSubNav(subNavItems) {
+  subNavItems.addEventListener('click', () => {    
+    if (subNavItems.getAttribute('aria-expanded') === 'false') {
+      let order = subNavItems.getAttribute('attr-order');
+      subNavItems.setAttribute('aria-expanded', 'true');
+      subNavItems.nextElementSibling.setAttribute('aria-hidden', 'false');
+      let allSubNavBtn = document.querySelectorAll('.subnav-btn');
+      allSubNavBtn.forEach((btn) => {
+        if (btn.getAttribute('attr-order') !== order) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.nextElementSibling.setAttribute('aria-hidden', 'true');
+        }
+      });
+    } else {
+      subNavItems.setAttribute('aria-expanded', 'false');
+      subNavItems.nextElementSibling.setAttribute('aria-hidden', 'true');
+      console.log('collapsed subnavItems', subNavItems);
+    }
+  });
+}
+
 /**
  * Create a new list item for page title and append to the nav tag ul
  * @param {Object, Element} pgObj The page title and page url.
  */
-function appendPageTitle(pgObj, block) {
+function appendPageTitle(pgObj, block, i) {
   const updatedUrl = updateURL(pgObj.pageLink);
   const navTagUL = block.querySelector('ul');
   const li = domEl('li', { class: 'page-title', id: pgObj.pageTitle });
   const aHref = domEl('a', { href: updatedUrl });
   const currPageTitle = currPg(window.location.href);
+
   aHref.innerHTML = `${pgObj.pageTitle}`;
   aHref.setAttribute('aria-current', 'false');
+
   if (currPageTitle === pgObj.pageTitle.toLowerCase()) {
     aHref.setAttribute('aria-current', 'true');
   }
-  li.appendChild(aHref);
-  navTagUL.appendChild(li);
+  if (pgObj.subnavItems) {
+    let subNavItems = domEl('button', { class: 'subnav-btn', 'aria-expanded': 'false', 'aria-controls': 'subnav', 'attr-order': i });
+    let subNav = domEl('div', { class: 'subnav', id: 'subnav', 'aria-hidden': 'true' });
+    let subNavUL = domEl('ul', { class: 'subnav-ul' });
+    li.appendChild(subNavItems);
+    subNavItems.innerHTML = pgObj.pageTitle;
+    listenSubNav(subNavItems);
+
+    pgObj.subnavItems.forEach((item) => {
+      const subNavLI = domEl('li', { class: 'subnav-li' });
+      const subNavA = domEl('a', { href: updateURL(item.pageLink) });
+      subNavA.innerHTML = `${item.pageTitle}`;
+      subNavLI.appendChild(subNavA);
+      subNavUL.appendChild(subNavLI);
+    });
+    subNav.appendChild(subNavUL);
+    li.appendChild(subNav);
+    navTagUL.appendChild(li);
+  } else {
+    li.appendChild(aHref);
+    navTagUL.appendChild(li);
+  }
 }
 
 /**
@@ -64,7 +107,7 @@ function parseXML(xmlData, block) {
         navigationTitle(value, block);
       }
       if (key === 'pageTitle') {
-        appendPageTitle(xmlData[i], block);
+        appendPageTitle(xmlData[i], block, i);
       }
     });
   }
@@ -157,6 +200,20 @@ function btnEventListener(block) {
 }
 
 /**
+ * reset dropdown menu on resize
+ * @param {Element} block The header block element
+ */
+function resetDropdown(block) {
+  const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
+  const mobileMenu = block.querySelector('ul.mobile-menu');
+  window.addEventListener('resize', () => {
+    mobileBtn.setAttribute('icon', 'caret-down');
+    mobileMenu.setAttribute('aria-expanded', 'false');
+  }, 500)
+
+}
+
+/**
  * Fetch local navigation api data. If on localhost, use cors-anywhere proxy to bypass CORS policy
  * @param {Element} block The header block element
  */
@@ -169,10 +226,12 @@ export default async function decorate(block) {
   await fetch(requestURL)
     .then((response) => response.json())
     .then((data) => {
+      console.log('local navigation data');
       initNavWrapper(block);
       parseXML(data, block);
       docAuthPageTitle(block);
       btnEventListener(block);
+      resetDropdown(block);
     })
     .catch((error) => error);
 }
