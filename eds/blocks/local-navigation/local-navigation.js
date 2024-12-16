@@ -34,12 +34,12 @@ function navigationTitle(value, block) {
 }
 
 function listenSubNav(subNavItems) {
-  subNavItems.addEventListener('click', () => {    
+  subNavItems.addEventListener('click', () => {
     if (subNavItems.getAttribute('aria-expanded') === 'false') {
-      let order = subNavItems.getAttribute('attr-order');
+      const order = subNavItems.getAttribute('attr-order');
+      const allSubNavBtn = document.querySelectorAll('.subnav-btn');
       subNavItems.setAttribute('aria-expanded', 'true');
       subNavItems.nextElementSibling.setAttribute('aria-hidden', 'false');
-      let allSubNavBtn = document.querySelectorAll('.subnav-btn');
       allSubNavBtn.forEach((btn) => {
         if (btn.getAttribute('attr-order') !== order) {
           btn.setAttribute('aria-expanded', 'false');
@@ -49,7 +49,6 @@ function listenSubNav(subNavItems) {
     } else {
       subNavItems.setAttribute('aria-expanded', 'false');
       subNavItems.nextElementSibling.setAttribute('aria-hidden', 'true');
-      console.log('collapsed subnavItems', subNavItems);
     }
   });
 }
@@ -72,9 +71,14 @@ function appendPageTitle(pgObj, block, i) {
     aHref.setAttribute('aria-current', 'true');
   }
   if (pgObj.subnavItems) {
-    let subNavItems = domEl('button', { class: 'subnav-btn', 'aria-expanded': 'false', 'aria-controls': 'subnav', 'attr-order': i });
-    let subNav = domEl('div', { class: 'subnav', id: 'subnav', 'aria-hidden': 'true' });
-    let subNavUL = domEl('ul', { class: 'subnav-ul' });
+    const subNavItems = domEl('button', { 
+      class: 'subnav-btn', 
+      'aria-expanded': 'false', 
+      'aria-controls': 'subnav', 
+      'attr-order': i 
+    });
+    const subNav = domEl('div', { class: 'subnav', id: 'subnav', 'aria-hidden': 'true' });
+    const subNavUL = domEl('ul', { class: 'subnav-ul' });
     li.appendChild(subNavItems);
     subNavItems.innerHTML = pgObj.pageTitle;
     listenSubNav(subNavItems);
@@ -209,8 +213,7 @@ function resetDropdown(block) {
   window.addEventListener('resize', () => {
     mobileBtn.setAttribute('icon', 'caret-down');
     mobileMenu.setAttribute('aria-expanded', 'false');
-  }, 500)
-
+  }, 500);
 }
 
 /**
@@ -226,7 +229,6 @@ export default async function decorate(block) {
   await fetch(requestURL)
     .then((response) => response.json())
     .then((data) => {
-      console.log('local navigation data');
       initNavWrapper(block);
       parseXML(data, block);
       docAuthPageTitle(block);
