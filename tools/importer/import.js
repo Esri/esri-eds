@@ -881,9 +881,9 @@ function inlineIcons(main, html) {
 
       icon.removeAttribute('class');
 
+      const iconHash = hashCode(icon.outerHTML);
       let iconName = findIcon(icon);
       if (!iconName) {
-        const iconHash = hashCode(icon.outerHTML);
         console.error('Unknown icon hash', iconHash, icon);
         iconName = `pending-${iconHash}`;
         notFoundIcons.push({
@@ -1154,6 +1154,10 @@ export default {
   preprocess: ({ document, url, html }) => {
     const { pathname } = new URL(url);
 
+    report = {
+      locale: pathname.split('/')[1],
+    };
+
     const main = document.querySelector('main');
     inlineIcons(main, html);
     form(main, pathname);
@@ -1161,9 +1165,6 @@ export default {
   transform: ({ document, url, html }) => {
     const { pathname } = new URL(url);
 
-    report = {
-      locale: pathname.split('/')[1],
-    };
     fragmentPages = [];
 
     const main = document.querySelector('main');
