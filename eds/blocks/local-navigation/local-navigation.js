@@ -100,6 +100,28 @@ function appendPageTitle(pgObj, block, i) {
 }
 
 /**
+ * Create CTA button for trial or register and append to the nav tag ul
+ * @param {Object} xmlData.
+ */
+function decorateBlueButton(value, block) {
+  setTimeout(() => {
+    let href;
+    if (value.triallink.startsWith('#')) {
+      href = `${window.location.pathname}#trial`;
+    } else if (value.triallink.startsWith('/')) {
+      href = `${window.location.origin}${value.triallink}`;
+    } else if (value.triallink.startsWith('https://') || value.triallink.startsWith('http://')) {
+      href = value.triallink;
+    }
+    if (href) {
+      const trialBtn = domEl('calcite-button', { class: 'trial-button', href });
+      trialBtn.innerHTML = value.triallabel;
+      block.querySelector('nav > ul').appendChild(trialBtn);
+    }
+  }, 50);
+}
+
+/**
  * For document authored paged title only 'function docAuthPageTitle()'.
  * Normalize url path, replace origin if different current origin.
  * @param {JSON, Element} xmlData The api returned xmlData page folder json schema.
@@ -112,6 +134,9 @@ function parseXML(xmlData, block) {
       }
       if (key === 'pageTitle') {
         appendPageTitle(xmlData[i], block, i);
+      }
+      if (value.triallabel) {
+        decorateBlueButton(value, block);
       }
     });
   }
@@ -171,8 +196,6 @@ function initNavWrapper(block) {
   const trialBtn = btnWrapper.lastElementChild;
   mobileButton.setAttribute('aria-label', 'menu');
   htmlNavTag.setAttribute('aria-label', 'main');
-  htmlNavTag.setAttribute('aria-expanded', 'false');
-  htmlNavTag.setAttribute('class', 'calcite-mode-dark');
   htmlNavTag.id = 'main';
   ul.classList.add('mobile-menu');
   ul.setAttribute('aria-labelledby', 'nav-title');
@@ -201,6 +224,12 @@ function btnEventListener(block) {
       mobileMenu.setAttribute('aria-expanded', 'false');
     }
   });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      mobileBtn.setAttribute('icon', 'caret-down');
+      mobileMenu.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 /**
@@ -225,7 +254,6 @@ export default async function decorate(block) {
   const PROXY = ISLOCAL.test(window.location.href) ? 'https://cors-anywhere.herokuapp.com/' : '';
   const NAVAPI = 'https://www.esri.com/bin/esri/localnavigation';
   const requestURL = `${PROXY}${NAVAPI}?path=/content/esri-sites${window.location.pathname}`;
-
   await fetch(requestURL)
     .then((response) => response.json())
     .then((data) => {

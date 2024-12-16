@@ -231,4 +231,10 @@
   .local-navigation calcite-icon {
     display: none;
   }
+
+  .local-navigation calcite-button {
+    inline-size: auto;
+    padding-inline: 0;
+    padding-block: var(--space-3);
+  }
 }
