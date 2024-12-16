@@ -71,11 +71,11 @@ function appendPageTitle(pgObj, block, i) {
     aHref.setAttribute('aria-current', 'true');
   }
   if (pgObj.subnavItems) {
-    const subNavItems = domEl('button', { 
-      class: 'subnav-btn', 
-      'aria-expanded': 'false', 
-      'aria-controls': 'subnav', 
-      'attr-order': i 
+    const subNavItems = domEl('button', {
+      class: 'subnav-btn',
+      'aria-expanded': 'false',
+      'aria-controls': 'subnav',
+      'attr-order': i,
     });
     const subNav = domEl('div', { class: 'subnav', id: 'subnav', 'aria-hidden': 'true' });
     const subNavUL = domEl('ul', { class: 'subnav-ul' });
