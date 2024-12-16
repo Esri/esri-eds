@@ -54,7 +54,7 @@
 }
 
 .local-navigation ul li a[aria-current='true']:hover, .local-navigation ul li.page-title a:hover {
-  background-color: #202020;
+  background-color: #2b2b2b;
 }
 
 .local-navigation ul li a[aria-current='true'] {
@@ -123,6 +123,7 @@
 
 .local-navigation .subnav .subnav-ul a:hover {
   background-position: 0 100%;
+  background-color: #202020;
 }
 
 .local-navigation .subnav .subnav-ul a:after {
@@ -189,6 +190,7 @@
   }
 
   .local-navigation ul li.page-title > a:hover {
+    background-color: #2f2f2f;
     box-shadow: inset 0 -3px 0 0 var(--calcite-link-blue-underline);
   }
 
