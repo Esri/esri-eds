@@ -262,10 +262,17 @@ function resetDropdown(block) {
  * @param {Element} block The header block element
  */
 function getBreadcrumb() {
-  if (!document.querySelector('script#breadcrumbs')) return;
   const scriptTag = document.querySelector('script#breadcrumbs');
-  const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
-  return jsonData.itemListElement[jsonData.itemListElement.length - 1];
+  if (!scriptTag) return;
+
+  try {
+    const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
+    const items = jsonData?.itemListElement;
+    return items?.[items.length - 1] || null;
+  } catch (error) {
+    console.error('Error parsing breadcrumb data:', error);
+    return null;
+  }
 }
 
 function fetchNavData(block) {
