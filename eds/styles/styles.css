@@ -32,7 +32,7 @@
   --esri-ui-opacity97-inverse: rgb(255 255 255/ 97%);
 
   /* icon filters */
-  --image-icon-filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(19%) hue-rotate(330deg) brightness(93%) contrast(91%); 
+  --image-icon-filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(19%) hue-rotate(330deg) brightness(93%) contrast(91%);
   --image-icon-filter-brand: brightness(0) saturate(100%) invert(30%) sepia(98%) saturate(1143%) hue-rotate(177deg) brightness(95%) contrast(101%);
 
   -webkit-font-smoothing: antialiased;
@@ -330,6 +330,11 @@ main {
   }
 
   .section > div > div {
+    background-color: var(--calcite-ui-foreground-1);
+    color: var(--calcite-ui-text-1);
+  }
+
+  .section.dark {
     background-color: var(--calcite-ui-foreground-1);
     color: var(--calcite-ui-text-1);
   }

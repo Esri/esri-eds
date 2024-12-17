@@ -4,9 +4,10 @@ import { div } from '../../scripts/dom-helpers.js';
 function decorateBlockSectionMode(block) {
   block.classList.forEach((className) => {
     if (className.startsWith('calcite-mode-')) {
+      const mode = className.split('-')[2];
       block.closest('.section')
         .classList
-        .add(className);
+        .add(className, mode);
     }
   });
 }
