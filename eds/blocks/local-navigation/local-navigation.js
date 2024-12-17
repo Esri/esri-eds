@@ -265,7 +265,7 @@ function getBreadcrumb() {
   if (!document.querySelector('script#breadcrumbs')) return;
   const scriptTag = document.querySelector('script#breadcrumbs');
   const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
-  return jsonData.itemListElement[jsonData.itemListElement.length-1]
+  return jsonData.itemListElement[jsonData.itemListElement.length - 1];
 }
 
 function fetchNavData(block) {
@@ -285,9 +285,7 @@ function fetchNavData(block) {
       ctaEventListener(block);
       resetDropdown(block);
     })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    .catch((error) => error);
 }
 
 /**
