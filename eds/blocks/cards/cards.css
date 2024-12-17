@@ -298,6 +298,7 @@
 
 .cards.simple a:is(:hover, :focus, :active) {
   border-inline-start: 3px solid var(--calcite-ui-brand);
+  text-decoration: none;
 }
 
 .cards.centered { text-align: center; }
