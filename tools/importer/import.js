@@ -685,7 +685,7 @@ function callToAction(main, document, html, pathname) {
       const cells = [...tmhBlockGroup.children]
         .map((child) => [processBlockGroupElement(child.querySelector('a'))]);
 
-      createBlock(tmhBlockGroup, document, 'Cards', cells);
+      createBlock(tmhBlockGroup, document, 'Cards', cells, ['Questions']);
     });
 
     ctaQuestions.querySelectorAll('.questions-contact').forEach((questionsContact) => {
