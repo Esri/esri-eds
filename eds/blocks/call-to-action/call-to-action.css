@@ -10,40 +10,51 @@
   display: flex;
   inline-size: 99%;
   position: relative;
-}
 
-.call-to-action.fragment {
-  /* to be addressed on a follow-up PR */
-  display: block;
-}
+  > div {
+    display: flex;
+    inline-size: 100%;
 
-.call-to-action > div {
-  display: flex;
-  inline-size: 100%;
-}
+    > div {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      block-size: var(--space-56);
+      border-inline-end: 0.01rem solid var(--calcite-ui-border-1);
+      margin-inline-end: -0.01rem;
 
-.call-to-action > div > div {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  block-size: var(--space-56);
-  border-inline-end: 0.01rem solid var(--calcite-ui-border-1);
-}
+      &:last-child {
+        border-inline-end: none;
+        margin-inline-end: 0;
+      }
+    }
+  }
 
-.call-to-action > div > div:last-child {
-  border-inline-end: none;
-}
-
-.call-to-action h2 {
-  font-size: var(--font-3);
-  font-weight: var(--calcite-font-weight-normal);
+  h2 {
+    font-size: var(--font-3);
+    font-weight: var(--calcite-font-weight-normal);
+  }
 }
 
 p.button-container .button {
   margin-inline-end: 0;
   margin-block-start: 0;
+}
+
+.call-to-action.fragment {
+  /* to be addressed on a follow-up PR */
+  inline-size: initial;
+  display: flex;
+
+  & > div {
+    inline-size: initial;
+  }
+
+  .cards ul {
+    inline-size: 50vw;
+  }
 }
 
 @media (width <= 768px) {
@@ -56,7 +67,11 @@ p.button-container .button {
     inline-size: 100%;
     margin-block: var(--space-10);
     border-inline-end: none;
+    margin-inline-end: 0;
     border-block-end: 0.01rem solid var(--calcite-ui-border-1);
+
+    /* expand height to allow for its contents */
+    /* block-size: auto; */
   }
 
   .call-to-action > div > div:last-child {

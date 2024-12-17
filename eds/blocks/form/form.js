@@ -6,51 +6,11 @@ import {
   getMetadata,
 } from '../../scripts/aem.js';
 
-export default async function decorate(block) {
-  block.closest('.section').classList.add('calcite-mode-dark', 'dark');
-  block.classList.add('calcite-mode-dark', 'dark');
-  const config = readBlockConfig(block);
-  const divId = getMetadata('formdivid') || config.divid;
-  config.divid = divId;
-
-  const formDiv = div({
-    id: divId,
-    class: 'one-form',
-  });
-  if (block.classList.contains('card-modal')) {
-    delete config.cardcontent;
-    // we need to find it "again" because the html is not preserved in readBlockConfig
-    const cardContent = [...block.querySelectorAll(':scope > div')]
-      .find((el) => el.firstElementChild.textContent === 'cardContent')
-      .lastElementChild;
-    const cardModalContent = a({ class: 'card-modal-content' }, cardContent);
-    cardModalContent.addEventListener('click', () => {
-      block.classList.add('modal-active');
-      window.openOneFormModal();
-    });
-    block.replaceChildren(
-      formDiv,
-      cardModalContent,
-    );
-  } else {
-    block.replaceChildren(formDiv);
-  }
-
-  // TODO get card if modals
-
-  await Promise.all([
-    loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
-    loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
-  ]);
-
-  config.aemEditMode = false;
-
+function getFormProps(config) {
   const baseFormProps = {
     aemFieldServiceBasePath: 'https://assets.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/one-form-admin/master',
     aemEditMode: 'false',
     mode: 'basic-progressive-form',
-    formOpensInAModal: 'true',
-    modalTitle: '',
     leftAligned: '',
     darkMode: true, // metadata.mode === 'dark',
     transparentBackground: '',
@@ -87,30 +47,69 @@ export default async function decorate(block) {
     emailSubject: '',
     emailBody: '',
   };
-  // merge config and baseFormProps
   const formProps = { ...baseFormProps, ...config };
+  return formProps;
+}
 
-  console.log('formProps', formProps);
+export default async function decorate(block) {
+  block.closest('.section').classList.add('calcite-mode-dark', 'dark');
+  block.classList.add('calcite-mode-dark', 'dark');
+  const config = readBlockConfig(block);
+  const divId = getMetadata('formdivid') || config.divid;
+  config.divid = divId;
 
-  // const form = window.oneForm.attachToForm(divId);
-  // form.on('load', (formApi) => {
-  //   //Perform API actions here
-  //   console.log('form loaded');
-  // });
+  const isModal = block.classList.contains('card-modal');
 
-  // workaround for initOneForm requiring the form div to be in the DOM,
-  // which it is not when loaded as a fragment
-  const observer = new MutationObserver((mutationsList) => {
-    mutationsList.forEach((mutation) => {
-      if (mutation.type === 'childlist') {
-        console.log('A child node has been added or removed.', document.getElementById(divId));
-      }
-      if (mutation.type === 'childList' && document.getElementById(divId)) {
-        const initResult = window.initOneForm(divId, formProps);
-        console.log('init result', initResult);
-        observer.disconnect();
-      }
-    });
+  if (isModal) {
+    config.formOpensInAModal = 'true';
+    // modalTitle: '',
+  }
+
+  const formProps = getFormProps(config);
+
+  const loadOneForm = Promise.all([
+    loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
+    loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
+  ]);
+  const formDiv = div({
+    id: divId,
+    class: 'one-form',
   });
-  observer.observe(document.body, { childList: true, subtree: true });
+  if (isModal) {
+    delete config.cardcontent;
+    // we need to find it "again" because the html is not preserved in readBlockConfig
+    const cardContent = [...block.querySelectorAll(':scope > div')]
+      .find((el) => el.firstElementChild.textContent === 'cardContent')
+      .lastElementChild;
+    const cardModalContent = a({ class: 'card-modal-content' }, cardContent);
+    cardModalContent.addEventListener('click', () => {
+      block.classList.add('modal-active');
+      window.openOneFormModal();
+    });
+    block.replaceChildren(
+      formDiv,
+      cardModalContent,
+    );
+  } else {
+    block.replaceChildren(formDiv);
+  }
+
+  loadOneForm.then(() => {
+    if (document.getElementById(divId)) {
+      window.initOneForm(divId, formProps);
+    } else { // it is being loaded on a fragment
+      const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+          if (mutation.type === 'childList' && document.getElementById(divId)) {
+            window.initOneForm(divId, formProps);
+            observer.disconnect();
+          }
+        });
+      });
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+  });
 }

@@ -3,7 +3,6 @@ import { div, domEl } from '../../scripts/dom-helpers.js';
 
 function processSimpleCard(listElem) {
   const cardBody = listElem.querySelector('.cards-card-body');
-  console.log('list elem', listElem, cardBody, cardBody.outerHTML);
   const anchorEl = cardBody.querySelector('a');
   anchorEl.parentElement.remove();
   const cardBodyContent = div(
