@@ -53,7 +53,7 @@
   padding-inline: var(--space-6);
 }
 
-.local-navigation ul li a[aria-current='true']:hover {
+.local-navigation ul li a[aria-current='true']:hover, .local-navigation ul li a:hover {
   background-color: #2b2b2b;
 }
 

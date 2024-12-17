@@ -53,13 +53,12 @@ function listenSubNav(subNavItems) {
   });
 
   document.addEventListener('click', (e) => {
-    let isClickInside = subNavItems.contains(e.target);
-
-    if (!isClickInside) { 
+    const isClickInside = subNavItems.contains(e.target);
+    if (!isClickInside) {
       subNavItems.setAttribute('aria-expanded', 'false');
       subNavItems.nextElementSibling.setAttribute('aria-hidden', 'true');
     }
-});
+  });
 }
 
 /**
@@ -77,7 +76,7 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
   aHref.innerHTML = `${pgObj.pageTitle}`;
   aHref.setAttribute('aria-current', 'false');
 
-  if ((currPageTitle === pgObj.pageTitle.toLowerCase() || menuTitle === pgObj.pageTitle) && !pgObj.subnavItems) {
+  if ((currPageTitle === pgObj.pageTitle.toLowerCase() || menuTitle === pgObj.pageTitle)) {
     aHref.setAttribute('aria-current', 'true');
   }
 
