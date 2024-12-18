@@ -263,9 +263,13 @@ function resetDropdown(block) {
  */
 function getBreadcrumb() {
   const scriptTag = document.querySelector('script#breadcrumbs');
-  if (!scriptTag) return;
-  const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
-  return jsonData.itemListElement.slice(-1)[0];
+  if (!scriptTag) {
+    return null;
+  } else {
+    const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
+    const lastItem = jsonData.itemListElement.slice(-1)[0];
+    return lastItem;
+  }
 }
 
 function fetchNavData(block) {
