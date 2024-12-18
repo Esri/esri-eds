@@ -264,15 +264,8 @@ function resetDropdown(block) {
 function getBreadcrumb() {
   const scriptTag = document.querySelector('script#breadcrumbs');
   if (!scriptTag) return;
-
-  try {
-    const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
-    const items = jsonData?.itemListElement;
-    return items?.[items.length - 1] || null;
-  } catch (error) {
-    console.error('Error parsing breadcrumb data:', error);
-    return null;
-  }
+  const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
+  return jsonData.itemListElement.slice(-1)[0];
 }
 
 function fetchNavData(block) {

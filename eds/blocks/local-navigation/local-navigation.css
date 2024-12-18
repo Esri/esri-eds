@@ -53,7 +53,7 @@
   padding-inline: var(--space-6);
 }
 
-.local-navigation ul li a[aria-current='true']:hover, .local-navigation ul li a:hover {
+.local-navigation ul li a:is([aria-current='true'], :hover) {
   background-color: #2b2b2b;
 }
 
@@ -161,9 +161,7 @@
 
 .local-navigation calcite-button {
   display: flex;
-  inline-size: 100%;
   padding-inline: 30%;
-  align-items: center;
   background-color: #202020;
   padding-block: var(--space-4);
 }
@@ -248,7 +246,6 @@
   }
 
   .local-navigation calcite-button {
-    inline-size: auto;
     padding-inline: var(--space-4);
     background-color: #2b2b2b;
   }
