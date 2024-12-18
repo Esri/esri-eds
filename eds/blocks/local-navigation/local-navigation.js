@@ -265,11 +265,10 @@ function getBreadcrumb() {
   const scriptTag = document.querySelector('script#breadcrumbs');
   if (!scriptTag) {
     return null;
-  } else {
-    const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
-    const lastItem = jsonData.itemListElement.slice(-1)[0];
-    return lastItem;
-  }
+  } 
+  const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
+  const lastItem = jsonData.itemListElement.slice(-1)[0];
+  return lastItem;
 }
 
 function fetchNavData(block) {
@@ -279,6 +278,7 @@ function fetchNavData(block) {
   const pathURL = getBreadcrumb() || window.location.pathname;
   const requestURL = `${PROXY}${NAVAPI}?path=/content/esri-sites${pathURL.item}`;
   const breadcrumbs = getBreadcrumb();
+
   const menuTitle = breadcrumbs.name;
   fetch(requestURL)
     .then((response) => response.json())
