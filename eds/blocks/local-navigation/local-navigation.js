@@ -265,7 +265,7 @@ function getBreadcrumb() {
   const scriptTag = document.querySelector('script#breadcrumbs');
   if (!scriptTag) {
     return null;
-  } 
+  }
   const jsonData = JSON.parse(scriptTag.textContent || scriptTag.innerText);
   const lastItem = jsonData.itemListElement.slice(-1)[0];
   return lastItem;
