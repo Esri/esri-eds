@@ -17,31 +17,31 @@ function processSimpleCard(listElem) {
   }
 }
 
-function processStandardCard(div) {
-  const anchorEl = div.querySelector('a');
+function processStandardCard(element) {
+  const anchorEl = element.querySelector('a');
   const cardBodyContent = domEl('div', { class: 'card-body-content' });
   if (anchorEl) {
     anchorEl.replaceChildren(cardBodyContent);
-    div.append(anchorEl);
+    element.append(anchorEl);
   } else {
-    div.append(cardBodyContent);
+    element.append(cardBodyContent);
   }
-  div.querySelectorAll('p')
+  element.querySelectorAll('p')
     .forEach((p) => {
       if (p.textContent === '') p.remove();
     });
-  [...div.querySelectorAll('.cards-card-body > :not(.card-body-content, a)')].forEach((el) => {
+  [...element.querySelectorAll('.cards-card-body > :not(.card-body-content, a)')].forEach((el) => {
     cardBodyContent.append(el);
     if (el.tagName === 'P' && el.children.length === 0 && el.parentNode.firstElementChild === el) {
       el.classList.add('overlay-text');
     }
   });
-  const pictureEl = div.querySelector('picture')
+  const pictureEl = element.querySelector('picture')
     .closest('p');
-  const overlayTextEl = div.querySelector('.overlay-text');
+  const overlayTextEl = element.querySelector('.overlay-text');
   if (overlayTextEl) pictureEl.append(overlayTextEl);
   pictureEl.nextElementSibling.classList.add('card-body-title');
-  const cardBodyTitle = div.querySelector('.card-body-title');
+  const cardBodyTitle = element.querySelector('.card-body-title');
 
   if (cardBodyContent.lastChild.classList === '') cardBodyContent.lastChild.classList.add('card-body-description');
 
@@ -59,10 +59,10 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else { div.className = 'cards-card-body'; }
-      if (block.classList.contains('standard')) processStandardCard(div);
+    [...li.children].forEach((element) => {
+      if (element.children.length === 1 && element.querySelector('picture')) element.className = 'cards-card-image';
+      else { element.className = 'cards-card-body'; }
+      if (block.classList.contains('standard')) processStandardCard(element);
     });
     if (block.classList.contains('simple')) processSimpleCard(li);
 

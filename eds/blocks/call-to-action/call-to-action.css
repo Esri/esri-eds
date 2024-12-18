@@ -69,9 +69,6 @@ p.button-container .button {
     border-inline-end: none;
     margin-inline-end: 0;
     border-block-end: 0.01rem solid var(--calcite-ui-border-1);
-
-    /* expand height to allow for its contents */
-    /* block-size: auto; */
   }
 
   .call-to-action > div > div:last-child {
