@@ -3,7 +3,6 @@ import {
   buildBlock,
   loadHeader,
   decorateButtons,
-  decorateIcons,
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme as aemDecorateTemplateAndTheme,
@@ -190,6 +189,36 @@ function decorateModes(main) {
 }
 
 /**
+ * Add <img> for icon, prefixed with codeBasePath and optional prefix.
+ * @param {Element} [span] span element with icon classes
+ * @param {string} [prefix] prefix to be added to icon src
+ * @param {string} [alt] alt text to be added to icon
+ */
+function decorateIcon(span, prefix = '', alt = '') {
+  const iconName = Array.from(span.classList)
+    .find((c) => c.startsWith('icon-'))
+    .substring(5);
+  const img = document.createElement('img');
+  img.dataset.iconName = iconName;
+  img.src = `https://www.esri.com/content/dam/esrisites/en-us/common/icons/meridian-/${prefix}${iconName}.svg`;
+  img.alt = alt;
+  img.loading = 'lazy';
+  span.append(img);
+}
+
+/**
+ * Add <img> for icons, prefixed with codeBasePath and optional prefix.
+ * @param {Element} [element] Element containing icons
+ * @param {string} [prefix] prefix to be added to icon the src
+ */
+function decorateIcons(element, prefix = '') {
+  const icons = [...element.querySelectorAll('span.icon')];
+  icons.forEach((span) => {
+    decorateIcon(span, prefix);
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -286,3 +315,7 @@ export function decorateInnerHrefButtonsWithArrowIcon(block) {
 }
 
 loadPage();
+
+export {
+  decorateIcons,
+};
