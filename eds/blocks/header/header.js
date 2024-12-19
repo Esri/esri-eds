@@ -205,9 +205,6 @@ export default async function decorate() {
   setLocaleAndDirection();
   await alternateHeaders()
     .then(async () => {
-      // const language = getMetadata('og:locale') || 'en-us';
-      // window.gnav_jsonPath = `https://www.esri.com/content/experience-fragments/esri-sites/${language}/site-settings/global-navigation-config/2022-nav-config.25.json`;
-
       await Promise.all([
         loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
         loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),
