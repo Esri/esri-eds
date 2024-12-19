@@ -188,14 +188,14 @@ function createSchema() {
 
 /**
  * Loads and decorates the header, mainly the navigation.
- * 
+ *
  * This function performs the following steps:
  * 1. Creates the schema for the webpage.
  * 2. Creates breadcrumbs for the webpage.
  * 3. Sets the locale and text direction based on metadata.
  * 4. Alternates headers based on the current page URL.
  * 5. Loads the global navigation script and CSS.
- * 
+ *
  * @param {Element} block The header block element
  * @returns {Promise<void>} A promise that resolves when the header is fully decorated.
  */
