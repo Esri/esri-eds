@@ -1,4 +1,4 @@
-import { decorateIcons } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/scripts.js';
 import { span, ul, li } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
@@ -18,7 +18,7 @@ export default function decorate(block) {
 
   const body = block.querySelector('.quote-block-body');
 
-  const quoteIcon = span({ class: 'icon icon-quote' });
+  const quoteIcon = span({ class: 'icon icon-quote-filled-48' });
   body.prepend(quoteIcon);
 
   decorateIcons(block);
