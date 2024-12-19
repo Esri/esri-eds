@@ -45,7 +45,7 @@
 }
 
 .hero .button-container {
-  margin-block-start: var(--space-8);
+  margin-block-start: var(--space-4);
 }
 
 .hero video {
