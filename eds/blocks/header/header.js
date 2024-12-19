@@ -118,7 +118,7 @@ async function createBreadcrumbs() {
   const urlSegments = window.location.pathname.split('/')
     .slice(2);
 
-  let language = getMetadata('og:locale');
+  const language = getMetadata('og:locale');
 
   const urlPrefix = `/${language}`;
   let accUrl = '';
@@ -198,6 +198,7 @@ export default async function decorate() {
     .then(async () => {
       // window.gnav_jsonPath = '/2022-nav-config.25.json';
       
+      const language = getMetadata('og:locale') || 'en-us';
       window.gnav_jsonPath = `https://www.esri.com/content/experience-fragments/esri-sites/${language}/site-settings/global-navigation-config/2022-nav-config.25.json`;
 
       await Promise.all([
