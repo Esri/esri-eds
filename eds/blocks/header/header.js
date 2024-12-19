@@ -118,7 +118,7 @@ async function createBreadcrumbs() {
   const urlSegments = window.location.pathname.split('/')
     .slice(2);
 
-  const language = getMetadata('og:locale');
+  let language = getMetadata('og:locale');
 
   const urlPrefix = `/${language}`;
   let accUrl = '';
