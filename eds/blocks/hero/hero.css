@@ -36,11 +36,6 @@
 
 .hero :where(h1, p) {
   inline-size: 90%;
-  margin-block-start: 0;
-}
-
-.hero p.description {
-  font-size: var(--font-0);
 }
 
 .hero p:has(+ p) {
@@ -49,7 +44,13 @@
 }
 
 .hero .button-container {
-  margin-block-start: var(--space-8);
+  margin-block: 0;
+  inline-size: auto;
+  display: inline-block;
+}
+
+.hero p.button-container a {
+  margin-block: var(--space-2);
 }
 
 .hero video {
