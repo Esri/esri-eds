@@ -197,7 +197,9 @@ export default async function decorate() {
   await alternateHeaders()
     .then(async () => {
       // window.gnav_jsonPath = '/2022-nav-config.25.json';
-      window.gnav_jsonPath = 'https://www.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/global-navigation-config/2022-nav-config.25.json';
+      
+      window.gnav_jsonPath = `https://www.esri.com/content/experience-fragments/esri-sites/${language}/site-settings/global-navigation-config/2022-nav-config.25.json`;
+
       await Promise.all([
         loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
         loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),
