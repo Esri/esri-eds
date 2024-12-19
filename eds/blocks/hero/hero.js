@@ -17,19 +17,6 @@ export default function decorate(block) {
     img.setAttribute('loading', 'eager');
   });
 
-  /* query select all 'button-container' elements */
-  // const buttonContainers = block.querySelectorAll('.button-container');
-  // if (buttonContainers.length > 0) {
-  //   const buttonContainerParent = buttonContainers[0].parentElement;
-  //   const newButtonContainer = document.createElement('div');
-  //   newButtonContainer.style.display = 'flex';
-  //   newButtonContainer.classList.add('button-wrapper');
-  //   buttonContainers.forEach((buttonContainer) => {
-  //     newButtonContainer.append(buttonContainer);
-  //   });
-  //   buttonContainerParent.append(newButtonContainer);
-  // }
-
   const videoAssets = block.querySelectorAll('a');
   if (videoAssets.length > 0) {
     const videoAsset = videoAssets[videoAssets.length - 1];
