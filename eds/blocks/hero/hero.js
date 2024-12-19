@@ -21,9 +21,6 @@ export default function decorate(block) {
   if (blockParagraphs.length > 1) {
     if (blockParagraphs[0].innerHTML && blockParagraphs[1].innerHTML) {
       if (!blockParagraphs[0].classList.contains('button-container') && !blockParagraphs[1].classList.contains('button-container')) {
-        const newH2 = document.createElement('h2');
-        newH2.innerHTML = blockParagraphs[0].innerHTML;
-        blockParagraphs[0].replaceWith(newH2);
         blockParagraphs[1].classList.add('description');
       }
     }

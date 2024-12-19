@@ -39,11 +39,6 @@
   margin-block-start: 0;
 }
 
-.hero h2 {
-  font-size: var(--font-2);
-  margin-block-end: var(--space-4);
-}
-
 .hero p.description {
   font-size: var(--font-0);
 }
