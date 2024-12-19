@@ -18,12 +18,14 @@ export default function decorate(block) {
 
   const blockTitle = block.querySelector('h1');
   const blockParagraphs = blockTitle.parentElement.querySelectorAll('p');
-  if (blockParagraphs.length === 3) {
+  if (blockParagraphs.length > 1) {
     if (blockParagraphs[0].innerHTML && blockParagraphs[1].innerHTML) {
-      const newH2 = document.createElement('h2');
-      newH2.innerHTML = blockParagraphs[0].innerHTML;
-      blockParagraphs[0].replaceWith(newH2);
-      blockParagraphs[1].classList.add('description');
+      if (!blockParagraphs[0].classList.contains('button-container') && !blockParagraphs[1].classList.contains('button-container')) {
+        const newH2 = document.createElement('h2');
+        newH2.innerHTML = blockParagraphs[0].innerHTML;
+        blockParagraphs[0].replaceWith(newH2);
+        blockParagraphs[1].classList.add('description');
+      }
     }
   }
 
