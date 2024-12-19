@@ -39,6 +39,10 @@
   margin-block-start: 0;
 }
 
+.hero p.description {
+  font-size: var(--font-0);
+}
+
 .hero p:has(+ p) {
   color: var(--calcite-ui-text-2);
   font-size: var(--font-2);
