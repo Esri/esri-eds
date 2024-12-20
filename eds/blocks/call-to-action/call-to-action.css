@@ -107,10 +107,6 @@ p.button-container .button {
     }
   }
 
-  & > div {
-    inline-size: initial;
-  }
-
   .cards ul {
     inline-size: 50vw;
   }
