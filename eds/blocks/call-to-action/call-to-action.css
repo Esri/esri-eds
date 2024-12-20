@@ -45,8 +45,55 @@ p.button-container .button {
 
 .call-to-action.fragment {
   /* to be addressed on a follow-up PR */
-  inline-size: initial;
   display: flex;
+
+  /* inline-size: 100vw; */
+
+  /* if it has three or more children, */
+  & > div:has(> div:nth-child(3)) {
+    display: block;
+    inline-size: 100vw;
+
+    > div:first-child {
+      display: block;
+      border-inline-end: none;
+      margin-inline-end: 0;
+
+      > div.default-content-wrapper {
+        margin: auto;
+
+        span.icon {
+          display: block;
+          margin: auto;
+          inline-size: 64px;
+          block-size: 64px;
+
+          img {
+            filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
+          }
+        }
+
+        h2 {
+          display: block;
+          align-items: center;
+          text-align: center;
+          justify-self: center;
+          margin: auto;
+        }
+      }
+    }
+
+    > div:nth-child(2) {
+      display: grid;
+      grid-template-columns: 50vw 50vw;
+      margin: 0;
+      block-size: max-content;
+    }
+
+    > div:nth-child(3) {
+      display: block;
+    }
+  }
 
   & > div {
     inline-size: initial;
