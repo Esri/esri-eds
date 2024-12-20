@@ -2,14 +2,9 @@ import { loadFragment } from '../fragment/fragment.js';
 import { div } from '../../scripts/dom-helpers.js';
 
 function decorateBlockSectionMode(block) {
-  block.classList.forEach((className) => {
-    if (className.startsWith('calcite-mode-')) {
-      const mode = className.split('-')[2];
-      block.closest('.section')
-        .classList
-        .add(className, mode);
-    }
-  });
+  block.closest('.section')
+    .classList
+    .add('calcite-mode-dark', 'dark');
 }
 
 export default async function decorate(block) {
