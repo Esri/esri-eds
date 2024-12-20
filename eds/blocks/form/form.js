@@ -1,9 +1,9 @@
-import { div, a } from '../../scripts/dom-helpers.js';
+import { div, a, p } from '../../scripts/dom-helpers.js';
 import {
   loadScript,
   loadCSS,
   readBlockConfig,
-  getMetadata,
+  getMetadata, buildBlock, loadBlock, decorateBlock,
 } from '../../scripts/aem.js';
 
 function getFormProps(config) {
@@ -81,15 +81,25 @@ export default async function decorate(block) {
     const cardContent = [...block.querySelectorAll(':scope > div')]
       .find((el) => el.firstElementChild.textContent === 'cardContent')
       .lastElementChild;
-    const cardModalContent = a({ class: 'card-modal-content' }, cardContent);
-    cardModalContent.addEventListener('click', () => {
+
+    const cardLink = a('Open form');
+    cardLink.addEventListener('click', () => {
       block.classList.add('modal-active');
       window.openOneFormModal();
     });
+
+    cardContent.prepend(cardLink);
+    const newCardContent = div(
+      ...[...cardContent.children].map((el) => p(el)),
+    );
+    const cardsBlock = buildBlock('cards', [[newCardContent]], ['simple']);
+
     block.replaceChildren(
       formDiv,
-      cardModalContent,
+      cardsBlock,
     );
+    decorateBlock(cardsBlock);
+    await loadBlock(cardsBlock);
   } else {
     block.replaceChildren(formDiv);
   }
