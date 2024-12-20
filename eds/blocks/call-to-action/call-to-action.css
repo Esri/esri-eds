@@ -58,14 +58,14 @@ p.button-container .button {
       text-align: center;
     }
 
+    div.default-content-wrapper {
+      margin: auto;
+    }
+
     > div:first-child {
       display: block;
       border-inline-end: none;
       margin-inline-end: 0;
-
-      > div.default-content-wrapper {
-        margin: auto;
-      }
 
       span.icon {
         display: block;
