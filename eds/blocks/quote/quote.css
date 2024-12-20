@@ -1,137 +1,67 @@
 .quote-container {
-  padding-block-start: 0;
   inline-size: 100vw;
+  padding-block-start: 0;
 }
 
 .quote {
-  margin: 0;
   inline-size: 100%;
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0 auto;
-    
-    li {
-      inline-size: 1440px;
-      max-inline-size: 96vw;
-      padding: 0 0.5rem;
-    }
-  }
-
-  .quote-block-body {
-    box-sizing: border-box;
-    padding: 3rem 0.5rem 1.5rem 1.5rem;
-    font-family: var(--calcite-sans-family);
-    inline-size: 1440px;
-    max-inline-size: 96vw;
-
-    .icon-quote {
-      inline-size: 48px;
-      block-size: 48px;      
-    }
-  }
-
-  p:nth-child(2) {
-    line-height: 1.375;
-    color: var(--calcite-ui-text-2);
-    font-weight: 400;
-    font-size: var(--font-3);
-    margin: 1rem 0;
-    margin-block-start: 0.5rem;
-    font-style: italic;
-  }
-
-  p:nth-child(3) {
-    line-height: 1.375;
-    color: var(--calcite-ui-text-1);
-    font-weight: 500;
-    font-size: var(--font-1);
-    margin: 0;
-  }
-
-  p:nth-child(4) {
-    line-height: 1.375;
-    color: var(--calcite-ui-text-1);
-    font-weight: 400;
-    font-size: var(--font-1);
-    padding-block-end: 1.5rem;
-    margin: 0;
-  }
-
-  .quote-block-image {
-    box-sizing: border-box;
-    inline-size: 1440px;
-    max-inline-size: 96vw;
-    padding: 0 0.5rem;
-
-    picture {
-      display: block;
-      inline-size: 100%;
-      aspect-ratio: 1/1;
-    }
-
-    img {
-      border-radius: 50%;
-      inline-size: 95%;
-      block-size: 95%;
-      position: relative;
-      inset-block-start: 5%;
-    }
-  }
+  margin: 0;
 }
 
-@media (width >= 480px) {
-  .quote {
-    li {
-      display: grid;
-      grid-template-columns: 3fr 9fr;
-      grid-template-rows: 1fr;
-      padding: 0;
-      margin: auto;
-    }
-
-    .quote-block-body {
-      padding: 4.5rem 0.5rem 4.5rem 1rem;
-      inline-size: 960px;
-      max-inline-size: 64vw;
-    }
-
-    .quote-block-image {
-      padding: 4.5rem 0.5rem;
-      margin-block-start: 3rem;
-      inline-size: 480px;
-      max-inline-size: 32vw;
-
-      picture {
-        img {
-          inset-block-start: 0;
-        }
-      }
-    }
-  }
+.quote p {
+  font-size: var(--font-1);
+  margin: 0;
 }
 
-@media (width >= 860px) {
-  .quote {
-    .quote-block-body {
-      padding-inline-start: 0.5rem;
-      inline-size: 780px;
-      max-inline-size: 52vw;
-    }
-
-    .quote-block-image {
-      inline-size: 360px;
-      max-inline-size: 24vw;
-      margin-block-start: 1.5rem;
-    }
-  }
+.quote article > div {
+  align-items: center;
+  inline-size: 96vw;
+  margin-inline: auto;
+  max-inline-size: 1440px;
 }
 
-@media (width >= 1024px) {
-  .quote {
-    .quote-block-body {
-      padding-inline-start: 1.5rem;
-    }
+.quote blockquote {
+  border: none;
+  margin-block: var(--space-4);
+  padding: 0;
+}
+
+.quote blockquote p {
+  font-size: var(--font-3);
+  font-style: italic;
+}
+
+.quote blockquote + p {
+  font-weight: var(--calcite-font-weight-medium);
+}
+
+.quote .quote-block-body {
+  inline-size: min(100%, 780px);
+}
+
+.quote .quote-block-image picture {
+  display: block;
+}
+
+.quote .quote-block-image img {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  max-inline-size: 95%;
+  display: block;
+  margin-inline: auto;
+}
+
+@media (width >= 768px) {
+  .quote article > div {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 3fr 9fr;
+    grid-template-rows: 1fr;
+    margin: auto;
+    padding: 4.5rem 0.5rem;
+  }
+
+  .quote .quote-block-image picture img {
+    inset-block-start: 0;
   }
 }
