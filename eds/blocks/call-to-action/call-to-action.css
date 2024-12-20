@@ -3,7 +3,6 @@
 }
 
 .call-to-action-wrapper {
-  /* display: flex; */
   color: var(--calcite-ui-text-1);
   padding: var(--space-24) 0 var(--space-32);
   background: var(--calcite-ui-foreground-1);
