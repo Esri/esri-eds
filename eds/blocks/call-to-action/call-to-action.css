@@ -1,3 +1,7 @@
+:root {
+  --sepia-icon-color: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
+}
+
 .call-to-action-wrapper {
   /* display: flex; */
   color: var(--calcite-ui-text-1);
@@ -84,7 +88,7 @@ p.button-container .button {
       }
 
       span.icon > img {
-        filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
+        filter: var(--sepia-icon-color);
       }
     }
 
@@ -98,6 +102,10 @@ p.button-container .button {
 
       margin: 0;
       block-size: max-content;
+
+      span.icon > img {
+        filter: var(--sepia-icon-color);
+      }
     }
 
     > div:nth-child(3) {
