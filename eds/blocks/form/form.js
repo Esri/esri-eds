@@ -84,7 +84,6 @@ export default async function decorate(block) {
 
     const cardLink = a('Open form');
     cardLink.addEventListener('click', () => {
-      block.classList.add('modal-active');
       window.openOneFormModal();
     });
 

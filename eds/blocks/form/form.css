@@ -2,22 +2,6 @@
   color: var(--calcite-ui-text-1);
   background-color: var(--calcite-ui-foreground-1);
 
-  &.card-modal {
-    & > div.one-form {
-      display: none;
-    }
-
-    &.modal-active > div.one-form {
-      display: block;
-    }
-
-    .card-modal-content {
-      img {
-        filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
-      }
-    }
-  }
-
   & > div.one-form {
     inline-size: 1440px;
     max-inline-size: 96vw;
@@ -34,6 +18,18 @@
         color: var(--calcite-ui-text-1);
         font-size: var(--font-0);
         margin-block: 0 var(--space-6);
+      }
+    }
+  }
+
+  &.card-modal {
+    & > div.one-form {
+      display: none;
+    }
+
+    .card-modal-content {
+      img {
+        filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
       }
     }
   }
