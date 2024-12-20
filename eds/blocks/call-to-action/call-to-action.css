@@ -51,16 +51,9 @@ p.button-container .button {
   /* to be addressed on a follow-up PR */
   display: flex;
 
-  /* inline-size: 100vw; */
-
-  &:has(div > div:nth-child(3)) {
-    display: block;
-  }
-
   /* if it has three or more children, */
   & > div:has(> div:nth-child(3)) {
     display: block;
-    inline-size: 100vw;
 
     h2 {
       text-align: center;
