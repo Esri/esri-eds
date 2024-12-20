@@ -555,11 +555,12 @@ function updateSectionsStatus(main) {
  * @param {string} blockName name of the block
  * @param {*} content two dimensional array or string or object of content
  */
-function buildBlock(blockName, content) {
+function buildBlock(blockName, content, variants = []) {
   const table = Array.isArray(content) ? content : [[content]];
   const blockEl = document.createElement('div');
   // build image block nested div structure
-  blockEl.classList.add(blockName);
+  blockEl.classList.add(blockName, ...variants);
+
   table.forEach((row) => {
     const rowEl = document.createElement('div');
     row.forEach((col) => {
