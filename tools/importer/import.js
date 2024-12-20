@@ -643,11 +643,11 @@ function callToAction(main, document, html, pathname) {
   const ctaGroup = getPageCTAGroup(pathname);
   console.log('ctaGroup', ctaGroup);
   if (ctaGroup === 'real-time-omit-fragment') {
-    main.querySelectorAll('.experiencefragment').forEach((fragment) => {
+    const allExperienceFragment = [...main.querySelectorAll('.experiencefragment')];
+    const lastExperienceFragment = allExperienceFragment.pop();
+    allExperienceFragment.forEach((fragment) => {
       fragment.remove();
     });
-    const newCta = document.createElement('div');
-    main.append(newCta);
 
     const fragmentPathname = `/${language}/call-to-action/real-time`;
     const fragmentUrl = edsUrl + fragmentPathname;
@@ -655,7 +655,7 @@ function callToAction(main, document, html, pathname) {
     ctaLink.setAttribute('href', fragmentUrl);
     ctaLink.textContent = fragmentUrl;
 
-    createBlock(newCta, document, 'Call to action', [[ctaLink]], ['fragment']);
+    createBlock(lastExperienceFragment, document, 'Call to action', [[ctaLink]], ['fragment']);
     return;
   }
 
