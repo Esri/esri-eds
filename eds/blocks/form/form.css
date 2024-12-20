@@ -20,6 +20,10 @@
         margin-block: 0 var(--space-6);
       }
     }
+
+    .submit-button-row {
+      block-size: auto;
+    }
   }
 
   &.card-modal {
