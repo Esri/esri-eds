@@ -54,6 +54,10 @@ p.button-container .button {
     display: block;
     inline-size: 100vw;
 
+    h2 {
+      text-align: center;
+    }
+
     > div:first-child {
       display: block;
       border-inline-end: none;
@@ -61,25 +65,17 @@ p.button-container .button {
 
       > div.default-content-wrapper {
         margin: auto;
+      }
 
-        span.icon {
-          display: block;
-          margin: auto;
-          inline-size: 64px;
-          block-size: 64px;
+      span.icon {
+        display: block;
+        margin: auto;
+        inline-size: 64px;
+        block-size: 64px;
+      }
 
-          img {
-            filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
-          }
-        }
-
-        h2 {
-          display: block;
-          align-items: center;
-          text-align: center;
-          justify-self: center;
-          margin: auto;
-        }
+      span.icon > img {
+        filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
       }
     }
 
