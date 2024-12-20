@@ -1,8 +1,9 @@
 import { decorateIcons } from '../../scripts/scripts.js';
-import { span, ul, li } from '../../scripts/dom-helpers.js';
+import { span, article, div } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  const list = ul(...[...block.children].map((row) => li(...[...row.children].map((divElement) => {
+  // eslint-disable-next-line max-len
+  const list = article(...[...block.children].map((row) => div(...[...row.children].map((divElement) => {
     if (
       divElement.children.length === 1
       && divElement.querySelector('picture')
