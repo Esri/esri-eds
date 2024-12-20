@@ -85,10 +85,14 @@
   block-size: 100%;
   display: block;
   inline-size: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   padding-inline-end: 2vw;
   position: initial;
+}
+
+.hero.medium picture img {
+  aspect-ratio: 3 / 2;
 }
 
 @media (width >= 1024px) {
