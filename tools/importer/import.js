@@ -70,6 +70,13 @@ function getBreadcrumbs(html, pathname) {
   return breadcrumbs;
 }
 
+function getThemeColor(html) {
+  const themeColorRegex = /--theme-color: (#[0-9a-fA-F]{6});/g;
+  const themeColorMatch = themeColorRegex.exec(html);
+
+  return themeColorMatch[1];
+}
+
 const preprocessMetadata = {};
 
 function createMetadata(main, document, pathname, html) {
@@ -77,6 +84,11 @@ function createMetadata(main, document, pathname, html) {
 
   const urlInfo = urls.find(({ URL: url }) => (new URL(url).pathname) === pathname);
   meta.Theme = urlInfo.Theme;
+  const themeColor = getThemeColor(html);
+  report.themeColor = themeColor;
+  if (themeColor !== '') {
+    meta.ThemeColor = themeColor;
+  }
   theme = meta.Theme;
 
   meta.Title = document.querySelector('meta[property="og:title"]').content;
@@ -853,9 +865,7 @@ function findIcon(iconNode) {
 }
 
 function inlineIcons(main, html) {
-  const themeColorRegex = /--theme-color: (#[0-9a-fA-F]{6});/g;
-  const themeColorMatch = themeColorRegex.exec(html);
-  const themeColor = themeColorMatch[1];
+  const themeColor = getThemeColor(html);
 
   const foundIcons = [];
   const notFoundIcons = [];
