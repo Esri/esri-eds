@@ -884,6 +884,7 @@ function inlineIcons(main, html) {
       let iconName = findIcon(icon);
       if (!iconName) {
         console.error('Unknown icon hash', iconHash, icon);
+        console.error('icon parent', icon.parentElement.parentElement);
         iconName = `pending-${iconHash}`;
         notFoundIcons.push({
           name: iconName,
