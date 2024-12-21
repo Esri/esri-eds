@@ -748,20 +748,6 @@ function callToAction(main, document, html, pathname) {
     const hasEmbeddedBlock = container.querySelector('table');
     if (hasEmbeddedBlock) {
       throw new Error('callToAction has embedded block in default case');
-      const fragmentPathname = `${pathname}/call-to-action`;
-
-      const link = document.createElement('a');
-      const url = edsUrl + fragmentPathname;
-      link.setAttribute('href', url);
-      link.textContent = url;
-      const wrapper = document.createElement('div');
-      wrapper.append(...container.children);
-      container.replaceChildren(link);
-
-      fragmentPages.push({
-        element: wrapper,
-        path: fragmentPathname,
-      });
     }
 
     const ctaQuestions = container.querySelector('.cta-questions');
