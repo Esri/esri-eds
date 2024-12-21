@@ -113,9 +113,11 @@ function decorateVariants(container, variants) {
 function createBlock(container, document, name, cells, variants = []) {
   decorateVariants(container, variants);
 
-  report[name] ??= new Set();
-  const blockReport = report[name];
-  variants.forEach((variant) => blockReport.add(variant));
+  const reportBlockName = name.toLowerCase();
+
+  report[reportBlockName] ??= new Set();
+  const blockReport = report[reportBlockName];
+  variants.forEach((variant) => blockReport.add(variant.toLowerCase()));
 
   const hasEmbeddedBlock = container.querySelector('table');
   const closestBlock = container.closest('table');
@@ -123,7 +125,7 @@ function createBlock(container, document, name, cells, variants = []) {
     if (!report.embeddedBlocks) {
       report.embeddedBlocks = [];
     }
-    report.embeddedBlocks.push(name);
+    report.embeddedBlocks.push(reportBlockName);
     if (hasEmbeddedBlock) {
       console.error(`Block "${name}" has block embedded in it`, hasEmbeddedBlock, cells);
     } else {
@@ -950,6 +952,23 @@ function columns(main, document) {
       throw new Error('media-text-split expected 2 children');
     }
     createBlock(container, document, 'columns', [children], ['Media split']);
+  });
+
+  main.querySelectorAll('.grid-container:has(.media-split)').forEach((container) => {
+    const cells = [...container.querySelectorAll('.media-split')].map((mediaSplit) => {
+      const splitDiv = mediaSplit.querySelector('.split');
+      const splitChildren = [...splitDiv.children];
+      if (splitChildren.length !== 2) {
+        throw new Error('media-split expected 2 children');
+      }
+      if (splitDiv.classList.contains('split--swap')) {
+        splitChildren.reverse();
+      }
+
+      return splitChildren;
+    });
+
+    createBlock(container, document, 'columns', cells, ['Media split']);
   });
 }
 
