@@ -505,7 +505,6 @@ function form(main, pathname) {
   const formProps = looseJsParse(jsString);
 
   const fields = {
-    divId: formProps.divId,
     formName: formProps.formName,
     formModalLookup: formProps.formModalLookup,
     pardotHandler: formProps.pardotHandler,
@@ -525,7 +524,9 @@ function form(main, pathname) {
 
   const formParent = formEl.parentElement;
 
-  // TODO only add to metadata when moving form to a fragment => and then remove it from the fragment divId
+  // TODO only add to metadata when moving form to a fragment
+  //  and then remove it from the fragment divId
+  // but if not possible, this is  fine
   preprocessMetadata.formDivId = fields.divId;
 
   const ctaGroup = getPageCTAGroup(pathname);
