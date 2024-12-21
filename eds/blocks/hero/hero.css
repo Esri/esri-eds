@@ -122,4 +122,8 @@
   .hero :where(h1, p) {
     inline-size: 90%;
   }
+
+  .hero.small.center :is(.image, .content) {
+    inline-size: auto;
+  }
 }
