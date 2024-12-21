@@ -223,12 +223,15 @@ function enableVideoControls(block) {
 }
 
 export default async function decorate(block) {
+  let foregroundSrc = '';
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
   const vidUrls = getMP4(block);
   const foregroundContentContainer = document.createElement('div');
-  const foregroundPicture = block.querySelectorAll('picture')[1];
-  const foregroundSrc = foregroundPicture.querySelector('img').src;
+  const foregroundPicture = block.querySelectorAll('picture');
+  if (foregroundPicture.length > 1) {
+    foregroundSrc = foregroundPicture[1].querySelector('img').src;
+  }
   const foregroundContent = document.createElement('div');
   const videoBtn = await getVideoBtn();
 
@@ -236,8 +239,8 @@ export default async function decorate(block) {
   let videoTag = video();
 
   foregroundContent.classList.add('content-wrapper');
-  if (isMP4(vidUrls) === true) {
-    foregroundPicture.classList.add('hide-poster');
+  if ((isMP4(vidUrls) === true) && (foregroundPicture.length > 1)) {
+    foregroundPicture[1].classList.add('hide-poster');
   }
   if ((pictureTagLeft !== null)) {
     setforegroundContainers(block);
