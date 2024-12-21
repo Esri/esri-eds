@@ -299,7 +299,7 @@ main {
     inline-size: 24px;
   }
 
-  .icon[class$="-48"] {
+  .icon:where([class$="-48"], [class$="-64"]) {
     block-size: 48px;
     inline-size: 48px;
   }
