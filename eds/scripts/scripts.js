@@ -143,28 +143,22 @@ function buildAutoBlocks(main) {
 
 const calciteModes = ['light', 'dark', 'gray'];
 
-// get theme color from meta tag
-// const themeColorMeta = document.querySelector('meta[name="themecolor"]');
-// // pass themcolor to filterColor function
-// if (themeColorMeta) {
-//   filterColor(themeColorMeta.getAttribute('content'));
-  
-// }
-
 const themeColorMeta = document.querySelector('meta[name="themecolor"]');
-
+// if the meta tag exists, get the content and filter the color
+// create the page color theme variables
   if (themeColorMeta) {
-    filterColor(themeColorMeta.getAttribute('content'));
-    
     const themeColor = themeColorMeta.getAttribute('content');
+    let cssFilter = filterColor(themeColor);
+    // clearn up cssFilter results 
+    // remove the string 'filter: ' from the beginning and trailing semicolon 
+    cssFilter = cssFilter.slice(7);
+    cssFilter = cssFilter.slice(0, -1);
+
     const style = document.createElement('style');
     style.innerHTML = `:root { 
-    --theme-color: ; 
-    --theme-color10: ${themeColor}1A;
-    --theme-color50: ${themeColor}80;
-    --theme-color: /* filter code */
-    --theme-color10: /* filter code + opactity(10%) */
-    --theme-color50: /* filter code + opactity(50%) */
+    --theme-color: ${cssFilter};
+    --theme-color10: ${cssFilter} opacity(10%);
+    --theme-color50: ${cssFilter} opacity(50%);
     }`;
     document.head.appendChild(style);
   }
@@ -311,6 +305,7 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
