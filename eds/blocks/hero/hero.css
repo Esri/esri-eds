@@ -34,8 +34,12 @@
   font-size: var(--font-6);
 }
 
+.hero.small.center .content {
+  text-align: center;
+}
+
 .hero :where(h1, p) {
-  inline-size: 90%;
+  inline-size: 100%;
 }
 
 .hero p:has(+ p) {
@@ -95,6 +99,10 @@
   aspect-ratio: 3 / 2;
 }
 
+.hero.small picture img {
+  aspect-ratio: 16 / 9;
+}
+
 @media (width >= 1024px) {
   .hero {
     align-items: center;
@@ -109,5 +117,13 @@
   .hero :is(.image, .content) {
     inline-size: 50%;
     max-inline-size: 700px;
+  }
+
+  .hero :where(h1, p) {
+    inline-size: 90%;
+  }
+
+  .hero.small.center :is(.image, .content) {
+    inline-size: auto;
   }
 }
