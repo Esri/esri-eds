@@ -304,36 +304,6 @@ export function filterColor(hex) {
     const color = new Color(rgb[0], rgb[1], rgb[2]);
     const solver = new Solver(color);
     const result = solver.solve();
-    return result;
-    // console.log(result.filter);
+  
+    return result.filter;
 }
-
-// $(document).ready(() => {
-//   $('button.execute').click(() => {
-//     const rgb = hexToRgb($('input.target').val());
-//     if (rgb.length !== 3) {
-//       alert('Invalid format!');
-//       return;
-//     }
-
-//     const color = new Color(rgb[0], rgb[1], rgb[2]);
-//     const solver = new Solver(color);
-//     const result = solver.solve();
-
-//     let lossMsg;
-//     if (result.loss < 1) {
-//       lossMsg = 'This is a perfect result.';
-//     } else if (result.loss < 5) {
-//       lossMsg = 'The is close enough.';
-//     } else if (result.loss < 15) {
-//       lossMsg = 'The color is somewhat off. Consider running it again.';
-//     } else {
-//       lossMsg = 'The color is extremely off. Run it again!';
-//     }
-
-//     $('.realPixel').css('background-color', color.toString());
-//     $('.filterPixel').attr('style', result.filter);
-//     $('.filterDetail').text(result.filter);
-//     $('.lossDetail').html(`Loss: ${result.loss.toFixed(1)}. <b>${lossMsg}</b>`);
-//   });
-// });
