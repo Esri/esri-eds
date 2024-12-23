@@ -8,8 +8,12 @@
 }
 
 .columns > div > div :where(h2, p) {
-  padding: 0 var(--space-8);
+  margin: 0 var(--space-8);
 }
+
+/* .columns > div > div:nth-of-type(2) :where(h2, p) {
+  margin: 0 var(--space-8);
+} */
 
 .columns > div > .columns-img-col {
   display: block;
@@ -40,8 +44,14 @@
     flex: 1;
   }
 
+  .columns > div > div:nth-of-type(2) :where(h2, p)  {
+    margin-inline: 0 auto;
+  }
+  
   .columns > div > div :where(h2, p) {
-    padding: 0 var(--space-16);
+    max-inline-size: 720px;
+    margin-inline-start: auto;
+    padding-inline: var(--space-12);
   }
 }
 
