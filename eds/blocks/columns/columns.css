@@ -26,10 +26,6 @@
   margin: 0 var(--space-8);
 }
 
-.columns.media-split picture img {
-  margin: auto;
-}
-
 .columns.calcite-mode-gray {
   background-color: var(--calcite-ui-foreground-2);
 }
