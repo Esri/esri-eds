@@ -11,10 +11,6 @@
   margin: 0 var(--space-8);
 }
 
-/* .columns > div > div:nth-of-type(2) :where(h2, p) {
-  margin: 0 var(--space-8);
-} */
-
 .columns > div > .columns-img-col {
   display: block;
   block-size: 100%;
@@ -24,6 +20,14 @@
   display: block;
   block-size: 100%;
   object-fit: cover;
+}
+
+.columns > div > div :where(h2, p) {
+  margin: 0 var(--space-8);
+}
+
+.columns.media-split picture img {
+  margin: auto;
 }
 
 .columns.calcite-mode-gray {
