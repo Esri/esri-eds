@@ -152,6 +152,7 @@ const calciteModes = ['light', 'dark', 'gray'];
 // }
 
 const themeColorMeta = document.querySelector('meta[name="themecolor"]');
+
   if (themeColorMeta) {
     filterColor(themeColorMeta.getAttribute('content'));
     
