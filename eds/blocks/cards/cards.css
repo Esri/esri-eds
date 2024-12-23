@@ -20,6 +20,7 @@
       line-height: 1.375;
       margin-block-end: 0;
       font-weight: 400;
+      margin-block-end: var(--space-2);
     }
 
     p:last-child {
