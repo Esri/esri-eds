@@ -141,6 +141,18 @@ function buildAutoBlocks(main) {
 
 const calciteModes = ['light', 'dark', 'gray'];
 
+const themeColorMeta = document.querySelector('meta[name="themecolor"]');
+  if (themeColorMeta) {
+    const themeColor = themeColorMeta.getAttribute('content');
+    const style = document.createElement('style');
+    style.innerHTML = `:root { 
+    --theme-color: ${themeColor}; 
+    --theme-color10: ${themeColor}1A;
+    --theme-color50: ${themeColor}80;
+    }`;
+    document.head.appendChild(style);
+  }
+
 function decorateBodyMode() {
   const { classList } = document.body;
   const main = document.body.querySelector('main');
