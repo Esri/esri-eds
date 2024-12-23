@@ -1,5 +1,3 @@
-'use strict';
-
 class Color {
   constructor(r, g, b) {
     this.set(r, g, b);
