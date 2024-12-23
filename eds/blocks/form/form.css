@@ -1,7 +1,8 @@
 .form.block {
   color: var(--calcite-ui-text-1);
+  background-color: var(--calcite-ui-foreground-1);
 
-  & > div:first-child {
+  & > div.one-form {
     inline-size: 1440px;
     max-inline-size: 96vw;
     margin: auto;
@@ -17,6 +18,22 @@
         color: var(--calcite-ui-text-1);
         font-size: var(--font-0);
         margin-block: 0 var(--space-6);
+      }
+    }
+
+    .submit-button-row {
+      block-size: auto;
+    }
+  }
+
+  &.card-modal {
+    & > div.one-form {
+      display: none;
+    }
+
+    .card-modal-content {
+      img {
+        filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
       }
     }
   }

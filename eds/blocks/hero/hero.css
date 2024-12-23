@@ -34,9 +34,12 @@
   font-size: var(--font-6);
 }
 
+.hero.small.center .content {
+  text-align: center;
+}
+
 .hero :where(h1, p) {
-  inline-size: 90%;
-  margin-block-start: 0;
+  inline-size: 100%;
 }
 
 .hero p:has(+ p) {
@@ -45,7 +48,13 @@
 }
 
 .hero .button-container {
-  margin-block-start: var(--space-8);
+  margin-block: 0;
+  inline-size: auto;
+  display: inline-block;
+}
+
+.hero p.button-container a {
+  margin-block: var(--space-2);
 }
 
 .hero video {
@@ -68,6 +77,7 @@
 .hero .backgroundimage img {
   block-size: 100%;
   inline-size: 100%;
+  object-fit: cover;
 }
 
 .hero .image {
@@ -79,10 +89,18 @@
   block-size: 100%;
   display: block;
   inline-size: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   padding-inline-end: 2vw;
   position: initial;
+}
+
+.hero.medium picture img {
+  aspect-ratio: 3 / 2;
+}
+
+.hero.small picture img {
+  aspect-ratio: 16 / 9;
 }
 
 @media (width >= 1024px) {
@@ -99,5 +117,13 @@
   .hero :is(.image, .content) {
     inline-size: 50%;
     max-inline-size: 700px;
+  }
+
+  .hero :where(h1, p) {
+    inline-size: 90%;
+  }
+
+  .hero.small.center :is(.image, .content) {
+    inline-size: auto;
   }
 }

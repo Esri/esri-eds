@@ -119,7 +119,7 @@ async function createBreadcrumbs() {
     .slice(2);
 
   const language = getMetadata('og:locale');
-
+  window.gnav_jsonPath = `https://www.esri.com/content/experience-fragments/esri-sites/${language}/site-settings/global-navigation-config/2022-nav-config.25.json`;
   const urlPrefix = `/${language}`;
   let accUrl = '';
   const accBreadcrumbs = [];
@@ -187,8 +187,17 @@ function createSchema() {
 }
 
 /**
- * loads and decorates the header, mainly the nav
+ * Loads and decorates the header, mainly the navigation.
+ *
+ * This function performs the following steps:
+ * 1. Creates the schema for the webpage.
+ * 2. Creates breadcrumbs for the webpage.
+ * 3. Sets the locale and text direction based on metadata.
+ * 4. Alternates headers based on the current page URL.
+ * 5. Loads the global navigation script and CSS.
+ *
  * @param {Element} block The header block element
+ * @returns {Promise<void>} A promise that resolves when the header is fully decorated.
  */
 export default async function decorate() {
   createSchema();
@@ -196,7 +205,6 @@ export default async function decorate() {
   setLocaleAndDirection();
   await alternateHeaders()
     .then(async () => {
-      window.gnav_jsonPath = '/2022-nav-config.25.json';
       await Promise.all([
         loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
         loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),

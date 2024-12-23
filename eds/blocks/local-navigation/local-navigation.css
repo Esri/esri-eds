@@ -5,43 +5,41 @@
   z-index: 3000;
 }
 
-.local-navigation-wrapper {
-  display: flex;
-  block-size: 60px;
-  align-items: center;
-}
-
 .local-navigation.block {
+  block-size: 60px;
   background-color: inherit;
-  color: inherit;
-  inline-size: 1440px;
 }
 
-.local-navigation nav {
+.local-navigation nav#main {
   display: flex;
-  margin-inline: var(--space-4);
-}
-
-.local-navigation .navigation-title {
-  white-space: nowrap;
-  font-size: var(--font-2);
+  margin-inline-start: var(--space-4);
+  align-items: flex-start;
 }
 
 .local-navigation .navigation-title a {
   color: #fff;
+  display: flex;
+  block-size: 60px;
+  align-items: center;
+  white-space: nowrap;
+  font-size: var(--font-0);
 }
 
 .local-navigation .navigation-title a:hover {
   box-shadow: inset 0 -3px 0 0 #2b2b2b;
 }
 
-.local-navigation ul {
+.local-navigation ul.mobile-menu {
   padding: 0;
   inline-size: 100%;
   position: absolute;
   inset-inline-end: 0;
   list-style-type: none;
-  margin-block-start: 42px;
+  inset-block-start: 60px;
+}
+
+.local-navigation ul.mobile-menu[aria-expanded='false'] {
+  display: none;
 }
 
 .local-navigation ul li a {
@@ -51,34 +49,126 @@
   block-size: 60px;
   align-items: center;
   text-decoration: none;
-  background-color: #2b2b2b;
-  padding-inline: var(--space-8);
+  background-color: #202020;
+  padding-inline: var(--space-6);
 }
 
-.local-navigation ul li a:hover {
+.local-navigation ul li a:is([aria-current='true'], :hover) {
+  background-color: #2b2b2b;
+}
+
+.local-navigation ul li.page-title > button[aria-current='true'] {
   background-color: #202020;
-  box-shadow: inset 0 -3px 0 0 var(--calcite-link-blue-underline);
+  box-shadow: inset 3px 0 0 0 var(--calcite-ui-brand);
 }
 
 .local-navigation ul li a[aria-current='true'] {
-  box-shadow: inset 3px 0 0 0 var(--calcite-ui-brand-hover);
+  box-shadow: inset 3px 0 0 0 var(--calcite-ui-brand);
+}
+
+.local-navigation ul li button {
+  border: none;
+  color: #fff;
+  display: flex;
+  cursor: pointer;
+  block-size: 60px;
+  inline-size: 100%;
+  align-items: center;
+  margin-block-start: 0;
+  text-decoration: none;
+  font-size: var(--font-0);
   background-color: #202020;
 }
 
-.local-navigation ul.mobile-menu[aria-expanded='false'] {
+.local-navigation ul li button:hover {
+  background-color: #2b2b2b;
+  box-shadow: inset 0 0 0 0 var(--calcite-link-blue-underline);
+}
+
+.local-navigation ul.mobile-menu .subnav[aria-hidden='true'] {
   display: none;
+}
+
+.local-navigation ul.mobile-menu button::after {
+  block-size: 13px;
+  position: absolute;
+  transition-duration: 0.25s;
+  inset-inline-end: var(--space-4);
+  content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 25' width='10' height='25'%3E%3Cpath fill='%23ffffff' d='M 0 0 14 0 7 7' /%3E%3C/svg%3E");
+}
+
+.local-navigation ul.mobile-menu button[aria-expanded='true']::after {
+  transition-duration: 0.25s;
+  transform: rotateX(180deg) translateY(1px);
 }
 
 .local-navigation calcite-icon {
   z-index: 3001;
   color: #fff;
+  block-size: 60px;
   cursor: pointer;
-  margin-inline-start: auto;
+  position: absolute;
+  margin: auto 0 auto 90%;
+}
+
+.local-navigation .subnav {
+  position: relative;
+  inset-inline-end: 0;
+  background-color: #202020;
+}
+
+.local-navigation .subnav .subnav-ul a {
+  color: #9f9f9f;
+  white-space: nowrap;
+  background-size: 200% 1px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  transition: background-position .25s;
+  background-image: linear-gradient(90deg, #007ac2 50%, #555 0);
+}
+
+.local-navigation .subnav .subnav-ul a:hover {
+  background-position: 0 100%;
+  background-color: #202020;
+}
+
+.local-navigation .subnav .subnav-ul a::after {
+  opacity: 0;
+  display: flex;
+  block-size: 16px;
+  inline-size: 100%;
+  justify-content: end;
+  margin-inline-end: 20px;
+  inset-inline-end: .20px;
+  transition: all .25s ease-out;
+  content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'%3E%3Cpath fill='%23007ac2' d='M8 14.3l5.3-5.3H0V8h13.3L8 2.7V1.3L15.2 8.5 8 15.7V14.3z' /%3E%3C/svg%3E");
+}
+
+.local-navigation .subnav .subnav-ul a:hover::after {
+  opacity: 1;
+  margin-inline-end: 10px;
+}
+
+.local-navigation .subnav .subnav-ul {
+  margin: 0;
+  list-style-type: none;
+  padding-inline-start: var(--space-10);
+}
+
+.local-navigation .subnav ul li a {
+  padding-inline: 0;
+}
+
+.local-navigation calcite-button {
+  display: flex;
+  padding-inline: 30%;
+  background-color: #202020;
+  padding-block: var(--space-4);
 }
 
 @media (width >= 616px) {
-  .local-navigation ul {
-    inline-size: 320px;
+  .local-navigation ul.mobile-menu {
+    inline-size: 330px;
   }
 }
 
@@ -91,19 +181,73 @@
     align-items: center;
   }
 
-  .local-navigation ul {
+  .local-navigation ul.mobile-menu {
     margin: 0;
-    justify-content: end;
+    inline-size: 100%;
     position: relative;
-    inline-size: 1440px;
+    inset-block-start: 0;
+    justify-content: end;
+  }
+
+  .local-navigation ul li a {
+    background-color: #2b2b2b;
   }
 
   .local-navigation ul li a[aria-current='true'] {
-    box-shadow: inset 0 -3px 0 0 var(--calcite-ui-brand-hover);
+    background-color: #202020;
+    box-shadow: inset 0 -3px 0 0 var(--calcite-ui-brand);
+  }
+
+  .local-navigation ul li.page-title {
+    position: relative;
+  }
+
+  .local-navigation ul li.page-title a:hover {
+    background-color: #202020;
+    box-shadow: inset 0 -3px 0 0 var(--calcite-link-blue-underline);
+  }
+
+  .local-navigation ul li.page-title > button[aria-current='true'] {
+    box-shadow: inset 0 -3px 0 0 var(--calcite-ui-brand);
+  }
+
+  .local-navigation ul.mobile-menu button::after {
+    position: relative;
+    inset-inline-start: var(--space-2);
   }
 
   .local-navigation ul.mobile-menu[aria-expanded='false'] {
     display: flex;
+    flex-wrap: nowrap;
+    block-size: 60px;
+    align-items: flex-end;
+  }
+
+  .local-navigation ul li button {
+    background-color: #2b2b2b;
+  }
+
+  .local-navigation ul li button:hover {
+    background-color: #202020;
+    box-shadow: inset 0 -3px 0 0 var(--calcite-link-blue-underline);
+  }
+
+  .local-navigation .subnav {
+    position: absolute;
+    inline-size: 330px;
+  }
+
+  .local-navigation .subnav .subnav-ul {
+    padding-inline-start: var(--space-6);
+  }
+
+  .local-navigation .subnav .subnav-ul a {
+    background-color: #202020;
+  }
+
+  .local-navigation calcite-button {
+    padding-inline: var(--space-4);
+    background-color: #2b2b2b;
   }
 
   .local-navigation calcite-icon {
