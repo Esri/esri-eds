@@ -19,6 +19,8 @@ import {
   video, source,
 } from './dom-helpers.js';
 
+import { filterColor } from './color-filter.js';
+
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
 
 /**
@@ -141,14 +143,27 @@ function buildAutoBlocks(main) {
 
 const calciteModes = ['light', 'dark', 'gray'];
 
+// get theme color from meta tag
+// const themeColorMeta = document.querySelector('meta[name="themecolor"]');
+// // pass themcolor to filterColor function
+// if (themeColorMeta) {
+//   filterColor(themeColorMeta.getAttribute('content'));
+  
+// }
+
 const themeColorMeta = document.querySelector('meta[name="themecolor"]');
   if (themeColorMeta) {
+    filterColor(themeColorMeta.getAttribute('content'));
+    
     const themeColor = themeColorMeta.getAttribute('content');
     const style = document.createElement('style');
     style.innerHTML = `:root { 
-    --theme-color: ${themeColor}; 
+    --theme-color: ; 
     --theme-color10: ${themeColor}1A;
     --theme-color50: ${themeColor}80;
+    --theme-color: /* filter code */
+    --theme-color10: /* filter code + opactity(10%) */
+    --theme-color50: /* filter code + opactity(50%) */
     }`;
     document.head.appendChild(style);
   }
