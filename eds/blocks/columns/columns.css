@@ -7,8 +7,8 @@
   padding-block-end: 32px;
 }
 
-.columns > div > div:last-child > * {
-  padding-inline: 6.7%;
+.columns > div > div :where(h2, p) {
+  margin: 0 var(--space-8);
 }
 
 .columns > div > .columns-img-col {
@@ -38,6 +38,16 @@
 
   .columns > div > div {
     flex: 1;
+  }
+
+  .columns > div > div:nth-of-type(2) :where(h2, p)  {
+    margin-inline: 0 auto;
+  }
+  
+  .columns > div > div :where(h2, p) {
+    max-inline-size: 720px;
+    margin-inline-start: auto;
+    padding-inline: var(--space-12);
   }
 }
 
