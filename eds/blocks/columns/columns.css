@@ -1,5 +1,12 @@
 .columns > div {
   display: flex;
+}
+
+.columns > div:has(div > :is(h2, p)) {
+  flex-direction: column-reverse;
+}
+
+.columns > div:has(div:nth-of-type(1) > :is(h2, p)) {
   flex-direction: column;
 }
 
@@ -29,6 +36,9 @@
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
+  }
+
+  .columns > div:has(div > :is(h2, p), div:nth-of-type(1) > :is(h2, p)) {
     flex-direction: row;
   }
 
