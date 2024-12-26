@@ -19,6 +19,8 @@ import {
   video, source,
 } from './dom-helpers.js';
 
+import { filterColor } from './color-filter.js';
+
 const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
 
 /**
@@ -140,6 +142,26 @@ function buildAutoBlocks(main) {
 }
 
 const calciteModes = ['light', 'dark', 'gray'];
+
+const themeColorMeta = document.querySelector('meta[name="themecolor"]');
+// if the meta tag exists, get the content and filter the color
+// create the page color theme variables
+if (themeColorMeta) {
+  const themeColor = themeColorMeta.getAttribute('content');
+  let cssFilter = filterColor(themeColor);
+  // clearn up cssFilter results
+  // remove the string 'filter: ' from the beginning and trailing semicolon
+  cssFilter = cssFilter.slice(7);
+  cssFilter = cssFilter.slice(0, -1);
+
+  const style = document.createElement('style');
+  style.innerHTML = `:root { 
+    --theme-color: ${cssFilter};
+    --theme-color10: ${cssFilter} opacity(10%);
+    --theme-color50: ${cssFilter} opacity(50%);
+    }`;
+  document.head.appendChild(style);
+}
 
 function decorateBodyMode() {
   const { classList } = document.body;
