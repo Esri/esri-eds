@@ -1,5 +1,12 @@
 .columns > div {
   display: flex;
+}
+
+.columns > div:has(div > :is(h2, p)) {
+  flex-direction: column-reverse;
+}
+
+.columns > div:has(div:nth-of-type(1) > :is(h2, p)) {
   flex-direction: column;
 }
 
@@ -7,8 +14,8 @@
   padding-block-end: 32px;
 }
 
-.columns > div > div:last-child > * {
-  padding-inline: 6.7%;
+.columns > div > div :where(h2, p) {
+  margin: 0 var(--space-8);
 }
 
 .columns > div > .columns-img-col {
@@ -29,6 +36,9 @@
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
+  }
+
+  .columns > div:has(div > :is(h2, p), div:nth-of-type(1) > :is(h2, p)) {
     flex-direction: row;
   }
 
@@ -38,6 +48,16 @@
 
   .columns > div > div {
     flex: 1;
+  }
+
+  .columns > div > div:nth-of-type(2) :where(h2, p)  {
+    margin-inline: 0 auto;
+  }
+  
+  .columns > div > div :where(h2, p) {
+    max-inline-size: 720px;
+    margin-inline-start: auto;
+    padding-inline: var(--space-12);
   }
 }
 
