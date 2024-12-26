@@ -62,6 +62,13 @@ export default function decorate(block) {
     [...li.children].forEach((element) => {
       if (element.children.length === 1 && element.querySelector('picture')) element.className = 'cards-card-image';
       else { element.className = 'cards-card-body'; }
+      if (!block.classList.contains('simple')) {
+        element.querySelectorAll('p:not(:has(img, a)):nth-last-child(2)').forEach((p) => {
+          const h3 = document.createElement('h3');
+          h3.innerHTML = p.innerHTML;
+          p.replaceWith(h3);
+        });
+      }
       if (block.classList.contains('standard')) processStandardCard(element);
     });
     if (block.classList.contains('simple')) processSimpleCard(li);
