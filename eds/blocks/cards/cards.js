@@ -67,7 +67,6 @@ export default function decorate(block) {
           const h3 = document.createElement('h3');
           h3.innerHTML = p.innerHTML;
           p.replaceWith(h3);
-          console.log('replaced' + h3.innerHTML);
         });
       }
       if (block.classList.contains('standard')) processStandardCard(element);
