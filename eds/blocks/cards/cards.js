@@ -65,7 +65,7 @@ export default function decorate(block) {
       if (!block.classList.contains('simple')) {
         const lastP = element.querySelector('p:last-child');
         let titleSelector;
-        if (lastP?.classList.contains('button-container')) {
+        if (lastP && (lastP.querySelector('a') || lastP.querySelector('button'))) {
           titleSelector = 'p:nth-last-child(3)';
         } else {
           titleSelector = 'p:nth-last-child(2)';
