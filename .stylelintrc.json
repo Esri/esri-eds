@@ -1,6 +1,6 @@
 {
   "extends": [ "stylelint-config-standard" ],
-  "plugins": [ "stylelint-use-logical" ],
+  "plugins": [ "stylelint-use-logical", "stylelint-order" ],
   "rules": {
     "custom-property-pattern": null,
     "no-empty-source": null,
@@ -34,6 +34,7 @@
           "inset-block"
         ]
       }
-    ]
+    ],
+    "order/properties-alphabetical-order": true
   }
 }

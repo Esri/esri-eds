@@ -63,7 +63,14 @@ export default function decorate(block) {
       if (element.children.length === 1 && element.querySelector('picture')) element.className = 'cards-card-image';
       else { element.className = 'cards-card-body'; }
       if (!block.classList.contains('simple')) {
-        element.querySelectorAll('p:not(:has(img, a)):nth-last-child(2)').forEach((p) => {
+        const lastP = element.querySelector('p:last-child');
+        let titleSelector;
+        if (lastP && (lastP.querySelector('a') || lastP.querySelector('button'))) {
+          titleSelector = 'p:nth-last-child(3)';
+        } else {
+          titleSelector = 'p:nth-last-child(2)';
+        }
+        element.querySelectorAll(titleSelector).forEach((p) => {
           const h3 = document.createElement('h3');
           h3.innerHTML = p.innerHTML;
           p.replaceWith(h3);
