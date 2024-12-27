@@ -7,10 +7,10 @@
 .storyteller {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   gap: var(--space-20);
-  padding-inline: var(--space-8);
+  justify-content: space-between;
   overflow: hidden;
+  padding-inline: var(--space-8);
 
   h2 {
     font-size: var(--font-5);
@@ -21,9 +21,9 @@
   }
 
   img {
+    aspect-ratio: 4 / 5;
     inline-size: 100%;
     max-inline-size: 576px;
-    aspect-ratio: 4 / 5;
   }
 
   .content {
@@ -43,16 +43,16 @@
   /* Inside the secondary content section */
   .overlay {
     align-self: end;
+    background-color: var(--esri-ui-opacity85);
+    color: var(--calcite-ui-text-1);
     inline-size: 90%;
     max-inline-size: 450px;
     padding: var(--space-6);
-    color: var(--calcite-ui-text-1);
-    background-color: var(--esri-ui-opacity85);
 
     h2 {
       font-size: var(--font-1);
-      margin-block-end: var(--space-2);
       font-weight: var(--calcite-font-weight-bold);
+      margin-block-end: var(--space-2);
     }
 
     p {
@@ -62,24 +62,24 @@
   }
 
   .video-play-button {
-    border: 1px solid #fff;
-    display: flex;
-    cursor: pointer;
-    padding: 0 14px;
-    border-radius: 50%;
     align-items: center;
-    justify-content: center;
     background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 0 14px;
 
     &::after {
-      content: "";
-      position: absolute;
-      inline-size: 20px;
-      block-size: 20px;
-      display: inline-block;
-      background-size: 20px 20px;
       background-color: #fff;
+      background-size: 20px 20px;
+      block-size: 20px;
+      content: "";
+      display: inline-block;
+      inline-size: 20px;
       mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iRXhwb3J0YWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMWQxZDFmfTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJwYXVzZSI+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzLjc1IiB5PSIzIiB3aWR0aD0iNC41IiBoZWlnaHQ9IjE0IiByeD0iMS41Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMS43NSIgeT0iMyIgd2lkdGg9IjQuNSIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPjwvZz48L3N2Zz4=");
+      position: absolute;
     }
 
     &.paused::after {
