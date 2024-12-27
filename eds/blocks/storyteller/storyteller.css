@@ -43,7 +43,7 @@
   /* Inside the secondary content section */
   .overlay {
     align-self: end;
-    inline-size: 100%;
+    inline-size: 90%;
     max-inline-size: 450px;
     padding: var(--space-6);
     color: var(--calcite-ui-text-1);
