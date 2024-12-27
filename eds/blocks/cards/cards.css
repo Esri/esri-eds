@@ -22,11 +22,14 @@
       margin-block-end: var(--space-2);
     }
 
-    p:last-child {
+    h3 + p:not(.button-container) {
       font-size: var(--font-minus-1);
       margin: .5rem 0;
       margin-block-end: 1.5rem;
-      padding-block-end: 2.75rem;
+    }
+
+    p a{
+      margin-block-start: 0;
     }
 
     h3, p:last-child {
