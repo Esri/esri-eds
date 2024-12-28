@@ -166,13 +166,12 @@ if (themeColorMeta) {
 function addAnimation() {
   // find any element with the class calcite-animate
   const animateElements = document.querySelectorAll('.calcite-animate');
-  console.log(animateElements);
+
   // add the class animate-slow to each element
   animateElements.forEach((element) => {
     element.classList.add('calcite-animate__in-up');
   });
 }
-
 
 function decorateBodyMode() {
   const { classList } = document.body;
