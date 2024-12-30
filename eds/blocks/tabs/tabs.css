@@ -232,7 +232,7 @@ p, h2 {
     }
   }
 
-  .tab-content .text-wrapper, .tab-content .buttons-wrapper {
+  /* .tab-content .text-wrapper, .tab-content .buttons-wrapper {
     animation-delay: 50ms;
     animation-duration: 550ms;
     animation-fill-mode: both;
@@ -241,7 +241,7 @@ p, h2 {
 
   .tab-content[aria-hidden='false'] .text-wrapper, .tab-content[aria-hidden='false'] .buttons-wrapper {
     animation-name: in-up;
-  }
+  } */
 }
 
 @media (width >= 900px) {
@@ -302,11 +302,11 @@ p, h2 {
     .tab-content[aria-hidden='false'] {
       & > .grid-container {
         display: grid;
-        min-block-size: 960px;
         grid-template: 
         "text img"
         "buttons img"
         auto / 1fr 1fr;
+        min-block-size: 960px;
       }
 
       .buttons-wrapper {

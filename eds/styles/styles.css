@@ -105,8 +105,8 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	border: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -374,8 +374,8 @@ main {
       }
 
       .video-close-button:hover {
-        color: var(--calcite-ui-text-inverse);
         background-color: var(--calcite-ui-brand);
+        color: var(--calcite-ui-text-inverse);
       }
     }
 

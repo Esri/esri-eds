@@ -69,7 +69,7 @@ export default async function decorate(block) {
   if (!tabsContainFragments) {
     tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
-      const textWrapper = div({ class: 'text-wrapper' }, ...text);
+      const textWrapper = div({ class: 'text-wrapper calcite-animate' }, ...text);
       content.splice(1, 3, textWrapper);
 
       const buttonContainers = [content[2], content[3]];
