@@ -55,7 +55,7 @@
     padding: 0 5vw;
     padding-block-start: 4rem;
 
-p, h2 {
+    p, h2 {
       inline-size: 90%;
     }
 
@@ -159,7 +159,7 @@ p, h2 {
       inset-inline-end: 0;
     }
 
-    .arrow-button[aria-hidden='true'] {
+    .arrow-button[aria-hidden="true"] {
       display: none;
     }
 
@@ -182,16 +182,16 @@ p, h2 {
       margin-block-end: 10px;
     }
 
-    .tab-title[aria-hidden='true'] {
+    .tab-title[aria-hidden="true"] {
       display: none;
     }
 
-    .tab-title[aria-hidden='false'] {
+    .tab-title[aria-hidden="false"] {
       border-block-end: 3px solid var(--calcite-ui-brand);
       padding-block-end: 0;
     }
 
-    .tab-title[aria-selected='true'] .icon {
+    .tab-title[aria-selected="true"] .icon {
       --image-icon-filter: var(--image-icon-filter-brand);
     }
 
@@ -204,7 +204,7 @@ p, h2 {
     position: relative;
   }
 
-  .tab-content[aria-hidden='true'] {
+  .tab-content[aria-hidden="true"] {
     display: none;
   }
 
@@ -226,7 +226,7 @@ p, h2 {
       margin-inline-end: 0.7rem;
       padding-block-end: 0.75rem;
 
-    span {
+      span {
         color: var(--calcite-ui-text-1);
       }
     }
@@ -262,8 +262,8 @@ p, h2 {
     }
 
     .tab-component {
-        position: relative;
-      }
+      position: relative;
+    }
 
     .tab-nav {
       box-sizing: content-box;
@@ -286,23 +286,23 @@ p, h2 {
         padding: 1rem;
       }
 
-      .tab-title[aria-hidden='false'] {
+      .tab-title[aria-hidden="false"] {
         border-block-end: 3px solid transparent;
       }
 
-      .tab-title[aria-selected='false']:hover {
+      .tab-title[aria-selected="false"]:hover {
         border-block-end: 3px solid #0079c180;
       }
 
-      .tab-title[aria-selected='true'] {
+      .tab-title[aria-selected="true"] {
         border-block-end: 3px solid var(--calcite-ui-brand);
       }
     }
 
-    .tab-content[aria-hidden='false'] {
+    .tab-content[aria-hidden="false"] {
       & > .grid-container {
         display: grid;
-        grid-template: 
+        grid-template:
         "text img"
         "buttons img"
         auto / 1fr 1fr;
@@ -326,21 +326,21 @@ p, h2 {
       }
     }
 
-    .tab-content[aria-hidden='false'] p:last-child {
+    .tab-content[aria-hidden="false"] p:last-child {
       grid-area: img;
     }
 
-    .tab-content[aria-hidden='false'] p:last-child picture {
+    .tab-content[aria-hidden="false"] p:last-child picture {
       inline-size: 100%;
     }
 
-    .tab-content[aria-hidden='false'] p:last-child picture img {
+    .tab-content[aria-hidden="false"] p:last-child picture img {
       block-size: 100%;
       object-fit: cover;
       object-position: center;
     }
 
-    .tab-content[aria-hidden='false'] > .grid-container > p:first-child {
+    .tab-content[aria-hidden="false"] > .grid-container > p:first-child {
       block-size: 100%;
       inline-size: 100%;
       inset-block-start: 0;
@@ -372,7 +372,7 @@ p, h2 {
 }
 
 @media (width >= 1480px) {
-  .tabs .tab-content[aria-hidden='false'] :is(.text-wrapper, .buttons-wrapper) {
+  .tabs .tab-content[aria-hidden="false"] :is(.text-wrapper, .buttons-wrapper) {
     inline-size: 720px;
     margin-inline: auto 0;
     padding-inline-start: 0;

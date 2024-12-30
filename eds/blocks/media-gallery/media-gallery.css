@@ -1,183 +1,183 @@
 .media-gallery-wrapper {
-    inline-size: 100vw;
+  inline-size: 100vw;
 }
 
 .media-gallery {
-    ul {
-        list-style-type: none;
-        display: grid;
-        grid-gap: 1rem;
-        inline-size: calc(100vw - 4rem);
-        margin: auto;
-        padding: 0;
+  ul {
+    display: grid;
+    grid-gap: 1rem;
+    inline-size: calc(100vw - 4rem);
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  picture {
+    aspect-ratio: 16/9;
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+
+  picture::after {
+    --gradient-angle: to top;
+    --gradient-angle-m: to top;
+    --gradient-transition: 60%;
+
+    background: linear-gradient(to top, var(--esri-ui-opacity80-inverse), transparent 60%);
+    block-size: 100%;
+    content: "";
+    inline-size: 100%;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    position: absolute;
+  }
+
+  .cards-card-body {
+    position: relative;
+  }
+
+  .card-content {
+    block-size: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    inset-block-start: 0;
+    justify-content: flex-end;
+    padding: 0 var(--space-6) var(--space-6) var(--space-6);
+    position: absolute;
+    z-index: 1;
+  }
+
+  .card-category {
+    background-color: var(--esri-ui-opacity85-inverse);
+    color: var(--calcite-ui-text-2);
+    font-size: var(--font-minus-2);
+    font-weight: var(--calcite-font-weight-bold);
+    inline-size: fit-content;
+    line-height: 1;
+    margin-block-end: var(--space-2);
+    margin-inline-start: -1.5rem;
+    padding: var(--space-2);
+    padding-inline-start: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    color: white;
+    font-family: var(--calcite-sans-family);
+    font-size: var(--font-2);
+    font-weight: var(--calcite-font-weight-normal);
+    line-height: 1.2;
+    margin: 0;
+    pointer-events: none;
+    text-align: start;
+  }
+
+  .card-description {
+    -webkit-box-orient: vertical;
+    color: white;
+    display: none;
+    font-family: var(--calcite-sans-family);
+    font-size: clamp(.8rem, 1vw, 1rem);
+    font-weight: 400;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    line-height: 1.2;
+    margin-block-end: 0;
+    overflow: hidden;
+    pointer-events: none;
+    text-align: start;
+    text-overflow: ellipsis;
+  }
+
+  img {
+    aspect-ratio: 16/9;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .card-content, img {
+    transition: 0.2s ease;
+  }
+
+  .cards-card-body:is(:hover,:focus,:focus-within) .card-content {
+    box-shadow: 0 0 0 10px inset var(--esri-ui-opacity80);
+  }
+
+  .cards-card-body:is(:hover,:focus,:focus-within) img {
+    transform: scale(1.08);
+  }
+
+  .start-button {
+    align-items: center;
+    block-size: 44px;
+    display: flex;
+    inline-size: 44px;
+    inset-block-start: calc(50% - 22px);
+    inset-inline-start: calc(50% - 22px);
+    justify-content: center;
+    margin: 0;
+    margin-block-end: 8px;
+    position: absolute;
+    z-index: 2;
+
+    svg {
+      block-size: 24px;
+      inline-size: 24px;
     }
-
-    p {
-        margin: 0;
-    }
-
-    picture {
-        display: block;
-        aspect-ratio: 16/9;
-        overflow: hidden;
-        position: relative;
-    }
-
-    picture::after {
-        --gradient-angle: to top;
-        --gradient-angle-m: to top;
-        --gradient-transition: 60%;
-
-        content: "";
-        block-size: 100%;
-        inline-size: 100%;
-        position: absolute;
-        inset-block-end: 0;
-        inset-inline-start: 0;
-        background: linear-gradient(to top, var(--esri-ui-opacity80-inverse), transparent 60%);
-    }
-
-    .cards-card-body {
-        position: relative;
-    }
-
-    .card-content {
-        position: absolute;
-        z-index: 1;
-        inset-block-start: 0;
-        inline-size: 100%;
-        block-size: 100%;
-        padding: 0 var(--space-6) var(--space-6) var(--space-6);
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .card-category {
-        background-color: var(--esri-ui-opacity85-inverse);
-        color: var(--calcite-ui-text-2);
-        font-size: var(--font-minus-2);
-        font-weight: var(--calcite-font-weight-bold);
-        inline-size: fit-content;
-        line-height: 1;
-        margin-block-end: var(--space-2);
-        margin-inline-start: -1.5rem;
-        padding: var(--space-2);
-        padding-inline-start: 1.5rem;
-        text-transform: uppercase;
-    }
-
-    .card-title {
-        color: white;
-        font-family: var(--calcite-sans-family);
-        font-size: var(--font-2);
-        font-weight: var(--calcite-font-weight-normal);
-        line-height: 1.2;
-        margin: 0;
-        pointer-events: none;
-        text-align: start;
-    }
-
-    .card-description {
-        display: none;
-        pointer-events: none;
-        color: white;
-        font-weight: 400;
-        font-family: var(--calcite-sans-family);
-        text-align: start;
-        font-size: clamp(.8rem,1vw,1rem);
-        line-height: 1.2;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-block-end: 0;
-    }
-
-    img {
-        inline-size: 100%;
-        aspect-ratio: 16/9;
-        object-fit: cover;
-    }
-
-    .card-content, img {
-        transition: 0.2s ease;
-    }
-
-    .cards-card-body:is(:hover,:focus,:focus-within) .card-content {
-        box-shadow: 0 0 0 10px inset var(--esri-ui-opacity80);
-    }
-
-    .cards-card-body:is(:hover,:focus,:focus-within) img {
-        transform: scale(1.08);
-    }
-
-    .start-button {
-        margin: 0;
-        margin-block-end: 8px;
-        inline-size: 44px;
-        block-size: 44px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        z-index: 2;
-        inset-block-start: calc(50% - 22px);
-        inset-inline-start: calc(50% - 22px);
-
-        svg {
-            inline-size: 24px;
-            block-size: 24px;
-        }
-    }
+  }
 }
 
 @media (width >= 768px) {
-    .media-gallery {
-        ul {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .card-title {
-            margin-block-end: 0.5rem;
-        }
-
-        .card-description {
-            display: -webkit-box;
-        }
-
-        .start-button {
-            position: static;
-        }
+  .media-gallery {
+    ul {
+      grid-template-columns: 1fr 1fr;
     }
+
+    .card-title {
+      margin-block-end: 0.5rem;
+    }
+
+    .card-description {
+      display: -webkit-box;
+    }
+
+    .start-button {
+      position: static;
+    }
+  }
 }
 
 @media (width >= 1152px) {
-    .media-gallery {
-        ul {
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            inline-size: 90%;
-        }
+  .media-gallery {
+    ul {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      inline-size: 90%;
+    }
+  }
+
+  .media-gallery.alternate-2-1 {
+    .grid-item-0, .grid-item-3 {
+      img, picture {
+        aspect-ratio: 1296/360;
+      }
     }
 
-    .media-gallery.alternate-2-1 {
-        .grid-item-0, .grid-item-3 {
-            img, picture {
-                aspect-ratio:  1296/360;
-            }
-        }
-
-        .grid-item-0 {
-            grid-column: 1/3;
-            grid-row: 1;
-        }
-
-        .grid-item-3 {
-            grid-column: 2/4;
-            grid-row: 2;
-        }
+    .grid-item-0 {
+      grid-column: 1/3;
+      grid-row: 1;
     }
+
+    .grid-item-3 {
+      grid-column: 2/4;
+      grid-row: 2;
+    }
+  }
 }

@@ -19,7 +19,7 @@
   .cards-card-body {
     margin: 8px;
 
-h3 {
+    h3 {
       font-size: var(--title-size);
       font-weight: 400;
       line-height: 1.375;
@@ -32,7 +32,7 @@ h3 {
       margin-block-end: 1.5rem;
     }
 
-    p a{
+    p a {
       margin-block-start: 0;
     }
 
@@ -118,7 +118,7 @@ h3 {
     --cards-per-row: 3;
   }
 
-  .cardsperrow-4 > ul > li{
+  .cardsperrow-4 > ul > li {
     --cards-per-row: 4;
   }
 
@@ -191,18 +191,18 @@ h3 {
 .cards.simple.centered li .cards-card-body .card-body-content {
   justify-content: center;
 
-p {
+  p {
     text-align: center;
   }
 }
 
 /* Cards Standard */
-.cards.standard li{
+.cards.standard li {
   display: flex;
   position: relative;
 }
 
-.cards.standard .cards-card-body{
+.cards.standard .cards-card-body {
   background-color: var(--calcite-ui-foreground-1);
   border: 1px solid var(--calcite-ui-border-1);
   display: flex;
@@ -250,8 +250,8 @@ p {
     }
   }
 
-  .card-body-title,.card-body-subtitle,p:last-child {
-    margin:0;
+  .card-body-title, .card-body-subtitle, p:last-child {
+    margin: 0;
     padding-inline: var(--space-5);
   }
 
@@ -262,7 +262,7 @@ p {
     font-size: var(--title-size);
     -webkit-line-clamp: 4;
     line-clamp: 4;
-    margin-block-end:  var(--space-3);
+    margin-block-end: var(--space-3);
     overflow: hidden;
     text-align: start;
   }
@@ -292,7 +292,7 @@ p {
     inline-size: 100%;
     padding-block-end: var(--space-5);
 
-img {
+    img {
       block-size: auto;
       inline-size: 100%;
     }
@@ -310,7 +310,7 @@ img {
 }
 
 .cards.centered {
- text-align: center;
+  text-align: center;
 }
 
 .cards.centered .cards-card-body {
@@ -319,7 +319,7 @@ img {
   }
 }
 
-.cards.simple .cards-card-body:is(:hover,:focus-within){
+.cards.simple .cards-card-body:is(:hover,:focus-within) {
   border: 1px solid var(--calcite-ui-brand);
 }
 

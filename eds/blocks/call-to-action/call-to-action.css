@@ -3,10 +3,10 @@
 }
 
 .call-to-action-wrapper {
-  color: var(--calcite-ui-text-1);
-  padding: var(--space-24) 0 var(--space-32);
   background: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
   justify-content: center;
+  padding: var(--space-24) 0 var(--space-32);
 }
 
 .call-to-action {
@@ -19,13 +19,13 @@
     inline-size: 100%;
 
     > div {
-      flex: 1;
-      display: flex;
       align-items: center;
-      flex-direction: column;
-      justify-content: center;
       block-size: var(--space-56);
       border-inline-end: 0.01rem solid var(--calcite-ui-border-1);
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
       margin-inline-end: -0.01rem;
 
       &:last-child {
@@ -42,8 +42,8 @@
 }
 
 p.button-container .button {
-  margin-inline-end: 0;
   margin-block-start: 0;
+  margin-inline-end: 0;
 }
 
 .call-to-action.fragment {
@@ -68,15 +68,15 @@ p.button-container .button {
     }
 
     > div:first-child {
-      display: block;
       border-inline-end: none;
+      display: block;
       margin-inline-end: 0;
 
       span.icon {
-        display: block;
-        margin: auto;
-        inline-size: 64px;
         block-size: 64px;
+        display: block;
+        inline-size: 64px;
+        margin: auto;
       }
 
       span.icon > img {
@@ -85,15 +85,14 @@ p.button-container .button {
     }
 
     > div:nth-child(2) {
+      block-size: max-content;
       display: grid;
       grid-template-columns: 50vw 50vw;
+      margin: 0;
 
       .cards ul {
         inline-size: 100%;
       }
-
-      margin: 0;
-      block-size: max-content;
 
       span.icon > img {
         filter: var(--sepia-icon-color);
@@ -101,8 +100,8 @@ p.button-container .button {
     }
 
     > div:nth-child(3) {
-      display: block;
       block-size: auto;
+      display: block;
     }
   }
 
@@ -118,11 +117,11 @@ p.button-container .button {
   }
 
   .call-to-action > div > div {
+    border-block-end: 0.01rem solid var(--calcite-ui-border-1);
+    border-inline-end: none;
     inline-size: 100%;
     margin-block: var(--space-10);
-    border-inline-end: none;
     margin-inline-end: 0;
-    border-block-end: 0.01rem solid var(--calcite-ui-border-1);
   }
 
   .call-to-action > div > div:last-child {
