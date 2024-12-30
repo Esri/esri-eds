@@ -61,6 +61,22 @@
     }
   }
 
+  .play-progress-circle {
+    block-size: 35px;
+    inline-size: 8px;
+    opacity: 1;
+    position: relative;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-width: 6px;
+    transform: rotate(-90deg);
+
+    .progress-background {
+      stroke: #6a6a6a;
+      stroke-width: 1px;
+    }
+  }
+
   .video-play-button {
     align-items: center;
     background-color: transparent;
@@ -82,7 +98,7 @@
       position: absolute;
     }
 
-    &.paused::after {
+    &.play::after {
       mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
     }
   }

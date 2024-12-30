@@ -96,7 +96,7 @@ function togglePlayButton(videoElement) {
   const videoContainer = videoElement.closest('.foreground');
   const playButton = videoContainer.querySelector('.video-play-button');
 
-  if (videoElement.paused) {
+  if (!videoElement.paused) {
     playButton.classList.add('play');
   } else {
     playButton.classList.remove('play');
