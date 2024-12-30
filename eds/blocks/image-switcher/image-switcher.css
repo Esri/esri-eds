@@ -1,23 +1,23 @@
 .image-switcher .nav {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
   margin: auto;
 
   .nav-list {
-    text-decoration: none;
-    list-style-type: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    list-style-type: none;
     padding: 0;
+    text-decoration: none;
 
     .nav-item {
+      align-items: center;
       block-size: 64px;
       border: 1px solid var(--calcite-ui-border-1);
       display: flex;
       justify-content: center;
-      align-items: center;
       transition: background-color 180ms, box-shadow 180ms;
     }
 
@@ -30,15 +30,15 @@
     }
 
     picture {
-      inline-size: 48px;
       block-size: 48px;
+      inline-size: 48px;
 
       img {
-        inline-size: 48px;
         block-size: 48px;
+        border-radius: 50%;
+        inline-size: 48px;
         object-fit: cover;
         object-position: center;
-        border-radius: 50%;
       }
     }
   }
@@ -48,13 +48,13 @@
   padding: var(--space-5);
 
   div {
-    max-inline-size: 600px;  
+    max-inline-size: 600px;
   }
 
   h2 {
     font-size: var(--font-4);
-    line-height: 1.375;
     font-weight: 400;
+    line-height: 1.375;
     margin-block: 0 var(--space-2);
   }
 
@@ -68,15 +68,15 @@
 
   h3 {
     font-size: 16px;
-    line-height: 20px;
     font-weight: 300;
+    line-height: 20px;
     margin-block-start: 0;
   }
 
   p {
+    color: var(--calcite-ui-text-2);
     font-size: 15px;
-    line-height: 20px;
-    color: var(--calcite-ui-text-2)
+    line-height: 20px
   }
 
   calcite-link {
@@ -85,36 +85,36 @@
   }
 
   & > div {
-    position: relative;
     block-size: 100%;
+    position: relative;
   }
-  
+
   & > div[aria-hidden="true"] {
     display: none;
   }
 
   .image-div {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
     block-size: 100%;
     inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    position: absolute;
   }
 
   .image-content {
-    position: absolute;
+    background-color: var(--esri-ui-opacity97-inverse);
     inset-block-start: 0;
     inset-inline-start: 0;
-    z-index: 3;
-    background-color: var(--esri-ui-opacity97-inverse);
     margin: var(--space-10);
     padding: var(--space-8);
+    position: absolute;
+    z-index: 3;
   }
 
   img {
-    object-fit: cover;
     block-size: 100%;
     inline-size: 100%;
+    object-fit: cover;
   }
 }
 
@@ -122,8 +122,8 @@
   .image-switcher .images {
     h3 {
       font-size: 24px;
-      line-height: 30px;
       font-weight: 300;
+      line-height: 30px;
     }
 
     p {
@@ -140,9 +140,9 @@
 
 @media (width >= 1096px) {
   .image-switcher {
+    block-size: 950px;
     display: flex;
     flex-direction: row-reverse;
-    block-size: 950px;
   }
 
   .image-switcher.flip {
@@ -157,20 +157,20 @@
 
   .image-switcher .images {
     .image-content {
+      inset-block: auto 0;
+      inset-inline-end: 0;
       margin: auto auto var(--space-24);
       max-inline-size: 82%;
       padding: var(--space-8);
-      inset-inline-end: 0;
-      inset-block: auto 0;
     }
   }
 
   .image-switcher .content {
-    padding: var(--space-20);
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: var(--space-20);
   }
 
   .image-switcher .nav {
@@ -183,8 +183,8 @@
 
       .nav-item {
         block-size: auto;
-        padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
         justify-content: flex-start;
+        padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
       }
 
       .nav-item.active, .nav-item:hover {
@@ -192,24 +192,24 @@
       }
 
       picture {
-        inline-size: 60px;
         block-size: 60px;
+        inline-size: 60px;
         margin-inline-end: var(--space-5);
 
         img {
-          inline-size: 60px;
           block-size: 60px;
+          inline-size: 60px;
         }
       }
 
       p {
-        display: block;
         color: var(--calcite-ui-text-2);
-        text-align: start;
-        font-size: var(--font-0);
         cursor: pointer;
+        display: block;
+        font-size: var(--font-0);
         margin-block: auto;
         padding-inline: 0;
+        text-align: start;
       }
     }
   }

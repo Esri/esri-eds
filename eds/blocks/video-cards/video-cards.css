@@ -1,11 +1,11 @@
 .video-cards {
-  inline-size: 1440px;
-  max-inline-size: 92vw;
+  background-color: var(--calcite-ui-foreground-1);
   display: flex;
   flex-direction: column;
+  inline-size: 1440px;
   margin: 0 auto;
+  max-inline-size: 92vw;
   padding: 3rem 0;
-  background-color: var(--calcite-ui-foreground-1);
 
   a {
     text-decoration: none;
@@ -16,10 +16,10 @@
   }
 
   img {
-    inline-size: 100%;
-    block-size: auto;
     aspect-ratio: 342 / 192;
-    object-fit: cover; 
+    block-size: auto;
+    inline-size: 100%;
+    object-fit: cover;
     object-position: center;
   }
 
@@ -36,26 +36,26 @@
 
   & > a > div {
     border: 1px solid var(--calcite-ui-border-1);
-    margin: var(--space-2);
     cursor: pointer;
+    margin: var(--space-2);
 
     & > p {
       position: relative;
 
       & > button {
+        align-items: center;
+        background-color: var(--calcite-ui-foreground-2);
+        block-size: 50px;
+        border-radius: 50%;
         color: var(--calcite-ui-text-1);
-        position: absolute;
+        display: flex;
+        inline-size: 50px;
         inset-block-start: calc(50% - 25px);
         inset-inline-start: calc(50% - 25px);
-        border-radius: 50%;
-        inline-size: 50px;
-        block-size: 50px;
+        justify-content: center;
         margin: 0;
         padding: 0;
-        background-color: var(--calcite-ui-foreground-2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: absolute;
       }
     }
 
@@ -68,20 +68,20 @@
     }
 
     & > ul {
-      list-style-type: none;
-      padding: var(--space-5) var(--space-5) var(--space-6) var(--space-5);
-      margin: 0;
       block-size: 124px;
       box-sizing: border-box;
+      list-style-type: none;
+      margin: 0;
+      padding: var(--space-5) var(--space-5) var(--space-6) var(--space-5);
     }
   }
 }
 
 @media (width >= 768px) {
   .video-cards {
-    max-inline-size: 96vw;
     flex-flow: row wrap;
     justify-content: center;
+    max-inline-size: 96vw;
 
     & > a > div {
       inline-size: 45.5vw;

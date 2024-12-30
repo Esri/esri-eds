@@ -19,13 +19,13 @@
 }
 
 .columns > div > .columns-img-col {
-  display: block;
   block-size: 100%;
+  display: block;
 }
 
 .columns > div > .columns-img-col img {
-  display: block;
   block-size: 100%;
+  display: block;
   object-fit: cover;
 }
 
@@ -50,29 +50,29 @@
     flex: 1;
   }
 
-  .columns > div > div:nth-of-type(2) :where(h2, p)  {
+  .columns > div > div:nth-of-type(2) :where(h2, p) {
     margin-inline: 0 auto;
   }
-  
+
   .columns > div > div :where(h2, p) {
-    max-inline-size: 720px;
     margin-inline-start: auto;
+    max-inline-size: 720px;
     padding-inline: var(--space-12);
   }
 }
 
 .columns.media-split {
   & > div > div:first-child {
-    padding-inline: 0;
     margin-block: 0;
+    padding-inline: 0;
   }
 
   & > div > div p:first-child {
-    font-weight: var(--calcite-font-weight-bold);
-    text-transform: uppercase;
     color: var(--calcite-ui-text-2);
     font-size: var(--font-minus-2);
+    font-weight: var(--calcite-font-weight-bold);
     margin-block-end: var(--space-2);
+    text-transform: uppercase;
   }
 
   & > div > div h2 {
