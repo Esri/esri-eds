@@ -1,11 +1,11 @@
 .form.block {
-  color: var(--calcite-ui-text-1);
   background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
 
   & > div.one-form {
     inline-size: 1440px;
-    max-inline-size: 96vw;
     margin: auto;
+    max-inline-size: 96vw;
 
     & div:first-child {
       h2 {

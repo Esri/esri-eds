@@ -163,6 +163,16 @@ if (themeColorMeta) {
   document.head.appendChild(style);
 }
 
+function addAnimation() {
+  // find any element with the class calcite-animate
+  const animateElements = document.querySelectorAll('.calcite-animate');
+
+  // add the class animate-slow to each element
+  animateElements.forEach((element) => {
+    element.classList.add('calcite-animate__in-up');
+  });
+}
+
 function decorateBodyMode() {
   const { classList } = document.body;
   const main = document.body.querySelector('main');
@@ -319,6 +329,7 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 4000);
   // load anything that can be postponed to the latest here
+  addAnimation();
 }
 
 async function loadPage() {

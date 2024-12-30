@@ -58,10 +58,12 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
+    li.classList.add('calcite-animate');
+    li.classList.add('animate-slow');
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((element) => {
       if (element.children.length === 1 && element.querySelector('picture')) element.className = 'cards-card-image';
-      else { element.className = 'cards-card-body'; }
+      else { element.className = 'cards-card-body calcite-animate'; }
       if (!block.classList.contains('simple')) {
         const lastP = element.querySelector('p:last-child');
         let titleSelector;

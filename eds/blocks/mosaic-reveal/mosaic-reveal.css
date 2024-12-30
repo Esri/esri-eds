@@ -1,21 +1,21 @@
 .mosaic-reveal-container {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .mosaic-reveal-container h2 {
   font-size: calc(100% + 6vw);
-  line-height: 1.1;
-  font-weight: var(--calcite-font-weight-medium);
   font-style: normal;
+  font-weight: var(--calcite-font-weight-medium);
+  line-height: 1.1;
   margin: 0 0 var(--space-4);
 }
 
 .mosaic-reveal-container > div:first-child {
-  padding: var(--space-8) 11%;
   box-sizing: border-box;
+  padding: var(--space-8) 11%;
 }
 
 .mosaic-reveal {
@@ -23,36 +23,36 @@
   --calcite-ui-text-link: var(--calcite-ui-text-1);
   --calcite-link-blue-underline: #fff6;
 
-  overflow: hidden;
-  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  overflow: hidden;
+  position: relative;
 
 }
-  
+
 .mosaic-reveal calcite-icon {
-  position: absolute;
   inset-block-end: var(--space-4);
   inset-inline-end: var(--space-4);
+  position: absolute;
   z-index: 2;
 }
 
 .mosaic-reveal .mosaic-reveal-content {
-  position: absolute;
-  inline-size: 100%;
-  block-size: 100%;
-  inset-inline-start: 0;
-  background-color: var(--calcite-ui-foreground-1);
-  z-index: 5;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  background-color: var(--calcite-ui-foreground-1);
+  block-size: 100%;
+  display: flex;
   flex-direction: column;
-  transition: 0.5s ease;
+  inline-size: 100%;
   inset-block-start: 0;
-  transform-origin: 50% 100%;
+  inset-inline-start: 0;
+  justify-content: center;
   opacity: 1;
+  position: absolute;
+  transform-origin: 50% 100%;
+  transition: 0.5s ease;
+  z-index: 5;
 }
 
 .mosaic-reveal .mosaic-reveal-content > :is(h3, p, p > a, .button-container) {
@@ -61,14 +61,14 @@
 
 .mosaic-reveal .mosaic-reveal-content > h3 {
   font-size: 1.414rem;
-  margin: 0 0 var(--space-4) 0;
   line-height: 1.375;
+  margin: 0 0 var(--space-4) 0;
 }
 
 .mosaic-reveal .mosaic-reveal-content > p:nth-child(3) {
-  margin-block-end: var(--space-4);
-  line-height: 1.25;
   font-size: var(--font-minus-1);
+  line-height: 1.25;
+  margin-block-end: var(--space-4);
 }
 
 .mosaic-reveal .mosaic-reveal-content > p.button-container {
@@ -80,26 +80,26 @@
   text-decoration: underline;
 }
 
-.mosaic-reveal .mosaic-reveal-content[aria-hidden='true'] {
+.mosaic-reveal .mosaic-reveal-content[aria-hidden="true"] {
   inset-block-start: 100%;
   opacity: 0;
   pointer-events: none;
 }
 
 .mosaic-reveal > div { /* stylelint-disable-line no-descending-specificity */
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 
 .mosaic-reveal > div::after {
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-start: 0;
-  inline-size: 100%;
+  background: linear-gradient(to bottom, #0000 66%, #000000b3 100%);
+  block-size: 100%;
   content: "";
   display: block;
-  block-size: 100%;
-  background: linear-gradient(to bottom, #0000 66%, #000000b3 100%);
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  position: absolute;
 }
 
 .mosaic-reveal > div:last-child::after {
@@ -107,9 +107,9 @@
 }
 
 .mosaic-reveal picture {
-  display: block;
   block-size: calc(220px + 50vw - 180px);
   cursor: pointer;
+  display: block;
   overflow: hidden;
 }
 
@@ -119,17 +119,17 @@
 }
 
 .mosaic-reveal .title {
-  position: absolute;
-  inset-block-end: 0;
-  z-index: 2;
-  padding: var(--space-1) var(--space-12) var(--space-4) var(--space-5);
-  margin: 0;
-  font-size: 1.2rem;
-  color: var(--calcite-ui-text-1);
-  font-weight: var(--calcite-font-weight-normal);
-  line-height: 1.375;
-  inline-size: 100%;
   box-sizing: border-box;
+  color: var(--calcite-ui-text-1);
+  font-size: 1.2rem;
+  font-weight: var(--calcite-font-weight-normal);
+  inline-size: 100%;
+  inset-block-end: 0;
+  line-height: 1.375;
+  margin: 0;
+  padding: var(--space-1) var(--space-12) var(--space-4) var(--space-5);
+  position: absolute;
+  z-index: 2;
 }
 
 @media (width >= 480px) {
@@ -184,8 +184,8 @@
   }
 
   .mosaic-reveal .title {
-    padding: var(--space-4) var(--space-6) var(--space-12);
     font-size: 1.414rem;
+    padding: var(--space-4) var(--space-6) var(--space-12);
   }
 }
 
