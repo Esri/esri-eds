@@ -23,6 +23,10 @@
   display: block;
 }
 
+.columns > div > :not(.columns-img-col) {
+  padding: var(--space-16) 0 var(--space-20);
+}
+
 .columns > div > .columns-img-col img {
   block-size: 100%;
   display: block;
