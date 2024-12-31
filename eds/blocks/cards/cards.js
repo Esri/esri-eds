@@ -73,13 +73,12 @@ export default function decorate(block) {
             href: a.getAttribute('href'),
             label: a.textContent,
           }, a.textContent);
-         p.replaceWith(button);
+          p.replaceWith(button);
         }
       });
       if (!block.classList.contains('simple')) {
-        let titleSelector;
         const isLastChildLink = element.lastElementChild?.tagName.toLowerCase() === 'calcite-link';
-        titleSelector = isLastChildLink ? 'p:nth-last-child(3)' : 'p:nth-last-child(2)';
+        const titleSelector = isLastChildLink ? 'p:nth-last-child(3)' : 'p:nth-last-child(2)';
         element.querySelectorAll(titleSelector).forEach((p) => {
           const h3 = document.createElement('h3');
           h3.innerHTML = p.innerHTML;
