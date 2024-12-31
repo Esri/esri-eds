@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { div, domEl } from '../../scripts/dom-helpers.js';
+import { div, domEl, calciteLink } from '../../scripts/dom-helpers.js';
 
 function processSimpleCard(listElem) {
   const cardBody = listElem.querySelector('.cards-card-body');
@@ -64,14 +64,22 @@ export default function decorate(block) {
     [...li.children].forEach((element) => {
       if (element.children.length === 1 && element.querySelector('picture')) element.className = 'cards-card-image';
       else { element.className = 'cards-card-body calcite-animate'; }
-      if (!block.classList.contains('simple')) {
-        const lastP = element.querySelector('p:last-child');
-        let titleSelector;
-        if (lastP && (lastP.querySelector('a') || lastP.querySelector('button'))) {
-          titleSelector = 'p:nth-last-child(3)';
-        } else {
-          titleSelector = 'p:nth-last-child(2)';
+      element.querySelectorAll('p.button-container').forEach((p) => {
+        const a = p.querySelector('a');
+        if (a) {
+          const button = calciteLink({
+            'icon-end': 'arrowRight',
+            class: 'button link',
+            href: a.getAttribute('href'),
+            label: a.textContent,
+          }, a.textContent);
+         p.replaceWith(button);
         }
+      });
+      if (!block.classList.contains('simple')) {
+        let titleSelector;
+        const isLastChildLink = element.lastElementChild?.tagName.toLowerCase() === 'calcite-link';
+        titleSelector = isLastChildLink ? 'p:nth-last-child(3)' : 'p:nth-last-child(2)';
         element.querySelectorAll(titleSelector).forEach((p) => {
           const h3 = document.createElement('h3');
           h3.innerHTML = p.innerHTML;

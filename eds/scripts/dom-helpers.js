@@ -205,6 +205,10 @@ export function calciteButton(...items) {
   return domEl('calcite-button', ...items);
 }
 
+export function calciteLink(...items) {
+  return domEl('calcite-link', ...items);
+}
+
 /**
  * Creates and returns an SVG element with the specified child elements or attributes.
  *
