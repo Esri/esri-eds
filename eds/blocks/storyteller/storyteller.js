@@ -13,7 +13,7 @@ function getVideoBtn() {
     class: 'video-play-button', 'aria-label': 'Play animation', tabindex: '0',
   });
   const playProgressCircle = svg({
-    class: 'play-progress-circle', viewBox: '0 0 100 100', 'aria-hidden': 'true',
+    class: 'play-progress-circle', viewBox: '0 0 100 100',
   });
   const progressBackground = circle({
     class: 'progress-background', r: '45', cy: '50', cx: '50',
@@ -22,7 +22,8 @@ function getVideoBtn() {
     class: 'progress-circle', r: '45', cy: '50', cx: '50',
   });
 
-  playProgressCircle.appendChild(progressBackground, progressCircle);
+  playProgressCircle.appendChild(progressBackground);
+  playProgressCircle.appendChild(progressCircle);
   videoButton.appendChild(playProgressCircle);
 
   return videoButton;
