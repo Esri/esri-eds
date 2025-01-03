@@ -168,8 +168,17 @@ function addAnimation() {
   const animateElements = document.querySelectorAll('.calcite-animate');
 
   // add the class animate-slow to each element
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('calcite-animate__in-up');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
   animateElements.forEach((element) => {
-    element.classList.add('calcite-animate__in-up');
+    observer.observe(element);
   });
 }
 

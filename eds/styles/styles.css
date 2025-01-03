@@ -11,6 +11,8 @@
  */
 
 :root {
+  --calcite-duration-factor: 3.666;
+
   /* esri.com colors with opacity */
   --esri-ui-opacity00: rgb(53 53 53 / 0%);
   --esri-ui-opacity20: rgb(53 53 53 / 20%);
