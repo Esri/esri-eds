@@ -11,8 +11,8 @@
 }
 
 .columns > div > div :where(h2, p,.button-container) {
-  padding-inline: var(--space-12);
   margin: var(--space-2) var(--space-8);
+  padding-inline: var(--space-12);
 }
 
 .columns > div > div .button-container a {
@@ -60,14 +60,14 @@
   }
 
   .columns > div > div:nth-of-type(1) > .buttons-container {
-    max-inline-size: 720px;
     margin-inline-start: auto;
+    max-inline-size: 720px;
   }
 
   .columns > div > div :where(h2, p, .buttons-container) {
     margin: 0;
-    max-inline-size: 720px;
     margin-inline-start: auto;
+    max-inline-size: 720px;
     padding-inline: var(--space-12);
   }
 
