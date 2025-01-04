@@ -2,20 +2,21 @@
   display: flex;
 }
 
-.columns > div:has(div > :is(h2, p)) {
+.columns > div:has(div > :where(h2)) {
   flex-direction: column-reverse;
 }
 
-.columns > div:has(div:nth-of-type(1) > :is(h2, p)) {
+.columns > div:has(div:nth-of-type(1) > :where(h2)) {
   flex-direction: column;
 }
 
-.columns > div > div:last-child {
-  padding-block-end: 32px;
+.columns > div > div :where(h2, p,.button-container) {
+  margin: var(--space-2) var(--space-8);
+  padding-inline: var(--space-12);
 }
 
-.columns > div > div :where(h2, p) {
-  margin: 0 var(--space-8);
+.columns > div > div .button-container a {
+  margin-block-start: var(--space-6);
 }
 
 .columns > div > .columns-img-col {
@@ -54,14 +55,29 @@
     flex: 1;
   }
 
-  .columns > div > div:nth-of-type(2) :where(h2, p) {
+  .columns > div > div:nth-of-type(2) :where(h2, p, .buttons-container) {
     margin-inline: 0 auto;
   }
 
-  .columns > div > div :where(h2, p) {
+  .columns > div > div:nth-of-type(1) > .buttons-container {
+    margin-inline-start: auto;
+    max-inline-size: 720px;
+  }
+
+  .columns > div > div :where(h2, p, .buttons-container) {
+    margin: 0;
     margin-inline-start: auto;
     max-inline-size: 720px;
     padding-inline: var(--space-12);
+  }
+
+  .columns > div > div .buttons-container {
+    padding-inline: var(--space-12) 0;
+  }
+
+  .columns > div > div .buttons-container p {
+    display: inline-block;
+    padding-inline: 0 var(--space-3);
   }
 }
 
