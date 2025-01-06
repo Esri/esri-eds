@@ -49,10 +49,6 @@
     align-items: center;
   }
 
-  .columns-wrapper > .columns.media-split  {
-    padding-inline: var(--space-6);
-  }
-
   .columns > div:has(div > :is(h2, p), div:nth-of-type(1) > :is(h2, p)) {
     flex-direction: row;
   }
