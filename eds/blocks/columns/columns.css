@@ -97,8 +97,8 @@
 
   .columns.media-split > div > .columns-img-col img {
     margin-block: var(--space-10);
-    padding-inline: 0;
     margin-inline-end: var(--space-20);
+    padding-inline: 0;
   }
 }
 
