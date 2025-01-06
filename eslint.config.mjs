@@ -35,6 +35,7 @@ export default [
       'import/no-extraneous-dependencies': 'off', // allow importing devDependencies
       'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
       'no-param-reassign': [2, { props: false }], // allow modifying properties of param
+      'no-unused-vars': 'off', // allow unused variables
     },
     ignores: [
       'helix-importer-ui',
