@@ -20,11 +20,11 @@ export default function decorate(block) {
     const btn = div.querySelector('.button-container');
     const labelText = btn.querySelector('a').textContent;
     const btnLink = calciteLink({
-          'icon-end': 'arrowRight',
-          class: 'button link',
-          href: linkHref,
-          label: labelText,
-        }, labelText);
+      'icon-end': 'arrowRight',
+      class: 'button link',
+      href: linkHref,
+      label: labelText,
+    }, labelText);
     btn.replaceWith(btnLink);
   });
 
