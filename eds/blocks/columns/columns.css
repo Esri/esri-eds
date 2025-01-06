@@ -31,11 +31,17 @@
 .columns > div > .columns-img-col img {
   block-size: 100%;
   display: block;
+  inline-size: 100%;
+  margin-inline-start: auto;
   object-fit: cover;
 }
 
 .columns.calcite-mode-gray {
   background-color: var(--calcite-ui-foreground-2);
+}
+
+.columns.media-split > div > .columns-img-col img {
+  padding-inline: var(--space-6);
 }
 
 @media (width >= 900px) {
@@ -71,6 +77,11 @@
     padding-inline: var(--space-12);
   }
 
+  .columns > div > .columns-img-col img {
+    inline-size: auto;
+  }
+
+
   .columns > div > div .buttons-container {
     padding-inline: var(--space-12) 0;
   }
@@ -78,6 +89,16 @@
   .columns > div > div .buttons-container p {
     display: inline-block;
     padding-inline: 0 var(--space-3);
+  }
+
+  .columns-wrapper > .columns.media-split  {
+    padding-inline: var(--space-6);
+  }
+
+  .columns.media-split > div > .columns-img-col img {
+    margin-block: var(--space-10);
+    margin-inline-end: var(--space-20);
+    padding-inline: 0;
   }
 }
 
