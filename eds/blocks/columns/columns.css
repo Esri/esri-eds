@@ -105,6 +105,10 @@
     padding-inline: var(--space-6);
   }
 
+  .columns.media-split > div > div {
+    inline-size: 50vw;
+  }
+
   .columns.media-split > div > .columns-img-col img {
     margin-block: var(--space-10);
     margin-inline-end: var(--space-20);
