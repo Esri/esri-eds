@@ -40,6 +40,8 @@ export default [
     ignores: [
       'helix-importer-ui',
       'tools/importer/import.bundle.js',
+      'tools/importer/urls.js',
+      'tools/importer/svgs.js',
     ],
   },
 ];
