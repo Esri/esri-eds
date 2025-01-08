@@ -178,7 +178,7 @@
     inline-size: 100%;
 
     .nav-list {
-      flex-direction: column;
+      flex-direction: row;
       inline-size: 100%;
 
       .nav-item {
@@ -199,6 +199,7 @@
         img {
           block-size: 60px;
           inline-size: 60px;
+          max-inline-size: 60px;
         }
       }
 
