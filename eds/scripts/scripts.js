@@ -206,6 +206,13 @@ export function decorateBlockMode(block) {
   decorateMode(block);
 }
 
+/**
+ * Creates an autoplayed video element with the given source and optional poster.
+ *
+ * @param {string} sourceSrc - The source URL of the video.
+ * @param {string} [posterSrc=''] - The optional poster image URL for the video.
+ * @returns {HTMLElement} The created video element.
+ */
 export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
   const videoElem = video(
     {
