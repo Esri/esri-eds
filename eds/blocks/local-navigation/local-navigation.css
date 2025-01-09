@@ -13,7 +13,6 @@
 .local-navigation nav#main {
   align-items: flex-start;
   display: flex;
-  margin-inline-start: var(--space-4);
 }
 
 .local-navigation .navigation-title a {
@@ -250,10 +249,23 @@
 
   .local-navigation calcite-button {
     background-color: #2b2b2b;
-    padding-inline: var(--space-4);
+    margin: 8.5px 10px;
+    padding: 0;
   }
 
   .local-navigation calcite-icon {
     display: none;
+  }
+}
+
+@media (width < 1600px) {
+  .local-navigation nav#main {
+    padding-inline-start: var(--space-8);
+  }
+}
+
+@media (width >= 1440px) {
+  .local-navigation calcite-button {
+    margin-inline: 10px 0;
   }
 }

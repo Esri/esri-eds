@@ -1,4 +1,4 @@
-import { a } from '../../scripts/dom-helpers.js';
+import { a, calciteLink } from '../../scripts/dom-helpers.js';
 
 import {
   decorateInnerHrefButtonsWithArrowIcon,
@@ -15,13 +15,17 @@ export default function decorate(block) {
     });
     div.parentNode.insertBefore(elasticContentWrapper, div);
     elasticContentWrapper.appendChild(div);
-
     decorateInnerHrefButtonsWithArrowIcon(elasticContentWrapper);
-  });
 
-  block.querySelectorAll('.button-container').forEach((bc) => {
-    bc.children[0].classList.remove('button');
-    bc.children[0].classList.add('learn-more-icon-container');
+    const btn = div.querySelector('.button-container');
+    const labelText = btn.querySelector('a').textContent;
+    const btnLink = calciteLink({
+      'icon-end': 'arrowRight',
+      class: 'button link',
+      href: linkHref,
+      label: labelText,
+    }, labelText);
+    btn.replaceWith(btnLink);
   });
 
   decorateBlockMode(block);

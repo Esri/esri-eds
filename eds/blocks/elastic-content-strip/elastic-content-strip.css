@@ -12,6 +12,15 @@
   text-decoration: none;
 }
 
+.elastic-content-link-wrapper p {
+  color: var(--calcite-ui-text-1);
+}
+
+.elastic-content-link-wrapper calcite-link {
+  --calcite-ui-text-link: var(--calcite-ui-text-1);
+  --calcite-link-blue-underline: transparent;
+}
+
 .elastic-content-link-wrapper > div {
   inline-size: 85%;
   margin-inline: auto;

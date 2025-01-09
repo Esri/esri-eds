@@ -206,10 +206,16 @@ export function decorateBlockMode(block) {
   decorateMode(block);
 }
 
+/**
+ * Creates an autoplayed video element with the given source and optional poster.
+ *
+ * @param {string} sourceSrc - The source URL of the video.
+ * @param {string} [posterSrc=''] - The optional poster image URL for the video.
+ * @returns {HTMLElement} The created video element.
+ */
 export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
   const videoElem = video(
     {
-      autoplay: '',
       preload: 'metadata',
       playsinline: '',
       type: 'video/mp4',
@@ -221,6 +227,23 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
   if (posterSrc) {
     videoElem.setAttribute('poster', posterSrc);
   }
+
+  /**
+   * IntersectionObserver to play or pause a video element based on its visibility.
+   * The video element will be played when the intersection ratio exceeds 0.8.
+   * Otherwise, the video element will pause.
+   */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio > 0.8) {
+        videoElem.play();
+      } else {
+        videoElem.pause();
+      }
+    });
+  }, { threshold: [0, 0.8] });
+
+  observer.observe(videoElem);
 
   return videoElem;
 }
@@ -263,7 +286,7 @@ function decorateIcons(element, prefix = '') {
  * Decorates the main element.
  * @param {Element} main The main element
  */
-// eslint-disable-next-line import/prefer-default-export
+
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
@@ -335,7 +358,6 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 4000);
   // load anything that can be postponed to the latest here
   addAnimation();
