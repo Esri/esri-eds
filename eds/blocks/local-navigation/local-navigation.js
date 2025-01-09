@@ -129,7 +129,7 @@ function decorateBlueButton(value, block) {
       href = value.triallink;
     }
     if (href) {
-      const trialBtn = domEl('calcite-button', { class: 'trial-button', href });
+      const trialBtn = domEl('calcite-button', { class: 'trial-button', href, scale: 'l' });
       trialBtn.innerHTML = value.triallabel;
       block.querySelector('nav > ul').appendChild(trialBtn);
     }
