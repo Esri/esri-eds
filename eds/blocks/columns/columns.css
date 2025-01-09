@@ -45,10 +45,10 @@
 }
 
 .columns > div > div .buttons-container {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .columns.media-split > div > .columns-img-col img {
