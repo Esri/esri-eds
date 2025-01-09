@@ -1,3 +1,5 @@
+import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -23,6 +25,30 @@ export default function decorate(block) {
           buttonWrapper.appendChild(btn);
         });
         parent.appendChild(buttonWrapper);
+      }
+
+      // convert buttons to calcite components
+      const btns = col.querySelectorAll('.button-container');
+      if (btns) {
+        btns.forEach((btn) => {
+          const labelText = btn.querySelector('a').textContent;
+          const outlineAttr = btn.querySelector('em') ? 'outline' : '';
+          const linkHref = col.querySelector('a,calcite-button').href;
+          if (outlineAttr) {
+            btn.replaceWith(calciteButton({
+              'icon-end': 'arrowRight',
+              appearance: `${outlineAttr}`,
+              href: linkHref,
+              label: labelText,
+            }, labelText));
+          } else {
+            btn.replaceWith(calciteLink({
+              'icon-end': 'arrowRight',
+              href: linkHref,
+              label: labelText,
+            }, labelText));
+          }
+        });
       }
 
       // media text split logic
