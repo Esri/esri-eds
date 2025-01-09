@@ -17,9 +17,6 @@ export default function decorate(block) {
     content.setAttribute('aria-hidden', 'true');
 
     const anchorElem = content.querySelector('a');
-    if (!anchorElem) {
-      console.log('No button container found', content.querySelector('a'));
-    }
     const linkText = anchorElem.textContent;
     const url = anchorElem.href;
     const link = domEl('calcite-link', {
