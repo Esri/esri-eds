@@ -14,7 +14,7 @@
   margin: var(--space-2) var(--space-8);
 }
 
-.columns > div > div  :where(.button-container, calcite-link, calcite-button) {
+.columns > div > div :where(calcite-link, calcite-button) {
   margin-block: var(--space-4) var(--space-1);
   margin-inline-start: var(--space-3);
 }
@@ -48,14 +48,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .columns.media-split > div > .columns-img-col img {
   padding-inline: var(--space-6);
-}
-
-.columns.media-split > div > div .buttons-container {
-  text-align: center;
 }
 
 @media (width >= 900px) {
@@ -79,9 +76,8 @@
     margin-inline: 0 auto;
   }
 
-  .columns > div > div:nth-of-type(1) > .buttons-container {
-    /* margin-inline-start: auto;
-    max-inline-size: 720px; */
+  .columns > div > div  :where(calcite-link, calcite-button) {
+    margin-inline-start: 0;
   }
 
   .columns > div > div :where(h2, p, .buttons-container) {
@@ -96,8 +92,6 @@
   }
 
   .columns > div > div .buttons-container {
-    /* display: flex;
-    align-items: center; */
     justify-content: flex-start;
   }
 
@@ -149,9 +143,5 @@
 
   & > div > div :where(h2, p) {
     text-align: center;
-  }
-
-  & > div > div  :where(.button-container, calcite-link, calcite-button) {
-    /* display: inline-block; */
   }
 }

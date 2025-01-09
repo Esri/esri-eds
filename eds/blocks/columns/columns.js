@@ -27,29 +27,29 @@ export default function decorate(block) {
         parent.appendChild(buttonWrapper);
       }
 
-      // const btns = col.querySelectorAll('.button-container');
-      // console.log('btn', btns);
-      // if (btns) {
-      //   btns.forEach((btn) => {
-      //     const labelText = btn.querySelector('a').textContent;
-      //     const outlineAttr = btn.querySelector('em') ? 'outline' : '';
-      //     const linkHref = col.querySelector('a,calcite-button').href;
-      //     if (outlineAttr) {
-      //       btn.replaceWith(calciteButton({
-      //         'icon-end': 'arrowRight',
-      //         appearance: `${outlineAttr}`,
-      //         href: linkHref,
-      //         label: labelText,
-      //       }, labelText));
-      //     } else {
-      //       btn.replaceWith(calciteLink({
-      //         'icon-end': 'arrowRight',
-      //         href: linkHref,
-      //         label: labelText,
-      //       }, labelText));
-      //     }
-      //   });
-      // }
+      const btns = col.querySelectorAll('.button-container');
+      console.log('btn', btns);
+      if (btns) {
+        btns.forEach((btn) => {
+          const labelText = btn.querySelector('a').textContent;
+          const outlineAttr = btn.querySelector('em') ? 'outline' : '';
+          const linkHref = col.querySelector('a,calcite-button').href;
+          if (outlineAttr) {
+            btn.replaceWith(calciteButton({
+              'icon-end': 'arrowRight',
+              appearance: `${outlineAttr}`,
+              href: linkHref,
+              label: labelText,
+            }, labelText));
+          } else {
+            btn.replaceWith(calciteLink({
+              'icon-end': 'arrowRight',
+              href: linkHref,
+              label: labelText,
+            }, labelText));
+          }
+        });
+      }
     });
   });
 }
