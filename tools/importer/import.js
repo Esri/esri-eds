@@ -431,6 +431,10 @@ function cards(main, document) {
         variants.push('simple');
       }
 
+      if (container.querySelector('.cards-standard')) {
+        variants.push('standard');
+      }
+
       createBlock(container, document, blockName, cells, variants);
     });
 }
