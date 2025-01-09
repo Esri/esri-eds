@@ -1,7 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { div, domEl, calciteLink } from '../../scripts/dom-helpers.js';
 
-function processSimpleCard(listElem) {
+function processSimdpleCard(listElem) {
   const cardBody = listElem.querySelector('.cards-card-body');
   const anchorEl = cardBody.querySelector('a');
   if (anchorEl) anchorEl.parentElement.remove();
@@ -41,6 +41,7 @@ function processStandardCard(listElem) {
     .closest('p');
   const overlayTextEl = element.querySelector('.overlay-text');
   if (overlayTextEl) pictureEl.append(overlayTextEl);
+  console.log('pictureEl', pictureEl, pictureEl?.parentElement, element);
   pictureEl.nextElementSibling.classList.add('card-body-title');
   const cardBodyTitle = element.querySelector('.card-body-title');
 
