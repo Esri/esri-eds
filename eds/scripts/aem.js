@@ -416,7 +416,9 @@ function wrapTextNodes(block) {
 function decorateButtons(element) {
   element.querySelectorAll('a').forEach((a) => {
     a.title = a.title || a.textContent;
-    if (a.href !== a.textContent) {
+    const url = new URL(a.href);
+    const relativePath = url.pathname + url.search + url.hash;
+    if (a.href !== a.textContent && relativePath!==a.textContent ) {
       const up = a.parentElement;
       const twoup = a.parentElement.parentElement;
       if (!a.querySelector('img')) {
