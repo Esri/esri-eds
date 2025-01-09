@@ -17,7 +17,8 @@ function processSimpleCard(listElem) {
   }
 }
 
-function processStandardCard(element) {
+function processStandardCard(listElem) {
+  const element = listElem.querySelector('.cards-card-body');
   const anchorEl = element.querySelector('a');
   const cardBodyContent = domEl('div', { class: 'card-body-content' });
   if (anchorEl) {
@@ -85,9 +86,9 @@ export default function decorate(block) {
           p.replaceWith(h3);
         });
       }
-      if (block.classList.contains('standard')) processStandardCard(element);
     });
     if (block.classList.contains('simple')) processSimpleCard(li);
+    if (block.classList.contains('standard')) processStandardCard(li);
 
     ul.append(li);
   });
