@@ -28,7 +28,6 @@ export default function decorate(block) {
       }
 
       const btns = col.querySelectorAll('.button-container');
-      console.log('btn', btns);
       if (btns) {
         btns.forEach((btn) => {
           const labelText = btn.querySelector('a').textContent;
