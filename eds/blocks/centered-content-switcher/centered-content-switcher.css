@@ -119,7 +119,7 @@
     transition: all linear .5s;
 
     & > div {
-      background-color: var(--esri-ui-opacity90);
+      background-color: var(--esri-ui-opacity90-inverse);
       inline-size: 1440px;
       margin: auto;
       max-inline-size: 96vw;
@@ -130,7 +130,7 @@
       animation-delay: 100ms;
       animation-duration: 550ms;
       animation-timing-function: ease;
-      background-color: var(--esri-ui-opacity90);
+      background-color: var(--esri-ui-opacity90-inverse);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
