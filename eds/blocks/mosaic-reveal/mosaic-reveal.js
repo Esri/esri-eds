@@ -16,16 +16,19 @@ export default function decorate(block) {
     content.classList.add('mosaic-reveal-content');
     content.setAttribute('aria-hidden', 'true');
 
-    const buttonContainer = content.querySelector('div.button-container > calcite-button');
-    const linkText = buttonContainer.textContent;
-    const url = buttonContainer.href;
+    const anchorElem = content.querySelector('a');
+    if (!anchorElem) {
+      console.log('No button container found', content.querySelector('a'));
+    }
+    const linkText = anchorElem.textContent;
+    const url = anchorElem.href;
     const link = domEl('calcite-link', {
       href: url,
       'icon-end': 'arrowRight',
     }, linkText);
 
-    buttonContainer.parentElement.appendChild(link);
-    buttonContainer.parentElement.removeChild(buttonContainer);
+    anchorElem.parentElement.appendChild(link);
+    anchorElem.parentElement.removeChild(anchorElem);
   });
 
   const revealContent = div({ class: 'mosaic-reveal-content', 'aria-hidden': 'true' });
