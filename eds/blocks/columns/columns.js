@@ -24,6 +24,12 @@ export default function decorate(block) {
         });
         parent.appendChild(buttonWrapper);
       }
+
+      // media text split logic
+      const p = col.querySelector('p');
+      if (p?.querySelector('picture')) {
+        p.classList.add('columns-p');
+      }
     });
   });
 }
