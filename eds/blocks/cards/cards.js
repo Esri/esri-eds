@@ -4,7 +4,7 @@ import { div, domEl, calciteLink } from '../../scripts/dom-helpers.js';
 function processSimpleCard(listElem) {
   const cardBody = listElem.querySelector('.cards-card-body');
   const anchorEl = cardBody.querySelector('a');
-  if(anchorEl) anchorEl.parentElement.remove();
+  if (anchorEl) anchorEl.parentElement.remove();
   const cardBodyContent = div(
     { class: 'card-body-content' },
     ...cardBody.querySelectorAll(':scope > :not(a)'),
