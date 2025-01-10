@@ -319,6 +319,10 @@
   border: 1px solid var(--calcite-ui-brand);
 }
 
+.cards.simple .cards-card-body:is(:hover,:focus-within) a{
+  border-color: var(--calcite-ui-brand);
+}
+
 .cards.standard .cards-card-body:is(:hover,:focus-within) {
   border: 1px solid var(--calcite-ui-brand);
 }
