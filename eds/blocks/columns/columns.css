@@ -51,6 +51,20 @@
   justify-content: center;
 }
 
+.columns .play-button {
+  align-items: center;
+  display: flex;
+  inset-block-start: calc(50% - 25px);
+  inset-inline-end: calc(50% - 25px);
+  justify-content: center;
+  position: absolute;
+}
+
+.columns .video-link {
+  display: block;
+  position: relative;
+}
+
 .columns.media-split > div > .columns-img-col img {
   padding-inline: var(--space-6);
 }

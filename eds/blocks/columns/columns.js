@@ -56,6 +56,27 @@ export default function decorate(block) {
       if (p?.querySelector('picture')) {
         p.classList.add('columns-p');
       }
+
+      // decorate play button
+      const vidURL = col.querySelector('a[href*="mediaspace"]', 'a[href*="youtube"]', 'a[href*="video"]');
+      const picture = col.querySelector('picture');
+      if (vidURL) {
+        vidURL.innerHTML = '';
+        vidURL.appendChild(picture);
+        const playButton = calciteButton({
+          class: 'play-button',
+          'icon-start': 'play-f',
+          label: 'play video',
+          'aria-hidden': 'false',
+          'aria-label': 'play video',
+          appearance: 'solid',
+          kind: 'inverse',
+          scale: 'l',
+          round: '',
+        });
+
+        vidURL.appendChild(playButton);
+      }
     });
   });
 }
