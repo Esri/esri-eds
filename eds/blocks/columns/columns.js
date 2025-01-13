@@ -57,8 +57,8 @@ export default function decorate(block) {
         p.classList.add('columns-p');
       }
 
-      // modal logic
-      const vidURL = col.querySelector('a[href*="co3"]');
+      // decorate play button
+      const vidURL = col.querySelector('a[href*="mediaspace"]','a[href*="youtube"]','a[href*="video"]');
       const picture = col.querySelector('picture');
       if (vidURL) {
         vidURL.innerHTML = '';
