@@ -58,7 +58,7 @@ export default function decorate(block) {
       }
 
       // decorate play button
-      const vidURL = col.querySelector('a[href*="mediaspace"]','a[href*="youtube"]','a[href*="video"]');
+      const vidURL = col.querySelector('a[href*="mediaspace"]', 'a[href*="youtube"]', 'a[href*="video"]');
       const picture = col.querySelector('picture');
       if (vidURL) {
         vidURL.innerHTML = '';
