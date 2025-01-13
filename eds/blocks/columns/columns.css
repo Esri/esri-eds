@@ -52,8 +52,8 @@
 }
 
 .columns .play-button {
-  background-color: var(--calcite-ui-foreground-2);
   align-items: center;
+  background-color: var(--calcite-ui-foreground-2);
   border-radius: 50px;
   block-size: 50px;
   display: flex;
