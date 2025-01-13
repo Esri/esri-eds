@@ -59,9 +59,9 @@
   color: var(--calcite-ui-text-1);
   display: flex;
   inline-size: 50px;
-  justify-content: center;
   inset-block-start: calc(50% - 25px);
   inset-inline-end: calc(50% - 25px);
+  justify-content: center;
   position: absolute;
 }
 
