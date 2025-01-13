@@ -52,8 +52,8 @@
 }
 
 .columns .play-button {
-  display: flex;
   align-items: center;
+  display: flex;
   inset-block-start: calc(50% - 25px);
   inset-inline-end: calc(50% - 25px);
   justify-content: center;
