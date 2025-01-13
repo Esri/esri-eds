@@ -55,11 +55,11 @@
   align-items: center;
   border-radius: 50px;
   border-style: none;
-  justify-content: center;
   background-color: var(--calcite-ui-foreground-2);
+  justify-content: center;
   display: flex;
-  text-align: center;
   block-size: 50px;
+  text-align: center;
   color: var(--calcite-ui-text-1);
   inline-size: 50px;
   inset-block-start: calc(50% - 25px);
