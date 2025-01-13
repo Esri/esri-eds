@@ -74,7 +74,7 @@ export default function decorate(block) {
           scale: 'l',
           round: '',
         });
-      
+
         vidURL.appendChild(playButton);
       }
     });
