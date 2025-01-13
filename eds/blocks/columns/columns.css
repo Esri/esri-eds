@@ -52,15 +52,15 @@
 }
 
 .columns .play-button {
-  border-radius: 50px;
   align-items: center;
-  justify-content: center;
+  border-radius: 50px;
   border-style: none;
-  text-align: center;
-  display: flex;
+  justify-content: center;
   background-color: var(--calcite-ui-foreground-2);
-  color: var(--calcite-ui-text-1);
+  display: flex;
+  text-align: center;
   block-size: 50px;
+  color: var(--calcite-ui-text-1);
   inline-size: 50px;
   inset-block-start: calc(50% - 25px);
   inset-inline-end: calc(50% - 25px);
