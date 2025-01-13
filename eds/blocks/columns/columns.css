@@ -54,13 +54,12 @@
 .columns .play-button {
   align-items: center;
   border-radius: 50px;
-  border-style: none;
   background-color: var(--calcite-ui-foreground-2);
-  justify-content: center;
-  display: flex;
   block-size: 50px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   color: var(--calcite-ui-text-1);
+  text-align: center;
   inline-size: 50px;
   inset-block-start: calc(50% - 25px);
   inset-inline-end: calc(50% - 25px);
