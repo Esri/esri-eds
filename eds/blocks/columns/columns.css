@@ -51,6 +51,36 @@
   justify-content: center;
 }
 
+.columns .play-button {
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  border-style: none;
+  text-align: center;
+  display: flex;
+  background-color: var(--calcite-ui-foreground-2);
+  color: var(--calcite-ui-text-1);
+  block-size: 50px;
+  inline-size: 50px;
+  inset-block-start: calc(50% - 25px);
+  inset-inline-end: calc(50% - 25px);
+  position: absolute;
+}
+
+.columns .play-button:is(:hover,:focus) {
+  background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
+}
+
+.columns .video-link {
+  display: flex;
+  position: relative;
+}
+
+.columns.media-split > div > .columns-img-col  a.video-link img {
+  margin-block: 0;
+}
+
 .columns.media-split > div > .columns-img-col img {
   padding-inline: var(--space-6);
 }

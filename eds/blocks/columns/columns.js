@@ -56,6 +56,27 @@ export default function decorate(block) {
       if (p?.querySelector('picture')) {
         p.classList.add('columns-p');
       }
+
+      // modal logic
+      const vidURL = col.querySelector('a[href*="co3"]');
+      const picture = col.querySelector('picture');
+      if (vidURL) {
+        vidURL.innerHTML = '';
+        vidURL.appendChild(picture);
+        const playButton = document.createElement('div');
+        playButton.classList.add('play-button');
+        playButton.setAttribute('aria-label', 'play video');
+        playButton.setAttribute('tabindex', '0');
+        playButton.setAttribute('aria-hidden', 'false');
+        const calciteIcon = document.createElement('calcite-icon');
+        calciteIcon.setAttribute('scale', 's');
+        calciteIcon.setAttribute('appearance', 'solid');
+        calciteIcon.setAttribute('icon', 'play-f');
+        calciteIcon.setAttribute('aria-hidden', 'true');
+        calciteIcon.setAttribute('calcite-hydrated', '');
+        playButton.appendChild(calciteIcon);
+        vidURL.appendChild(playButton);
+      }
     });
   });
 }
