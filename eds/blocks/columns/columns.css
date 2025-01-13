@@ -52,22 +52,12 @@
 }
 
 .columns .play-button {
-  align-items: center;
-  background-color: var(--calcite-ui-foreground-2);
-  block-size: 50px;
-  border-radius: 50px;
-  color: var(--calcite-ui-text-1);
   display: flex;
-  inline-size: 50px;
+  align-items: center;
   inset-block-start: calc(50% - 25px);
   inset-inline-end: calc(50% - 25px);
   justify-content: center;
   position: absolute;
-}
-
-.columns .play-button:is(:hover,:focus) {
-  background-color: var(--calcite-ui-foreground-1);
-  color: var(--calcite-ui-text-1);
 }
 
 .columns .video-link {

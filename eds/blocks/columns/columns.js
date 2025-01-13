@@ -63,18 +63,18 @@ export default function decorate(block) {
       if (vidURL) {
         vidURL.innerHTML = '';
         vidURL.appendChild(picture);
-        const playButton = document.createElement('div');
-        playButton.classList.add('play-button');
-        playButton.setAttribute('aria-label', 'play video');
-        playButton.setAttribute('tabindex', '0');
-        playButton.setAttribute('aria-hidden', 'false');
-        const calciteIcon = document.createElement('calcite-icon');
-        calciteIcon.setAttribute('scale', 's');
-        calciteIcon.setAttribute('appearance', 'solid');
-        calciteIcon.setAttribute('icon', 'play-f');
-        calciteIcon.setAttribute('aria-hidden', 'true');
-        calciteIcon.setAttribute('calcite-hydrated', '');
-        playButton.appendChild(calciteIcon);
+        const playButton = calciteButton({
+          class: 'play-button',
+          'icon-start': 'play-f',
+          label: 'play video',
+          'aria-hidden': 'false',
+          'aria-label': 'play video',
+          appearance: 'solid',
+          kind: 'inverse',
+          scale: 'l',
+          round: '',
+        });
+      
         vidURL.appendChild(playButton);
       }
     });
