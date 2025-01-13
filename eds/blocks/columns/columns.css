@@ -56,11 +56,11 @@
   background-color: var(--calcite-ui-foreground-2);
   block-size: 50px;
   border-radius: 50px;
-  display: flex;
   color: var(--calcite-ui-text-1);
+  display: flex;
   justify-content: center;
-  inline-size: 50px;
   text-align: center;
+  inline-size: 50px;
   inset-block-start: calc(50% - 25px);
   inset-inline-end: calc(50% - 25px);
   position: absolute;
