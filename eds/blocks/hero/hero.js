@@ -17,18 +17,10 @@ export default function decorate(block) {
     imgCollection.forEach((img) => {
       img.setAttribute('loading', 'eager');
       img.setAttribute('fetchpriority', 'high');
-      // console.log the images href
-      console.log(img.src);
-      // preload the images
-      const preloadLink = document.createElement('link');
-      preloadLink.href = img.src;
-      preloadLink.rel = 'preload';
-      preloadLink.as = 'image';
-      document.querySelector('.hero-container').insertBefore(preloadLink, document.querySelector('.hero-container').firstChild);
     });
   } else {
     imgCollection.forEach((img) => {
-      img.setAttribute('loading', 'eager');
+      img.setAttribute('loading', 'lazy');
     });
   }
 
