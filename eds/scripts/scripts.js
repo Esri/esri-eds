@@ -221,7 +221,7 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
       type: 'video/mp4',
       muted: '',
     },
-    source({ src: sourceSrc }),
+    source({ 'data-src': sourceSrc }),
   );
 
   if (posterSrc) {
@@ -235,13 +235,16 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
    */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio > 0.8) {
+      if (entry.intersectionRatio > 0.4) {
+        if (!videoElem.src) {
+          videoElem.src = videoElem.querySelector('source').dataset.src;
+        }
         videoElem.play();
       } else {
         videoElem.pause();
       }
     });
-  }, { threshold: [0, 0.8] });
+  }, { threshold: [0, 0.4] });
 
   observer.observe(videoElem);
 
