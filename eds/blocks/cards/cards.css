@@ -178,7 +178,7 @@
 
     img {
       block-size: 44px;
-      inline-size: 44px;
+      inline-size: auto;
       margin-block-end: var(--content-spacing);
     }
   }
