@@ -12,9 +12,25 @@ export default function decorate(block) {
   block.replaceChildren(...newChildren);
 
   const imgCollection = block.querySelectorAll('picture > img');
-  imgCollection.forEach((img) => {
-    img.setAttribute('loading', 'eager');
-  });
+  const heroContainer = document.querySelector('main > .hero-container');
+  if (heroContainer && (heroContainer === heroContainer.parentElement.children[0] || heroContainer === heroContainer.parentElement.children[1])) {
+    imgCollection.forEach((img) => {
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+      // console.log the images href
+      console.log(img.src);
+      // preload the images
+      const preloadLink = document.createElement('link');
+      preloadLink.href = img.src;
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'image';
+      document.head.appendChild(preloadLink);
+    });
+  } else {
+    imgCollection.forEach((img) => {
+      img.setAttribute('loading', 'eager');
+    });
+  }
 
   const blockTitle = block.querySelector('h1');
   const blockParagraphs = blockTitle.parentElement.querySelectorAll('p');
