@@ -24,7 +24,7 @@ export default function decorate(block) {
       preloadLink.href = img.src;
       preloadLink.rel = 'preload';
       preloadLink.as = 'image';
-      document.head.appendChild(preloadLink);
+      document.querySelector('.hero-container').insertBefore(preloadLink, document.querySelector('.hero-container').firstChild);
     });
   } else {
     imgCollection.forEach((img) => {
