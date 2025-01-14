@@ -13,7 +13,8 @@ export default function decorate(block) {
 
   const imgCollection = block.querySelectorAll('picture > img');
   const heroContainer = document.querySelector('main > .hero-container');
-  if (heroContainer && (heroContainer === heroContainer.parentElement.children[0] || heroContainer === heroContainer.parentElement.children[1])) {
+  if (heroContainer && (heroContainer === heroContainer.parentElement.children[0]
+    || heroContainer === heroContainer.parentElement.children[1])) {
     imgCollection.forEach((img) => {
       img.setAttribute('loading', 'eager');
       img.setAttribute('fetchpriority', 'high');
