@@ -69,6 +69,47 @@
   padding-inline: var(--space-6);
 }
 
+.co3-modal {
+  background: var(--esri-ui-opacity80-inverse);
+  block-size: 100%;
+  inline-size: 100vw;
+  position: fixed;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.co3-modal-container {
+  inline-size: 85%;
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1.7777777778;
+}
+
+.co3-modal iframe {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+ .co3-modal-container calcite-icon {
+  background: var(--calcite-ui-text-1);
+  border-radius: 100%;
+  inline-size: 50px;
+  block-size: 50px;
+  inset-inline-start: 100%;
+  inset-block-start: 0;
+  z-index: 2;
+}
+
+.co3-modal-container calcite-icon:is(:hover, :focus-within, :active) {
+  background: var(--calcite-ui-brand);
+  color: var(--calcite-ui-text-1);
+  cursor: pointer;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
@@ -135,6 +176,10 @@
     margin-block: var(--space-10);
     margin-inline-end: var(--space-20);
     padding-inline: 0;
+  }
+
+  .co3-modal-container {
+    inline-size: 66%;
   }
 }
 
