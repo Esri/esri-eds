@@ -221,7 +221,9 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
       type: 'video/mp4',
       muted: '',
     },
-    source({ src: sourceSrc }),
+
+    /* add source element with data-src attribute to lazy load the video */
+    source({ 'data-src': sourceSrc }),
   );
 
   if (posterSrc) {
@@ -232,16 +234,20 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
    * IntersectionObserver to play or pause a video element based on its visibility.
    * The video element will be played when the intersection ratio exceeds 0.8.
    * Otherwise, the video element will pause.
+   * lazy loads the video source when the video is in view
    */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio > 0.8) {
+      if (entry.intersectionRatio > 0.4) {
+        if (!videoElem.src) {
+          videoElem.src = videoElem.querySelector('source').dataset.src;
+        }
         videoElem.play();
       } else {
         videoElem.pause();
       }
     });
-  }, { threshold: [0, 0.8] });
+  }, { threshold: [0, 0.4] });
 
   observer.observe(videoElem);
 

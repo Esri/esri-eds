@@ -12,9 +12,18 @@ export default function decorate(block) {
   block.replaceChildren(...newChildren);
 
   const imgCollection = block.querySelectorAll('picture > img');
-  imgCollection.forEach((img) => {
-    img.setAttribute('loading', 'eager');
-  });
+  const heroContainer = document.querySelector('main > .hero-container');
+  if (heroContainer && (heroContainer === heroContainer.parentElement.children[0]
+    || heroContainer === heroContainer.parentElement.children[1])) {
+    imgCollection.forEach((img) => {
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+    });
+  } else {
+    imgCollection.forEach((img) => {
+      img.setAttribute('loading', 'lazy');
+    });
+  }
 
   const blockTitle = block.querySelector('h1');
   const blockParagraphs = blockTitle.parentElement.querySelectorAll('p');
