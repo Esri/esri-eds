@@ -6,7 +6,7 @@ function removeModal(modal) {
     videoIframeWrapper.remove();
   }
 
-  ['style', 'tabindex', 'aria-hidden'].forEach(attr => document.body.removeAttribute(attr));
+  ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
   modal.remove();
 }
 
