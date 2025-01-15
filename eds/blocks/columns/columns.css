@@ -85,22 +85,22 @@
   inset-block-start: 50%;
   inset-inline-start: 50%;
   position: absolute;
-  transform: translate(-50%, -50%);
   aspect-ratio: 1.7778;
+  transform: translate(-50%, -50%);
 }
 
 .co3-modal iframe {
-  inline-size: 100%;
   block-size: 100%;
+  inline-size: 100%;
 }
 
  .co3-modal-container calcite-icon {
   background: var(--calcite-ui-text-1);
   border-radius: 100%;
-  inline-size: 50px;
   block-size: 50px;
-  inset-inline-start: 100%;
+  inline-size: 50px;
   inset-block-start: 0;
+  inset-inline-start: 100%;
   z-index: 2;
 }
 
