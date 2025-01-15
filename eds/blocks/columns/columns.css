@@ -84,8 +84,8 @@
   inline-size: 85%;
   inset-block-start: 50%;
   inset-inline-start: 50%;
-  position: absolute;
   aspect-ratio: 1.7778;
+  position: absolute;
   transform: translate(-50%, -50%);
 }
 
@@ -96,8 +96,8 @@
 
  .co3-modal-container calcite-icon {
   background: var(--calcite-ui-text-1);
-  border-radius: 100%;
   block-size: 50px;
+  border-radius: 100%;
   inline-size: 50px;
   inset-block-start: 0;
   inset-inline-start: 100%;
