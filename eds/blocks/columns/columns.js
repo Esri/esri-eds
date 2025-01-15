@@ -54,7 +54,7 @@ function decorateModal() {
       removeModal(modal);
     }
   });
-  
+
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('co3-modal-container');
   modalContainer.appendChild(iframe);
