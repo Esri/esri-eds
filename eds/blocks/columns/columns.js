@@ -17,7 +17,7 @@ const toggleLoader = () => {
   }
 };
 
-const removeModal = (modal) =>{
+const removeModal = (modal) => {
   const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
   if (videoIframeWrapper) {
     videoIframeWrapper.remove();
@@ -25,7 +25,7 @@ const removeModal = (modal) =>{
 
   ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
   modal.remove();
-}
+};
 
 // decorate modal
 function decorateModal() {
@@ -37,6 +37,8 @@ function decorateModal() {
     iframe.setAttribute('src', href);
   }
 
+  const modal = document.createElement('div');
+  modal.classList.add('co3-modal', 'calcite-mode-dark');
   const closeButton = document.createElement('calcite-icon');
   closeButton.classList.add('co3-modal-container', 'calcite-icon');
   closeButton.setAttribute('icon', 'x');
@@ -52,11 +54,9 @@ function decorateModal() {
       removeModal(modal);
     }
   });
-
+  
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('co3-modal-container');
-  const modal = document.createElement('div');
-  modal.classList.add('co3-modal', 'calcite-mode-dark');
   modalContainer.appendChild(iframe);
   modalContainer.appendChild(closeButton);
   modal.appendChild(modalContainer);
