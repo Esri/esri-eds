@@ -18,6 +18,15 @@ function decorateModal() {
       loader.classList.toggle('visible');
     }
   };
+  const removeModal = (modal) =>{
+    const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
+    if (videoIframeWrapper) {
+      videoIframeWrapper.remove();
+    }
+
+    ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
+    modal.remove();
+  }
 
   const iframe = document.createElement('iframe');
   iframe.classList.add('co3-modal', 'iframe');
