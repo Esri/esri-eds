@@ -1,15 +1,5 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
 
-// function removeModal(modal) {
-//   const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
-//   if (videoIframeWrapper) {
-//     videoIframeWrapper.remove();
-//   }
-
-//   ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
-//   modal.remove();
-// }
-
 const toggleLoader = () => {
   const loader = document.querySelector('.web-dev-loader');
   if (loader) {
