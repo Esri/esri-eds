@@ -83,9 +83,14 @@ export default function decorate(block) {
         const pTags = element.querySelectorAll('p');
         titleSelector = (pTags.length >= 3) ? 'p:nth-last-child(2)' : 'p:nth-last-child(1)';
       } else if (!block.classList.contains('simple') && !block.classList.contains('standard')) {
-        titleSelector = (linksCount === 1) ? 'p:nth-last-child(3)' :
-            (linksCount === 2) ? 'p:nth-last-child(4)' : 'p:nth-last-child(3)';
-          }
+        if (linksCount === 1) {
+          titleSelector = 'p:nth-last-child(3)';
+        } else if (linksCount === 2) {
+          titleSelector = 'p:nth-last-child(4)';
+        } else {
+          titleSelector = 'p:nth-last-child(3)';
+        }
+      }
       if (titleSelector) {
         element.querySelectorAll(titleSelector).forEach((p) => {
           const h3 = document.createElement('h3');
