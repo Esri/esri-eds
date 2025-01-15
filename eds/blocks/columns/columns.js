@@ -10,15 +10,15 @@ function removeModal(modal) {
   modal.remove();
 }
 
-function toggleLoader() {
-  const loader = document.querySelector('.web-dev-loader');
-  if (loader) {
-    loader.classList.toggle('visible');
-  }
-}
-
 // decorate modal
 function decorateModal() {
+  const toggleLoader = () => {
+    const loader = document.querySelector('.web-dev-loader');
+    if (loader) {
+      loader.classList.toggle('visible');
+    }
+  };
+
   const iframe = document.createElement('iframe');
   iframe.classList.add('co3-modal', 'iframe');
   const videoLink = document.querySelector('.video-link');
