@@ -39,6 +39,10 @@
     h3, p:last-child {
       padding-inline-end: var(--space-5);
     }
+
+    calcite-link {
+      display: block;
+    }
   }
 
   .cards-card-image {

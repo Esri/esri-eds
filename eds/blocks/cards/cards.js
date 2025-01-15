@@ -36,18 +36,19 @@ function processStandardCard(element) {
       el.classList.add('overlay-text');
     }
   });
-  const pictureEl = element.querySelector('picture')
-    .closest('p');
+  const pictureEl = element.querySelector('picture').closest('p');
   const overlayTextEl = element.querySelector('.overlay-text');
   if (overlayTextEl) pictureEl.append(overlayTextEl);
-  pictureEl.nextElementSibling.classList.add('card-body-title');
-  const cardBodyTitle = element.querySelector('.card-body-title');
+  if(pictureEl) {
+    pictureEl.nextElementSibling.classList.add('card-body-title');
+    const cardBodyTitle = element.querySelector('.card-body-title');
+    if (cardBodyContent.lastChild.classList === '') cardBodyContent.lastChild.classList.add('card-body-description');
 
-  if (cardBodyContent.lastChild.classList === '') cardBodyContent.lastChild.classList.add('card-body-description');
-
-  if (cardBodyTitle.nextElementSibling && !cardBodyTitle.nextElementSibling.classList.contains('card-body-description')) {
-    cardBodyTitle.nextElementSibling.classList.add('card-body-subtitle');
+    if (cardBodyTitle.nextElementSibling && !cardBodyTitle.nextElementSibling.classList.contains('card-body-description')) {
+      cardBodyTitle.nextElementSibling.classList.add('card-body-subtitle');
+    }
   }
+ 
 }
 
 export default function decorate(block) {
@@ -76,9 +77,18 @@ export default function decorate(block) {
           p.replaceWith(button);
         }
       });
-      if (!block.classList.contains('simple')) {
-        const isLastChildLink = element.lastElementChild?.tagName.toLowerCase() === 'calcite-link';
-        const titleSelector = isLastChildLink ? 'p:nth-last-child(3)' : 'p:nth-last-child(2)';
+
+      const linksCount = element.querySelectorAll('calcite-link').length;
+      let titleSelector;
+      if (block.classList.contains('block-group')) {
+        const pTags = element.querySelectorAll('p');
+        console.log('number of p '+pTags.length);
+        titleSelector = (pTags.length >= 3) ? 'p:nth-last-child(2)' : 'p:nth-last-child(1)';
+      } else if (!block.classList.contains('simple') && !block.classList.contains('standard')) {
+        titleSelector = (linksCount === 1) ? 'p:nth-last-child(3)' :
+            (linksCount === 2) ? 'p:nth-last-child(4)' : 'p:nth-last-child(3)';
+      }
+      if (titleSelector) {
         element.querySelectorAll(titleSelector).forEach((p) => {
           const h3 = document.createElement('h3');
           h3.innerHTML = p.innerHTML;

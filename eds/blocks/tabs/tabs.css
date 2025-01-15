@@ -23,26 +23,6 @@
     margin-block-start: var(--space-5);
   }
 
-  .cards ul {
-    align-items: stretch;
-  }
-
-  .cards li {
-    block-size: 100%;
-    flex: 0 0 100%;
-  }
-
-  .cards a {
-    block-size: 100%;
-    color: var(--calcite-ui-text-1);
-    display: block;
-    text-decoration: none;
-  }
-
-  .cards-card-body :is(picture, img) {
-    aspect-ratio: 342 / 192;
-  }
-
   p:last-child {
     align-items: center;
     display: flex;
@@ -78,38 +58,6 @@
       font-size: var(--font-8);
       margin: 0;
       margin-block-end: 0.6rem;
-    }
-  }
-
-  .cards-card-body {
-    border: solid 1px var(--calcite-ui-border-1);
-    margin: var(--space-2);
-
-    & > p:first-child {
-      margin-block-end: 0;
-    }
-
-    & > p:nth-child(2) {
-      color: var(--calcite-ui-text-1);
-      font-size: var(--font-2);
-      margin-block-end: var(--space-2);
-      margin-inline: var(--space-5);
-    }
-
-    & > p:last-child {
-      color: var(--calcite-ui-text-1);
-      display: block;
-      font-size: var(--font-minus-1);
-      margin-block-end: var(--space-6);
-      margin-inline: var(--space-5);
-      padding: 0;
-    }
-
-    & > p:nth-child(3):not(:last-child) {
-      color: var(--calcite-ui-text-2);
-      font-size: var(--font-minus-1);
-      margin-block-end: var(--space-2);
-      margin-inline: var(--space-5);
     }
   }
 
@@ -231,17 +179,6 @@
       }
     }
   }
-
-  /* .tab-content .text-wrapper, .tab-content .buttons-wrapper {
-    animation-delay: 50ms;
-    animation-duration: 550ms;
-    animation-fill-mode: both;
-    animation-timing-function: ease-in-out;
-  }
-
-  .tab-content[aria-hidden='false'] .text-wrapper, .tab-content[aria-hidden='false'] .buttons-wrapper {
-    animation-name: in-up;
-  } */
 }
 
 @media (width >= 900px) {
@@ -257,10 +194,6 @@
 
 @media (width >= 1024px) {
   .tabs {
-    .cards li {
-      flex: 0 0 33.33%;
-    }
-
     .tab-component {
       position: relative;
     }
@@ -357,10 +290,6 @@
 }
 
 @media (width >= 1440px) {
-  .tabs .cards li {
-    flex: 0 0 25%;
-  }
-
   .tabs .columns {
     margin: auto;
   }
