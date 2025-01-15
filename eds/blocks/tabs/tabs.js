@@ -47,25 +47,6 @@ export default async function decorate(block) {
     }, content));
   }
 
-  const isCardsVariant = contents?.every((content) => content.querySelectorAll('.cards').length > 0);
-  if (isCardsVariant) {
-    contents.forEach((content) => {
-      const cards = content.querySelectorAll('.cards-card-body');
-      cards.forEach((card) => {
-        const anchor = card.querySelector('a');
-        anchor.classList.remove('button');
-        anchor.textContent = '';
-
-        const cardParent = card.parentElement;
-        cardParent.removeChild(card);
-
-        anchor.parentElement.parentElement.removeChild(anchor.parentElement);
-        anchor.appendChild(card);
-        cardParent.appendChild(anchor);
-      });
-    });
-  }
-
   if (!tabsContainFragments) {
     tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
