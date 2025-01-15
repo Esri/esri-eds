@@ -1,5 +1,22 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
 
+function removeModal(modal) {
+  const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
+  if (videoIframeWrapper) {
+    videoIframeWrapper.remove();
+  }
+
+  ['style', 'tabindex', 'aria-hidden'].forEach(attr => document.body.removeAttribute(attr));
+  modal.remove();
+}
+
+function toggleLoader() {
+  const loader = document.querySelector('.web-dev-loader');
+  if (loader) {
+    loader.classList.toggle('visible');
+  }
+}
+
 // decorate modal
 function decorateModal() {
   const iframe = document.createElement('iframe');
@@ -46,23 +63,6 @@ function decorateModal() {
     iframe.focus();
     toggleLoader();
   });
-}
-
-function removeModal(modal) {
-  const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
-  if (videoIframeWrapper) {
-    videoIframeWrapper.remove();
-  }
-
-  ['style', 'tabindex', 'aria-hidden'].forEach(attr => document.body.removeAttribute(attr));
-  modal.remove();
-}
-
-function toggleLoader() {
-  const loader = document.querySelector('.web-dev-loader');
-  if (loader) {
-    loader.classList.toggle('visible');
-  }
 }
 
 export default function decorate(block) {
