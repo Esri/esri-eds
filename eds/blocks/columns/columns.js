@@ -1,6 +1,23 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
 
-function removeModal(modal) {
+// function removeModal(modal) {
+//   const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
+//   if (videoIframeWrapper) {
+//     videoIframeWrapper.remove();
+//   }
+
+//   ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
+//   modal.remove();
+// }
+
+const toggleLoader = () => {
+  const loader = document.querySelector('.web-dev-loader');
+  if (loader) {
+    loader.classList.toggle('visible');
+  }
+};
+
+const removeModal = (modal) =>{
   const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
   if (videoIframeWrapper) {
     videoIframeWrapper.remove();
@@ -12,22 +29,6 @@ function removeModal(modal) {
 
 // decorate modal
 function decorateModal() {
-  const toggleLoader = () => {
-    const loader = document.querySelector('.web-dev-loader');
-    if (loader) {
-      loader.classList.toggle('visible');
-    }
-  };
-  const removeModal = (modal) =>{
-    const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
-    if (videoIframeWrapper) {
-      videoIframeWrapper.remove();
-    }
-
-    ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
-    modal.remove();
-  }
-
   const iframe = document.createElement('iframe');
   iframe.classList.add('co3-modal', 'iframe');
   const videoLink = document.querySelector('.video-link');
