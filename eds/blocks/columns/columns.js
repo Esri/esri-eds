@@ -1,5 +1,69 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
 
+const toggleLoader = () => {
+  const loader = document.querySelector('.web-dev-loader');
+  if (loader) {
+    loader.classList.toggle('visible');
+  }
+};
+
+const removeModal = (modal) => {
+  const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
+  if (videoIframeWrapper) {
+    videoIframeWrapper.remove();
+  }
+
+  ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
+  modal.remove();
+};
+
+// decorate modal
+function decorateModal() {
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('co3-modal', 'iframe');
+  const videoLink = document.querySelector('.video-link');
+  if (videoLink) {
+    const href = videoLink.getAttribute('href');
+    iframe.setAttribute('src', href);
+  }
+
+  const modal = document.createElement('div');
+  modal.classList.add('co3-modal', 'calcite-mode-dark');
+  const closeButton = document.createElement('calcite-icon');
+  closeButton.classList.add('co3-modal-container', 'calcite-icon');
+  closeButton.setAttribute('icon', 'x');
+  closeButton.setAttribute('scale', 'm');
+  closeButton.setAttribute('aria-label', 'close modal');
+  closeButton.setAttribute('aria-hidden', 'false');
+  closeButton.setAttribute('tabindex', '0');
+  closeButton.addEventListener('click', () => {
+    removeModal(modal);
+  });
+  closeButton.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
+      removeModal(modal);
+    }
+  });
+  const modalContainer = document.createElement('div');
+  modalContainer.classList.add('co3-modal-container');
+  modalContainer.appendChild(iframe);
+  modalContainer.appendChild(closeButton);
+  modal.appendChild(modalContainer);
+  document.body.setAttribute('tabindex', '-1');
+  document.body.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(modal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      removeModal(modal);
+    }
+  });
+
+  iframe.addEventListener('load', () => {
+    iframe.focus();
+    toggleLoader();
+  });
+}
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -64,18 +128,27 @@ export default function decorate(block) {
         vidURL.innerHTML = '';
         vidURL.appendChild(picture);
         const playButton = calciteButton({
-          class: 'play-button',
           'icon-start': 'play-f',
-          label: 'play video',
           'aria-hidden': 'false',
           'aria-label': 'play video',
+          class: 'play-button',
+          label: 'play video',
           appearance: 'solid',
           kind: 'inverse',
           scale: 'l',
           round: '',
         });
-
         vidURL.appendChild(playButton);
+      }
+
+      // setup play button click event
+      const playButton = col.querySelector('.play-button');
+      if (playButton) {
+        playButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          toggleLoader();
+          decorateModal();
+        });
       }
     });
   });
