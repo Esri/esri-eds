@@ -1,4 +1,5 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
+let lastfocusBtn;
 
 const toggleLoader = () => {
   const loader = document.querySelector('.web-dev-loader');
@@ -15,7 +16,19 @@ const removeModal = (modal) => {
 
   ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
   modal.remove();
+  lastfocusBtn.focus();
 };
+
+const handleEscKeyPress = (event) => {
+  if (event.key === 'Escape') {
+    removeModal(document.querySelector('.co3-modal'));
+  } else {
+    const iframe = document.querySelector('iframe.co3-modal');
+    if (iframe) {
+      iframe.focus();
+    }
+  }
+}
 
 // decorate modal
 function decorateModal() {
@@ -23,8 +36,7 @@ function decorateModal() {
   iframe.classList.add('co3-modal', 'iframe');
   const videoLink = document.querySelector('.video-link');
   if (videoLink) {
-    const href = videoLink.getAttribute('href');
-    iframe.setAttribute('src', href);
+    iframe.setAttribute('src', videoLink.getAttribute('href'));
   }
 
   const modal = document.createElement('div');
@@ -52,6 +64,7 @@ function decorateModal() {
   document.body.setAttribute('tabindex', '-1');
   document.body.setAttribute('aria-hidden', 'true');
   document.body.appendChild(modal);
+  document.addEventListener('keydown', handleEscKeyPress);
   modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       removeModal(modal);
@@ -59,7 +72,6 @@ function decorateModal() {
   });
 
   iframe.addEventListener('load', () => {
-    iframe.focus();
     toggleLoader();
   });
 }
@@ -145,6 +157,7 @@ export default function decorate(block) {
       const playButton = col.querySelector('.play-button');
       if (playButton) {
         playButton.addEventListener('click', (event) => {
+          lastfocusBtn = playButton.parentElement;
           event.preventDefault();
           toggleLoader();
           decorateModal();
