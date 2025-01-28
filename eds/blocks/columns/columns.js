@@ -1,6 +1,6 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
-let lastfocusBtn;
 
+let lastfocusBtn;
 const toggleLoader = () => {
   const loader = document.querySelector('.web-dev-loader');
   if (loader) {
@@ -28,7 +28,7 @@ const handleEscKeyPress = (event) => {
       iframe.focus();
     }
   }
-}
+};
 
 // decorate modal
 function decorateModal() {
