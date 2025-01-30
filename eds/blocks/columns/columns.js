@@ -23,9 +23,9 @@ const handleEscKeyPress = (event) => {
   if (event.key === 'Escape') {
     removeModal(document.querySelector('.co3-modal'));
   } else {
-    const iframe = document.querySelector('iframe.co3-modal');
-    if (iframe) {
-      iframe.focus();
+    const co3ModalContainer = document.querySelector('.co3-modal-container');
+    if (co3ModalContainer) {
+      co3ModalContainer.focus();
     }
   }
 };
@@ -38,7 +38,6 @@ function decorateModal() {
   if (videoLink) {
     iframe.setAttribute('src', videoLink.getAttribute('href'));
   }
-
   const modal = document.createElement('div');
   modal.classList.add('co3-modal', 'calcite-mode-dark');
   const closeButton = document.createElement('calcite-icon');
@@ -56,8 +55,10 @@ function decorateModal() {
       removeModal(modal);
     }
   });
+
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('co3-modal-container');
+  modalContainer.setAttribute('tabindex', '0');
   modalContainer.appendChild(iframe);
   modalContainer.appendChild(closeButton);
   modal.appendChild(modalContainer);
@@ -73,6 +74,7 @@ function decorateModal() {
 
   iframe.addEventListener('load', () => {
     toggleLoader();
+    modalContainer.focus();
   });
 }
 
@@ -157,7 +159,8 @@ export default function decorate(block) {
       const playButton = col.querySelector('.play-button');
       if (playButton) {
         playButton.addEventListener('click', (event) => {
-          lastfocusBtn = playButton.parentElement;
+          playButton.setAttribute('tabindex', '0');
+          lastfocusBtn = playButton;
           event.preventDefault();
           toggleLoader();
           decorateModal();
