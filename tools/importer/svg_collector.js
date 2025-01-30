@@ -2,8 +2,6 @@ import { readdir, readFileSync } from 'fs';
 import { extname, join, basename } from 'path';
 import { stdout } from 'process';
 
-const directoryPath = './tools/importer/svgs'; // Replace with your folder path
-
 const additionalSvgs = [
   {
     name: 'contact-email-48',
@@ -27,23 +25,37 @@ const additionalSvgs = [
   },
 ];
 
+const svgArray = additionalSvgs;
+const directoryPath = './tools/importer/svgs';
+const productDirectoryPath = './tools/importer/products';
+
+function processReadDirFiles(path, prefix = '') {
+  return (err, files) => {
+    if (err) {
+      console.log(`Unable to scan directory: ${err}`);
+      return;
+    }
+
+    const svgFiles = files.filter((file) => extname(file) === '.svg');
+
+    svgFiles.forEach((file) => {
+      const filePath = join(path, file);
+      const fileContents = readFileSync(filePath, 'utf8');
+      const fileName = basename(file, '.svg');
+      svgArray.push({
+        name: `${prefix}${fileName}`,
+        contents: fileContents,
+      });
+    });
+  };
+}
+
 readdir(directoryPath, (err, files) => {
-  if (err) {
-    console.log(`Unable to scan directory: ${err}`);
-    return;
-  }
+  processReadDirFiles(directoryPath)(err, files);
+  readdir(productDirectoryPath, (err, files) => {
+    processReadDirFiles(productDirectoryPath, 'product-')(err, files);
 
-  const svgFiles = files.filter((file) => extname(file) === '.svg');
-  const svgArray = additionalSvgs;
-
-  svgFiles.forEach((file) => {
-    const filePath = join(directoryPath, file);
-    const fileContents = readFileSync(filePath, 'utf8');
-    const fileName = basename(file, '.svg');
-    svgArray.push({ name: fileName, contents: fileContents });
+    const jsDataStr = `export default ${JSON.stringify(svgArray, null, 2)}\n`;
+    stdout.write(jsDataStr);
   });
-
-  // write to stdout as js
-  const jsDataStr = `export default ${JSON.stringify(svgArray, null, 2)}\n`;
-  stdout.write(jsDataStr);
 });

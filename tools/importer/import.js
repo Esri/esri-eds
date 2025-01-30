@@ -880,6 +880,9 @@ function inlineIcons(main, html) {
       let color = path.style.fill;
       if (!path.style.fill) {
         color = themeColor;
+      } else {
+        // remove fill attribute
+        path.removeAttribute('style');
       }
 
       icon.removeAttribute('class');
@@ -890,6 +893,19 @@ function inlineIcons(main, html) {
         console.error('Unknown icon hash', iconHash, icon);
         console.error('icon parent', icon.parentElement.parentElement);
         iconName = `pending-${iconHash}`;
+        if (iconName === 'pending-18eexth') {
+          const contents = "<svg id=\"icon-ui-svg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M23.172 31.845L17.9 34.889v-9.077l5.088-2.766 4.616 2.665a3.806 3.806 0 0 1 .396.133v-.828l-4.497-2.596 3.516-8.038 4.081-2.356v5.585a3.986 3.986 0 0 1 .8-.1v-6.409L17.5 2.788 3.1 11.102V27.73l14.4 8.314 5.98-3.452zm-.366-9.828L18.3 19.416l7.551-4.36zM17.9 3.943l12.8 7.39-3.865 2.231L17.9 4.877zm0 2.049l8.215 7.988-8.215 4.743zm0 14.117l4.275 2.468-4.275 2.325zm-14-8.083l3.267 1.886-.88 11.516L3.9 26.806zm4.035 2.33l8.765 5.06-9.574 5.528zM17.1 34.888l-12.8-7.39 2.64-1.525H17.1zm0-9.715H8.326l8.774-5.066zm0-6.45l-8.83-5.099 8.83-7.7zm0-13.86l-9.563 8.338L4.3 11.333l12.8-7.39zM43.462 39.57a66.93 66.93 0 0 1-1.079 4.3l-.766-.228c.005-.017.52-1.758 1.064-4.243.53-2.42-.564-7.838-.575-7.892A1.12 1.12 0 0 0 41 30.4c-1.1 0-1.1.347-1.1.6v1h-.8v-1.5a1.102 1.102 0 0 0-1.1-1.1c-1.1 0-1.1.482-1.1.688V31h-.8v-1.5a1.1 1.1 0 1 0-2.2 0V31h-.8v-9.5a1.1 1.1 0 1 0-2.2 0v12.317l-3.592-4.828a.98.98 0 0 0-1.403-.442.997.997 0 0 0-.478.653 1.181 1.181 0 0 0 .137.85l2.784 6.745 3.965 4.955-.626.5-4.057-5.098-2.781-6.75a1.921 1.921 0 0 1-.202-1.378 1.788 1.788 0 0 1 .857-1.169 1.757 1.757 0 0 1 2.471.695l2.125 2.853V21.5a1.9 1.9 0 0 1 3.8 0v6.452a1.9 1.9 0 0 1 2.89.909A2.443 2.443 0 0 1 38 28.6a1.903 1.903 0 0 1 1.778 1.229A2.75 2.75 0 0 1 41 29.6a1.897 1.897 0 0 1 1.897 1.808c.04.168 1.13 5.577.565 8.162z\" id=\"icon-ui-svg--base\"/></svg>";
+
+          const div = document.createElement('div');
+          div.innerHTML = contents;
+          const testSvg = div.querySelector(':scope > svg');
+
+          const equals = testSvg.outerHTML === icon.outerHTML;
+
+          console.log('equals?', equals);
+          console.log('page', icon.outerHTML);
+          console.log('refe', testSvg.outerHTML);
+        }
         notFoundIcons.push({
           name: iconName,
           icon: icon.outerHTML,
