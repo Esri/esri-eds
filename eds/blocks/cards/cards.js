@@ -56,6 +56,10 @@ export default function decorate(block) {
   }
   /* change to ul, li */
   const ul = document.createElement('ul');
+  if (block.classList.contains('block-group')) {
+    block.classList.add(`cardsperrow-${[...block.children].length}`);
+    block.classList.add('centered');
+  }
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     li.classList.add('calcite-animate');
@@ -104,6 +108,7 @@ export default function decorate(block) {
 
     ul.append(li);
   });
+
   ul.querySelectorAll('img').forEach((img) => img.closest('picture')?.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
