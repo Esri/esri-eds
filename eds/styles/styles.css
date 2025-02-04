@@ -312,6 +312,10 @@ main {
     inline-size: 100%;
   }
 
+  .icon img[src*="/product-logos/"] {
+    filter: none;
+  }
+  
   /* arrow right icon ->
     This is the default icon we add for inside redirects
   */
