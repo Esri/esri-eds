@@ -1,8 +1,8 @@
 import babelParser from '@babel/eslint-parser';
-import { FlatCompat } from '@eslint/eslintrc';
-import { fileURLToPath } from 'url';
 import globals from 'globals';
 import path from 'path';
+import { FlatCompat } from '@eslint/eslintrc';
+import { fileURLToPath } from 'url';
 
 // Mimic CommonJS variables
 const filename = fileURLToPath(import.meta.url);
@@ -10,7 +10,7 @@ const dirname = path.dirname(filename);
 
 // Create a FlatCompat instance
 const compat = new FlatCompat({
-  baseDirectory: dirname,
+  BaseDirectory: dirname,
 });
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -26,18 +26,21 @@ export default [
       parser: babelParser,
       parserOptions: {
         allowImportExportEverywhere: true,
-        sourceType: 'module',
         requireConfigFile: false,
+        sourceType: 'module',
       },
     },
     rules: {
-      'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
-      'import/no-extraneous-dependencies': 'off', // allow importing devDependencies
-      'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
-      'no-param-reassign': [2, { props: false }], // allow modifying properties of param
-      'no-unused-vars': 'off', // allow unused variables
+      'import/extensions': ['error', { js: 'always' }], // Require js file extensions in imports
+      'import/no-extraneous-dependencies': 'off', // Allow importing devDependencies
+      'linebreak-style': ['error', 'unix'], // Enforce unix linebreaks
+      'no-param-reassign': ['error', { props: false }], // Allow modifying properties of param
+      'no-unused-vars': 'off', // Allow unused variables
     },
+  },
+  {
     ignores: [
+      'eds/scripts/aem.js',
       'helix-importer-ui',
       'tools/importer/import.bundle.js',
     ],
