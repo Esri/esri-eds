@@ -270,7 +270,11 @@ function decorateIcon(span, prefix = '', alt = '') {
     .substring(5);
   const img = document.createElement('img');
   img.dataset.iconName = iconName;
-  img.src = `https://www.esri.com/content/dam/esrisites/en-us/common/icons/meridian-/${prefix}${iconName}.svg`;
+  if (iconName.startsWith('product-')) {
+    img.src = `https://www.esri.com/content/dam/esrisites/en-us/common/icons/product-logos/${prefix}${iconName.substring(8)}.svg`;
+  } else {
+    img.src = `https://www.esri.com/content/dam/esrisites/en-us/common/icons/meridian-/${prefix}${iconName}.svg`;
+  }
   img.alt = alt;
   img.loading = 'lazy';
   span.append(img);
