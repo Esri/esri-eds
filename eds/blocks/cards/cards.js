@@ -56,8 +56,8 @@ export default function decorate(block) {
   }
   /* change to ul, li */
   const ul = document.createElement('ul');
-  if(block.classList.contains('block-group')){
-    block.classList.add('cardsperrow-' + [...block.children].length);
+  if (block.classList.contains('block-group')) {
+    block.classList.add(`cardsperrow-${[...block.children].length}`);
     block.classList.add('centered');
   }
   [...block.children].forEach((row) => {
