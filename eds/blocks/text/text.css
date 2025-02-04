@@ -107,7 +107,7 @@
       margin-block-end: var(--content-spacing);
       margin-inline: auto;
       max-inline-size: 80ch;
-      word-break: break-word;
+      overflow-wrap: break-word;
     }
   }
 
