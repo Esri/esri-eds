@@ -331,6 +331,13 @@ main {
     padding-inline: var(--space-6);
   }
 
+  .section > .default-content-wrapper * {
+    inline-size: 48vw;
+    margin-block: 3rem;
+    max-inline-size: 720px;
+    padding-inline: 0.5rem;
+  }
+
   .section:where(.center, .centered) > .default-content-wrapper {
     text-align: center;
   }
