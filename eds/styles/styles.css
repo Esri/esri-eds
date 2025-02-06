@@ -335,7 +335,11 @@ main {
     inline-size: 48vw;
     margin-block: 3rem;
     max-inline-size: 720px;
-    padding-inline: 0.5rem;
+
+    @media screen and (width <= 859px) {
+      inline-size: 100%;
+      max-inline-size: 96vw;
+      }
   }
 
   .section:where(.center, .centered) > .default-content-wrapper {
