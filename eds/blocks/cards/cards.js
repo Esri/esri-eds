@@ -19,10 +19,21 @@ function processSimpleCard(listElem) {
 
 function processStandardCard(element) {
   const anchorEl = element.querySelector('a');
+  const calciteLinkEl = element.querySelector('calcite-link');
   const cardBodyContent = domEl('div', { class: 'card-body-content' });
+
+  const appendCardBodyContent = (parent) => {
+    parent.replaceChildren(cardBodyContent);
+    element.append(parent);
+  };
+
   if (anchorEl) {
-    anchorEl.replaceChildren(cardBodyContent);
-    element.append(anchorEl);
+    appendCardBodyContent(anchorEl);
+  } else if (calciteLinkEl) {
+    const newAnchorEl = document.createElement('a');
+    newAnchorEl.setAttribute('href', calciteLinkEl.getAttribute('href'));
+    appendCardBodyContent(newAnchorEl);
+    calciteLinkEl.remove();
   } else {
     element.append(cardBodyContent);
   }
