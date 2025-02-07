@@ -49,9 +49,8 @@ export default function decorate(block) {
   };
 
   [...block.children].forEach((child, idx) => {
-    let msrevealcontent = child.querySelector('.mosaic-reveal-content');
-    let mosaicTitle = msrevealcontent.querySelector('h3');
-    
+    const msrevealcontent = child.querySelector('.mosaic-reveal-content');
+    const mosaicTitle = msrevealcontent.querySelector('h3');
     child.addEventListener('click', () => {
       if (mediaQuery.matches) {
         revealContent.setAttribute('aria-hidden', 'false');
