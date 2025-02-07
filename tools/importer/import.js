@@ -188,6 +188,14 @@ function hero(main, document) {
 }
 
 function videos(main, document) {
+  main.querySelectorAll('a').forEach((a) => {
+    if (a.href.startsWith('https://mediaspace.esri.com/')) {
+      if (a.textContent.trim() === '') {
+        a.textContent = a.href;
+      }
+    }
+  });
+
   main.querySelectorAll('video')
     .forEach((video) => {
       const videoSrc = video.getAttribute('data-video-src');
@@ -956,6 +964,14 @@ function quote(main, document) {
   });
 }
 
+function caseStudyMediaSplit(main, document) {
+  main.querySelectorAll('.case-study-hero .ind-case_study_resource')
+    .forEach((container) => {
+      const cells = [...container.children].map((child) => [child]);
+      createBlock(container, document, 'Media split', cells, ['Case study']);
+    });
+}
+
 function columns(main, document) {
   main.querySelectorAll('.fifty-fifty_container')
     .forEach((container) => {
@@ -1198,6 +1214,7 @@ export default {
     const main = document.querySelector('main');
     inlineIcons(main, html);
     form(main, pathname);
+    caseStudyMediaSplit(main, document);
   },
   transform: ({ document, url, html }) => {
     const { pathname } = new URL(url);
