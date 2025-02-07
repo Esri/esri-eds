@@ -195,4 +195,8 @@ export default [
     URL: 'https://www.esri.com/en-us/location-intelligence/overview',
     Theme: 'dark',
   },
+  {
+    URL: 'https://www.esri.com/en-us/capabilities/3d-gis/get-started',
+    Theme: 'dark',
+  },
 ];

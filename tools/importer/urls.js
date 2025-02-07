@@ -196,6 +196,10 @@ export default [
     "URL": "https://www.esri.com/en-us/location-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/en-us/capabilities/3d-gis/get-started"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/fr-fr/about/about-esri/americas"
   },
@@ -390,6 +394,10 @@ export default [
   {
     "Theme": "dark",
     "URL": "https://www.esri.com/fr-fr/location-intelligence/overview"
+  },
+  {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/fr-fr/capabilities/3d-gis/get-started"
   },
   {
     "Theme": "light",
@@ -588,6 +596,10 @@ export default [
     "URL": "https://www.esri.com/zh-cn/location-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/zh-cn/capabilities/3d-gis/get-started"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/ja-jp/about/about-esri/americas"
   },
@@ -782,6 +794,10 @@ export default [
   {
     "Theme": "dark",
     "URL": "https://www.esri.com/ja-jp/location-intelligence/overview"
+  },
+  {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/ja-jp/capabilities/3d-gis/get-started"
   },
   {
     "Theme": "light",
@@ -980,6 +996,10 @@ export default [
     "URL": "https://www.esri.com/es-es/location-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/es-es/capabilities/3d-gis/get-started"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/ru-ru/about/about-esri/americas"
   },
@@ -1174,6 +1194,10 @@ export default [
   {
     "Theme": "dark",
     "URL": "https://www.esri.com/ru-ru/location-intelligence/overview"
+  },
+  {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/ru-ru/capabilities/3d-gis/get-started"
   },
   {
     "Theme": "light",
@@ -1372,6 +1396,10 @@ export default [
     "URL": "https://www.esri.com/de-de/location-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/de-de/capabilities/3d-gis/get-started"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/ar-sa/about/about-esri/americas"
   },
@@ -1566,6 +1594,10 @@ export default [
   {
     "Theme": "dark",
     "URL": "https://www.esri.com/ar-sa/location-intelligence/overview"
+  },
+  {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/ar-sa/capabilities/3d-gis/get-started"
   },
   {
     "Theme": "light",
@@ -1764,6 +1796,10 @@ export default [
     "URL": "https://www.esri.com/it-it/location-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/it-it/capabilities/3d-gis/get-started"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/ko-kr/about/about-esri/americas"
   },
@@ -1958,6 +1994,10 @@ export default [
   {
     "Theme": "dark",
     "URL": "https://www.esri.com/ko-kr/location-intelligence/overview"
+  },
+  {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/ko-kr/capabilities/3d-gis/get-started"
   },
   {
     "Theme": "light",
@@ -2156,6 +2196,10 @@ export default [
     "URL": "https://www.esri.com/pl-pl/location-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/pl-pl/capabilities/3d-gis/get-started"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/pt-br/about/about-esri/americas"
   },
@@ -2350,5 +2394,9 @@ export default [
   {
     "Theme": "dark",
     "URL": "https://www.esri.com/pt-br/location-intelligence/overview"
+  },
+  {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/pt-br/capabilities/3d-gis/get-started"
   }
 ]
