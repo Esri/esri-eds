@@ -1,4 +1,3 @@
-
 .section.map-container {
   background-attachment: var(--bg-img-attachment);
   background-image: var(--bg-overlay), var(--bg-img);
@@ -20,7 +19,7 @@
   --posX: right;
   --bg-img-position: var(--posY) var(--posX);
   --bg-img-repeat: no-repeat;
-  --bg-img-size: initial;
+  --bg-img-size: cover;
   --bg-img-attachment: initial;
   --bg-overlay-dir: to right;
   --bg-overlay-start-color: var(--esri-ui-opacity00-inverse);
@@ -52,7 +51,7 @@
 
 .map.block:not(.section) {
   background-color: transparent;
-  padding: 0;
+  padding: 3rem 0;
 }
 
 .iframe-map-placeholder {
@@ -61,15 +60,8 @@
   inline-size: 100%;
 }
 
-hr.separator {
-  background-color: #0079c1;
-  block-size: 2px;
-  border-block-start: none;
-  inline-size: 40px;
-}
-
-hr.center, .text-center hr {
-  margin-inline: auto;
+.map hr.separator {
+  display: none;
 }
 
 #map-default-content-wrapper > div > p {
@@ -91,8 +83,6 @@ hr.center, .text-center hr {
 
 #frame-wrapper.is-fullscreen {
   block-size: 100%;
-
-  /* block-size: 100%; */
   inline-size: 100%;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -153,5 +143,4 @@ hr.center, .text-center hr {
     margin-inline: 179px;
     max-inline-size: 72vw;
   }
-
 }
