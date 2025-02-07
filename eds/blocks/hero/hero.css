@@ -103,6 +103,10 @@
   aspect-ratio: 16 / 9;
 }
 
+body[aria-hidden="true"]{
+  overflow: hidden;
+}
+
 .co3-modal {
   background: var(--esri-ui-opacity80-inverse);
   block-size: 100%;
@@ -111,7 +115,7 @@
   inset-inline-start: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 3001;
 }
 
 .co3-modal-container {
@@ -135,7 +139,7 @@
   inline-size: 50px;
   inset-block-start: 0;
   inset-inline-start: 100%;
-  z-index: 2;
+  z-index: 3002;
 }
 
 .co3-modal-container calcite-icon:is(:hover, :focus-within, :active) {

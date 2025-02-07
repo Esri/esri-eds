@@ -128,25 +128,27 @@ export default function decorate(block) {
   }
 
   const videoLink = block.querySelector('.video-link');
-  const btnContainer = videoLink.closest('.button-container');
-  if ((videoLink) && (btnContainer)) {
-    btnContainer.replaceWith(calciteButton({
-      'icon-end': 'play-f',
-      appearance: 'solid',
-      href: videoLink.href,
-      label: videoLink.textContent,
-    }, videoLink.textContent));
-  }
+  if (videoLink) {
+    const btnContainer = videoLink.closest('.button-container');
+    if ((videoLink) && (btnContainer)) {
+      btnContainer.replaceWith(calciteButton({
+        'icon-end': 'play-f',
+        appearance: 'solid',
+        href: videoLink.href,
+        label: videoLink.textContent,
+      }, videoLink.textContent));
+    }
 
-  const calciteBtn = block.querySelector('calcite-button');
-  if (calciteBtn) {
-    calciteBtn.addEventListener('click', (evt) => {
-      evt.preventDefault();
-      calciteBtn.setAttribute('tabindex', '0');
-      lastfocusBtn = calciteBtn;
+    const calciteBtn = block.querySelector('calcite-button');
+    if (calciteBtn) {
+      calciteBtn.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        calciteBtn.setAttribute('tabindex', '0');
+        lastfocusBtn = calciteBtn;
 
-      toggleLoader();
-      decorateModal(videoLink.href);
-    });
+        toggleLoader();
+        decorateModal(videoLink.href);
+      });
+    }
   }
 }
