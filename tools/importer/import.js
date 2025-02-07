@@ -968,7 +968,7 @@ function caseStudyMediaSplit(main, document) {
   main.querySelectorAll('.case-study-hero .ind-case_study_resource')
     .forEach((container) => {
       const cells = [...container.children].map((child) => [child]);
-      createBlock(container, document, 'Media split', cells, ['Case study']);
+      createBlock(container, document, 'Columns', cells, ['Media split', 'Case study']);
     });
 }
 
