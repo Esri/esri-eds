@@ -49,9 +49,9 @@ export default function decorate(block) {
   };
 
   [...block.children].forEach((child, idx) => {
-    var msrevealcontent = child.querySelector('.mosaic-reveal-content');   
-    var h3 = msrevealcontent.querySelector('h3');
-   
+    let msrevealcontent = child.querySelector('.mosaic-reveal-content');
+    let mosaicTitle = msrevealcontent.querySelector('h3');
+    
     child.addEventListener('click', () => {
       if (mediaQuery.matches) {
         revealContent.setAttribute('aria-hidden', 'false');
@@ -63,9 +63,9 @@ export default function decorate(block) {
     child.addEventListener('mouseenter', () => {
       if (!mediaQuery.matches) {
         child.querySelector('.mosaic-reveal-content').ariaHidden = false;
-        h3.setAttribute('tabindex', '0');
+        mosaicTitle.setAttribute('tabindex', '0');
         setTimeout(() => {
-          h3.focus();
+          mosaicTitle.focus();
         }, 100);
       }
     });
@@ -73,7 +73,7 @@ export default function decorate(block) {
     child.addEventListener('mouseleave', () => {
       if (!mediaQuery.matches) {
         child.querySelector('.mosaic-reveal-content').ariaHidden = true;
-        h3.setAttribute('tabindex', '-1');
+        mosaicTitle.setAttribute('tabindex', '-1');
       }
     });
 
