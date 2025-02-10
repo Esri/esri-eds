@@ -31,11 +31,30 @@
 
 }
 
-.mosaic-reveal calcite-icon {
-  inset-block-end: var(--space-4);
-  inset-inline-end: var(--space-4);
+.mosaic-reveal .mosaic-reveal-button,
+.mosaic-reveal .mosaic-contract-button {
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  block-size: 25px;
+  border-color: transparent;
+  content: "";
+  display: block;
+  inline-size: 25px;
+  inset-block-end: var(--space-5);
+  inset-inline-end: var(--space-5);
+  margin: 0;
+  padding: 0;
   position: absolute;
-  z-index: 2;
+}
+
+.mosaic-reveal calcite-icon {
+  block-size: 20px;
+  inline-size: 20px;
+  inset-block-end: var(--space-1);
+  inset-inline-end: var(--space-1);
+  position: absolute;
 }
 
 .mosaic-reveal .mosaic-reveal-content {
@@ -45,13 +64,14 @@
   display: flex;
   flex-direction: column;
   inline-size: 100%;
-  inset-block-start: 0;
+  inset-block-end: 0;
   inset-inline-start: 0;
   justify-content: center;
   opacity: 1;
   position: absolute;
   transform-origin: 50% 100%;
   transition: 0.5s ease;
+  visibility: visible;
   z-index: 5;
 }
 
@@ -81,29 +101,15 @@
 }
 
 .mosaic-reveal .mosaic-reveal-content[aria-hidden="true"] {
-  inset-block-start: 100%;
+  block-size: 0;
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
 }
 
 .mosaic-reveal > div { /* stylelint-disable-line no-descending-specificity */
-  overflow: hidden;
+  overflow: unset;
   position: relative;
-}
-
-.mosaic-reveal > div::after {
-  background: linear-gradient(to bottom, #0000 66%, #000000b3 100%);
-  block-size: 100%;
-  content: "";
-  display: block;
-  inline-size: 100%;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  position: absolute;
-}
-
-.mosaic-reveal > div:last-child::after {
-  display: none;
 }
 
 .mosaic-reveal picture {

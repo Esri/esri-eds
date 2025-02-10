@@ -4,11 +4,14 @@ export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
 
   [...block.children].forEach((child) => {
+    child.querySelector('h3').setAttribute('tabindex', '-1');
     const titleText = child.querySelector('h3').textContent;
 
     child.children[0].appendChild(h3({ class: 'title' }, titleText));
-
-    child.appendChild(domEl('calcite-icon', { icon: 'expand', scale: 's' }));
+    const expandButton = domEl('button', { class: 'mosaic-reveal-button' });
+    const icon = domEl('calcite-icon', { icon: 'expand', scale: 's' });
+    expandButton.appendChild(icon);
+    child.appendChild(expandButton);
   });
 
   const contents = [...block.children].map((child) => child.children[1]);
@@ -46,6 +49,8 @@ export default function decorate(block) {
   };
 
   [...block.children].forEach((child, idx) => {
+    const msrevealcontent = child.querySelector('.mosaic-reveal-content');
+    const mosaicTitle = msrevealcontent.querySelector('h3');
     child.addEventListener('click', () => {
       if (mediaQuery.matches) {
         revealContent.setAttribute('aria-hidden', 'false');
@@ -57,20 +62,36 @@ export default function decorate(block) {
     child.addEventListener('mouseenter', () => {
       if (!mediaQuery.matches) {
         child.querySelector('.mosaic-reveal-content').ariaHidden = false;
+        mosaicTitle.setAttribute('tabindex', '0');
+        setTimeout(() => {
+          mosaicTitle.focus();
+        }, 100);
       }
     });
 
     child.addEventListener('mouseleave', () => {
       if (!mediaQuery.matches) {
         child.querySelector('.mosaic-reveal-content').ariaHidden = true;
+        mosaicTitle.setAttribute('tabindex', '-1');
       }
+    });
+
+    child.querySelector('.mosaic-reveal-button').addEventListener('click', () => {
+      const event = new Event('mouseenter');
+      child.dispatchEvent(event);
+    });
+
+    child.querySelector('.mosaic-reveal-content').addEventListener('click', () => {
+      const event = new Event('mouseleave');
+      child.dispatchEvent(event);
     });
   });
 
-  block.appendChild(revealContent);
-
   block.querySelectorAll('.mosaic-reveal-content').forEach((content) => {
     content.insertBefore(div({ class: 'content-bg' }), content.firstChild);
-    content.appendChild(domEl('calcite-icon', { icon: 'contract', scale: 's' }));
+    const contractButton = domEl('button', { class: 'mosaic-contract-button' });
+    const icon = domEl('calcite-icon', { icon: 'contract', scale: 's' });
+    contractButton.appendChild(icon);
+    content.appendChild(contractButton);
   });
 }
