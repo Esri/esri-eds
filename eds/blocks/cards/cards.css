@@ -21,7 +21,6 @@
 
     h3 {
       font-size: var(--title-size);
-      font-weight: 400;
       line-height: 1.375;
       margin-block-end: var(--space-2);
     }
