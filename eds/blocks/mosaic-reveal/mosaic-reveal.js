@@ -86,7 +86,6 @@ export default function decorate(block) {
       child.dispatchEvent(event);
     });
   });
-  block.appendChild(revealContent);
 
   block.querySelectorAll('.mosaic-reveal-content').forEach((content) => {
     content.insertBefore(div({ class: 'content-bg' }), content.firstChild);
