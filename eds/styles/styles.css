@@ -346,6 +346,10 @@ main {
     text-align: center;
   }
 
+  .section:where(.center, .centered) > .default-content-wrapper * {
+    margin-inline: auto;
+  }
+
   .section > div > div {
     background-color: var(--calcite-ui-foreground-1);
     color: var(--calcite-ui-text-1);
