@@ -136,36 +136,37 @@ export default function decorate(block) {
       }
 
       // decorate play button
-      const vidURL = col.querySelector('a[href*="mediaspace"]', 'a[href*="youtube"]', 'a[href*="video"]');
-      const picture = col.querySelector('picture');
-      if (vidURL) {
-        vidURL.innerHTML = '';
-        vidURL.appendChild(picture);
-        const playButton = calciteButton({
-          'icon-start': 'play-f',
-          'aria-hidden': 'false',
-          'aria-label': 'play video',
-          class: 'play-button',
-          label: 'play video',
-          appearance: 'solid',
-          kind: 'inverse',
-          scale: 'l',
-          round: '',
-        });
-        vidURL.appendChild(playButton);
-      }
+      // const vidURL = col.querySelector('a[href*="mediaspace"]', 'a[href*="youtube"]', 'a[href*="video"]');
+      // const picture = col.querySelector('picture');
+      // console.log(picture);
+      // if ( (vidURL) && (picture !== null) ) {
+      //   vidURL.innerHTML = '';
+      //   vidURL.appendChild(picture);
+      //   const playButton = calciteButton({
+      //     'icon-start': 'play-f',
+      //     'aria-hidden': 'false',
+      //     'aria-label': 'play video',
+      //     class: 'play-button',
+      //     label: 'play video',
+      //     appearance: 'solid',
+      //     kind: 'inverse',
+      //     scale: 'l',
+      //     round: '',
+      //   });
+      //   vidURL.appendChild(playButton);
+      // }
 
       // setup play button click event
-      const playButton = col.querySelector('.play-button');
-      if (playButton) {
-        playButton.addEventListener('click', (event) => {
-          playButton.setAttribute('tabindex', '0');
-          lastfocusBtn = playButton;
-          event.preventDefault();
-          toggleLoader();
-          decorateModal();
-        });
-      }
+      // const playButton = col.querySelector('.play-button');
+      // if (playButton) {
+      //   playButton.addEventListener('click', (event) => {
+      //     playButton.setAttribute('tabindex', '0');
+      //     lastfocusBtn = playButton;
+      //     event.preventDefault();
+      //     toggleLoader();
+      //     decorateModal();
+      //   });
+      // }
     });
   });
 }

@@ -103,11 +103,11 @@
   aspect-ratio: 16 / 9;
 }
 
-body[aria-hidden="true"]{
+/* body[aria-hidden="true"]{
   overflow: hidden;
-}
+} */
 
-.co3-modal {
+/* .co3-modal {
   background: var(--esri-ui-opacity80-inverse);
   block-size: 100%;
   inline-size: 100vw;
@@ -146,7 +146,7 @@ body[aria-hidden="true"]{
   background: var(--calcite-ui-brand);
   color: var(--calcite-ui-text-1);
   cursor: pointer;
-}
+} */
 
 
 @media (width >= 1024px) {

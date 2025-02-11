@@ -61,3 +61,81 @@ window.dataLayer.push({
 });
 
 loadAnalytics(window.dataLayer);
+
+// decorate modal
+const toggleLoader = () => {
+  const loader = document.querySelector('.web-dev-loader');
+  if (loader) {
+    loader.classList.toggle('visible');
+  }
+};
+
+const removeModal = (modal, playButton) => {
+  const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
+  if (videoIframeWrapper) {
+    videoIframeWrapper.remove();
+  }
+
+  ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
+  modal.remove();
+  playButton.focus();
+};
+
+const handleEscKeyPress = (event) => {
+  if (event.key === 'Escape') {
+    removeModal(document.querySelector('.co3-modal'));
+  } else {
+    const co3ModalContainer = document.querySelector('.co3-modal-container');
+    if (co3ModalContainer) {
+      co3ModalContainer.focus();
+    }
+  }
+};
+
+// decorate modal
+function decorateModal(videoLink, playButton) {
+  const closeButton = Object.assign(document.createElement('calcite-icon'), {
+    className: 'co3-modal-container calcite-icon',
+    icon: 'x',
+    scale: 'm',
+    tabIndex: 0,
+    ariaLabel: 'close modal',
+    ariaHidden: 'false',
+  });
+
+  const iframe = document.createElement('iframe');
+  const modalContainer = document.createElement('div');
+  const modal = document.createElement('div');
+  iframe.classList.add('co3-modal', 'iframe');
+  iframe.setAttribute('src', videoLink);
+  modalContainer.classList.add('co3-modal-container');
+  modalContainer.setAttribute('tabindex', '0');
+  modalContainer.appendChild(iframe);
+  modalContainer.appendChild(closeButton);
+  modal.classList.add('co3-modal', 'calcite-mode-dark');
+  modal.appendChild(modalContainer);
+  document.body.setAttribute('tabindex', '-1');
+  document.body.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(modal);
+  document.addEventListener('keydown', handleEscKeyPress);
+  closeButton.addEventListener('click', () => removeModal(modal));
+  closeButton.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
+      removeModal(modal, playButton);
+    }
+  });
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      removeModal(modal, playButton);
+    }
+  });
+
+  iframe.addEventListener('load', () => {
+    toggleLoader();
+    modalContainer.focus();
+  });
+}
+
+export { 
+  decorateModal,
+};
