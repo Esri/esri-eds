@@ -190,6 +190,12 @@ function hero(main, document) {
 function videos(main, document) {
   main.querySelectorAll('a').forEach((a) => {
     if (a.href.startsWith('https://mediaspace.esri.com/')) {
+      const dataLazyImage = a.getAttribute('data-lazy-image');
+      if (dataLazyImage) {
+        const img = document.createElement('img');
+        img.setAttribute('src', dataLazyImage);
+        a.after(img);
+      }
       if (a.textContent.trim() === '') {
         a.textContent = a.href;
       }
