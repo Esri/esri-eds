@@ -6,6 +6,13 @@ import {
   getMetadata, buildBlock, loadBlock, decorateBlock,
 } from '../../scripts/aem.js';
 
+/**
+ * Get the form properties
+ *
+ * @param {Object} config - The configuration for the form
+ *
+ * @returns {Object} The form properties
+ */
 function getFormProps(config) {
   const baseFormProps = {
     aemFieldServiceBasePath: 'https://assets.esri.com/content/experience-fragments/esri-sites/en-us/site-settings/one-form-admin/master',
@@ -51,6 +58,43 @@ function getFormProps(config) {
   return formProps;
 }
 
+/**
+ * Initialize the one-form when the element is in view
+ *
+ * @param {string} divId - The ID of the form element
+ * @param {Object} formProps - The properties for the form
+ * @param {Promise} loadOneForm - The promise to load the one-form
+ *
+ * @returns {void} nothing
+ */
+function initOneFormWhenVisible(divId, formProps, loadOneForm) {
+  loadOneForm.then(() => {
+    if (document.getElementById(divId)) {
+      window.initOneForm(divId, formProps);
+    } else { // if the element is not yet in DOM, wait for mutations
+      const mutationObserver = new MutationObserver((mutationsList, observer) => {
+        mutationsList.forEach((mutation) => {
+          if (mutation.type === 'childList' && document.getElementById(divId)) {
+            window.initOneForm(divId, formProps);
+            observer.disconnect();
+          }
+        });
+      });
+      mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+  });
+}
+
+/**
+ * Decorate the form block
+ *
+ * @param {Element} block - The form block
+ *
+ * @returns {void} nothing
+ */
 export default async function decorate(block) {
   block.closest('.section').classList.add('calcite-mode-dark', 'dark');
   block.classList.add('calcite-mode-dark', 'dark');
@@ -71,10 +115,12 @@ export default async function decorate(block) {
     loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
     loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
   ]);
+
   const formDiv = div({
     id: divId,
     class: 'one-form',
   });
+
   if (isModal) {
     delete config.cardcontent;
     // we need to find it "again" because the html is not preserved in readBlockConfig
@@ -83,7 +129,9 @@ export default async function decorate(block) {
       .lastElementChild;
 
     const cardLink = a('Open form');
+    // Fallback: if the user clicks without the element being in view, load the form immediately
     cardLink.addEventListener('click', () => {
+      initOneFormWhenVisible(divId, formProps, loadOneForm);
       window.openOneFormModal();
     });
 
@@ -103,22 +151,14 @@ export default async function decorate(block) {
     block.replaceChildren(formDiv);
   }
 
-  loadOneForm.then(() => {
-    if (document.getElementById(divId)) {
-      window.initOneForm(divId, formProps);
-    } else { // it is being loaded on a fragment
-      const observer = new MutationObserver((mutationsList) => {
-        mutationsList.forEach((mutation) => {
-          if (mutation.type === 'childList' && document.getElementById(divId)) {
-            window.initOneForm(divId, formProps);
-            observer.disconnect();
-          }
-        });
-      });
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
-    }
-  });
+  // Use IntersectionObserver to delay loading the one-form script until the form is in view
+  const observer = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        initOneFormWhenVisible(divId, formProps, loadOneForm);
+        observerInstance.disconnect();
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(formDiv);
 }
