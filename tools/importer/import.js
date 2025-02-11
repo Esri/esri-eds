@@ -612,7 +612,7 @@ function processSection(section) {
   const sectionStyles = [];
   if (section.children.length === 1) {
     const child = section.firstElementChild;
-    if (child.classList.contains('text-center')) {
+    if (child.classList.contains('text-center') || section.classList.contains('text-center')) {
       sectionStyles.push('centered');
     }
   }
