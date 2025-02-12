@@ -1,5 +1,5 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
-import { decorateModal } from '../../scripts/delayed.js';
+import decorateModal from '../../scripts/delayed.js';
 
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];

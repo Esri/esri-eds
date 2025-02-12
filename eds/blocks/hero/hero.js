@@ -1,6 +1,6 @@
 import { createAutoplayedVideo } from '../../scripts/scripts.js';
 import { calciteButton } from '../../scripts/dom-helpers.js';
-import { decorateModal } from '../../scripts/delayed.js';
+import decorateModal from '../../scripts/delayed.js';
 
 export default function decorate(block) {
   const newChildren = [...block.children].map((entry) => {
