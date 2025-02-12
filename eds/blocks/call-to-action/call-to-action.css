@@ -50,6 +50,10 @@ p.button-container .button {
   /* to be addressed on a follow-up PR */
   display: flex;
 
+  h2 {
+    font-size: var(--font-0);
+  }
+
   /* if it has three or more children, */
   & > div:has(> div:nth-child(3)) {
     display: block;
@@ -108,7 +112,67 @@ p.button-container .button {
   .cards ul {
     inline-size: 50vw;
   }
+
+  ul:has(li:nth-child(3)) {
+    inline-size: 1440px;
+    max-inline-size: 80%;
+  }
+
+  .cards.questions {
+    padding: 0;
+
+    & > ul > li {
+      --cards-per-row: 3;
+    }
+
+    .card-body-content p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .cards-card-body:is(:hover, :focus-within) a {
+      border-color: transparent;
+    }
+
+    img {
+      filter: var(--image-icon-filter);
+    }
+  }
 }
+
+@media (width <= 1440px) {
+  .call-to-action.fragment .cards.questions {
+    inline-size: 100vw;
+  }
+
+  ul:has(li:nth-child(3)) {
+    inline-size: inherit;
+    min-inline-size: 80%;
+  }
+}
+
+@media (width <= 860px) {
+  .call-to-action.fragment ul:has(li:nth-child(3)) {
+    max-inline-size: 100%;
+  }
+
+  .call-to-action.fragment .cards.questions > ul {
+    inline-size: 100vw;
+  }
+
+  .call-to-action.fragment .cards.questions > ul:has(li:last-child) li {
+    --cards-per-row: 3;
+  }
+
+  .call-to-action.fragment .cards.questions > ul:has(li:nth-child(2):last-child) li {
+    --cards-per-row: 2;
+  }
+
+  .call-to-action.fragment .cards.questions > ul:has(li:nth-child(1):last-child) li {
+    --cards-per-row: 1;
+  }
+}
+
 
 @media (width <= 768px) {
   .call-to-action > div {
