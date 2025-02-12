@@ -83,7 +83,7 @@ export default function decorate(block) {
       if (playButton) {
         const videoLink = block.querySelector('.video-link');
         playButton.addEventListener('click', (event) => {
-          evt.preventDefault();
+          event.preventDefault();
           playButton.setAttribute('tabindex', '0');
           decorateModal(videoLink.href, playButton);
         });
