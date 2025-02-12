@@ -1,82 +1,5 @@
 import { calciteButton, calciteLink } from '../../scripts/dom-helpers.js';
-
-let lastfocusBtn;
-const toggleLoader = () => {
-  const loader = document.querySelector('.web-dev-loader');
-  if (loader) {
-    loader.classList.toggle('visible');
-  }
-};
-
-const removeModal = (modal) => {
-  const videoIframeWrapper = document.querySelector('.video-iframe-wrapper');
-  if (videoIframeWrapper) {
-    videoIframeWrapper.remove();
-  }
-
-  ['style', 'tabindex', 'aria-hidden'].forEach((attr) => document.body.removeAttribute(attr));
-  modal.remove();
-  lastfocusBtn.focus();
-};
-
-const handleEscKeyPress = (event) => {
-  if (event.key === 'Escape') {
-    removeModal(document.querySelector('.co3-modal'));
-  } else {
-    const co3ModalContainer = document.querySelector('.co3-modal-container');
-    if (co3ModalContainer) {
-      co3ModalContainer.focus();
-    }
-  }
-};
-
-// decorate modal
-function decorateModal() {
-  const iframe = document.createElement('iframe');
-  iframe.classList.add('co3-modal', 'iframe');
-  const videoLink = document.querySelector('.video-link');
-  if (videoLink) {
-    iframe.setAttribute('src', videoLink.getAttribute('href'));
-  }
-  const modal = document.createElement('div');
-  modal.classList.add('co3-modal', 'calcite-mode-dark');
-  const closeButton = document.createElement('calcite-icon');
-  closeButton.classList.add('co3-modal-container', 'calcite-icon');
-  closeButton.setAttribute('icon', 'x');
-  closeButton.setAttribute('scale', 'm');
-  closeButton.setAttribute('aria-label', 'close modal');
-  closeButton.setAttribute('aria-hidden', 'false');
-  closeButton.setAttribute('tabindex', '0');
-  closeButton.addEventListener('click', () => {
-    removeModal(modal);
-  });
-  closeButton.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
-      removeModal(modal);
-    }
-  });
-
-  const modalContainer = document.createElement('div');
-  modalContainer.classList.add('co3-modal-container');
-  modalContainer.setAttribute('tabindex', '0');
-  modalContainer.appendChild(iframe);
-  modalContainer.appendChild(closeButton);
-  modal.appendChild(modalContainer);
-  document.body.setAttribute('tabindex', '-1');
-  document.body.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(modal);
-  document.addEventListener('keydown', handleEscKeyPress);
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      removeModal(modal);
-    }
-  });
-
-  iframe.addEventListener('load', () => {
-    toggleLoader();
-    modalContainer.focus();
-  });
-}
+import { decorateModal } from '../../scripts/delayed.js';
 
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
@@ -136,37 +59,35 @@ export default function decorate(block) {
       }
 
       // decorate play button
-      // const vidURL = col.querySelector('a[href*="mediaspace"]', 'a[href*="youtube"]', 'a[href*="video"]');
-      // const picture = col.querySelector('picture');
-      // console.log(picture);
-      // if ( (vidURL) && (picture !== null) ) {
-      //   vidURL.innerHTML = '';
-      //   vidURL.appendChild(picture);
-      //   const playButton = calciteButton({
-      //     'icon-start': 'play-f',
-      //     'aria-hidden': 'false',
-      //     'aria-label': 'play video',
-      //     class: 'play-button',
-      //     label: 'play video',
-      //     appearance: 'solid',
-      //     kind: 'inverse',
-      //     scale: 'l',
-      //     round: '',
-      //   });
-      //   vidURL.appendChild(playButton);
-      // }
+      const vidURL = col.querySelector('a[href*="mediaspace"]', 'a[href*="youtube"]', 'a[href*="video"]');
+      const picture = col.querySelector('picture');
+      if (vidURL) {
+        vidURL.innerHTML = '';
+        vidURL.appendChild(picture);
+        const playButton = calciteButton({
+          'icon-start': 'play-f',
+          'aria-hidden': 'false',
+          'aria-label': 'play video',
+          class: 'play-button',
+          label: 'play video',
+          appearance: 'solid',
+          kind: 'inverse',
+          scale: 'l',
+          round: '',
+        });
+        vidURL.appendChild(playButton);
+      }
 
       // setup play button click event
-      // const playButton = col.querySelector('.play-button');
-      // if (playButton) {
-      //   playButton.addEventListener('click', (event) => {
-      //     playButton.setAttribute('tabindex', '0');
-      //     lastfocusBtn = playButton;
-      //     event.preventDefault();
-      //     toggleLoader();
-      //     decorateModal();
-      //   });
-      // }
+      const playButton = col.querySelector('.play-button');
+      if (playButton) {
+        const videoLink = block.querySelector('.video-link');
+        playButton.addEventListener('click', (event) => {
+          evt.preventDefault();
+          playButton.setAttribute('tabindex', '0');
+          decorateModal(videoLink.href, playButton);
+        });
+      }
     });
   });
 }

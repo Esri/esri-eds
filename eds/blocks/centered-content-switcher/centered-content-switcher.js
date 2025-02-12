@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { decorateModal } from '../../scripts/delayed.js';
+import { decorateModal } from '../../scripts/delayed.js'; 
 import {
   calciteButton,
   ul,

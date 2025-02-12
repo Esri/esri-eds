@@ -81,9 +81,9 @@ const removeModal = (modal, playButton) => {
   playButton.focus();
 };
 
-const handleEscKeyPress = (event) => {
+const handleEscKeyPress = (event, playButton) => {
   if (event.key === 'Escape') {
-    removeModal(document.querySelector('.co3-modal'));
+    removeModal(document.querySelector('.co3-modal'), playButton);
   } else {
     const co3ModalContainer = document.querySelector('.co3-modal-container');
     if (co3ModalContainer) {
@@ -117,7 +117,7 @@ function decorateModal(videoLink, playButton) {
   document.body.setAttribute('tabindex', '-1');
   document.body.setAttribute('aria-hidden', 'true');
   document.body.appendChild(modal);
-  document.addEventListener('keydown', handleEscKeyPress);
+  document.addEventListener('keydown', (event) => handleEscKeyPress(event, playButton));
   closeButton.addEventListener('click', () => removeModal(modal));
   closeButton.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
