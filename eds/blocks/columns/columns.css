@@ -181,6 +181,64 @@
   .co3-modal-container {
     inline-size: 66%;
   }
+
+  .columns.media-split.case-study {
+    display: flex;
+    inline-size: 1440px;
+    margin: 0 auto;
+    max-inline-size: 96vw;
+    padding: 0;
+  }
+
+  .columns.media-split.case-study > div:first-child {
+    inline-size: 58%;
+  }
+
+  .columns.media-split.case-study > div:last-child {
+    inline-size: 40%;
+    margin-inline-start: 1%;
+  }
+
+  .columns.media-split.case-study > div > div p {
+    margin: 0;
+    max-inline-size: initial;
+  }
+
+  .columns.media-split.case-study picture img {
+    inline-size: 100%;
+    margin: 0;
+  }
+
+  .columns.media-split.case-study > div > div:not(.columns-img-col) :where(h2, p) {
+    padding-inline: var(--space-6);
+  }
+
+  .columns.media-split.case-study > div > div p:first-child {
+    font-size: var(--font-minus-1);
+  }
+
+}
+
+@media (width >= 600px) {
+  .columns.media-split.case-study a img{
+    min-block-size: 480px;
+  }
+}
+
+@media (width < 900px) {
+  .columns.media-split.case-study > div:last-child > div{
+    margin-inline-start: 5%;
+    padding: var(--space-8) 0 0 ;
+
+    :where(h2, p) {
+      margin-inline-start: 0;
+      text-align: start;
+    }
+  }
+}
+
+.columns.media-split.case-study a img{
+  padding-inline: 0;
 }
 
 .columns.media-split {
