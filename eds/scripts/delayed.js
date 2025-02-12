@@ -93,7 +93,7 @@ const handleEscKeyPress = (event, playButton) => {
 };
 
 // decorate modal
-export default function decorateModal(videoLink, playButton) {
+export function decorateModal(videoLink, playButton) {
   const closeButton = Object.assign(document.createElement('calcite-icon'), {
     className: 'co3-modal-container calcite-icon',
     icon: 'x',
