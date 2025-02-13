@@ -4,6 +4,13 @@
   background-size: cover;
   padding: 0;
   text-align: center;
+  
+  > div >  div {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .media-wrapper {
     inline-size: 92%;
@@ -29,7 +36,6 @@
 
   p {
     inline-size: 90%;
-    margin-inline: auto;
   }
 
   .button-container {
