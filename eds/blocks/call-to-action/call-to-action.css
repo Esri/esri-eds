@@ -2,6 +2,27 @@
   --sepia-icon-color: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
 }
 
+.call-to-action-container > .default-content-wrapper {
+  padding: var(--space-24) 0;
+  text-align: center;
+}
+
+.section.call-to-action-container > .default-content-wrapper * {
+  margin: 0.5rem auto;
+}
+
+.section.call-to-action-container > .default-content-wrapper > .button-container a.button {
+  font-size: var(--calcite-font-size-0);
+  inline-size: auto;
+  padding-block: 11px;
+  padding-inline: 15px;
+}
+
+.section.call-to-action-container > .default-content-wrapper > p {
+  color: var(--calcite-ui-text-2);
+  font-size: var(--font-2);
+}
+
 .call-to-action-wrapper {
   background: var(--calcite-ui-foreground-1);
   color: var(--calcite-ui-text-1);
