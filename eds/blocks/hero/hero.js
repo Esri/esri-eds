@@ -3,14 +3,21 @@ import { calciteButton } from '../../scripts/dom-helpers.js';
 import decorateModal from '../../scripts/delayed.js';
 
 export default function decorate(block) {
-  const newChildren = [...block.children].map((entry) => {
-    const entryKey = entry.firstElementChild.textContent.toLowerCase();
+  const newChildren = [...block.children]
+    // filter out empty children
+    .filter((entry) => {
+      const entryContent = entry.lastElementChild;
+      return entryContent.innerHTML !== '' && entryContent.innerHTML !== 'null';
+    })
+    // then map the children to add a class
+    .map((entry) => {
+      const entryKey = entry.firstElementChild.textContent.toLowerCase();
 
-    const entryContent = entry.lastElementChild;
-    entryContent.classList.add(entryKey);
+      const entryContent = entry.lastElementChild;
+      entryContent.classList.add(entryKey);
 
-    return entryContent;
-  });
+      return entryContent;
+    });
   block.replaceChildren(...newChildren);
 
   const imgCollection = block.querySelectorAll('picture > img');
@@ -25,6 +32,12 @@ export default function decorate(block) {
     imgCollection.forEach((img) => {
       img.setAttribute('loading', 'lazy');
     });
+  }
+
+  // look for div.backgroundimage and remove it no images
+  const backgroundImage = block.querySelector('div.backgroundimage');
+  if (backgroundImage && backgroundImage.innerHTML === '<p>null</p>') {
+    backgroundImage.remove();
   }
 
   const blockTitle = block.querySelector('h1');
@@ -57,7 +70,7 @@ export default function decorate(block) {
   const videoLink = block.querySelector('.video-link');
   if (videoLink) {
     const btnContainer = videoLink.closest('.button-container');
-    if ((videoLink) && (btnContainer)) {
+    if (btnContainer) {
       btnContainer.replaceWith(calciteButton({
         'icon-end': 'play-f',
         appearance: 'solid',
