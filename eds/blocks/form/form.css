@@ -7,6 +7,7 @@
     inline-size: 1440px;
     margin: auto;
     max-inline-size: 96vw;
+    padding-block-start: 0;
 
     & div:first-child {
       h2 {
@@ -46,5 +47,25 @@
   .web-dev-loader {
     /* stylelint-disable-next-line declaration-no-important */
     position: absolute !important;
+  }
+}
+
+.section.form-container > .default-content-wrapper {
+  inline-size: 1440px;
+  margin: auto;
+  max-inline-size: 632px;
+  text-align: center;
+
+  & > :where(h2, p) {
+    inline-size: 100%;
+    margin: 0 auto;
+  }
+
+  & > h2 {
+    margin-block-end: var(--space-6);
+  }
+
+  & > p {
+    margin-block-end: var(--space-4);
   }
 }
