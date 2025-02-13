@@ -20,6 +20,10 @@
   padding-block: var(--space-16);
 }
 
+.hero .content:only-child {
+  text-align: center;
+}
+
 .hero h1 {
   font-size: var(--font-6);
   font-weight: var(--calcite-font-weight-bold);
