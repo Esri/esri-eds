@@ -1,4 +1,5 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
+import decorateModal from '../../scripts/delayed.js';
 
 /**
  * Decorates a Calcite button with the appropriate icon and kind based on its class.
@@ -119,5 +120,15 @@ export default function decorate(block) {
 
   if (videoElement && mediaWrapper) {
     mediaWrapper.appendChild(videoElement);
+  }
+
+  // Find mediaspace link with ?co3=true appended to url
+  const mediaSpaceLink = block.querySelector('a[href*="?co3=true"]');
+  if (mediaSpaceLink) {
+    mediaSpaceLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      mediaSpaceLink.setAttribute('tabindex', '0');
+      decorateModal(mediaSpaceLink.href, mediaSpaceLink);
+    });
   }
 }
