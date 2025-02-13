@@ -37,6 +37,7 @@
 
   > div {
     display: flex;
+    flex-direction: column;
     inline-size: 100%;
 
     > div {
