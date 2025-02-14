@@ -610,8 +610,8 @@ body[aria-hidden="true"]{
 
 .section > .default-content-wrapper.center > :is(h2, p) {
   inline-size: 100%;
-  max-inline-size: 850px;
   margin-inline: auto;
+  max-inline-size: 850px;
   text-align: center;
 }
 
