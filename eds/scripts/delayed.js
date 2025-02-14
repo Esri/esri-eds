@@ -135,3 +135,24 @@ export default function decorateModal(videoLink, playButton) {
     modalContainer.focus();
   });
 }
+
+
+// decorate embed iframe
+const videoLink = document.querySelector('a.button.video-link[title="video player"]');
+if (videoLink) {
+  const parentNode = videoLink.parentNode;
+  if (parentNode) {
+    const videoUrl = videoLink.getAttribute('href');
+    const iframe = document.createElement('iframe');
+    const iframeContainer = document.createElement('div');
+    iframe.src = videoUrl;
+    iframe.allowFullscreen = true;
+    iframeContainer.classList.add('iframe-container');
+    iframeContainer.appendChild(iframe);
+    const buttonContainer = parentNode.closest('.button-container');
+    buttonContainer.classList.add('hidden');
+    const defaultContentWrapper = parentNode.closest('.default-content-wrapper');
+    defaultContentWrapper.appendChild(iframeContainer);
+    iframeContainer.parentNode.classList.add('center');
+  }
+}

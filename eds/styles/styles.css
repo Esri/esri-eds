@@ -601,3 +601,30 @@ body[aria-hidden="true"]{
   color: var(--calcite-ui-text-1);
   cursor: pointer;
 }
+
+/* Embed Iframe */
+.section > .default-content-wrapper .iframe-container {
+  inline-size: 100%;
+  max-inline-size: 850px;
+}
+
+.section > .default-content-wrapper.center > :is(h2, p) {
+  inline-size: 100%;
+  max-inline-size: 850px;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.iframe-container {
+  margin: var(--space-8) auto;
+}
+
+.default-content-wrapper .iframe-container iframe {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  max-inline-size: none;
+}
+
+.button-container.hidden {
+  display: none;
+}
