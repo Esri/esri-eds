@@ -253,13 +253,15 @@ main {
     font-style: normal;
     font-weight: var(--calcite-font-weight-normal);
     line-height: 1rem;
-    margin-block-start: var(--space-8);
+
+    /* margin-block-start: var(--space-8); */
     margin-inline-end: var(--space-2);
     overflow: hidden;
     padding: 5px 30px;
     text-align: center;
     text-decoration: none;
     text-overflow: ellipsis;
+    transition: color var(--calcite-animation-timing) ease-in-out, background-color var(--calcite-animation-timing) ease-in-out, box-shadow var(--calcite-animation-timing) ease-in-out, outline-color var(--calcite-animation-timing) ease-in-out;
     white-space: nowrap;
   }
 
@@ -273,6 +275,7 @@ main {
   button:hover,
   button:focus {
     background-color: var(--calcite-ui-brand-hover);
+    box-shadow: inset 0 0 0 1px currentcolor;
     cursor: pointer;
   }
 
@@ -287,6 +290,7 @@ main {
     background-color: unset;
     border: 2px solid currentcolor;
     color: var(--calcite-ui-text-1);
+    inline-size: fit-content;
   }
 
   img {
@@ -333,7 +337,8 @@ main {
 
   .section > .default-content-wrapper * {
     inline-size: 48vw;
-    margin-block: 3rem;
+
+    /* margin-block: 3rem; */
     max-inline-size: 720px;
 
     @media screen and (width <= 859px) {
