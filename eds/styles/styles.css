@@ -596,3 +596,26 @@ body[aria-hidden="true"]{
   color: var(--calcite-ui-text-1);
   cursor: pointer;
 }
+
+/* Embed Iframe */
+.iframe-container {
+  position: relative;
+  max-inline-size: 850px;
+  margin: 20px auto; 
+  padding-block-end: 45%; 
+}
+
+.iframe-container iframe {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+  
+}
+
+.button-container.hidden {
+  display: none;
+}
