@@ -131,14 +131,10 @@ export default async function decorate(block) {
     const cardLink = a('Open form');
     // Fallback: if the user clicks without the element being in view, load the form immediately
     cardLink.addEventListener('click', async () => {
-      await initOneFormWhenVisible(divId, formProps, loadOneForm);
-      loadOneForm.then(() => {
+      initOneFormWhenVisible(divId, formProps, loadOneForm);
         if (window.openOneFormModal) {
           window.openOneFormModal();
         }
-      }).catch((error) => {
-        console.error(error);
-      });
     });
 
     cardContent.prepend(cardLink);
