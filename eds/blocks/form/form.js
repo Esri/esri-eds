@@ -133,13 +133,11 @@ export default async function decorate(block) {
     cardLink.addEventListener('click', async () => {
       await initOneFormWhenVisible(divId, formProps, loadOneForm);
       loadOneForm.then(() => {
-        if (typeof window.openOneFormModal === 'function') {
+        if (window.openOneFormModal) {
           window.openOneFormModal();
-        } else {
-          console.error('openOneFormModal is not defined');
         }
       }).catch((error) => {
-        console.error('Error loading one-form:', error);
+        console.error(error);
       });
     });
 
