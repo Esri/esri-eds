@@ -665,16 +665,10 @@ function processSection(section) {
   let backgroundImage;
   const backgroundImgDiv = section.querySelector('.has-background--img');
   if (backgroundImgDiv) {
-    console.log('WebImporter.DomUtils', WebImporter.DOMUtils);
-    // This is the style, grab the bg img url style="--bg-gradient-end: var(--bg-color); --bg-img: url(/content/dam/esrisites/en-us/arcgis/products/arcgis-3d-mapping/3d-data-management/3d-data-management-bg.jpg); --posX: center; --posY: center;  ;"
     const bgImageSrc = backgroundImgDiv.style.getPropertyValue('--bg-img').substring(4, backgroundImgDiv.style.getPropertyValue('--bg-img').length - 1);
     backgroundImage = document.createElement('img');
     backgroundImage.setAttribute('src', bgImageSrc);
-
-    // backgroundImage = WebImporter.DOMUtils.getImgFromBackground(backgroundImgDiv, document);
-    console.log('div', backgroundImage);
   }
-  console.log('backgroundImage', backgroundImage);
 
   if (sectionStyles.length > 0) {
     const sectionCells = { Style: sectionStyles.join(', ') };
