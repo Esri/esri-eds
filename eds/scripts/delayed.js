@@ -136,11 +136,10 @@ export default function decorateModal(videoLink, playButton) {
   });
 }
 
-
 // decorate embed iframe
 const videoLink = document.querySelector('a.button.video-link[title="video player"]');
 if (videoLink) {
-  const parentNode = videoLink.parentNode;
+  const { parentNode } = videoLink;
   if (parentNode) {
     const videoUrl = videoLink.getAttribute('href');
     const iframe = document.createElement('iframe');
