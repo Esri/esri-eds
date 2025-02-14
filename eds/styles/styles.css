@@ -611,8 +611,8 @@ body[aria-hidden="true"]{
 .section > .default-content-wrapper.center > :is(h2, p) {
   inline-size: 100%;
   max-inline-size: 850px;
-  text-align: center;
   margin-inline: auto;
+  text-align: center;
 }
 
 .iframe-container {
@@ -620,8 +620,8 @@ body[aria-hidden="true"]{
 }
 
 .default-content-wrapper .iframe-container iframe {
-  inline-size: 100%;
   aspect-ratio: 16 / 9;
+  inline-size: 100%;
   max-inline-size: none;
 }
 
