@@ -38,6 +38,10 @@
         filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(375%) hue-rotate(121deg) brightness(103%) contrast(86%);
       }
     }
+
+    .card-body-content {
+      cursor: pointer;
+    }
   }
 
   & > div {
