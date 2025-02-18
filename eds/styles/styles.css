@@ -253,8 +253,6 @@ main {
     font-style: normal;
     font-weight: var(--calcite-font-weight-normal);
     line-height: 1rem;
-
-    /* margin-block-start: var(--space-8); */
     margin-inline-end: var(--space-2);
     overflow: hidden;
     padding: 5px 30px;
@@ -320,10 +318,6 @@ main {
     filter: none;
   }
   
-  /* arrow right icon ->
-    This is the default icon we add for inside redirects
-  */
-
   .default-arrow-right {
     margin-inline-start: 4px;
   }
@@ -337,8 +331,6 @@ main {
 
   .section > .default-content-wrapper * {
     inline-size: 48vw;
-
-    /* margin-block: 3rem; */
     max-inline-size: 720px;
 
     @media screen and (width <= 859px) {
