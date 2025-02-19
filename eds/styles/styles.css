@@ -593,3 +593,22 @@ body[aria-hidden="true"]{
   color: var(--calcite-ui-text-1);
   cursor: pointer;
 }
+
+/* Embed Iframe */
+.section > .default-content-wrapper :is(h2, p) {
+  inline-size: 100%;
+}
+
+.iframe-container {
+  margin: var(--space-8) auto;
+}
+
+.default-content-wrapper .iframe-container iframe {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  max-inline-size: none;
+}
+
+.button-container[aria-hidden="true"] {
+  display: none;
+}
