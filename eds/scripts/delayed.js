@@ -144,14 +144,18 @@ if (videoLink) {
     const videoUrl = videoLink.getAttribute('href');
     const iframe = document.createElement('iframe');
     const iframeContainer = document.createElement('div');
+    const section = parentNode.closest('.section');
     iframe.src = videoUrl;
     iframe.allowFullscreen = true;
     iframeContainer.classList.add('iframe-container');
+    iframeContainer.setAttribute('style', 'max-inline-size: 850px; inline-size: 100%');
     iframeContainer.appendChild(iframe);
     const buttonContainer = parentNode.closest('.button-container');
-    buttonContainer.classList.add('hidden');
+    buttonContainer.setAttribute('aria-hidden', 'true');
     const defaultContentWrapper = parentNode.closest('.default-content-wrapper');
     defaultContentWrapper.appendChild(iframeContainer);
-    iframeContainer.parentNode.classList.add('center');
+    if (section) {
+      section.classList.add('center');
+    }
   }
 }

@@ -603,16 +603,8 @@ body[aria-hidden="true"]{
 }
 
 /* Embed Iframe */
-.section > .default-content-wrapper .iframe-container {
+.section > .default-content-wrapper :is(h2, p) {
   inline-size: 100%;
-  max-inline-size: 850px;
-}
-
-.section > .default-content-wrapper.center > :is(h2, p) {
-  inline-size: 100%;
-  margin-inline: auto;
-  max-inline-size: 850px;
-  text-align: center;
 }
 
 .iframe-container {
@@ -620,11 +612,11 @@ body[aria-hidden="true"]{
 }
 
 .default-content-wrapper .iframe-container iframe {
-  aspect-ratio: 16 / 9;
   inline-size: 100%;
+  aspect-ratio: 16 / 9;
   max-inline-size: none;
 }
 
-.button-container.hidden {
+.button-container[aria-hidden="true"] {
   display: none;
 }
