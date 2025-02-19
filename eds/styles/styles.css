@@ -435,6 +435,47 @@ main {
   }
 }
 
+/* Font size classes */
+.font-minus-3 {
+  font-size: var(--font-minus-3);
+}
+
+.font-minus-2 {
+  font-size: var(--font-minus-2);
+}
+
+.font-minus-1 {
+  font-size: var(--font-minus-1);
+}
+
+.font-0 {
+  font-size: var(--font-0);
+}
+
+.font-1 {
+  font-size: var(--font-1);
+}
+
+.font-2 {
+  font-size: var(--font-2);
+}
+
+.font-3 {
+  font-size: var(--font-3);
+}
+
+.font-4 {
+  font-size: var(--font-4);
+}
+
+.font-5 {
+  font-size: var(--font-5);
+}
+
+.font-6 {
+  font-size: var(--font-6)
+}
+
 /* Grid leader trailer spacing */
 .leader-0 {
   margin-block-start: 0;
@@ -604,8 +645,8 @@ body[aria-hidden="true"]{
 }
 
 .default-content-wrapper .iframe-container iframe {
-  inline-size: 100%;
   aspect-ratio: 16 / 9;
+  inline-size: 100%;
   max-inline-size: none;
 }
 
