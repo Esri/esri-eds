@@ -30,6 +30,43 @@
   padding: var(--space-24) 0 var(--space-32);
 }
 
+.section.form-container.call-to-action-container > .default-content-wrapper {
+  padding-block-end: 0;
+}
+
+.section.form-container.call-to-action-container > .form-wrapper .form.card-modal.button {
+  .cards.simple {
+    padding: 0;
+  }
+
+  ul li {
+    justify-content: center;
+  }
+
+  .cards-card-body {
+    background-color: var(--calcite-ui-brand);
+    color: var(--calcite-ui-text-inverse);
+    flex: none;
+  }
+
+  .card-body-content {
+    padding: 0;
+  }
+
+  p{
+    margin: 0
+  }
+
+  h3 {
+    color: var(--calcite-ui-text-inverse);
+    font-size: var(--calcite-font-size-0);
+    font-weight: normal;
+    line-height: 1.25rem;
+    margin: 0;
+    padding: 15px;
+  }
+}
+
 .call-to-action {
   display: flex;
   inline-size: 99%;

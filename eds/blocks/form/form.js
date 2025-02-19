@@ -116,6 +116,8 @@ export default async function decorate(block) {
     loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
   ]);
 
+  initOneFormWhenVisible(divId, formProps, loadOneForm);
+
   const formDiv = div({
     id: divId,
     class: 'one-form',
@@ -130,9 +132,11 @@ export default async function decorate(block) {
 
     const cardLink = a('Open form');
     // Fallback: if the user clicks without the element being in view, load the form immediately
-    cardLink.addEventListener('click', () => {
+    cardLink.addEventListener('click', async () => {
       initOneFormWhenVisible(divId, formProps, loadOneForm);
-      window.openOneFormModal();
+      if (window.openOneFormModal) {
+        window.openOneFormModal();
+      }
     });
 
     cardContent.prepend(cardLink);
