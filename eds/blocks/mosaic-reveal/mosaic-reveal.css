@@ -6,7 +6,6 @@
 }
 
 .mosaic-reveal-container h2 {
-  /* font-size: calc(100% + 6vw); */
   font-style: normal;
   font-weight: var(--calcite-font-weight-medium);
   line-height: 1.1;
@@ -167,7 +166,6 @@
 
 @media (width >= 1024px) {
   .mosaic-reveal-container h2 {
-    /* font-size: 4.75rem; */
     line-height: 1.11;
   }
 }
