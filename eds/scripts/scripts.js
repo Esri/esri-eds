@@ -266,6 +266,7 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
 
 function decorateModes(main) {
   main.querySelectorAll('.block').forEach(decorateMode);
+  main.querySelectorAll('.section').forEach(addBackgroundImageToSection);
 }
 
 /**
