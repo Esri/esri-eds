@@ -339,6 +339,12 @@ main {
     padding-inline: var(--space-6);
   }
 
+  .section[data-background-image] {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .section > .default-content-wrapper * {
     inline-size: 48vw;
     max-inline-size: 720px;
