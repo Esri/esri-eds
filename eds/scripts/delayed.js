@@ -151,7 +151,7 @@ if (videoLink) {
     iframeContainer.setAttribute('style', 'max-inline-size: 850px; inline-size: 100%');
     iframeContainer.appendChild(iframe);
     const buttonContainer = parentNode.closest('.button-container');
-    buttonContainer.setAttribute('aria-hidden', 'true');
+    buttonContainer.setAttribute('hidden','');
     const defaultContentWrapper = parentNode.closest('.default-content-wrapper');
     defaultContentWrapper.appendChild(iframeContainer);
     if (section) {

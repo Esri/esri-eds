@@ -668,6 +668,6 @@ body[aria-hidden="true"]{
   max-inline-size: none;
 }
 
-.button-container[aria-hidden="true"] {
+/* .button-container[aria-hidden="true"] {
   display: none;
-}
+} */
