@@ -24,7 +24,7 @@
     --gradient-angle-m: to top;
     --gradient-transition: 60%;
 
-    background: linear-gradient(to top, var(--esri-ui-opacity80-inverse), transparent 60%);
+    background: linear-gradient(to top, var(--esri-ui-opacity80), transparent 80%);
     block-size: 100%;
     content: "";
     inline-size: 100%;
