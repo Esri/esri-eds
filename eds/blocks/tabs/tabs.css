@@ -63,7 +63,6 @@
 .tabs .tab-component {
   display: flex;
   flex-direction: column;
-  inline-size: 100vw;
   justify-content: flex-end;
 }
 
@@ -145,8 +144,6 @@
 
 .tabs .tab-content > .grid-container {
   display: block;
-  inline-size: 100vw;
-  padding: 0;
   position: relative;
 }
 
