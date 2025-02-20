@@ -30,11 +30,31 @@
   padding: var(--space-24) 0 var(--space-32);
 }
 
-.section.form-container.call-to-action-container > .default-content-wrapper {
+.section.call-to-action-container .default-content-wrapper {
+  inline-size: 1440px;
+  margin: auto;
+  max-inline-size: 632px;
   padding-block-end: 0;
+  text-align: center;
+
+  & > :where(h2, p) {
+    inline-size: 100%;
+    margin: 0 auto;
+  }
+
+  & > h2 {
+    margin-block-end: var(--space-2);
+  }
+
+  & > h2 + p {
+    color: var(--calcite-ui-text-2);
+    font-size: var(--font-2);
+  }
 }
 
-.section.form-container.call-to-action-container > .form-wrapper .form.card-modal.button {
+.section.call-to-action-container .form-wrapper .form.card-modal.button {
+  margin-block-start: var(--space-4);
+
   .cards.simple {
     padding: 0;
   }
@@ -50,6 +70,7 @@
   }
 
   .card-body-content {
+    cursor: pointer;
     padding: 0;
   }
 
@@ -110,7 +131,8 @@ p.button-container .button {
   display: flex;
 
   h2 {
-    font-size: var(--font-0);
+    font-size: var(--font-4);
+    font-weight: var(--calcite-font-weight-bold);
   }
 
   /* if it has three or more children, */
@@ -197,7 +219,6 @@ p.button-container .button {
       filter: var(--image-icon-filter);
     }
   }
-}
 
 @media (width <= 1440px) {
   .call-to-action.fragment .cards.questions {
@@ -250,4 +271,5 @@ p.button-container .button {
   .call-to-action > div > div:last-child {
     border-block-end: none;
   }
+}
 }
