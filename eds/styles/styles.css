@@ -367,6 +367,17 @@ main {
     color: var(--calcite-ui-text-1);
   }
 
+  .section > .default-content-wrapper .button-container {
+    margin-block-start: var(--space-6);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .section > .default-content-wrapper .button-container a {
+    display: inline;
+    font-size: var(--font-0);
+    padding: var(--space-3) var(--space-4);
+  }
+
   .video-iframe-box {
     align-items: center;
     background-color: var(--esri-ui-opacity80);
