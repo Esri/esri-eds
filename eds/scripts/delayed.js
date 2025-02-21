@@ -115,7 +115,7 @@ export default function decorateModal(videoLink, playButton) {
   modal.classList.add('co3-modal', 'calcite-mode-dark');
   modal.appendChild(modalContainer);
   document.body.setAttribute('tabindex', '-1');
-  document.body.setAttribute('aria-hidden', 'true');
+  document.body.setAttribute('hidden', '');
   document.body.appendChild(modal);
   document.addEventListener('keydown', (event) => handleEscKeyPress(event, playButton));
   closeButton.addEventListener('click', () => removeModal(modal));

@@ -4,6 +4,8 @@
   block-size: 100%;
   box-sizing: border-box;
   padding: 0;
+  position: relative;
+  overflow: hidden;
 
   .mobile-nav {
     align-items: center;
@@ -167,10 +169,7 @@
     }
   }
 
-  & > div[aria-hidden="true"] {
-    display: none;
-    opacity: 0;
-    pointer-events: none;
+  & > div[hidden] {
     position: absolute;
 
     a, .previous-button, .next-button {

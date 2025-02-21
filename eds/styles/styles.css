@@ -608,7 +608,7 @@ main {
 }
 
 /* Modal */
-body[aria-hidden="true"]{
+body[hidden]{
   overflow: hidden;
 }
 
@@ -667,7 +667,3 @@ body[aria-hidden="true"]{
   inline-size: 100%;
   max-inline-size: none;
 }
-
-/* .button-container[aria-hidden="true"] {
-  display: none;
-} */
