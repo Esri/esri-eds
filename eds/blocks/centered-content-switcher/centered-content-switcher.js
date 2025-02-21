@@ -90,7 +90,7 @@ export default function decorate(block) {
 
     desktopList.children[selectedIdx].classList.remove('active');
     dots.children[selectedIdx].classList.remove('active');
-    currentTab.setAttribute('aria-hidden', 'true');
+    currentTab.setAttribute('hidden', '');
     currentTab.classList.remove('calcite-animate__in');
     currentTab.classList.add('animate-out');
     currentTab.children[0].classList.remove('calcite-animate__in-up');
@@ -102,7 +102,7 @@ export default function decorate(block) {
 
     dots.children[selectedIdx].classList.add('active');
     desktopList.children[selectedIdx].classList.add('active');
-    nextTab.setAttribute('aria-hidden', 'false');
+    nextTab.removeAttribute('hidden');
     nextTab.classList.add('calcite-animate__in');
     nextTab.classList.remove('animate-out');
     nextTab.children[0].classList.add('calcite-animate__in-up');
@@ -124,7 +124,7 @@ export default function decorate(block) {
     tab.classList.add('calcite-animate');
     tab.classList.add('animate-out');
 
-    tab.setAttribute('aria-hidden', 'true');
+    tab.setAttribute('hidden', '');
     tab.setAttribute('role', 'tabpanel');
 
     tab.children[0].classList.add('calcite-animate');
@@ -169,6 +169,5 @@ export default function decorate(block) {
     }
   });
 
-  block.children[selectedIdx].setAttribute('aria-hidden', 'false');
   changeSelectedTab(selectedIdx);
 }
