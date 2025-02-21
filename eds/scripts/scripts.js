@@ -163,6 +163,16 @@ if (themeColorMeta) {
   document.head.appendChild(style);
 }
 
+// look for .section data-background-image attribute and add it as a background image
+function addBackgroundImageToSection(section) {
+  let backgroundImage = section.getAttribute('data-background-image');
+  if (backgroundImage) {
+    backgroundImage = backgroundImage.replace(/([?&])width=750([&$])/, '$1').replace(/\?$/, '');
+    section.style.backgroundImage = `url(${backgroundImage})`;
+    section.classList.add('background-image');
+  }
+}
+
 function addAnimation() {
   // find any element with the class calcite-animate
   const animateElements = document.querySelectorAll('.calcite-animate');
@@ -256,6 +266,7 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
 
 function decorateModes(main) {
   main.querySelectorAll('.block').forEach(decorateMode);
+  main.querySelectorAll('.section').forEach(addBackgroundImageToSection);
 }
 
 /**
