@@ -1,10 +1,10 @@
 .centered-content-switcher {
+  overflow: hidden;
   animation-duration: 550ms;
   animation-timing-function: ease;
   block-size: 100%;
   box-sizing: border-box;
   padding: 0;
-  overflow: hidden;
   position: relative;
 
   .mobile-nav {
