@@ -4,8 +4,8 @@
   block-size: 100%;
   box-sizing: border-box;
   padding: 0;
-  position: relative;
   overflow: hidden;
+  position: relative;
 
   .mobile-nav {
     align-items: center;
