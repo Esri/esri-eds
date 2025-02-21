@@ -89,10 +89,6 @@
     position: relative;
   }
 
-  & > div[aria-hidden="true"] {
-    display: none;
-  }
-
   .image-div {
     block-size: 100%;
     inline-size: 100%;
@@ -223,3 +219,4 @@
     }
   }
 }
+
