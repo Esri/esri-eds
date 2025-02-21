@@ -20,10 +20,10 @@ export default function decorate(block) {
 
   let selectedIndex = 0;
   const changeSelectedTab = (index) => {
-    tabs[selectedIndex].setAttribute('aria-hidden', 'true');
+    tabs[selectedIndex].setAttribute('hidden', '');
     navList.children[selectedIndex].classList.remove('active');
     navList.children[index].classList.add('active');
-    tabs[index].setAttribute('aria-hidden', 'false');
+    tabs[index].removeAttribute('hidden');
     selectedIndex = index;
   };
 
@@ -78,7 +78,7 @@ export default function decorate(block) {
     const link = domEl('calcite-link', { href: url, 'icon-end': 'arrow-right' }, title);
     buttonContainer?.parentElement.replaceChild(link, buttonContainer);
 
-    tab.setAttribute('aria-hidden', 'true');
+    tab.setAttribute('hidden', '');
     tab.setAttribute('role', 'tabpanel');
   });
 
