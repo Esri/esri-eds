@@ -1,7 +1,7 @@
 .centered-content-switcher {
-  overflow: hidden;
   animation-duration: 550ms;
   animation-timing-function: ease;
+  overflow: hidden;
   block-size: 100%;
   box-sizing: border-box;
   padding: 0;
