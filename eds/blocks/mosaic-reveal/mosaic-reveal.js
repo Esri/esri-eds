@@ -31,7 +31,7 @@ export default function decorate(block) {
     anchorElem.parentElement.removeChild(anchorElem);
   });
 
-  const revealContent = div({ class: 'mosaic-reveal-content', 'hidden': 'true' });
+  const revealContent = div({ class: 'mosaic-reveal-content', hidden: '' });
   revealContent.addEventListener('click', () => {
     revealContent.setAttribute('hidden', '');
   });
@@ -71,7 +71,7 @@ export default function decorate(block) {
 
     child.addEventListener('mouseleave', () => {
       if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').setAttribute('hidden','true') ;
+        child.querySelector('.mosaic-reveal-content').setAttribute('hidden', 'true');
         mosaicTitle.setAttribute('tabindex', '-1');
       }
     });
