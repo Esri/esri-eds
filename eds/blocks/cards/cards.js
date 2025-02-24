@@ -1,5 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { div, domEl, calciteLink } from '../../scripts/dom-helpers.js';
+import { div, domEl, calciteLink, calciteButton } from '../../scripts/dom-helpers.js';
+import decorateModal from '../../scripts/delayed.js';
 
 function processSimpleCard(listElem) {
   const cardBody = listElem.querySelector('.cards-card-body');
@@ -59,6 +60,32 @@ function processStandardCard(element) {
       cardBodyTitle.nextElementSibling.classList.add('card-body-subtitle');
     }
   }
+  if(anchorEl.classList.contains('video-link')) {
+    videoCards(anchorEl);
+  }
+}
+
+function videoCards(anchorEl) {
+  const playButton = calciteButton({
+    'icon-start': 'play-f',
+    'aria-hidden': 'false',
+    'aria-label': 'play video',
+    class: 'play-button',
+    label: 'play video',
+    appearance: 'solid',
+    scale: 'l',
+    round: '',
+    color: 'light',
+    kind: '',
+  });
+
+  anchorEl.querySelector('picture').parentElement.append(playButton);
+
+  playButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    playButton.setAttribute('tabindex', '0');
+    decorateModal(anchorEl.href, playButton);
+  });
 }
 
 export default function decorate(block) {
