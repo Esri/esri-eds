@@ -99,7 +99,7 @@
   text-decoration: underline;
 }
 
-.mosaic-reveal .mosaic-reveal-content[aria-hidden="true"] {
+.mosaic-reveal .mosaic-reveal-content[hidden] {
   block-size: 0;
   opacity: 0;
   pointer-events: none;
