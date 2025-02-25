@@ -17,7 +17,7 @@ export default function decorate(block) {
   const contents = [...block.children].map((child) => child.children[1]);
   contents.forEach((content) => {
     content.classList.add('mosaic-reveal-content');
-    content.setAttribute('aria-hidden', 'true');
+    content.setAttribute('hidden', '');
 
     const anchorElem = content.querySelector('a');
     const linkText = anchorElem.textContent;
@@ -31,9 +31,9 @@ export default function decorate(block) {
     anchorElem.parentElement.removeChild(anchorElem);
   });
 
-  const revealContent = div({ class: 'mosaic-reveal-content', 'aria-hidden': 'true' });
+  const revealContent = div({ class: 'mosaic-reveal-content', hidden: '' });
   revealContent.addEventListener('click', () => {
-    revealContent.setAttribute('aria-hidden', 'true');
+    revealContent.setAttribute('hidden', '');
   });
 
   const mediaQuery = window.matchMedia('(width < 860px)');
@@ -41,10 +41,10 @@ export default function decorate(block) {
   mediaQuery.onchange = (e) => {
     if (e.matches) {
       contents.forEach((content) => {
-        content.setAttribute('aria-hidden', 'true');
+        content.setAttribute('hidden', '');
       });
     } else {
-      revealContent.setAttribute('aria-hidden', 'true');
+      revealContent.setAttribute('hidden', '');
     }
   };
 
@@ -53,7 +53,7 @@ export default function decorate(block) {
     const mosaicTitle = msrevealcontent.querySelector('h3');
     child.addEventListener('click', () => {
       if (mediaQuery.matches) {
-        revealContent.setAttribute('aria-hidden', 'false');
+        revealContent.removeAttribute('hidden');
         const children = [...contents[idx].children].map((el) => el.cloneNode(true));
         revealContent.replaceChildren(...children);
       }
@@ -61,7 +61,7 @@ export default function decorate(block) {
 
     child.addEventListener('mouseenter', () => {
       if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').ariaHidden = false;
+        child.querySelector('.mosaic-reveal-content').removeAttribute('hidden');
         mosaicTitle.setAttribute('tabindex', '0');
         setTimeout(() => {
           mosaicTitle.focus();
@@ -71,7 +71,7 @@ export default function decorate(block) {
 
     child.addEventListener('mouseleave', () => {
       if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').ariaHidden = true;
+        child.querySelector('.mosaic-reveal-content').setAttribute('hidden', '');
         mosaicTitle.setAttribute('tabindex', '-1');
       }
     });
