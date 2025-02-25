@@ -284,12 +284,25 @@
     text-decoration: none;
     transition: border-color 0.25s linear;
     white-space: normal;
+
+    &.video-link {
+      p {
+        display: flex;
+        justify-content: center;
+      }
+
+      calcite-button {
+        display: flex;
+        inset-block-start: calc(50% - 32px);
+        position: absolute;
+      }
+    }
   }
 
   picture {
-    display: inline-block;
+    display: flex;
     inline-size: 100%;
-    padding-block-end: var(--space-5);
+    margin-block-end: var(--space-5);
 
     img {
       block-size: auto;
