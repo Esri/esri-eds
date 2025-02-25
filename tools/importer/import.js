@@ -598,6 +598,15 @@ function classHasPrefix(className, prefix) {
   return className.startsWith(prefix) && className.length > prefix.length;
 }
 
+function getBackgroundImage(backgroundImgDiv) {
+  const bgImageSrc = backgroundImgDiv.style.getPropertyValue('--bg-img')
+    .substring(4, backgroundImgDiv.style.getPropertyValue('--bg-img').length - 1);
+  const backgroundImage = document.createElement('img');
+  backgroundImage.setAttribute('src', bgImageSrc);
+
+  return backgroundImage;
+}
+
 function processSection(section) {
   const sectionStyles = [];
   if (section.children.length === 1) {
@@ -655,9 +664,7 @@ function processSection(section) {
   let backgroundImage;
   const backgroundImgDiv = section.querySelector('.has-background--img');
   if (backgroundImgDiv) {
-    const bgImageSrc = backgroundImgDiv.style.getPropertyValue('--bg-img').substring(4, backgroundImgDiv.style.getPropertyValue('--bg-img').length - 1);
-    backgroundImage = document.createElement('img');
-    backgroundImage.setAttribute('src', bgImageSrc);
+    backgroundImage = getBackgroundImage(backgroundImgDiv);
   }
 
   if (sectionStyles.length > 0) {
@@ -1156,8 +1163,10 @@ function switchers(main, document) {
 function elasticContentStrip(main, document) {
   main.querySelectorAll('.elastic-content-strip > .ecs__wrapper > .ecs__main').forEach((container) => {
     const cells = [...container.children].map((child) => {
+      const bgImage = getBackgroundImage(child);
       const link = child.querySelector('a');
       if (!link) {
+        child.append(bgImage);
         return [child];
       }
       const newDiv = document.createElement('div');
@@ -1165,6 +1174,7 @@ function elasticContentStrip(main, document) {
       const cta = newDiv.querySelector('div.ecs__link');
       link.replaceChildren(cta);
       newDiv.append(link);
+      newDiv.append(bgImage);
 
       return [newDiv];
     });
