@@ -40,8 +40,6 @@
 }
 
 .elastic-content-strip.block > div {
-  --shadow-color: var(--esri-ui-opacity80);
-
   background-image: url("/assets/location-overview-programs-background.jpeg");
   background-position: center;
   background-size: cover;
@@ -55,7 +53,7 @@
 }
 
 .elastic-content-strip.block > div:hover {
-  box-shadow: 0 0 0 10px inset var(--shadow-color);
+  box-shadow: 0 0 0 10px inset var(--esri-ui-opacity80);
   text-decoration: none;
 }
 
