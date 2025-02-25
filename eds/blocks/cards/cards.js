@@ -23,7 +23,7 @@ function videoCards(anchorEl) {
 
   anchorEl.querySelector('picture').parentElement.append(playButton);
 
-  playButton.addEventListener('click', (event) => {
+  anchorEl.addEventListener('click', (event) => {
     event.preventDefault();
     playButton.setAttribute('tabindex', '0');
     decorateModal(anchorEl.href, playButton);
