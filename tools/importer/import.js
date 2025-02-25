@@ -424,16 +424,6 @@ function cards(main, document) {
         throw new Error('No cards found', container.outerHTML);
       }
 
-      const withVideo = cells.some((row) => row[0]
-        .querySelector(':scope > a:first-child')
-        ?.getAttribute('href')
-        .startsWith('https://youtu.be/'));
-
-      let blockName = 'cards';
-      if (withVideo) {
-        blockName = 'Video cards';
-      }
-
       const variants = [];
       container.classList.forEach((className) => {
         if (className.startsWith('cardsPerRow-')) {
@@ -449,7 +439,7 @@ function cards(main, document) {
         variants.push('standard');
       }
 
-      createBlock(container, document, blockName, cells, variants);
+      createBlock(container, document, 'cards', cells, variants);
     });
 }
 
@@ -1093,7 +1083,7 @@ function newsletter(main, document) {
     newsletterLink.textContent = newsletterIframeUrl;
 
     main.append(WebImporter.Blocks.createBlock(document, {
-      name: 'newsletter',
+      name: 'Sidedrawer',
       cells: [[newsletterLink]],
     }));
 
