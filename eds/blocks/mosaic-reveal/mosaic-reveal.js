@@ -71,7 +71,7 @@ export default function decorate(block) {
 
     child.addEventListener('mouseleave', () => {
       if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').setAttribute('hidden', 'true');
+        child.querySelector('.mosaic-reveal-content').setAttribute('hidden', '');
         mosaicTitle.setAttribute('tabindex', '-1');
       }
     });
