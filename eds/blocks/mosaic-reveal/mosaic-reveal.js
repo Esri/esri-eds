@@ -24,8 +24,8 @@ export default function decorate(block) {
       const linkText = anchorElem.textContent;
       const url = anchorElem.href;
       const link = domEl('calcite-link', {
-      href: url,
-      'icon-end': 'arrowRight',
+        href: url,
+        'icon-end': 'arrowRight',
       }, linkText);
 
       anchorElem.parentElement.appendChild(link);
