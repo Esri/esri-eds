@@ -20,15 +20,17 @@ export default function decorate(block) {
     content.setAttribute('hidden', '');
 
     const anchorElem = content.querySelector('a');
-    const linkText = anchorElem.textContent;
-    const url = anchorElem.href;
-    const link = domEl('calcite-link', {
+    if (anchorElem) {
+      const linkText = anchorElem.textContent;
+      const url = anchorElem.href;
+      const link = domEl('calcite-link', {
       href: url,
       'icon-end': 'arrowRight',
-    }, linkText);
+      }, linkText);
 
-    anchorElem.parentElement.appendChild(link);
-    anchorElem.parentElement.removeChild(anchorElem);
+      anchorElem.parentElement.appendChild(link);
+      anchorElem.parentElement.removeChild(anchorElem);
+    }
   });
 
   const revealContent = div({ class: 'mosaic-reveal-content', hidden: '' });
