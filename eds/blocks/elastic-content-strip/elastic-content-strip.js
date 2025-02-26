@@ -7,7 +7,9 @@ import {
 
 export default function decorate(block) {
   block.querySelectorAll('.elastic-content-strip > div > div').forEach((div) => {
-    const linkHref = div.querySelector('a,calcite-button').href;
+    const linkElement = div.querySelector('a,calcite-button');
+    if (!linkElement) return;
+    const linkHref = linkElement.href;
 
     const elasticContentWrapper = a({
       class: 'elastic-content-link-wrapper',
@@ -17,8 +19,20 @@ export default function decorate(block) {
     elasticContentWrapper.appendChild(div);
     decorateInnerHrefButtonsWithArrowIcon(elasticContentWrapper);
 
+    const backgroundImage = div.querySelector('picture');
+    if (backgroundImage) {
+      const backgroundImageSrc = backgroundImage
+        .querySelector('source')
+        .srcset
+      div.parentNode.parentNode.style.backgroundImage = `url(${backgroundImageSrc})`;
+    }
+    backgroundImage.remove();
+
     const btn = div.querySelector('.button-container');
-    const labelText = btn.querySelector('a').textContent;
+    if (!btn) return;
+    const labelElement = btn.querySelector('a');
+    if (!labelElement) return;
+    const labelText = labelElement.textContent;
     const btnLink = calciteLink({
       'icon-end': 'arrowRight',
       class: 'button link',
