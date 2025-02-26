@@ -4,8 +4,13 @@ export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
 
   [...block.children].forEach((child) => {
-    child.querySelector('h3').setAttribute('tabindex', '-1');
-    const titleText = child.querySelector('h3').textContent;
+    const h3Element = child.querySelector('h3');
+    let titleText = '';
+    if (h3Element) {
+      h3Element.setAttribute('tabindex', '-1');
+      titleText = h3Element.textContent;
+      child.children[0].appendChild(h3({ class: 'title' }, titleText));
+    }
 
     child.children[0].appendChild(h3({ class: 'title' }, titleText));
     const expandButton = domEl('button', { class: 'mosaic-reveal-button' });
@@ -20,15 +25,17 @@ export default function decorate(block) {
     content.setAttribute('hidden', '');
 
     const anchorElem = content.querySelector('a');
-    const linkText = anchorElem.textContent;
-    const url = anchorElem.href;
-    const link = domEl('calcite-link', {
-      href: url,
-      'icon-end': 'arrowRight',
-    }, linkText);
+    if (anchorElem) {
+      const linkText = anchorElem.textContent;
+      const url = anchorElem.href;
+      const link = domEl('calcite-link', {
+        href: url,
+        'icon-end': 'arrowRight',
+      }, linkText);
 
-    anchorElem.parentElement.appendChild(link);
-    anchorElem.parentElement.removeChild(anchorElem);
+      anchorElem.parentElement.appendChild(link);
+      anchorElem.parentElement.removeChild(anchorElem);
+    }
   });
 
   const revealContent = div({ class: 'mosaic-reveal-content', hidden: '' });
