@@ -110,7 +110,7 @@ export default function decorate(block) {
     });
     observer.disconnect();
   }, {
-    threshold: 0.1, // Lower threshold so map loads earlier
+    threshold: 0.3, // Lower threshold so map loads earlier
   });
 
   observer.observe(frameWrapper);
