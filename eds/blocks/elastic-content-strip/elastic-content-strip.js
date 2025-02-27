@@ -23,7 +23,7 @@ export default function decorate(block) {
     if (backgroundImage) {
       const backgroundImageSrc = backgroundImage
         .querySelector('source')
-        .srcset
+        .srcset;
       div.parentNode.parentNode.style.backgroundImage = `url(${backgroundImageSrc})`;
     }
     backgroundImage.remove();
