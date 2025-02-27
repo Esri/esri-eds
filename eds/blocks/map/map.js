@@ -110,8 +110,7 @@ export default function decorate(block) {
     });
     observer.disconnect();
   }, {
-    threshold: 0.2, // Lower threshold so map loads earlier
-    rootMargin: '100px', // Preload when within 100px of viewport
+    threshold: 0.1, // Lower threshold so map loads earlier
   });
 
   observer.observe(frameWrapper);
