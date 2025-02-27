@@ -102,6 +102,13 @@
 
   /* nav height */
   --nav-height: 64px;
+
+  /* block variables */
+  --wrapper-max-width: 1440px;
+  --content-max-width: 840px;
+
+  /* frame height */
+  --frame-height: 775px;
 }
 
 *,
