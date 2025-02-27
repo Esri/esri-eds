@@ -40,7 +40,6 @@
 }
 
 .elastic-content-strip.block > div {
-  background-image: url("/assets/location-overview-programs-background.jpeg");
   background-position: center;
   background-size: cover;
   color: var(--calcite-ui-text-1);
