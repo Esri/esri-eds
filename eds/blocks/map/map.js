@@ -6,20 +6,41 @@ const getMapPlaceholder = () => {
   const mapPlaceholder = domEl('calcite-loader', {
     label: 'Loading Map',
     class: 'iframe-map-placeholder',
+    'aria-live': 'polite',
   });
 
   return mapPlaceholder;
 };
 
-const handleLoadFrame = () => {
-  const mapPlaceholder = document.querySelector('.iframe-map-placeholder');
-  mapPlaceholder.style.display = 'none';
+const handleLoadFrame = (event) => {
+  // Use the closest parent to find the placeholder within this specific block instance
+  const mapFrame = event.target;
+  const frameWrapper = mapFrame.closest('.frame-wrapper');
+  const mapPlaceholder = frameWrapper.querySelector('.iframe-map-placeholder');
+
+  if (mapPlaceholder) {
+    mapPlaceholder.style.display = 'none';
+  }
+};
+
+const handleLoadError = (event) => {
+  // Use the closest parent to find the placeholder within this specific block instance
+  const mapFrame = event.target;
+  const frameWrapper = mapFrame.closest('.frame-wrapper');
+  const mapPlaceholder = frameWrapper.querySelector('.iframe-map-placeholder');
+
+  if (mapPlaceholder) {
+    mapPlaceholder.remove();
+  }
+
+  const errorMessage = p({ class: 'map-error-message' });
+  errorMessage.textContent = 'Failed to load map. Please try again later.';
+  frameWrapper?.appendChild(errorMessage);
 };
 
 const getMapFrame = (url) => {
   const mapFrame = iframe({
-    id: 'map-frame',
-    class: 'map-frame-aspect-ratio',
+    class: 'map-frame map-frame-aspect-ratio',
     role: 'application',
     src: url,
     sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
@@ -28,6 +49,7 @@ const getMapFrame = (url) => {
     loading: 'lazy',
     title: 'Esri locations map',
     onload: handleLoadFrame,
+    onerror: handleLoadError,
   });
 
   return mapFrame;
@@ -36,23 +58,36 @@ const getMapFrame = (url) => {
 export default function decorate(block) {
   const blockParams = block.querySelectorAll('p');
   const heading = block.querySelector('h2');
-  const blockText = blockParams[0].innerText;
-  const mapLink = blockParams[1].innerText;
+
+  // Validate that we have the required elements
+  if (blockParams.length < 2) {
+    return;
+  }
+
+  const blockText = blockParams[0]?.innerText || '';
+  const mapLink = blockParams[1]?.innerText || '';
+
+  if (!mapLink) {
+    return;
+  }
+
   block.textContent = '';
 
   const gridContainer = div({ class: 'grid-container' });
-  const frameWrapper = div({ id: 'frame-wrapper' });
+  const frameWrapper = div({ class: 'frame-wrapper' });
 
-  const defaultContentContainer = div();
-  const nodeTextParam = p({ id: 'map-text-content' });
+  const nodeTextParam = p({ class: 'map-text-content' });
   nodeTextParam.textContent = blockText;
   const hr = horizontalRule({ class: 'separator center' });
 
-  const contentWrapperChildren = [defaultContentContainer, heading, hr, nodeTextParam];
-  const defaultContentWrapper = div({ id: 'map-default-content-wrapper' });
+  // Use only necessary elements
+  const contentWrapperChildren = heading ? [heading, hr, nodeTextParam] : [hr, nodeTextParam];
+  const defaultContentWrapper = div({ class: 'map-default-content-wrapper' });
 
   contentWrapperChildren.forEach((child) => {
-    defaultContentWrapper.appendChild(child);
+    if (child) {
+      defaultContentWrapper.appendChild(child);
+    }
   });
 
   const gridContainerChildren = [defaultContentWrapper, frameWrapper];
@@ -74,7 +109,9 @@ export default function decorate(block) {
       }
     });
     observer.disconnect();
-  }, { threshold: 0.75 });
+  }, {
+    threshold: 0.3, // Lower threshold so map loads earlier
+  });
 
   observer.observe(frameWrapper);
 
