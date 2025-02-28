@@ -87,7 +87,7 @@
 }
 
 /* Cards per row - width calculation */
-[class*="cards"] li {
+[class*="cardsperrow"] li {
   --cards-per-row: 1;
 
   inline-size: calc(100% / var(--cards-per-row));
@@ -98,7 +98,7 @@
 }
 
 @media (width >= 1024px) {
-  [class*="cards"] li {
+  [class*="cardsperrow"] li {
     --cards-per-row: 3;
   }
 }
