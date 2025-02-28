@@ -21,32 +21,32 @@
   margin: 8px;
 }
 
-.cards .cards-card-body h3 {
+.cards-card-body h3 {
   font-size: var(--title-size);
   line-height: 1.375;
   margin-block-end: var(--space-2);
 }
 
-.cards .cards-card-body h3 + p:not(.button-container) {
+.cards-card-body h3 + p:not(.button-container) {
   font-size: var(--font-minus-1);
   margin: .5rem 0;
   margin-block-end: 1.5rem;
 }
 
-.cards .cards-card-body p a {
+.cards-card-body p a {
   margin-block-start: 0;
 }
 
-.cards .cards-card-body h3,
+.cards-card-body h3,
 .cards .cards-card-body p:last-child {
   padding-inline-end: var(--space-5);
 }
 
-.cards .cards-card-body calcite-link {
+.cards-card-body calcite-link {
   display: block;
 }
 
-.cards .cards-card-image {
+.cards-card-image {
   line-height: 0;
 }
 
@@ -62,32 +62,32 @@
   padding: 0;
 }
 
-.cards > ul > li img {
+.cards li img {
   block-size: auto;
   inline-size: 100%;
   object-fit: cover;
 }
 
 @media (width >= 768px) {
-  .cards > ul > li {
+  .cards li {
     inline-size: 50%;
   }
 }
 
 @media (width >= 1024px) {
-  .cards > ul > li {
+  .cards li {
     inline-size: 33.333%;
   }
 }
 
 @media (width >= 1440px) {
-  .cards > ul > li {
+  .cards li {
     inline-size: 25%;
   }
 }
 
 /* Cards per row - width calculation */
-[class*="cards"] > ul > li {
+[class*="cards"] li {
   --cards-per-row: 1;
 
   inline-size: calc(100% / var(--cards-per-row));
@@ -98,33 +98,33 @@
 }
 
 @media (width >= 1024px) {
-  [class*="cards"] > ul > li {
+  [class*="cards"] li {
     --cards-per-row: 3;
   }
 }
 
 @media (width >= 1440px) {
-  .cardsperrow-1 > ul > li {
+  .cardsperrow-1 li {
     --cards-per-row: 1;
   }
 
-  .cardsperrow-2 > ul > li {
+  .cardsperrow-2 li {
     --cards-per-row: 2;
   }
 
-  .cardsperrow-3 > ul > li {
+  .cardsperrow-3 li {
     --cards-per-row: 3;
   }
 
-  .cardsperrow-4 > ul > li {
+  .cardsperrow-4 li {
     --cards-per-row: 4;
   }
 
-  .cardsperrow-5 > ul > li {
+  .cardsperrow-5 li {
     --cards-per-row: 5;
   }
 
-  .cardsperrow-6 > ul > li {
+  .cardsperrow-6 li {
     --cards-per-row: 6;
   }
 }
