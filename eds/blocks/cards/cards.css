@@ -62,6 +62,10 @@
   padding: 0;
 }
 
+.cards.detailed-list > ul {
+  justify-content: flex-start;
+}
+
 .cards li img {
   block-size: auto;
   inline-size: 100%;
@@ -69,25 +73,25 @@
 }
 
 @media (width >= 768px) {
-  .cards li {
+  .cards > ul > li {
     inline-size: 50%;
   }
 }
 
 @media (width >= 1024px) {
-  .cards li {
+  .cards > ul > li {
     inline-size: 33.333%;
   }
 }
 
 @media (width >= 1440px) {
-  .cards li {
+  .cards > ul > li {
     inline-size: 25%;
   }
 }
 
 /* Cards per row - width calculation */
-[class*="cardsperrow"] li {
+[class*="cardsperrow"] > ul > li {
   --cards-per-row: 1;
 
   inline-size: calc(100% / var(--cards-per-row));
@@ -98,33 +102,33 @@
 }
 
 @media (width >= 1024px) {
-  [class*="cardsperrow"] li {
+  [class*="cardsperrow"] > ul > li {
     --cards-per-row: 3;
   }
 }
 
 @media (width >= 1440px) {
-  .cardsperrow-1 li {
+  .cardsperrow-1 > ul > li {
     --cards-per-row: 1;
   }
 
-  .cardsperrow-2 li {
+  .cardsperrow-2 > ul > li {
     --cards-per-row: 2;
   }
 
-  .cardsperrow-3 li {
+  .cardsperrow-3 > ul > li {
     --cards-per-row: 3;
   }
 
-  .cardsperrow-4 li {
+  .cardsperrow-4 > ul > li {
     --cards-per-row: 4;
   }
 
-  .cardsperrow-5 li {
+  .cardsperrow-5 > ul > li {
     --cards-per-row: 5;
   }
 
-  .cardsperrow-6 li {
+  .cardsperrow-6 > ul > li {
     --cards-per-row: 6;
   }
 }
