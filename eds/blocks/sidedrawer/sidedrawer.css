@@ -3,12 +3,20 @@
   float: unset;
   inline-size: unset;
   inset-block-start: 150px;
+  inset-inline-end: 0;
   padding: 0;
-  position: relative
+  position: absolute;
+  z-index: 1;
 }
 
 .sidedrawer {
   display: none;
+}
+
+@media (width >= 1024px) {
+  .sidedrawer {
+    display: block;
+  }
 }
 
 .sidedrawer-button {
@@ -16,6 +24,7 @@
   border-color: var(--calcite-ui-border-2);
   color: var(--calcite-ui-text-1);
   cursor: pointer;
+  font-size: var(--font-minus-2);
   font-weight: var(--calcite-font-weight-medium);
   letter-spacing: 2px;
   margin-block-end: -50px;
@@ -25,6 +34,11 @@
   text-transform: uppercase;
   white-space: nowrap;
   writing-mode: vertical-rl;
+}
+
+.sidedrawer-button calcite-icon {
+  inset-inline-start: 18px;
+  position: absolute;
 }
 
 .sidedrawer-button:is(:hover, :focus) {
@@ -59,7 +73,7 @@ html[dir="rtl"] .sidedrawer-button {
   max-block-size: 300px;
   max-inline-size: 95vw;
   min-block-size: 0;
-  padding: 54px;
+  transition: all 0.6s ease-out;
 }
 
 @media (width >= 1024px) {
@@ -72,15 +86,24 @@ html[dir="rtl"] .sidedrawer-button {
     z-index: 999;
   }
 
-  .sidedrawer-content[aria-expanded="false"] {
+  .sidedrawer-content[aria-expanded="false"] .sidedrawer-contentframe {
     max-inline-size: 0;
     transition: all 0.6s ease-out;
   }
 
-  .sidedrawer-content[aria-expanded="true"] {
+  .sidedrawer-content[aria-expanded="true"] .sidedrawer-contentframe {
     inline-size: 100%;
     max-inline-size: 700px;
     transition: all 0.6s ease-out;
+  }
+
+  .sidedrawer-content[aria-expanded="false"] .sidedrawer-button calcite-icon {
+    transform: scale(1.4);
+    transition: all .47s ease-out;
+  }
+
+  .sidedrawer-content[aria-expanded="true"] .sidedrawer-button calcite-icon {
+    transform: rotate(45deg) scale(1.5);
   }
 
   html[dir="rtl"] .sidedrawer {
