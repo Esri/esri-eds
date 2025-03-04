@@ -81,9 +81,10 @@
 }
 
 .cards.detailed-list .cards-card-body li::before {
+  aspect-ratio: 1/1;
   block-size: 32px;
-  content: url('data:image/svg+xml,<svg aria-hidden="true" class="svg" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g  transform-origin="center"><path d="M13.5 22.142L7.59 16.42l.636-.636L13.5 20.87 26.721 7.8l.637.637z"></path></g></svg>');
-  display: inline-block;
+  content: url('data:image/svg+xml,<svg aria-hidden="true" class="svg" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.142L7.59 16.42l.636-.636L13.5 20.87 26.721 7.8l.637.637z"></path></svg>');
+  display: block;
   inline-size: 32px;
 }
 
