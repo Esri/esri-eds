@@ -1,6 +1,8 @@
 import { div, button, domEl } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
+  const anchorEl = block.querySelector('a');
+
   /* Add class names to div's in markup */
   const childDiv = block.querySelector('div');
   if (childDiv) {
@@ -14,8 +16,8 @@ export default function decorate(block) {
   if (h3Element) {
     const buttonEl = button(
       { class: 'sidedrawer-button' },
-      h3Element.textContent,
       domEl('calcite-icon', { icon: 'plus', scale: 's', 'aria-hidden': 'true' }),
+      h3Element.textContent,
     );
     contentDiv.replaceChild(buttonEl, h3Element);
   }
@@ -27,6 +29,14 @@ export default function decorate(block) {
   [...sidedrawerContent.querySelectorAll(':not(.sidedrawer-button, calcite-icon, .sidedrawer-contentframe)')].forEach((el) => {
     contentFrame.append(el);
   });
+  if (anchorEl) {
+    const iframeEl = domEl('iframe', {
+      src: anchorEl.href,
+      class: 'sidedrawer-iframe',
+    });
+    contentFrame.appendChild(iframeEl);
+    anchorEl.remove();
+  }
   sidedrawerContent.setAttribute('aria-expanded', false);
   buttonEl.addEventListener('click', () => {
     const isExpanded = sidedrawerContent.getAttribute('aria-expanded') === 'true';
