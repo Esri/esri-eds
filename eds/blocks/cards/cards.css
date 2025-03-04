@@ -67,7 +67,6 @@
 }
 
 .cards-card-body > ul {
-  /* list-style-position: inside; */
   list-style-type: none;
   padding: 0;
 }
@@ -92,32 +91,10 @@
   border-block-end: none;
 }
 
-/* .cards.detailed-list .cards-card-body li::marker {
-  font-size: var(--font-6);
-} */
-
 .cards li img {
   block-size: auto;
   inline-size: 100%;
   object-fit: cover;
-}
-
-@media (width >= 768px) {
-  .cards > ul > li {
-    /* inline-size: 50%; */
-  }
-}
-
-@media (width >= 1024px) {
-  .cards > ul > li {
-    /* inline-size: 33.333%; */
-  }
-}
-
-@media (width >= 1440px) {
-  .cards > ul > li {
-    /* inline-size: 25%; */
-  }
 }
 
 /* Cards per row - width calculation */
