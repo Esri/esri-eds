@@ -109,8 +109,8 @@
   color: #fff;
   cursor: pointer;
   margin: auto 0 auto 90%;
-  position: absolute;
   inset-inline-end: var(--space-4);
+  position: absolute;
   z-index: 3001;
 }
 
