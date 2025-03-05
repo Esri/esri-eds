@@ -39,16 +39,16 @@ function listenSubNav(subNavItems) {
       const order = subNavItems.getAttribute('attr-order');
       const allSubNavBtn = document.querySelectorAll('.subnav-btn');
       subNavItems.setAttribute('aria-expanded', 'true');
-      subNavItems.nextElementSibling.setAttribute('aria-hidden', 'false');
+      subNavItems.nextElementSibling.removeAttribute('hidden');
       allSubNavBtn.forEach((btn) => {
         if (btn.getAttribute('attr-order') !== order) {
           btn.setAttribute('aria-expanded', 'false');
-          btn.nextElementSibling.setAttribute('aria-hidden', 'true');
+          btn.nextElementSibling.setAttribute('hidden', '');
         }
       });
     } else {
       subNavItems.setAttribute('aria-expanded', 'false');
-      subNavItems.nextElementSibling.setAttribute('aria-hidden', 'true');
+      subNavItems.nextElementSibling.setAttribute('hidden', '');
     }
   });
 
@@ -56,7 +56,7 @@ function listenSubNav(subNavItems) {
     const isClickInside = subNavItems.contains(e.target);
     if (!isClickInside) {
       subNavItems.setAttribute('aria-expanded', 'false');
-      subNavItems.nextElementSibling.setAttribute('aria-hidden', 'true');
+      subNavItems.nextElementSibling.setAttribute('hidden', '');
     }
   });
 }
@@ -89,7 +89,7 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
       'aria-current': 'false',
       'attr-order': i,
     });
-    const subNav = domEl('div', { class: 'subnav', id: 'subnav', 'aria-hidden': 'true' });
+    const subNav = domEl('div', { class: 'subnav', id: 'subnav', 'hidden': '' });
     const subNavUL = domEl('ul', { class: 'subnav-ul' });
     li.appendChild(subNavItems);
     subNavItems.innerHTML = pgObj.pageTitle;
@@ -205,7 +205,6 @@ function initNavWrapper(block) {
     icon: 'caret-down',
     dir: 'ltr',
     'calcite-hydrated': '',
-    'aria-hidden': 'true',
   });
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
