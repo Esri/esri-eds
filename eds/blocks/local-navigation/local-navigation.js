@@ -89,7 +89,7 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
       'aria-current': 'false',
       'attr-order': i,
     });
-    const subNav = domEl('div', { class: 'subnav', id: 'subnav', 'hidden': '' });
+    const subNav = domEl('div', { class: 'subnav', id: 'subnav', 'hidden': ' ' });
     const subNavUL = domEl('ul', { class: 'subnav-ul' });
     li.appendChild(subNavItems);
     subNavItems.innerHTML = pgObj.pageTitle;
