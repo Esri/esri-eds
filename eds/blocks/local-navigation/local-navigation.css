@@ -110,8 +110,8 @@
   cursor: pointer;
   margin: auto 0 auto 90%;
   position: absolute;
-  z-index: 3001;
   inset-inline-end: var(--space-4);
+  z-index: 3001;
 }
 
 .local-navigation .subnav {
