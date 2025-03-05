@@ -107,9 +107,9 @@
 .local-navigation calcite-icon {
   block-size: 60px;
   color: #fff;
+  inset-inline-end: var(--space-4);
   cursor: pointer;
   margin: auto 0 auto 90%;
-  inset-inline-end: var(--space-4);
   position: absolute;
   z-index: 3001;
 }
