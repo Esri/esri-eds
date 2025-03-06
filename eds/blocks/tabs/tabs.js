@@ -43,7 +43,7 @@ export default async function decorate(block) {
     contents = tabContents.map((content) => div({
       class: 'tab-content',
       role: 'tabpanel',
-      'hidden': ' ',
+      'hidden': '',
     }, content));
   }
 
@@ -89,13 +89,13 @@ export default async function decorate(block) {
     contents = tabContents.map((content) => div({
       class: 'tab-content',
       role: 'tabpanel',
-      'hidden': ' ',
+      'hidden': '',
     }, div({ class: 'grid-container' }, ...content)));
   }
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
     role: 'tab',
-    'hidden': ' ',
+    'hidden': '',
   }, button(title)));
 
   const arrowLeft = calciteButton(
