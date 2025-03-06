@@ -104,10 +104,6 @@
   inset-inline-end: 0;
 }
 
-.tabs .tab-nav .arrow-button[aria-hidden="true"] {
-  display: none;
-}
-
 .tabs .tab-nav .tab-title {
   display: block;
   transition: 0.3s ease;
@@ -127,11 +123,11 @@
   margin-block-end: 10px;
 }
 
-.tabs .tab-nav .tab-title[aria-hidden="true"] {
+.tabs .tab-nav .tab-title[hidden] {
   display: none;
 }
 
-.tabs .tab-nav .tab-title[aria-hidden="false"] {
+.tabs .tab-nav .tab-title {
   border-block-end: 3px solid var(--calcite-ui-brand);
   padding-block-end: 0;
 }
@@ -143,10 +139,6 @@
 .tabs .tab-content > .grid-container {
   display: block;
   position: relative;
-}
-
-.tabs .tab-content[aria-hidden="true"] {
-  display: none;
 }
 
 .tabs .grid-container > p:first-child img {
@@ -173,7 +165,7 @@
   color: var(--calcite-ui-text-1);
 }
 
-.tabs .tab-content[aria-hidden="false"] p:last-child picture {
+.tabs .tab-content p:last-child picture {
   z-index: 1;
 }
 
@@ -214,7 +206,7 @@
         padding: 1rem;
       }
 
-      .tab-title[aria-hidden="false"] {
+      .tab-title {
         border-block-end: 3px solid transparent;
       }
 
@@ -227,7 +219,7 @@
       }
     }
 
-    .tab-content[aria-hidden="false"] {
+    .tab-content {
       & > .grid-container {
         display: grid;
         grid-template:
@@ -254,21 +246,21 @@
       }
     }
 
-    .tab-content[aria-hidden="false"] p:last-child {
+    .tab-content p:last-child {
       grid-area: img;
     }
 
-    .tab-content[aria-hidden="false"] p:last-child picture {
+    .tab-content p:last-child picture {
       inline-size: 100%;
     }
 
-    .tab-content[aria-hidden="false"] p:last-child picture img {
+    .tab-content p:last-child picture img {
       block-size: 100%;
       object-fit: cover;
       object-position: center;
     }
 
-    .tab-content[aria-hidden="false"] > .grid-container > p:first-child {
+    .tab-content > .grid-container > p:first-child {
       block-size: 100%;
       inline-size: 100%;
       inset-block-start: 0;
@@ -296,7 +288,7 @@
 }
 
 @media (width >= 1480px) {
-  .tabs .tab-content[aria-hidden="false"] :is(.text-wrapper, .buttons-wrapper) {
+  .tabs .tab-content :is(.text-wrapper, .buttons-wrapper) {
     inline-size: 720px;
     margin-inline: auto 0;
     padding-inline-start: 0;
