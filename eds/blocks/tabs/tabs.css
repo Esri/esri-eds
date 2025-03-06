@@ -105,8 +105,8 @@
 }
 
 .tabs .tab-nav .tab-title {
-  transition: 0.3s ease;
   border-block-end: 3px solid var(--calcite-ui-brand);
+  transition: 0.3s ease;
   display: block;
   padding-block-end: 0;
 }
@@ -191,6 +191,7 @@
       z-index: 2;
 
       .tab-title {
+        border-block-end: 3px solid transparent;
         display: block;
         flex: 1;
         inset-block-start: 1px;
@@ -200,10 +201,6 @@
       .tab-title button {
         inline-size: 100%;
         padding: 1rem;
-      }
-
-      .tab-title {
-        border-block-end: 3px solid transparent;
       }
 
       .tab-title[aria-selected="false"]:hover {
