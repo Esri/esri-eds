@@ -105,9 +105,9 @@
 }
 
 .tabs .tab-nav .tab-title {
-  display: block;
   transition: 0.3s ease;
   border-block-end: 3px solid var(--calcite-ui-brand);
+  display: block;
   padding-block-end: 0;
 }
 
@@ -191,7 +191,6 @@
       z-index: 2;
 
       .tab-title {
-        border-block-end: 1px solid var(--calcite-ui-text-1);
         display: block;
         flex: 1;
         inset-block-start: 1px;
