@@ -107,6 +107,8 @@
 .tabs .tab-nav .tab-title {
   display: block;
   transition: 0.3s ease;
+  border-block-end: 3px solid var(--calcite-ui-brand);
+  padding-block-end: 0;
 }
 
 .tabs .tab-nav .tab-title button {
@@ -125,11 +127,6 @@
 
 .tabs .tab-nav .tab-title[hidden] {
   display: none;
-}
-
-.tabs .tab-nav .tab-title {
-  border-block-end: 3px solid var(--calcite-ui-brand);
-  padding-block-end: 0;
 }
 
 .tabs .tab-nav .tab-title[aria-selected="true"] .icon {
