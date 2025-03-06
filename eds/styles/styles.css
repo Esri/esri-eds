@@ -654,6 +654,7 @@ body[aria-hidden="true"]{
   inset-inline-start: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
+  max-inline-size: 950px;
 }
 
 .co3-modal iframe {
