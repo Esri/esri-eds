@@ -652,8 +652,8 @@ body[aria-hidden="true"]{
   inline-size: 85%;
   inset-block-start: 50%;
   inset-inline-start: 50%;
-  position: absolute;
   max-inline-size: 950px;
+  position: absolute;
   transform: translate(-50%, -50%);
 }
 
