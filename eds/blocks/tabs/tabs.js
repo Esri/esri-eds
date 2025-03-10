@@ -43,7 +43,7 @@ export default async function decorate(block) {
     contents = tabContents.map((content) => div({
       class: 'tab-content',
       role: 'tabpanel',
-      'aria-hidden': true,
+      hidden: '',
     }, content));
   }
 
@@ -89,13 +89,13 @@ export default async function decorate(block) {
     contents = tabContents.map((content) => div({
       class: 'tab-content',
       role: 'tabpanel',
-      'aria-hidden': true,
+      hidden: '',
     }, div({ class: 'grid-container' }, ...content)));
   }
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
     role: 'tab',
-    'aria-hidden': true,
+    hidden: '',
   }, button(title)));
 
   const arrowLeft = calciteButton(
@@ -127,15 +127,15 @@ export default async function decorate(block) {
   arrowLeft.addEventListener('click', () => {
     const newSelectedIdx = selectedIdx - 1;
     if (newSelectedIdx < 0) return;
-    if (newSelectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
-    arrowRight.setAttribute('aria-hidden', 'false');
+    if (newSelectedIdx === 0) arrowLeft.setAttribute('hidden', '');
+    arrowRight.removeAttribute('hidden');
 
     const tabTitle = titles[selectedIdx];
-    tabTitle.setAttribute('aria-hidden', 'true');
-    titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
+    tabTitle.setAttribute('hidden', '');
+    titles[newSelectedIdx].removeAttribute('hidden');
 
-    contents[selectedIdx].setAttribute('aria-hidden', 'true');
-    contents[newSelectedIdx].setAttribute('aria-hidden', 'false');
+    contents[selectedIdx].setAttribute('hidden', '');
+    contents[newSelectedIdx].removeAttribute('hidden');
 
     selectedIdx = newSelectedIdx;
 
@@ -146,14 +146,14 @@ export default async function decorate(block) {
     const newSelectedIdx = selectedIdx + 1;
     if (newSelectedIdx >= titles.length) return;
     if (newSelectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
-    arrowLeft.setAttribute('aria-hidden', 'false');
+    arrowLeft.removeAttribute('hidden');
 
     const tabTitle = titles[selectedIdx];
-    tabTitle.setAttribute('aria-hidden', 'true');
-    titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
+    tabTitle.setAttribute('hidden', '');
+    titles[newSelectedIdx].removeAttribute('hidden');
 
-    contents[selectedIdx].setAttribute('aria-hidden', 'true');
-    contents[newSelectedIdx].setAttribute('aria-hidden', 'false');
+    contents[selectedIdx].setAttribute('hidden', '');
+    contents[newSelectedIdx].removeAttribute('hidden');
 
     selectedIdx = newSelectedIdx;
 
@@ -177,7 +177,7 @@ export default async function decorate(block) {
     ...contents,
   );
 
-  contents[selectedIdx].setAttribute('aria-hidden', 'false');
+  contents[selectedIdx].removeAttribute('hidden');
 
   titles.forEach((title, index) => {
     title.addEventListener('click', (e) => {
@@ -187,8 +187,8 @@ export default async function decorate(block) {
       titles.forEach((t) => t.setAttribute('aria-selected', 'false'));
       tabTitle.setAttribute('aria-selected', 'true');
 
-      contents[selectedIdx].setAttribute('aria-hidden', 'true');
-      contents[index].setAttribute('aria-hidden', 'false');
+      contents[selectedIdx].setAttribute('hidden', '');
+      contents[index].removeAttribute('hidden');
 
       selectedIdx = index;
 
@@ -199,25 +199,25 @@ export default async function decorate(block) {
   const addAccessiblityAttributes = () => {
     if (window.innerWidth >= 1024) {
       titles.forEach((title, index) => {
-        title.setAttribute('aria-hidden', 'false');
+        title.removeAttribute('hidden');
         title.setAttribute('aria-selected', 'false');
         if (index === selectedIdx) {
           title.setAttribute('aria-selected', 'true');
         }
       });
-      arrowLeft.setAttribute('aria-hidden', 'true');
-      arrowRight.setAttribute('aria-hidden', 'true');
+      arrowLeft.setAttribute('hidden', '');
+      arrowRight.setAttribute('hidden', '');
     } else {
-      arrowLeft.setAttribute('aria-hidden', 'false');
-      arrowRight.setAttribute('aria-hidden', 'false');
-      if (selectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
-      if (selectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
+      arrowLeft.removeAttribute('hidden');
+      arrowRight.removeAttribute('hidden');
+      if (selectedIdx === 0) arrowLeft.setAttribute('hidden', '');
+      if (selectedIdx === titles.length - 1) arrowRight.setAttribute('hidden', '');
 
-      titles[selectedIdx].setAttribute('aria-hidden', 'false');
+      titles[selectedIdx].removeAttribute('hidden');
       titles.forEach((title, index) => {
         title.removeAttribute('aria-selected');
         if (index !== selectedIdx) {
-          title.setAttribute('aria-hidden', 'true');
+          title.setAttribute('hidden', '');
         }
       });
     }
