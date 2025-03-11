@@ -25,8 +25,8 @@ export default function decorate(block) {
         .querySelector('source')
         .srcset;
       div.parentNode.parentNode.style.backgroundImage = `url(${backgroundImageSrc})`;
+      backgroundImage.remove();
     }
-    backgroundImage.remove();
 
     const btn = div.querySelector('.button-container');
     if (!btn) return;
