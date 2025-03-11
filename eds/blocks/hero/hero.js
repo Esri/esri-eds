@@ -56,14 +56,17 @@ export default function decorate(block) {
 
     const src = videoAsset.getAttribute('title');
     const videoElement = createAutoplayedVideo(src, '');
+    const foregroundDiv = document.createElement('div');
+    foregroundDiv.classList.add('foregrounddiv');
+    foregroundDiv.appendChild(videoElement);
 
     videoAsset.classList.add('hidden');
 
     const heroImage = block.querySelector('.image');
     if (heroImage && heroImage.children.length === 0) {
-      heroImage.append(videoElement);
+      heroImage.append(foregroundDiv);
     } else {
-      block.append(videoElement);
+      block.append(foregroundDiv);
     }
   }
 
