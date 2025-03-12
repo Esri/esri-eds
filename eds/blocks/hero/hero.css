@@ -64,7 +64,6 @@
 .hero video {
   block-size: 100%;
   inset: 0;
-  position: absolute;
   z-index: -2;
 }
 
@@ -82,6 +81,13 @@
   block-size: 100%;
   inline-size: 100%;
   object-fit: cover;
+}
+
+.hero .foregrounddiv {
+  aspect-ratio: 1 / 1;
+  block-size: 700px;
+  inline-size: 720px;
+  margin: 0;
 }
 
 .hero .image {
