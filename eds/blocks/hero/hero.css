@@ -67,6 +67,10 @@
   z-index: -2;
 }
 
+.hero > video {
+  position: absolute;
+}
+
 .hero .backgroundimage {
   block-size: 100%;
   inline-size: 100%;
