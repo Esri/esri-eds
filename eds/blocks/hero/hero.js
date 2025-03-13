@@ -63,9 +63,9 @@ export default function decorate(block) {
     videoAsset.classList.add('hidden');
 
     const heroImage = block.querySelector('.image');
-    if(!heroImage){
+    if (!heroImage) {
       block.append(foregroundDiv);
-    }else {
+    } else {
       block.append(videoElement);
     }
   }
