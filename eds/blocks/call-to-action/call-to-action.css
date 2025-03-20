@@ -31,10 +31,7 @@
 }
 
 .section.call-to-action-container .default-content-wrapper {
-  inline-size: 1440px;
-  margin: auto;
   max-inline-size: 632px;
-  padding-block-end: 0;
   text-align: center;
 
   & > :where(h2, p) {
