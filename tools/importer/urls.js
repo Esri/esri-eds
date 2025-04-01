@@ -184,6 +184,10 @@ export default [
     "URL": "https://www.esri.com/en-us/artificial-intelligence/overview"
   },
   {
+    "Theme": "dark",
+    "URL": "https://www.esri.com/en-us/geospatial-artificial-intelligence/overview"
+  },
+  {
     "Theme": "light",
     "URL": "https://www.esri.com/en-us/digital-transformation/overview"
   },

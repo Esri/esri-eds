@@ -184,6 +184,10 @@ export default [
     Theme: 'dark',
   },
   {
+    URL: 'https://www.esri.com/en-us/geospatial-artificial-intelligence/overview',
+    Theme: 'dark',
+  },
+  {
     URL: 'https://www.esri.com/en-us/digital-transformation/overview',
     Theme: 'light',
   },
