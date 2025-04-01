@@ -12,14 +12,17 @@ export default function decorate(block) {
   if (contentDiv) {
     contentDiv.classList.add('sidedrawer-content');
   }
-  const h3Element = contentDiv.querySelector('h3');
-  if (h3Element) {
+  let btnText = contentDiv.querySelector('h3');
+  if (!btnText) {
+    btnText = contentDiv.querySelector('p');
+  }
+  if (btnText) {
     const buttonEl = button(
       { class: 'sidedrawer-button' },
       domEl('calcite-icon', { icon: 'plus', scale: 's', 'aria-hidden': 'true' }),
-      h3Element.textContent,
+      btnText.textContent,
     );
-    contentDiv.replaceChild(buttonEl, h3Element);
+    contentDiv.replaceChild(buttonEl, btnText);
   }
   const sidedrawerContent = document.querySelector('.sidedrawer-content');
   const buttonEl = document.querySelector('.sidedrawer-button');
