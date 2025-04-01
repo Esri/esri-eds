@@ -9,7 +9,7 @@
         "isPalette": true,
         "includePaths": ["**.docx**"],
         "passConfig": true,
-        "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)"
+        "paletteRect": "box-sizing: border-box; top: 50px; bottom: 10px; right: 10px; left: auto; width:800px; height: calc(100vh - 60px); border: 1px solid var(--mod-popover-border-color);"
       },
       {
         "id": "library",
