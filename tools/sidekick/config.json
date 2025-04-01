@@ -4,8 +4,13 @@
       {
         "id": "asset-library",
         "title": "Asset Library",
-        "environments": ["edit"]
-      }
+        "environments": ["edit"],
+        "url": "/tools/sidekick/asset-library.html",
+        "isPalette": true,
+        "includePaths": ["**.docx**"],
+        "passConfig": true,
+        "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)"
+      },
       {
         "id": "library",
         "title": "Library",
