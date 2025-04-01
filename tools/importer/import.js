@@ -1091,7 +1091,7 @@ function newsletter(main, document) {
 
     main.append(WebImporter.Blocks.createBlock(document, {
       name: 'Sidedrawer',
-      cells: [[newsletterLink]],
+      cells: [[newsletterContainer.querySelector('.span-title').textContent, newsletterLink]],
     }));
 
     newsletterContainer.closest('.aem-GridColumn.experiencefragment').remove();
