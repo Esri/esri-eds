@@ -2,6 +2,11 @@
     "project": "esri",
     "plugins": [
       {
+        "id": "asset-library",
+        "title": "Asset Library",
+        "environments": ["edit"]
+      }
+      {
         "id": "library",
         "title": "Library",
         "environments": ["edit"],
