@@ -5,7 +5,7 @@
         "id": "asset-library",
         "title": "Asset Library",
         "environments": ["edit"],
-        "url": "/tools/sidekick/asset-library.html",
+        "url": "https://experience.adobe.com/solutions/CQ-helix-assets-addon/static-assets/resources/asset-selector.html",
         "isPalette": true,
         "includePaths": ["**.docx**"],
         "passConfig": true,
