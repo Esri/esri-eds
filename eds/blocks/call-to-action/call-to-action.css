@@ -27,7 +27,7 @@
   background: var(--calcite-ui-foreground-1);
   color: var(--calcite-ui-text-1);
   justify-content: center;
-  padding: var(--space-48) 0 var(--space-32);
+  padding: 0 0 var(--space-32) 0;
 }
 
 .section.call-to-action-container .default-content-wrapper {
@@ -136,12 +136,24 @@ p.button-container .button {
   & > div:has(> div:nth-child(3)) {
     display: block;
 
-    h2 {
-      text-align: center;
-    }
-
     div.default-content-wrapper {
       margin: auto;
+      text-align: start;
+    }
+
+    div.default-content-wrapper h2 {
+      font-size: var(--font-3);
+      font-weight: normal;
+    }
+
+    div.default-content-wrapper h3 {
+      font-size: var(--font-4);
+      font-weight: normal;
+    }
+
+    div.default-content-wrapper :is(p, h2, h3) {
+      margin-block-end: var(--space-4);
+      text-align: start;
     }
 
     > div {
@@ -151,7 +163,6 @@ p.button-container .button {
 
     > div:first-child {
       border-inline-end: none;
-      display: block;
       margin-inline-end: 0;
 
       span.icon {
@@ -168,11 +179,24 @@ p.button-container .button {
 
     > div:nth-child(2) {
       block-size: max-content;
-      display: grid;
-      grid-template-columns: 50vw 50vw;
-      margin: 0;
+      border-block-end: 1px solid var(--calcite-ui-border-1);
+      display: flex;
+      flex-flow: row wrap;
+      flex-direction: row;
+      gap: 30px;
+      margin: 0 auto;
+      max-inline-size: 1440px;
 
-      .cards ul {
+     > div {
+        flex:1;
+        inline-size: 100%;
+      }
+
+      .cards ul{
+        inline-size: 100%;
+      }
+
+      .cards.simple > ul > li{
         inline-size: 100%;
       }
 
@@ -184,6 +208,12 @@ p.button-container .button {
     > div:nth-child(3) {
       block-size: auto;
       display: block;
+
+      h2 {
+        font-size: var(--font-1);
+        padding-block-start: var(--space-12);
+        text-align: center;
+      }
     }
   }
 
@@ -199,8 +229,28 @@ p.button-container .button {
   .cards.questions {
     padding: 0;
 
+    & > ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
     & > ul > li {
+      --cards-per-row: 2;
+
+      flex-basis: calc(50% - 1.5rem);
+      inline-size: calc(50% - 1.5rem);
+    }
+
+    & > ul:has(li:nth-child(3)) > li {
       --cards-per-row: 3;
+
+      flex-basis: calc(33.333% - 1.5rem);
+      inline-size: calc(33.333% - 1.5rem);
+    }
+
+
+    & > ul > li  .cards-card-body {
+      margin: 12px;
     }
 
     .card-body-content p {
@@ -217,6 +267,63 @@ p.button-container .button {
     }
   }
 
+  /* Variation that has support and contact us aligned horizontally */
+  &.columns {
+    margin: 0 auto;
+    max-inline-size: 1440px;
+  }
+
+  &.columns > div{
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  &.columns div{
+    align-items: stretch;
+    block-size: auto;
+    padding: 0;
+  }
+
+  &.columns .cards-container {
+    align-items: center;
+    justify-content: normal;
+    margin: var(--space-10) 0;
+  }
+
+  &.columns .cards-container .cards-wrapper{
+    inline-size: 100%;
+  }
+
+  &.columns .cards-container .cards-wrapper .cards.questions ul{
+    inline-size: auto;
+  }
+
+  &.columns .cards-container .cards-wrapper .cards.questions ul > li{
+    inline-size: auto;
+  }
+
+  &.columns .cards-container h2{
+    font-size: var(--font-1);
+    padding-block-start: var(--space-12);
+    text-align: center;
+  }
+
+  @media (width <= 480px) {
+    & > div:has(> div:nth-child(3)) > div:nth-child(2) {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    & > div:has(> div:nth-child(3)) > div:nth-child(2) .cards.simple{
+      padding: 1rem 0;
+  }
+
+    .cards.questions > ul > li, .cards.questions > ul:has(li:nth-child(3)) > li {
+      flex-basis: calc(100% - 1.5rem);
+      inline-size: calc(100% - 1.5rem);
+    }
+  }
+
 @media (width <= 1440px) {
   .call-to-action.fragment .cards.questions {
     inline-size: 100vw;
@@ -224,7 +331,7 @@ p.button-container .button {
 
   ul:has(li:nth-child(3)) {
     inline-size: inherit;
-    min-inline-size: 80%;
+    max-inline-size: none;
   }
 }
 
