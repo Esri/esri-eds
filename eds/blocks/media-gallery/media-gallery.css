@@ -1,4 +1,10 @@
 .media-gallery {
+  &.mg-card-dark {
+    picture::after {
+      background: linear-gradient(to top, var(--esri-ui-opacity80), transparent 80%);
+    }
+  }
+
   ul {
     display: grid;
     grid-gap: 1rem;
