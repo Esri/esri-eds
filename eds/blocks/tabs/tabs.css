@@ -246,6 +246,7 @@
     }
 
     .tab-content p:last-child picture {
+      block-size: 100%;
       inline-size: 100%;
     }
 
