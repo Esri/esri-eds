@@ -96,6 +96,10 @@
   padding: 1rem;
 }
 
+.map .frame-wrapper {
+  block-size: 785px;
+}
+
 /* Fullscreen mode */
 .frame-wrapper.is-fullscreen {
   block-size: 100%;
