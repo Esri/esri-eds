@@ -45,7 +45,6 @@
   font-weight: 600;
   margin: 0;
   margin-block-end: 0.5rem;
-  text-transform: uppercase;
 }
 
 .tabs .text-wrapper p:last-child {
@@ -55,7 +54,7 @@
 }
 
 .tabs .text-wrapper h2 {
-  font-size: var(--font-8);
+  font-size: var(--font-6);
   margin: 0;
   margin-block-end: 0.6rem;
 }
