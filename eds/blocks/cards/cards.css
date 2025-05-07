@@ -10,7 +10,6 @@
 .cards {
   background-color: var(--calcite-ui-foreground-1);
   color: var(--calcite-ui-text-1);
-  padding: 4rem 0;
 }
 
 .cards .icon img {
