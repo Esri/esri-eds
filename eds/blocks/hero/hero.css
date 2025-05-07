@@ -127,12 +127,12 @@
   }
 
   .hero .content {
-    padding-inline-start: 2vw;
+    padding-inline-start: 0;
   }
 
   .hero :is(.image, .content) {
     inline-size: 50%;
-    max-inline-size: 700px;
+    max-inline-size: 720px;
   }
 
   .hero :where(h1, p) {
