@@ -132,6 +132,7 @@
   }
 
   .frame-wrapper {
+    aspect-ratio: 1/1;
     max-inline-size: 96vw;
   }
 }
@@ -143,6 +144,7 @@
   }
 
   .frame-wrapper {
+    aspect-ratio: 4/3;
     inline-size: 72vw;
     max-inline-size: 1080px;
   }
@@ -163,7 +165,7 @@
 /* Smaller screens - more square aspect ratio */
 @media (width < 480px) {
   .frame-wrapper {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 2;
   }
 }
 
