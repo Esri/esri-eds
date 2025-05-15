@@ -1,4 +1,4 @@
-import { calciteButton, div } from '../../scripts/dom-helpers.js';
+import { calciteButton, calciteLink, div } from '../../scripts/dom-helpers.js';
 import decorateModal from '../../scripts/delayed.js';
 
 /**
