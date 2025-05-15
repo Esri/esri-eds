@@ -74,8 +74,29 @@ export default function decorate(block) {
   }
 
   // Decorate the Calcite button with the appropriate icon and kind
-  const button = block.querySelector('calcite-button');
-  decorateCalciteButton(button);
+  const btns = block.querySelectorAll('.button-container');
+  if (btns) {
+    btns.forEach((btn) => {
+      const labelText = btn.querySelector('a').textContent;
+      const outlineAttr = btn.querySelector('em') ? 'outline' : '';
+      const linkHref = btn.querySelector('a,calcite-button').href;
+      if (outlineAttr) {
+        btn.replaceWith(calciteButton({
+          'icon-end': 'arrowRight',
+          appearance: `${outlineAttr}`,
+          kind: 'inverse',
+          href: linkHref,
+          label: labelText,
+        }, labelText));
+      } else {
+        btn.replaceWith(calciteLink({
+          'icon-end': 'arrowRight',
+          href: linkHref,
+          label: labelText,
+        }, labelText));
+      }
+    });
+  }
 
   // TODO background picture quality is low, fix it
   // If one image, use as foreground image
