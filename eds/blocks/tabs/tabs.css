@@ -122,6 +122,10 @@
   padding: 1rem;
 }
 
+.tabs .tab-nav .tab-title button:is(:hover, :focus, :active) {
+  box-shadow: none;
+}
+
 .tabs .tab-nav .tab-title .icon {
   margin-block-end: var(--space-4);
 }
@@ -204,10 +208,7 @@
         padding: 1rem;
       }
 
-      .tab-title[aria-selected="false"]:hover {
-        border-block-end: 3px solid #0079c180;
-      }
-
+      .tab-title[aria-selected="false"]:hover, 
       .tab-title[aria-selected="true"] {
         border-block-end: 3px solid var(--calcite-ui-brand);
       }
