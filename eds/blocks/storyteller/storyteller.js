@@ -12,19 +12,11 @@ function getVideoBtn() {
   const videoButton = button({
     class: 'video-play-button', 'aria-label': 'Play animation', tabindex: '0',
   });
-  const playProgressCircle = svg({
-    class: 'play-progress-circle', viewBox: '0 0 100 100',
-  });
-  const progressBackground = circle({
-    class: 'progress-background', r: '45', cy: '50', cx: '50',
-  });
-  const progressCircle = circle({
-    class: 'progress-circle', r: '45', cy: '50', cx: '50',
-  });
 
-  playProgressCircle.appendChild(progressBackground);
-  playProgressCircle.appendChild(progressCircle);
-  videoButton.appendChild(playProgressCircle);
+  videoButton.innerHTML = `<svg class="play-progress-circle" viewBox="0 0 100 100">
+              <circle class="progress-background" r="45" cx="50" cy="50"></circle>
+              <circle class="progress-circle" r="45" cx="50" cy="50"></circle>
+            </svg>`;
 
   return videoButton;
 }
