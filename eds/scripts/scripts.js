@@ -406,4 +406,3 @@ loadPage();
 export {
   decorateIcons,
 };
-

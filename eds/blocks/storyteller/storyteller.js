@@ -128,9 +128,9 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   }
 
   videoElement.addEventListener('timeupdate', updateDashOffset);
-  videoElement.addEventListener('ended', () => { togglePlayButton(videoElement) });
-  videoElement.addEventListener('play', () => { togglePlayButton(videoElement) });
-  videoElement.addEventListener('pause', () => { togglePlayButton(videoElement) });
+  videoElement.addEventListener('ended', () => { togglePlayButton(videoElement); });
+  videoElement.addEventListener('play', () => { togglePlayButton(videoElement); });
+  videoElement.addEventListener('pause', () => { togglePlayButton(videoElement); });
 }
 
 /**
