@@ -252,7 +252,9 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
         if (!videoElem.src) {
           videoElem.src = videoElem.querySelector('source').dataset.src;
         }
-        videoElem.play();
+        videoElem.play().catch((error) => {
+          console.warn('Video playback failed:', error);
+        });
       } else {
         videoElem.pause();
       }
@@ -404,3 +406,4 @@ loadPage();
 export {
   decorateIcons,
 };
+

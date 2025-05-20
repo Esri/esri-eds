@@ -1,5 +1,5 @@
 import {
-  div, calciteButton, video, button, svg, circle,
+  div, calciteButton, button
 } from '../../scripts/dom-helpers.js';
 import { createAutoplayedVideo } from '../../scripts/scripts.js';
 
@@ -12,19 +12,11 @@ function getVideoBtn() {
   const videoButton = button({
     class: 'video-play-button', 'aria-label': 'Play animation', tabindex: '0',
   });
-  const playProgressCircle = svg({
-    class: 'play-progress-circle', viewBox: '0 0 100 100',
-  });
-  const progressBackground = circle({
-    class: 'progress-background', r: '45', cy: '50', cx: '50',
-  });
-  const progressCircle = circle({
-    class: 'progress-circle', r: '45', cy: '50', cx: '50',
-  });
 
-  playProgressCircle.appendChild(progressBackground);
-  playProgressCircle.appendChild(progressCircle);
-  videoButton.appendChild(playProgressCircle);
+  videoButton.innerHTML = `<svg class="play-progress-circle" viewBox="0 0 100 100">
+  <circle class="progress-background" r="45" cx="50" cy="50"></circle>
+  <circle class="progress-circle" r="41.25" cx="50" cy="50"></circle>
+</svg>`;
 
   return videoButton;
 }
@@ -78,29 +70,11 @@ function decorateButtons(block) {
  *
  * @returns {Promise<void>}
  */
-async function playVideo(videoElement) {
-  const playPromise = videoElement.play();
+ function playVideo(videoElement) {
+  let playPromise = videoElement.play();
 
   if (playPromise !== undefined) {
     playPromise.then(() => videoElement.play().then((r) => r).catch(() => null));
-  }
-}
-
-/**
- * Toggles a 'paused' class on a video play button based on the paused state of a video element.
- *
- * @param {HTMLVideoElement} videoElement - The video element to check the paused state of.
- *
- * @returns {void}
- */
-function togglePlayButton(videoElement) {
-  const videoContainer = videoElement.closest('.foreground');
-  const playButton = videoContainer.querySelector('.video-play-button');
-
-  if (!videoElement.paused) {
-    playButton.classList.add('play');
-  } else {
-    playButton.classList.remove('play');
   }
 }
 
@@ -112,24 +86,52 @@ function togglePlayButton(videoElement) {
  *
  * @returns {void}
  */
-function setupVideoControl(playButtonElement, videoElement) {
+function setupVideoControl(playButtonElement, videoElement, videoLength) {
+  const totalFrames = 259.18;
+  const playProgressCircle = playButtonElement.querySelector('.play-progress-circle');
+  const progressCircle = playProgressCircle.querySelector('.progress-circle');
+  progressCircle.style.strokeDasharray = totalFrames;
+  progressCircle.style.strokeDashoffset = totalFrames;
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (!isReducedMotion.matches) {
-    playButtonElement.addEventListener('click', async () => {
-      videoElement.loop = true;
+    playButtonElement.addEventListener('click', function () {
       if (videoElement.paused) {
-        await playVideo(videoElement);
+        playVideo(videoElement);
         togglePlayButton(videoElement);
       } else {
         videoElement.pause();
         togglePlayButton(videoElement);
       }
+      updateDashOffset();
     });
   }
 
-  videoElement.addEventListener('play', () => togglePlayButton(videoElement));
-  videoElement.addEventListener('pause', () => togglePlayButton(videoElement));
+  function togglePlayButton(videoElement) {
+    const videoContainer = videoElement.closest('.foreground');
+    const playButton = videoContainer.querySelector('.video-play-button');
+    if (videoElement.paused) {
+      playButton.setAttribute('aria-label','pause animation');
+      playButton.classList.add('paused');
+    } else {
+      playButton.setAttribute('aria-label', 'play animation');
+      playButton.classList.remove('paused');
+    }
+  }
+
+  function updateDashOffset() {
+    const currentTime = (videoElement.currentTime / videoLength) * totalFrames;
+    progressCircle.style.strokeDashoffset = totalFrames - currentTime;
+    requestAnimationFrame(updateDashOffset);
+    if (currentTime == totalFrames) {
+      progressCircle.style.strokeDashoffset = totalFrames;
+    }
+}
+
+  videoElement.addEventListener('timeupdate', updateDashOffset);
+  videoElement.addEventListener('ended', () => {togglePlayButton(videoElement)});
+  videoElement.addEventListener('play', () => {togglePlayButton(videoElement)});
+  videoElement.addEventListener('pause', () => {togglePlayButton(videoElement)});
 }
 
 /**
@@ -144,9 +146,14 @@ function bindVideoElement(videoContainer) {
   if (videoContainer) {
     const videoElement = videoContainer.querySelector('video');
     const playButton = videoContainer.querySelector('.video-play-button');
-    const newVideo = video({ src: videoElement.querySelector('video > source').src });
 
-    newVideo.addEventListener('loadedmetadata', () => setupVideoControl(playButton, videoElement));
+    if (videoElement) {
+      videoElement.load();
+      videoElement.addEventListener('loadedmetadata', () => {
+        const videoLength = videoElement.duration;
+        setupVideoControl(playButton, videoElement, videoLength);
+      });
+    }
   }
 }
 
@@ -200,3 +207,4 @@ export default async function decorate(block) {
 
   decorateButtons(block);
 }
+
