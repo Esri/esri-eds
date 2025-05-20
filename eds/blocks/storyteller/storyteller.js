@@ -1,5 +1,5 @@
 import {
-  div, calciteButton, button
+  div, calciteButton, button,
 } from '../../scripts/dom-helpers.js';
 import { createAutoplayedVideo } from '../../scripts/scripts.js';
 
@@ -70,9 +70,8 @@ function decorateButtons(block) {
  *
  * @returns {Promise<void>}
  */
- function playVideo(videoElement) {
-  let playPromise = videoElement.play();
-
+function playVideo(videoElement){
+  const playPromise = videoElement.play();
   if (playPromise !== undefined) {
     playPromise.then(() => videoElement.play().then((r) => r).catch(() => null));
   }
@@ -94,6 +93,27 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   progressCircle.style.strokeDashoffset = totalFrames;
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  function togglePlayButton(videoElement) {
+    const videoContainer = videoElement.closest('.foreground');
+    const playButton = videoContainer.querySelector('.video-play-button');
+    if (videoElement.paused) {
+      playButton.setAttribute('aria-label','pause animation');
+      playButton.classList.add('paused');
+    } else {
+      playButton.setAttribute('aria-label', 'play animation');
+      playButton.classList.remove('paused');
+    }
+  }
+  
+  function updateDashOffset() {
+    const currentTime = (videoElement.currentTime / videoLength) * totalFrames;
+    progressCircle.style.strokeDashoffset = totalFrames - currentTime;
+    requestAnimationFrame(updateDashOffset);
+    if (currentTime === totalFrames) {
+      progressCircle.style.strokeDashoffset = totalFrames;
+    }
+  }
+
   if (!isReducedMotion.matches) {
     playButtonElement.addEventListener('click', function () {
       if (videoElement.paused) {
@@ -106,27 +126,6 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
       updateDashOffset();
     });
   }
-
-  function togglePlayButton(videoElement) {
-    const videoContainer = videoElement.closest('.foreground');
-    const playButton = videoContainer.querySelector('.video-play-button');
-    if (videoElement.paused) {
-      playButton.setAttribute('aria-label','pause animation');
-      playButton.classList.add('paused');
-    } else {
-      playButton.setAttribute('aria-label', 'play animation');
-      playButton.classList.remove('paused');
-    }
-  }
-
-  function updateDashOffset() {
-    const currentTime = (videoElement.currentTime / videoLength) * totalFrames;
-    progressCircle.style.strokeDashoffset = totalFrames - currentTime;
-    requestAnimationFrame(updateDashOffset);
-    if (currentTime == totalFrames) {
-      progressCircle.style.strokeDashoffset = totalFrames;
-    }
-}
 
   videoElement.addEventListener('timeupdate', updateDashOffset);
   videoElement.addEventListener('ended', () => {togglePlayButton(videoElement)});
@@ -207,4 +206,3 @@ export default async function decorate(block) {
 
   decorateButtons(block);
 }
-
