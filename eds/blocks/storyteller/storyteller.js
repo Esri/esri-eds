@@ -93,10 +93,10 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   progressCircle.style.strokeDashoffset = totalFrames;
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  function togglePlayButton(videoElement) {
-    const videoContainer = videoElement.closest('.foreground');
+  function togglePlayButton(element) {
+    const videoContainer = element.closest('.foreground');
     const playButton = videoContainer.querySelector('.video-play-button');
-    if (videoElement.paused) {
+    if (element.paused) {
       playButton.setAttribute('aria-label', 'pause animation');
       playButton.classList.add('paused');
     } else {
@@ -104,7 +104,7 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
       playButton.classList.remove('paused');
     }
   }
-  
+
   function updateDashOffset() {
     const currentTime = (videoElement.currentTime / videoLength) * totalFrames;
     progressCircle.style.strokeDashoffset = totalFrames - currentTime;
@@ -128,9 +128,9 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   }
 
   videoElement.addEventListener('timeupdate', updateDashOffset);
-  videoElement.addEventListener('ended', () => { togglePlayButton(videoElement)} );
-  videoElement.addEventListener('play', () => { togglePlayButton(videoElement)} );
-  videoElement.addEventListener('pause', () => { togglePlayButton(videoElement)} );
+  videoElement.addEventListener('ended', () => { togglePlayButton(videoElement) });
+  videoElement.addEventListener('play', () => { togglePlayButton(videoElement) });
+  videoElement.addEventListener('pause', () => { togglePlayButton(videoElement) });
 }
 
 /**
