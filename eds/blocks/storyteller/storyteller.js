@@ -70,7 +70,7 @@ function decorateButtons(block) {
  *
  * @returns {Promise<void>}
  */
-function playVideo(videoElement){
+function playVideo(videoElement) {
   const playPromise = videoElement.play();
   if (playPromise !== undefined) {
     playPromise.then(() => videoElement.play().then((r) => r).catch(() => null));
@@ -97,7 +97,7 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
     const videoContainer = videoElement.closest('.foreground');
     const playButton = videoContainer.querySelector('.video-play-button');
     if (videoElement.paused) {
-      playButton.setAttribute('aria-label','pause animation');
+      playButton.setAttribute('aria-label', 'pause animation');
       playButton.classList.add('paused');
     } else {
       playButton.setAttribute('aria-label', 'play animation');
@@ -115,7 +115,7 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   }
 
   if (!isReducedMotion.matches) {
-    playButtonElement.addEventListener('click', function () {
+    playButtonElement.addEventListener('click', () => {
       if (videoElement.paused) {
         playVideo(videoElement);
         togglePlayButton(videoElement);
@@ -128,9 +128,9 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   }
 
   videoElement.addEventListener('timeupdate', updateDashOffset);
-  videoElement.addEventListener('ended', () => {togglePlayButton(videoElement)});
-  videoElement.addEventListener('play', () => {togglePlayButton(videoElement)});
-  videoElement.addEventListener('pause', () => {togglePlayButton(videoElement)});
+  videoElement.addEventListener('ended', () => { togglePlayButton(videoElement)} );
+  videoElement.addEventListener('play', () => { togglePlayButton(videoElement)} );
+  videoElement.addEventListener('pause', () => { togglePlayButton(videoElement)} );
 }
 
 /**
