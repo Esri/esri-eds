@@ -159,53 +159,87 @@
   .video-play-button {
     align-items: center;
     background-color: transparent;
-    block-size: 40px;
-    border: 1px solid var(--calcite-ui-text-1);
+    block-size: 44px;
+    border: 0 solid var(--calcite-ui-text-1);
     border-radius: 50%;
+    box-shadow: none;
     cursor: pointer;
     display: flex;
-    inline-size: 40px;
+    inline-size: 44px;
     inset-block-start: var(--space-2);
     inset-inline-end: var(--space-2);
     justify-content: center;
     margin: 0;
+    outline: 2px solid transparent;
     padding: 0;
     pointer-events: auto;
     position: absolute;
+    transition: none;
     z-index: 4;
-
-    &::after {
-      background-color: var(--calcite-ui-text-1);
-      background-size: 20px 20px;
-      block-size: 20px;
-      content: "";
-      display: inline-block;
-      inline-size: 20px;
-      mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZD0iTTUgMTUuMjVWNC43N2ExLjQ0IDEuNDQgMCAwMTEuNDQtMS42MiAxLjg2IDEuODYgMCAwMTEuMTEuMzFsOC41MyA1Yy43Ni40NCAxLjE3LjggMS4xNyAxLjUxcy0uNDEgMS4wNy0xLjE3IDEuNTFsLTguNTMgNWExLjg2IDEuODYgMCAwMS0xLjExLjMxQTEuNDIgMS40MiAwIDAxNSAxNS4yNXoiLz48L3N2Zz4=");
-      mask-size: cover;
-      position: absolute;
-    }
-
-    &.play::after {
-      mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iRXhwb3J0YWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMWQxZDFmfTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJwYXVzZSI+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzLjc1IiB5PSIzIiB3aWR0aD0iNC41IiBoZWlnaHQ9IjE0IiByeD0iMS41Ii8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMS43NSIgeT0iMyIgd2lkdGg9IjQuNSIgaGVpZ2h0PSIxNCIgcng9IjEuNSIvPjwvZz48L3N2Zz4=");
-    }
-
-    .play-progress-circle {
-      block-size: 40px;
-      fill: transparent;
-      inline-size: 40px;
-      opacity: 1;
-      overflow: hidden;
-      position: relative;
-      stroke: var(--calcite-ui-text-1);
-      stroke-linecap: round;
-      stroke-width: 5px;
-      transform: rotate(-90deg);
-
-      .progress-background {
-        stroke: var(--calcite-ui-text-1);
-        stroke-width: 1px;
-      }
-    }
   }
 }
+
+
+/* Dynamic play/pause button styles for video */
+.video-button-container {
+  cursor: pointer;
+  inset-block-start: var(--space-5);
+  inset-inline-end: var(--space-5);
+  padding: 1em;
+  pointer-events: auto;
+  position: absolute;
+  z-index: 2;
+}
+
+.play-progress-circle {
+  background-color: #f3f3f340;
+  block-size: 44px;
+  border-radius: 50%;
+  fill: transparent;
+  inline-size: 44px;
+  padding: 4px;
+  position: absolute;
+  stroke: var(--calcite-ui-text-1);
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+}
+
+.calcite-mode-dark .play-progress-circle {
+  background-color: #15151580;
+}
+
+.play-progress-circle .progress-circle {
+  stroke: var(--calcite-ui-text-1);
+  stroke-linecap: butt;
+  stroke-width: 5px;
+}
+
+.progress-background {
+  stroke: var(--calcite-ui-text-1);
+  stroke-width: 3px;
+}
+
+.video-play-button:focus {
+  border-radius: 50%;
+  box-shadow: none;
+  outline: 2px solid var(--calcite-ui-brand);
+}
+
+.video-play-button.paused::after {
+  inline-size: 10px;
+  margin-inline-start: 4px;
+  mask: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxMCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDAuNTcxMjg5TDEwIDcuMDAxMjlMMCAxMy40MjkzVjAuNTcxMjg5WiIgZmlsbD0iIzE1MTUxNSIvPgo8L3N2Zz4K');
+}
+
+.video-play-button::after {
+  background-color: var(--calcite-ui-text-1);
+  background-size: 20px 20px;
+  block-size: 14px;
+  content: '';
+  display: inline-block;
+  inline-size: 12px;
+  mask: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxMiAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wIDBINVYxNEgwVjBaTTEyIDBIN1YxNEgxMlYwWiIgZmlsbD0iIzE1MTUxNSIvPgo8L3N2Zz4K');
+  mask-size: cover;
+  position: absolute;
+}
+
