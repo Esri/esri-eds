@@ -186,7 +186,7 @@ export default async function decorate(block) {
   // Handle video decoration, fallback to second picture if no videos
   if (vidUrls.length > 0) {
     vidUrls.forEach((url) => {
-      const videoTag = createAutoplayedVideo(url.href, posterSrc);
+      const videoTag = createAutoplayedVideo(url.href, posterSrc, block.classList.contains('loop-video'));
       const videoOverlay = div(
         { class: 'overlay' },
         h2,

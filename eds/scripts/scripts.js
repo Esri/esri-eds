@@ -223,13 +223,14 @@ export function decorateBlockMode(block) {
  * @param {string} [posterSrc=''] - The optional poster image URL for the video.
  * @returns {HTMLElement} The created video element.
  */
-export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
+export function createAutoplayedVideo(sourceSrc, posterSrc = '', loop = false) {
   const videoElem = video(
     {
       preload: 'metadata',
       playsinline: '',
       type: 'video/mp4',
       muted: '',
+      'data-loop': loop,
     },
 
     /* add source element with data-src attribute to lazy load the video */

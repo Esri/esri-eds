@@ -55,7 +55,7 @@ export default function decorate(block) {
     const videoAsset = videoAssets[videoAssets.length - 1];
 
     const src = videoAsset.getAttribute('title');
-    const videoElement = createAutoplayedVideo(src, '');
+    const videoElement = createAutoplayedVideo(src, !block.classList.contains('no-loop-video'));
     const foregroundDiv = document.createElement('div');
     foregroundDiv.classList.add('foregrounddiv');
     foregroundDiv.appendChild(videoElement);
