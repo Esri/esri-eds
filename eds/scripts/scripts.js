@@ -245,7 +245,7 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
    * Otherwise, the video element will pause.
    * lazy loads the video source when the video is in view
    */
- 
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio > 0.4) {
