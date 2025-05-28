@@ -71,9 +71,9 @@ export default function decorate(block) {
         child.querySelector('.mosaic-reveal-content').removeAttribute('hidden');
         mosaicTitle.setAttribute('tabindex', '0');
         setTimeout(() => {
-            if (child.matches(':focus-within')) {
-              mosaicTitle.focus();
-            }
+          if (child.matches(':focus-within')) {
+            mosaicTitle.focus();
+          }
         }, 100);
       }
     });
