@@ -6,6 +6,7 @@
 }
 
 .mosaic-reveal-container h2 {
+  font-size: calc(100% + 6vw);
   font-style: normal;
   font-weight: var(--calcite-font-weight-medium);
   line-height: 1.1;
@@ -58,7 +59,7 @@
 
 .mosaic-reveal .mosaic-reveal-content {
   align-items: center;
-  background-color: var(--calcite-ui-foreground-1);
+  background-color: #0079c1;
   block-size: 100%;
   display: flex;
   flex-direction: column;
@@ -80,6 +81,7 @@
 
 .mosaic-reveal .mosaic-reveal-content > h3 {
   font-size: 1.414rem;
+  font-weight: var(--calcite-font-weight-normal);
   line-height: 1.375;
   margin: 0 0 var(--space-4) 0;
 }
@@ -166,6 +168,7 @@
 
 @media (width >= 1024px) {
   .mosaic-reveal-container h2 {
+    font-size: 4.75rem;
     line-height: 1.11;
   }
 }
