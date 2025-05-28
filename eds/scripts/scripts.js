@@ -229,7 +229,6 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
       preload: 'metadata',
       playsinline: '',
       type: 'video/mp4',
-      muted: '',
     },
 
     /* add source element with data-src attribute to lazy load the video */
@@ -246,12 +245,14 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
    * Otherwise, the video element will pause.
    * lazy loads the video source when the video is in view
    */
+ 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio > 0.4) {
         if (!videoElem.src) {
           videoElem.src = videoElem.querySelector('source').dataset.src;
         }
+        videoElem.muted = true;
         videoElem.play().catch((error) => {
           console.warn('Video playback failed:', error);
         });
