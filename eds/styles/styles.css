@@ -391,67 +391,10 @@ main {
     padding: var(--space-3) var(--space-4);
   }
 
-  .video-iframe-box {
-    align-items: center;
-    background-color: var(--esri-ui-opacity80);
-    block-size: 100vh;
-    display: flex;
-    inline-size: 100vw;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    justify-content: center;
-    overscroll-behavior: contain;
-    position: fixed;
-    z-index: 5;
-
-    .video-iframe-wrapper {
-      aspect-ratio: 16/9;
-      inline-size: 85%;
-      position: relative;
-
-      .video-close-button {
-        align-items: center;
-        background: var(--calcite-ui-text-1);
-        background-color: var(--calcite-ui-text-inverse);
-        block-size: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        inline-size: 50px;
-        inset-block-start: -20px;
-        inset-inline-end: -20px;
-        justify-content: center;
-        position: absolute;
-        transition: .15s ease-in-out;
-      }
-
-      .video-close-button:hover {
-        background-color: var(--calcite-ui-brand);
-        color: var(--calcite-ui-text-inverse);
-      }
-    }
-
-    .video-iframe {
-      block-size: 100%;
-      border: none;
-      inline-size: 100%;
-      inset-block-start: 0;
-      inset-inline-start: 0;
-      position: absolute;
-    }
-  }
 
   @media (width >= 900px) {
     .section > div {
       margin: auto;
-    }
-  }
-
-  @media (width >= 1024px) {
-    .video-iframe-box {
-      .video-iframe-wrapper {
-        inline-size: 65%;
-      }
     }
   }
 
@@ -695,4 +638,62 @@ body[aria-hidden="true"]{
 
 .button-container[aria-hidden="true"] {
   display: none;
+}
+
+.video-iframe-box {
+  align-items: center;
+  background-color: var(--esri-ui-opacity80);
+  block-size: 100vh;
+  display: flex;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  justify-content: center;
+  overscroll-behavior: contain;
+  position: fixed;
+  z-index: 5;
+
+  .video-iframe-wrapper {
+    aspect-ratio: 16/9;
+    inline-size: 85%;
+    position: relative;
+
+    .video-close-button {
+      align-items: center;
+      background: var(--calcite-ui-text-1);
+      background-color: var(--calcite-ui-text-inverse);
+      block-size: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      inline-size: 50px;
+      inset-block-start: -20px;
+      inset-inline-end: -20px;
+      justify-content: center;
+      position: absolute;
+      transition: .15s ease-in-out;
+    }
+
+    .video-close-button:hover {
+      background-color: var(--calcite-ui-brand);
+      color: var(--calcite-ui-text-inverse);
+    }
+  }
+
+  .video-iframe {
+    block-size: 100%;
+    border: none;
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    position: absolute;
+  }
+}
+
+@media (width >= 1024px) {
+  .video-iframe-box {
+    .video-iframe-wrapper {
+      inline-size: 65%;
+    }
+  }
 }
