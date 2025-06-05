@@ -253,9 +253,7 @@ export function createAutoplayedVideo(sourceSrc, posterSrc = '') {
           videoElem.src = videoElem.querySelector('source').dataset.src;
         }
         videoElem.muted = true;
-        videoElem.play().catch((error) => {
-          console.warn('Video playback failed:', error);
-        });
+        videoElem.play();
       } else {
         videoElem.pause();
       }
