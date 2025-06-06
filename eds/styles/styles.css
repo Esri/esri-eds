@@ -666,8 +666,8 @@ body[aria-hidden="true"]{
   align-items: center;
   block-size: 50px;
   display: flex;
-  z-index: 3002;
   background: var(--calcite-ui-text-1);
+  z-index: 3002;
   border-radius: 100%;
   inline-size: 50px;
   inset-block-start: -17px;
