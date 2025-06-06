@@ -670,8 +670,8 @@ body[aria-hidden="true"]{
   z-index: 3002;
   background: var(--calcite-ui-text-1);
   border-radius: 100%;
-  position: absolute;
   inset-block-start: -17px;
+  position: absolute;
   inset-inline-end: -17px;
   justify-content: center;
 }
