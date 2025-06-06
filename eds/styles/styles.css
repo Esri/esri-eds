@@ -665,12 +665,12 @@ body[aria-hidden="true"]{
 .co3-modal-container .modal-close-button {
   align-items: center;
   block-size: 50px;
-  display: flex;
   background: var(--calcite-ui-text-1);
+  display: flex;
   border-radius: 100%;
   inline-size: 50px;
-  z-index: 3002;
   inset-block-start: -17px;
+  z-index: 3002;
   inset-inline-end: -17px;
   justify-content: center;
   position: absolute;
