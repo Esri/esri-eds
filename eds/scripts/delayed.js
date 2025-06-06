@@ -1,4 +1,5 @@
 import { sampleRUM, loadScript } from './aem.js';
+import { div, domEl } from './dom-helpers.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -92,48 +93,59 @@ const handleEscKeyPress = (event, playButton) => {
   }
 };
 
-// decorate modal
-export default function decorateModal(videoLink, playButton) {
-  const closeButton = Object.assign(document.createElement('calcite-icon'), {
-    className: 'co3-modal-container calcite-icon',
-    icon: 'x',
-    scale: 'm',
-    tabIndex: 0,
-    ariaLabel: 'close modal',
-    ariaHidden: 'false',
-  });
+function attachModalEventListeners(modal, playButton) {
+  const modalCloseButton = modal.querySelector('.modal-close-button');
+  const co3Modal = document.querySelector('.co3-modal');
+  const iframe = co3Modal.querySelector('iframe');
 
-  const iframe = document.createElement('iframe');
-  const modalContainer = document.createElement('div');
-  const modal = document.createElement('div');
-  iframe.classList.add('co3-modal', 'iframe');
-  iframe.setAttribute('src', videoLink);
-  modalContainer.classList.add('co3-modal-container');
-  modalContainer.setAttribute('tabindex', '0');
-  modalContainer.appendChild(iframe);
-  modalContainer.appendChild(closeButton);
-  modal.classList.add('co3-modal', 'calcite-mode-dark');
-  modal.appendChild(modalContainer);
-  document.body.setAttribute('tabindex', '-1');
-  document.body.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(modal);
-  document.addEventListener('keydown', (event) => handleEscKeyPress(event, playButton));
-  closeButton.addEventListener('click', () => removeModal(modal));
-  closeButton.addEventListener('keydown', (event) => {
+  modalCloseButton.addEventListener('click', () => removeModal(co3Modal));
+  modalCloseButton.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
-      removeModal(modal, playButton);
+      removeModal(co3Modal, playButton);
     }
   });
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      removeModal(modal, playButton);
+
+  co3Modal.addEventListener('click', (event) => {
+    if (event.target === co3Modal) {
+      removeModal(co3Modal, playButton);
     }
   });
 
   iframe.addEventListener('load', () => {
     toggleLoader();
-    modalContainer.focus();
+    modal.querySelector('.co3-modal-container').focus();
   });
+}
+
+// decorate modal
+export default function decorateModal(videoLink, playButton) {
+  const modal = div(
+    { class: 'co3-modal calcite-mode-dark' },
+    div({
+      class: 'co3-modal-container',
+      tabindex: '0',
+    }, domEl('iframe', {
+      class: 'co3-modal iframe',
+      src: videoLink,
+    }), div(
+      { class: 'modal-close-button' },
+      domEl('calcite-icon', {
+        icon: 'x',
+        scale: 'l',
+        tabIndex: 0,
+        'aria-label': 'close modal',
+        'aria-hidden': 'false',
+      }),
+    )),
+  );
+
+  document.body.setAttribute('tabindex', '-1');
+  document.body.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(modal);
+  document.addEventListener('keydown', (event) => handleEscKeyPress(event, playButton));
+
+  // Attach event listeners to the modal
+  attachModalEventListeners(modal, playButton);
 }
 
 // decorate embed iframe

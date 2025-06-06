@@ -605,17 +605,21 @@ body[aria-hidden="true"]{
   inline-size: 100%;
 }
 
- .co3-modal-container calcite-icon {
+.co3-modal-container .modal-close-button {
+  align-items: center;
   background: var(--calcite-ui-text-1);
   block-size: 50px;
   border-radius: 100%;
+  display: flex;
   inline-size: 50px;
-  inset-block-start: 0;
-  inset-inline-start: 100%;
+  inset-block-start: -17px;
+  inset-inline-end: -17px;
+  justify-content: center;
+  position: absolute;
   z-index: 3002;
 }
 
-.co3-modal-container calcite-icon:is(:hover, :focus-within, :active) {
+.co3-modal-container .modal-close-button:is(:hover, :focus-within, :active) {
   background: var(--calcite-ui-brand);
   color: var(--calcite-ui-text-1);
   cursor: pointer;
