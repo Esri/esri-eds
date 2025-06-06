@@ -663,8 +663,8 @@ body[aria-hidden="true"]{
 }
 
 .co3-modal-container .modal-close-button {
-  block-size: 50px;
   align-items: center;
+  block-size: 50px;
   display: flex;
   inline-size: 50px;
   z-index: 3002;
