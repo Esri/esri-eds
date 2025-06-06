@@ -663,13 +663,13 @@ body[aria-hidden="true"]{
 }
 
 .co3-modal-container .modal-close-button {
-  align-items: center;
   block-size: 50px;
   display: flex;
-  background: var(--calcite-ui-text-1);
+  align-items: center;
   inline-size: 50px;
-  border-radius: 100%;
   z-index: 3002;
+  background: var(--calcite-ui-text-1);
+  border-radius: 100%;
   position: absolute;
   inset-block-start: -17px;
   inset-inline-end: -17px;
