@@ -667,8 +667,8 @@ body[aria-hidden="true"]{
   block-size: 50px;
   display: flex;
   inline-size: 50px;
-  background: var(--calcite-ui-text-1);
   z-index: 3002;
+  background: var(--calcite-ui-text-1);
   border-radius: 100%;
   inset-block-start: -17px;
   inset-inline-end: -17px;
