@@ -671,8 +671,8 @@ body[aria-hidden="true"]{
   inline-size: 50px;
   inset-block-start: -17px;
   inset-inline-end: -17px;
-  z-index: 3002;
   justify-content: center;
+  z-index: 3002;
   position: absolute;
 }
 
