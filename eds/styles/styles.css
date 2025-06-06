@@ -666,12 +666,12 @@ body[aria-hidden="true"]{
   align-items: center;
   block-size: 50px;
   background: var(--calcite-ui-text-1);
-  display: flex;
   border-radius: 100%;
+  display: flex;
   inline-size: 50px;
   inset-block-start: -17px;
-  z-index: 3002;
   inset-inline-end: -17px;
+  z-index: 3002;
   justify-content: center;
   position: absolute;
 }
