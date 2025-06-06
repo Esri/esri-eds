@@ -119,22 +119,24 @@ function attachModalEventListeners(modal, playButton) {
 
 // decorate modal
 export default function decorateModal(videoLink, playButton) {
-  const modal = div({ class: 'co3-modal calcite-mode-dark'},
+  const modal = div(
+    { class: 'co3-modal calcite-mode-dark' },
     div({
       class: 'co3-modal-container',
-      tabindex: '0'
+      tabindex: '0',
     }, domEl('iframe', {
       class: 'co3-modal iframe',
-      src: videoLink
-    }), div({ class: 'modal-close-button' },
+      src: videoLink,
+    }), div(
+      { class: 'modal-close-button' },
       domEl('calcite-icon', {
         icon: 'x',
         scale: 'l',
         tabIndex: 0,
         'aria-label': 'close modal',
         'aria-hidden': 'false',
-      })
-    ))
+      }),
+    )),
   );
 
   document.body.setAttribute('tabindex', '-1');
