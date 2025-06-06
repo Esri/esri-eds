@@ -672,8 +672,8 @@ body[aria-hidden="true"]{
   inset-block-start: -17px;
   inset-inline-end: -17px;
   justify-content: center;
-  z-index: 3002;
   position: absolute;
+  z-index: 3002;
 }
 
 .co3-modal-container .modal-close-button:is(:hover, :focus-within, :active) {
