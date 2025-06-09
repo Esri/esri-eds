@@ -211,7 +211,7 @@ function decorateMode(element) {
     }
   });
 }
-// If the main element has the calcite-mode-dark class, set all calcite buttons to inverse(black and white))
+// If the page has calcite-mode-dark, set all calcite buttons to inverse(black and white)
 window.addEventListener('load', () => {
   const main = document.querySelector('main');
   if (main && main.classList.contains('calcite-mode-dark')) {
