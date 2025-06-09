@@ -211,6 +211,16 @@ function decorateMode(element) {
     }
   });
 }
+// If the main element has the calcite-mode-dark class, set all calcite buttons to inverse(black and white))
+window.addEventListener('load', () => {
+  const main = document.querySelector('main');
+  if (main && main.classList.contains('calcite-mode-dark')) {
+    const calciteButtons = document.querySelectorAll('calcite-button');
+    calciteButtons.forEach((button) => {
+      button.setAttribute('kind', 'inverse');
+    });
+  }
+});
 
 export function decorateBlockMode(block) {
   decorateMode(block);

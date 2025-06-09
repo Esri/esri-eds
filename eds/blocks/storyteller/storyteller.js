@@ -53,6 +53,7 @@ function decorateButtons(block) {
     const linkButton = calciteButton({
       'aria-label': anchorElement.innerHTML,
       tabindex: '0',
+      'icon-end': 'arrowRight',
       href: anchorElement.getAttribute('href'),
       scale: anchorElement.getAttribute('scale') || 'l',
     });
