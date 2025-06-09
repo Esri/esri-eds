@@ -168,8 +168,9 @@
 
 @media (width >= 1024px) {
   .mosaic-reveal-container h2 {
-    font-size: 4.75rem;
-    line-height: 1.11;
+    font-size: var(--font-4);
+    font-weight: var(--calcite-font-weight-bold);
+    line-height: 1.5;
   }
 }
 
