@@ -130,7 +130,8 @@
 }
 
 .hero.center .image {
-  max-inline-size: unset;
+  inline-size: 92%;
+  max-inline-size: 1050px;
 }
 
 @media (width >= 1024px) {
