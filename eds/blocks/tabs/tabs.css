@@ -99,11 +99,14 @@
 
 .tabs .tab-nav .arrow-button.left {
   inset-inline-start: 0;
+  margin-inline-start: -18px;
 }
 
 .tabs .tab-nav .arrow-button.right {
   inset-inline-end: 0;
+  margin-inline-end: -18px;
 }
+
 
 .tabs .tab-nav .tab-title {
   border-block-end: 3px solid var(--calcite-ui-brand);

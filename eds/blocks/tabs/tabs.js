@@ -106,6 +106,7 @@ export default async function decorate(block) {
       scale: 'l',
       kind: 'inverse',
       round: '',
+      style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
     },
   );
 
@@ -117,8 +118,35 @@ export default async function decorate(block) {
       scale: 'l',
       kind: 'inverse',
       round: '',
+      style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
     },
   );
+
+  document.addEventListener('scroll', () => {
+    const tabsContainer = block.querySelector('.tab-component');
+    const tabsRect = tabsContainer.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    const topBoundary = viewportHeight * 0.25;
+    const bottomBoundary = viewportHeight * 0.75;
+
+    if (tabsRect.top < topBoundary && tabsRect.bottom > bottomBoundary) {
+      arrowLeft.style.position = 'fixed';
+      arrowRight.style.position = 'fixed';
+      arrowLeft.style.top = `${viewportHeight / 2}px`;
+      arrowRight.style.top = `${viewportHeight / 2}px`;
+    } else if (tabsRect.top >= topBoundary) {
+      arrowLeft.style.position = 'fixed';
+      arrowRight.style.position = 'fixed';
+      arrowLeft.style.top = `${tabsRect.top + viewportHeight * 0.25}px`;
+      arrowRight.style.top = `${tabsRect.top + viewportHeight * 0.25}px`;
+    } else if (tabsRect.bottom <= bottomBoundary) {
+      arrowLeft.style.position = 'fixed';
+      arrowRight.style.position = 'fixed';
+      arrowLeft.style.top = `${tabsRect.bottom - viewportHeight * 0.25}px`;
+      arrowRight.style.top = `${tabsRect.bottom - viewportHeight * 0.25}px`;
+    }
+  });
 
   const titleIndex = tabTitles.findIndex((el) => el.textContent.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
   const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;
@@ -228,3 +256,4 @@ export default async function decorate(block) {
 
   block.replaceChildren(tabComponent);
 }
+
