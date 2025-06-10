@@ -119,6 +119,20 @@
   aspect-ratio: 16 / 9;
 }
 
+.hero.center {
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero.center img {
+  aspect-ratio: unset;
+  padding-inline-end: 0;
+}
+
+.hero.center .image {
+  max-inline-size: unset;
+}
+
 @media (width >= 1024px) {
   .hero {
     align-items: center;
