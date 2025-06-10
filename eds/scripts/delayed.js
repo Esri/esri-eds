@@ -98,7 +98,7 @@ function attachModalEventListeners(modal, playButton) {
   const co3Modal = document.querySelector('.co3-modal');
   const iframe = co3Modal.querySelector('iframe');
 
-  modalCloseButton.addEventListener('click', () => removeModal(co3Modal));
+  modalCloseButton.addEventListener('click', () => removeModal(co3Modal, playButton));
   modalCloseButton.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
       removeModal(co3Modal, playButton);

@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import decorateModal from '../../scripts/delayed.js';
+// import decorateModal from '../../scripts/delayed.js';
 import {
   calciteButton,
   ul,
@@ -152,11 +152,6 @@ export default function decorate(block) {
       anchor.appendChild(playButton);
       anchor.parentElement.parentElement.removeChild(anchor.parentElement);
       tab.children[0].appendChild(anchor);
-      playButton.addEventListener('click', (evt) => {
-        evt.preventDefault();
-        playButton.setAttribute('tabindex', '0');
-        decorateModal(anchor.href, playButton);
-      });
     } else {
       const button = calciteButton({
         'icon-end': 'arrowRight',
