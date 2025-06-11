@@ -201,8 +201,8 @@ function initNavWrapper(block) {
   const ul = document.createElement('ul');
   const mobileButton = domEl('calcite-icon', {
     class: 'btn-mobile',
-    scale: 'm',
-    icon: 'caret-down',
+    scale: 's',
+    icon: 'chevron-down',
     dir: 'ltr',
     'calcite-hydrated': '',
   });
@@ -223,7 +223,7 @@ function initNavWrapper(block) {
 }
 
 /**
- * toggle caret-up or caret-down mobile menu caret icon and aria-expanded attribute
+ * toggle caret-up or chevron-down mobile menu caret icon and aria-expanded attribute
  * @param {Element} block The header block element
  */
 function ctaEventListener(block) {
@@ -231,11 +231,11 @@ function ctaEventListener(block) {
   const mobileMenu = block.querySelector('ul.mobile-menu');
 
   mobileBtn.addEventListener('click', () => {
-    if (mobileBtn.getAttribute('icon') === 'caret-down') {
-      mobileBtn.setAttribute('icon', 'caret-up');
+    if (mobileBtn.getAttribute('icon') === 'chevron-down') {
+      mobileBtn.setAttribute('icon', 'chevron-up');
       mobileMenu.setAttribute('aria-expanded', 'true');
     } else {
-      mobileBtn.setAttribute('icon', 'caret-down');
+      mobileBtn.setAttribute('icon', 'chevron-down');
       mobileMenu.setAttribute('aria-expanded', 'false');
     }
   });
@@ -250,7 +250,7 @@ function resetDropdown(block) {
   const mobileMenu = block.querySelector('ul.mobile-menu');
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
-      mobileBtn.setAttribute('icon', 'caret-down');
+      mobileBtn.setAttribute('icon', 'chevron-down');
       mobileMenu.setAttribute('aria-expanded', 'false');
     }
   });
