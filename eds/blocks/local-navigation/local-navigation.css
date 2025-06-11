@@ -107,9 +107,9 @@
   block-size: 60px;
   color: #fff;
   cursor: pointer;
-  z-index: 3001;
   position: relative;
-  inset-inline-start: var(--space-4)
+  inset-inline-start: var(--space-4);
+  z-index: 3001;
 }
 
 .local-navigation .subnav {
