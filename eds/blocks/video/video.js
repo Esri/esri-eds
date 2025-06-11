@@ -76,7 +76,6 @@ function getVideoElement(source, autoplay, background) {
   video.append(sourceEl);
 
   return video;
-
 }
 
 const loadVideoEmbed = (block, link, autoplay, background) => {
