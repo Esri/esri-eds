@@ -107,8 +107,8 @@
   block-size: 60px;
   color: #fff;
   cursor: pointer;
-  position: relative;
   inset-inline-start: var(--space-4);
+  position: relative;
   z-index: 3001;
 }
 
