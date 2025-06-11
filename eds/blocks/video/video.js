@@ -70,8 +70,8 @@ function getVideoElement(source, autoplay, background) {
 
   const sourceEl = document.createElement('iframe');
   sourceEl.setAttribute('src', source);
-  sourceEl.setAttribute('width', '640');
-  sourceEl.setAttribute('height', '360');
+  sourceEl.setAttribute('width', '840');
+  sourceEl.setAttribute('height', '560');
   sourceEl.setAttribute('title', 'Embedded Video');
   video.append(sourceEl);
 
