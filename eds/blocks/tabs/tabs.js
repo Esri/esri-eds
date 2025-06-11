@@ -84,13 +84,13 @@ export default async function decorate(block) {
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
       content.splice(2, 2, buttonsWrapper);
 
-      buttons.forEach((button) => {
-        button.addEventListener('click', (e) => {
+      buttons.forEach((ctabutton) => {
+        ctabutton.addEventListener('click', (e) => {
           e.preventDefault();
-          const href = button.getAttribute('href');
+          const href = ctabutton.getAttribute('href');
           if (href) {
-            button.setAttribute('tabindex', '0');
-            decorateModal(href, button);
+            ctabutton.setAttribute('tabindex', '0');
+            decorateModal(href, ctabutton);
           }
         });
       });
