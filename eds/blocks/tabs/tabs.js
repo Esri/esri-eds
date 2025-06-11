@@ -1,6 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
-  button, calciteButton, div, li, ul,
+  button, calciteButton, calciteIcon, div, li, ul,
 } from '../../scripts/dom-helpers.js';
 import { loadFragment } from '../fragment/fragment.js';
 
@@ -98,28 +98,34 @@ export default async function decorate(block) {
     hidden: '',
   }, button(title)));
 
-  const arrowLeft = calciteButton(
+  const arrowLeft = button(
     {
       class: 'arrow-button left',
+      style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
+    },
+    calciteIcon({
       label: 'Previous Tab',
       'icon-end': 'chevronLeft',
-      scale: 'l',
+      icon: 'chevronLeft',
+      scale: 'm',
       kind: 'inverse',
       round: '',
-      style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
-    },
+    }),
   );
 
-  const arrowRight = calciteButton(
+  const arrowRight = button(
     {
       class: 'arrow-button right',
-      label: 'Next Tab',
-      'icon-end': 'chevronRight',
-      scale: 'l',
-      kind: 'inverse',
-      round: '',
       style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
     },
+    calciteIcon({
+      label: 'Next Tab',
+      'icon-end': 'chevronRight',
+      icon: 'chevronRight',
+      scale: 'm',
+      kind: 'inverse',
+      round: '',
+    }),
   );
 
   document.addEventListener('scroll', () => {
