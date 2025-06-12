@@ -117,15 +117,12 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
         playVideo(videoElement); // Play the video again
       }
       requestAnimationFrame(updateDashOffset);
-    } else {
+    } else if (currentTime >= totalFrames) {
       // Check if the video has ended, reset dash offset and play again
-      if (currentTime >= totalFrames) {
-        progressCircle.style.strokeDashoffset = totalFrames;
-      } else {
+      progressCircle.style.strokeDashoffset = totalFrames;
+    } else {
       // Schedule the next update for smoother animation
-        requestAnimationFrame(updateDashOffset);
-      }
-      // No operation to ensure the else block is not empty
+      requestAnimationFrame(updateDashOffset);
     }
     if (currentTime === totalFrames) {
       progressCircle.style.strokeDashoffset = totalFrames;
