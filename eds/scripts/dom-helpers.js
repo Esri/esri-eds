@@ -209,6 +209,10 @@ export function calciteLink(...items) {
   return domEl('calcite-link', ...items);
 }
 
+export function calciteIcon(...items) {
+  return domEl('calcite-icon', ...items);
+}
+
 /**
  * Creates and returns an SVG element with the specified child elements or attributes.
  *

@@ -1,6 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
-  button, calciteButton, div, li, ul,
+  button, calciteButton, calciteIcon, div, li, ul,
 } from '../../scripts/dom-helpers.js';
 import { loadFragment } from '../fragment/fragment.js';
 
@@ -98,27 +98,61 @@ export default async function decorate(block) {
     hidden: '',
   }, button(title)));
 
-  const arrowLeft = calciteButton(
+  const arrowLeft = button(
     {
       class: 'arrow-button left',
+      style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
+    },
+    calciteIcon({
       label: 'Previous Tab',
       'icon-end': 'chevronLeft',
-      scale: 'l',
+      icon: 'chevronLeft',
+      scale: 'm',
       kind: 'inverse',
       round: '',
-    },
+    }),
   );
 
-  const arrowRight = calciteButton(
+  const arrowRight = button(
     {
       class: 'arrow-button right',
+      style: 'position: sticky; top: 50%; transform: translateY(-50%); z-index: 10;',
+    },
+    calciteIcon({
       label: 'Next Tab',
       'icon-end': 'chevronRight',
-      scale: 'l',
+      icon: 'chevronRight',
+      scale: 'm',
       kind: 'inverse',
       round: '',
-    },
+    }),
   );
+
+  document.addEventListener('scroll', () => {
+    const tabsContainer = block.querySelector('.tab-component');
+    const tabsRect = tabsContainer.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    const topBoundary = viewportHeight * 0.25;
+    const bottomBoundary = viewportHeight * 0.75;
+
+    if (tabsRect.top < topBoundary && tabsRect.bottom > bottomBoundary) {
+      arrowLeft.style.position = 'fixed';
+      arrowRight.style.position = 'fixed';
+      arrowLeft.style.top = `${viewportHeight / 2}px`;
+      arrowRight.style.top = `${viewportHeight / 2}px`;
+    } else if (tabsRect.top >= topBoundary) {
+      arrowLeft.style.position = 'fixed';
+      arrowRight.style.position = 'fixed';
+      arrowLeft.style.top = `${tabsRect.top + viewportHeight * 0.25}px`;
+      arrowRight.style.top = `${tabsRect.top + viewportHeight * 0.25}px`;
+    } else if (tabsRect.bottom <= bottomBoundary) {
+      arrowLeft.style.position = 'fixed';
+      arrowRight.style.position = 'fixed';
+      arrowLeft.style.top = `${tabsRect.bottom - viewportHeight * 0.25}px`;
+      arrowRight.style.top = `${tabsRect.bottom - viewportHeight * 0.25}px`;
+    }
+  });
 
   const titleIndex = tabTitles.findIndex((el) => el.textContent.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
   const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;

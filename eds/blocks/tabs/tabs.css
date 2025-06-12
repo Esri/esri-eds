@@ -85,24 +85,52 @@
   padding: 0;
 }
 
-.tabs .tab-nav calcite-icon {
-  color: var(--calcite-ui-inverse);
-}
+/* .tabs .tab-nav calcite-icon {
+  color: var(--calcite-ui-text-inverse);
+} */
 
 .tabs .tab-nav .arrow-button {
+  background-color: var(--calcite-ui-inverse);
   border: none;
+  border-radius: 50%;
+  color: var(--calcite-ui-text-inverse);
+  font-size: var(--calcite-font-size-0);
+  inline-size: 2.75rem;
+  line-height: 1.25rem;
   margin: auto 0;
+  min-block-size: 2.75rem;
   opacity: .96;
   padding: 0;
   position: absolute;
+
+  --calcite-button-padding-x-internal: 0.125rem;
+  --calcite-button-padding-y-internal: 9px;
 }
 
 .tabs .tab-nav .arrow-button.left {
   inset-inline-start: 0;
+  margin-inline-start: -16px;
+}
+
+.tabs .tab-nav .arrow-button.left calcite-icon {
+    margin-block-start: 4px;
+    margin-inline-start: 12px;
 }
 
 .tabs .tab-nav .arrow-button.right {
   inset-inline-end: 0;
+  margin-inline-end: -16px;
+}
+
+.tabs .tab-nav .arrow-button.right calcite-icon {
+  margin-block-start: 4px;
+  margin-inline-end: 12px;
+}
+
+@media screen and (width >= 1024px) {
+  .tabs .tab-nav .arrow-button{
+    display: none;
+  }
 }
 
 .tabs .tab-nav .tab-title {
