@@ -3,6 +3,7 @@ import {
   button, calciteButton, calciteIcon, div, li, ul,
 } from '../../scripts/dom-helpers.js';
 import { loadFragment } from '../fragment/fragment.js';
+import decorateModal from '../../scripts/delayed.js';
 
 function urlEncodeTitle(tabTitle) {
   return tabTitle
@@ -82,6 +83,17 @@ export default async function decorate(block) {
 
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
       content.splice(2, 2, buttonsWrapper);
+
+      buttons.forEach((ctabutton) => {
+        ctabutton.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = ctabutton.getAttribute('href');
+          if (href) {
+            ctabutton.setAttribute('tabindex', '0');
+            decorateModal(href, ctabutton);
+          }
+        });
+      });
     });
   }
 
