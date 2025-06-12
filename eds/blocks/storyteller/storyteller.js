@@ -117,7 +117,7 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
         playVideo(videoElement); // Play the video again
       }
       requestAnimationFrame(updateDashOffset);
-      } else {
+    } else {
       // Check if the video has ended, reset dash offset and play again
       if (currentTime >= totalFrames) {
         progressCircle.style.strokeDashoffset = totalFrames;
@@ -126,7 +126,6 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
         requestAnimationFrame(updateDashOffset);
       }
       // No operation to ensure the else block is not empty
-      void 0;
     }
     if (currentTime === totalFrames) {
       progressCircle.style.strokeDashoffset = totalFrames;
