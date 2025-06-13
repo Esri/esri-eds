@@ -109,7 +109,21 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   function updateDashOffset() {
     const currentTime = (videoElement.currentTime / videoLength) * totalFrames;
     progressCircle.style.strokeDashoffset = totalFrames - currentTime;
-    requestAnimationFrame(updateDashOffset);
+
+    // Check if the video is a loop video
+    if (videoElement.closest('div.storyteller')?.classList.contains('loop-video')) {
+      if (currentTime >= totalFrames) {
+        videoElement.currentTime = 0; // Reset video to start
+        playVideo(videoElement); // Play the video again
+      }
+      requestAnimationFrame(updateDashOffset);
+    } else if (currentTime >= totalFrames) {
+      // Check if the video has ended, reset dash offset and play again
+      progressCircle.style.strokeDashoffset = totalFrames;
+    } else {
+      // Schedule the next update for smoother animation
+      requestAnimationFrame(updateDashOffset);
+    }
     if (currentTime === totalFrames) {
       progressCircle.style.strokeDashoffset = totalFrames;
     }
