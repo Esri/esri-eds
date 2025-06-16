@@ -17,7 +17,7 @@ export default function decorate(block) {
       domEl(
         'button',
         { class: 'mosaic-reveal-button' },
-        domEl('calcite-icon', { icon: 'expand', scale: 's' },),
+        domEl('calcite-icon', { icon: 'expand', scale: 's' }),
       ),
     );
     child.appendChild(expandButton);
