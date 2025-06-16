@@ -44,9 +44,9 @@
   inline-size: 25px;
   inset-block-end: var(--space-5);
   inset-inline-end: var(--space-5);
+  box-shadow: none;
   margin: 0;
   padding: 0;
-  box-shadow: none;
   position: absolute;
 }
 
