@@ -37,6 +37,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
+  box-shadow: none;
   block-size: 25px;
   border-color: transparent;
   content: "";
@@ -44,7 +45,6 @@
   inline-size: 25px;
   inset-block-end: var(--space-5);
   inset-inline-end: var(--space-5);
-  box-shadow: none;
   margin: 0;
   padding: 0;
   position: absolute;
