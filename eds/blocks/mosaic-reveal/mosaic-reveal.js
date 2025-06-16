@@ -13,9 +13,11 @@ export default function decorate(block) {
     }
 
     child.children[0].appendChild(h3({ class: 'title' }, titleText));
-    const expandButton = domEl('button', { class: 'mosaic-reveal-button' });
-    const icon = domEl('calcite-icon', { icon: 'expand', scale: 's' });
-    expandButton.appendChild(icon);
+    const expandButton = div(
+      domEl('button', { class: 'mosaic-reveal-button' },
+        domEl('calcite-icon', { icon: 'expand', scale: 's' })
+      )
+    );
     child.appendChild(expandButton);
   });
 
