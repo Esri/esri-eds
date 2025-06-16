@@ -67,22 +67,18 @@ export default function decorate(block) {
     });
 
     child.addEventListener('mouseenter', () => {
-      if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').removeAttribute('hidden');
-        mosaicTitle.setAttribute('tabindex', '0');
-        setTimeout(() => {
-          if (child.matches(':focus-within')) {
-            mosaicTitle.focus();
-          }
-        }, 100);
-      }
+      child.querySelector('.mosaic-reveal-content').removeAttribute('hidden');
+      mosaicTitle.setAttribute('tabindex', '0');
+      setTimeout(() => {
+        if (child.matches(':focus-within')) {
+          mosaicTitle.focus();
+        }
+      }, 100);
     });
 
     child.addEventListener('mouseleave', () => {
-      if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').setAttribute('hidden', '');
-        mosaicTitle.setAttribute('tabindex', '-1');
-      }
+      child.querySelector('.mosaic-reveal-content').setAttribute('hidden', '');
+      mosaicTitle.setAttribute('tabindex', '-1');
     });
 
     child.querySelector('.mosaic-reveal-button').addEventListener('click', () => {
