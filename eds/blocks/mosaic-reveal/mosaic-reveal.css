@@ -39,6 +39,7 @@
   background-size: contain;
   block-size: 25px;
   border-color: transparent;
+  box-shadow: none;
   content: "";
   display: block;
   inline-size: 25px;
@@ -47,7 +48,6 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  box-shadow: none;
 }
 
 .mosaic-reveal calcite-icon {

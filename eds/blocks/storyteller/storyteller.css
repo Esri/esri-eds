@@ -15,17 +15,18 @@
     flex-direction: column;
 
     .content {
-      @media screen and (width >= 1152px) {
+      @media screen and (width >= 800px) {
         inline-size: 50%;
         margin-inline: auto 0;
         max-inline-size: 720px;
         padding: 0;
-        padding-inline-end: var(--space-24);
+        padding-inline: var(--space-12);
+        padding-inline-start: 14px;
       }
     }
 
     .media {
-      @media screen and (width >= 1152px) {
+      @media screen and (width >= 800px) {
         align-items: flex-start;
       }
 
@@ -41,7 +42,7 @@
     }
   }
 
-  @media screen and (width >= 1152px) {
+  @media screen and (width >= 800px) {
     flex-direction: row;
     gap: 0;
     min-block-size: 1100px;
@@ -74,12 +75,12 @@
     margin-inline-end: auto;
     padding-inline: var(--space-6);
 
-    @media screen and (width >= 1152px) {
+    @media screen and (width >= 800px) {
       inline-size: min(50%, 720px);
       inline-size: 50%;
       margin-inline-end: auto;
       max-inline-size: 720px;
-      padding-inline: var(--space-20) 0;
+      padding-inline: var(--space-12) 0;
       padding-inline-end: 14px;
     }
   }
@@ -91,7 +92,7 @@
     padding-inline: var(--space-6);
     position: relative;
 
-    @media screen and (width >= 1152px) {
+    @media screen and (width >= 800px) {
       align-items: flex-end;
       inline-size: 50%;
       padding-inline: 0;
@@ -108,7 +109,7 @@
       position: absolute;
       z-index: 1;
 
-      @media screen and (width >= 1152px) {
+      @media screen and (width >= 800px) {
         display: block;
       }
     }
@@ -119,9 +120,13 @@
       position: relative;
       z-index: 2;
 
-      @media screen and (width >= 1152px) {
-        inline-size: 500px;
+      @media screen and (width >= 800px) {
+        inline-size: 410px;
         position: absolute;
+      }
+
+      @media screen and (width >= 1000px) {
+        inline-size: 500px;
       }
 
       video, img {
@@ -139,7 +144,7 @@
     position: absolute;
     z-index: 3;
 
-    @media screen and (width >= 1152px) {
+    @media screen and (width >= 800px) {
       inline-size: 90%;
       max-inline-size: 450px;
     }
