@@ -109,8 +109,7 @@
   visibility: hidden;
 }
 
-.mosaic-reveal > div { /* stylelint-disable-line no-descending-specificity */
-  overflow: unset;
+.mosaic-reveal > div > div:not(.mosaic-reveal-content) { /* stylelint-disable-line no-descending-specificity */
   position: relative;
 }
 
@@ -157,6 +156,10 @@
 }
 
 @media (width >= 860px) {
+  .mosaic-reveal > div {
+    position: relative;
+  }
+
   .mosaic-reveal picture {
     block-size: 400px;
     cursor: default;

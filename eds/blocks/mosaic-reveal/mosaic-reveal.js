@@ -13,9 +13,13 @@ export default function decorate(block) {
     }
 
     child.children[0].appendChild(h3({ class: 'title' }, titleText));
-    const expandButton = domEl('button', { class: 'mosaic-reveal-button' });
-    const icon = domEl('calcite-icon', { icon: 'expand', scale: 's' });
-    expandButton.appendChild(icon);
+    const expandButton = div(
+      domEl(
+        'button',
+        { class: 'mosaic-reveal-button' },
+        domEl('calcite-icon', { icon: 'expand', scale: 's' }),
+      ),
+    );
     child.appendChild(expandButton);
   });
 
@@ -67,22 +71,18 @@ export default function decorate(block) {
     });
 
     child.addEventListener('mouseenter', () => {
-      if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').removeAttribute('hidden');
-        mosaicTitle.setAttribute('tabindex', '0');
-        setTimeout(() => {
-          if (child.matches(':focus-within')) {
-            mosaicTitle.focus();
-          }
-        }, 100);
-      }
+      child.querySelector('.mosaic-reveal-content').removeAttribute('hidden');
+      mosaicTitle.setAttribute('tabindex', '0');
+      setTimeout(() => {
+        if (child.matches(':focus-within')) {
+          mosaicTitle.focus();
+        }
+      }, 100);
     });
 
     child.addEventListener('mouseleave', () => {
-      if (!mediaQuery.matches) {
-        child.querySelector('.mosaic-reveal-content').setAttribute('hidden', '');
-        mosaicTitle.setAttribute('tabindex', '-1');
-      }
+      child.querySelector('.mosaic-reveal-content').setAttribute('hidden', '');
+      mosaicTitle.setAttribute('tabindex', '-1');
     });
 
     child.querySelector('.mosaic-reveal-button').addEventListener('click', () => {
