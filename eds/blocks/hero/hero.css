@@ -145,6 +145,10 @@
     padding-inline-start: 0;
   }
 
+  .content {
+    margin-inline-start: 2vw;
+  }
+
   .hero :is(.image, .content) {
     inline-size: 50%;
     max-inline-size: 720px;
