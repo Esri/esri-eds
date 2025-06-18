@@ -249,7 +249,7 @@
         "text img"
         "buttons img"
         auto / 1fr 1fr;
-        min-block-size: 960px;
+        min-block-size: 50vh;
       }
 
       .buttons-wrapper {
@@ -274,12 +274,13 @@
     }
 
     .tab-content p:last-child picture {
+      align-items: center;
       block-size: 100%;
+      display: flex;
       inline-size: 100%;
     }
 
     .tab-content p:last-child picture img {
-      block-size: 100%;
       object-fit: cover;
       object-position: center;
     }
@@ -308,6 +309,10 @@
   .tabs .columns > div > div:first-child {
     inline-size: 100%;
     padding-inline-start: var(--space-16);
+  }
+
+  .tabs .tab-content p:last-child picture {
+    align-items: normal;
   }
 }
 
