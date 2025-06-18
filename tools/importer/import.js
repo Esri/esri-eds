@@ -1017,6 +1017,25 @@ function columns(main, document) {
   });
 
   main.querySelectorAll('.grid-container:has(.media-split)').forEach((container) => {
+    const tabsMediaSplit = container.querySelectorAll('.esri-tabs article.media-split');
+    if (tabsMediaSplit.length > 0) {
+      console.log('tabs media split', tabsMediaSplit.length);
+
+      tabsMediaSplit.forEach((mediaSplit) => {
+        const splitDiv = mediaSplit.querySelector('.split');
+        const splitChildren = [...splitDiv.children];
+        if (splitChildren.length !== 2) {
+          throw new Error('media-split expected 2 children');
+        }
+        if (splitDiv.classList.contains('split--swap')) {
+          splitChildren.reverse();
+        }
+
+        createBlock(mediaSplit, document, 'columns', [splitChildren], ['Media split']);
+      });
+      return;
+    }
+
     const cells = [...container.querySelectorAll('.media-split')].map((mediaSplit) => {
       const splitDiv = mediaSplit.querySelector('.split');
       const splitChildren = [...splitDiv.children];
