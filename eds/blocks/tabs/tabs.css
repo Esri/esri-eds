@@ -226,14 +226,17 @@
       .tab-title {
         border-block-end: 3px solid transparent;
         display: block;
-        flex: 1;
+        inline-size: 100%;
         inset-block-start: 1px;
+        max-inline-size: 286px;
+        padding: .75rem;
         position: relative;
       }
 
       .tab-title button {
         inline-size: 100%;
-        padding: 1rem;
+        line-height: 1.25rem;
+        padding: 0;
       }
 
       .tab-title[aria-selected="false"]:hover, 
