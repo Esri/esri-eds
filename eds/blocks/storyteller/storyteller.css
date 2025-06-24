@@ -115,7 +115,6 @@
     }
 
     .foreground {
-      aspect-ratio: 3 / 4;
       overflow: hidden;
       position: relative;
       z-index: 2;
@@ -126,11 +125,11 @@
       }
 
       @media screen and (width >= 1000px) {
-        inline-size: 500px;
+        inline-size: 576px;
       }
 
       video, img {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 4 / 5;
       }
     }
   }
@@ -146,7 +145,6 @@
 
     @media screen and (width >= 800px) {
       inline-size: 90%;
-      max-inline-size: 450px;
     }
 
     h2 {
@@ -183,7 +181,6 @@
     z-index: 4;
   }
 }
-
 
 /* Dynamic play/pause button styles for video */
 .video-button-container {
@@ -247,4 +244,3 @@
   mask-size: cover;
   position: absolute;
 }
-
