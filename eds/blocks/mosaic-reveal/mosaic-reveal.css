@@ -13,6 +13,10 @@
   margin: 0 0 var(--space-4);
 }
 
+.section.mosaic-reveal-container > .default-content-wrapper .button-container {
+  padding-inline-start: 0;
+}
+
 .mosaic-reveal-container > div:first-child {
   box-sizing: border-box;
   padding: var(--space-8) 11%;
