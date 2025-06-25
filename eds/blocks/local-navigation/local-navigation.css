@@ -49,7 +49,7 @@
 .local-navigation ul li a {
   align-items: center;
   background-color: #202020;
-  block-size: 65px;
+  block-size: 56px;
   color: #fff;
   cursor: pointer;
   display: flex;
@@ -168,6 +168,7 @@
 }
 
 @media (width >= 975px) {
+  
   .local-navigation-wrapper {
     max-inline-size: 1440px;
   }
