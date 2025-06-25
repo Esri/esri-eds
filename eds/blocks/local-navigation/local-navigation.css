@@ -39,7 +39,7 @@
 }
 
 .local-navigation ul.mobile-menu li a:hover {
-  background-color: #2b2b2b;
+  background-color: #202020;
 }
 
 .local-navigation ul.mobile-menu[aria-expanded="false"] {
@@ -48,7 +48,7 @@
 
 .local-navigation ul li a {
   align-items: center;
-  background-color: #202020;
+  background-color: #151515;
   block-size: 56px;
   color: #fff;
   cursor: pointer;
@@ -168,7 +168,6 @@
 }
 
 @media (width >= 975px) {
-  
   .local-navigation-wrapper {
     max-inline-size: 1440px;
   }
@@ -186,6 +185,7 @@
   }
 
   .local-navigation ul li a {
+    block-size: 65px;
     background-color: #2b2b2b;
   }
 
