@@ -185,8 +185,8 @@
   }
 
   .local-navigation ul li a {
-    block-size: 65px;
     background-color: #2b2b2b;
+    block-size: 65px;
   }
 
   .local-navigation ul li a[aria-current="true"] {
