@@ -127,6 +127,7 @@
   color: #9f9f9f;
   transition: background-position .25s;
   white-space: nowrap;
+  font-size: 14px;
 }
 
 .local-navigation .subnav .subnav-ul a:hover {
