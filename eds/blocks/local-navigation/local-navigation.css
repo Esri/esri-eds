@@ -159,6 +159,7 @@
 
 .local-navigation .subnav ul li a {
   padding-inline: 0;
+  block-size: 60px;
 }
 
 .local-navigation calcite-button {
@@ -187,7 +188,7 @@
 
   .local-navigation ul li a {
     background-color: #2b2b2b;
-    block-size: 60px;
+    block-size: 65px;
   }
 
   .local-navigation ul li a[aria-current="true"] {
