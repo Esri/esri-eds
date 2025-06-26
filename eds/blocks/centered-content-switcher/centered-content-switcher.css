@@ -161,7 +161,6 @@
       & > h2 {
         color: var(--calcite-ui-text-1);
         font-size: var(--font-4);
-        font-weight: var(--calcite-font-weight-normal);
         line-height: 1.375;
         margin: 0 0 var(--space-4);
         margin-block-end: var(--space-2);
