@@ -123,7 +123,6 @@ function setupVideoControl(playButtonElement, videoElement, videoLength) {
   videoElement.addEventListener('pause', () => { togglePlayButton(videoElement); });
 }
 
-
 /**
  * Binds a play button to a video element, setting up a video control to play
  * or pause the video when clicked.
@@ -146,7 +145,6 @@ function bindVideoElement(videoContainer) {
     }
   }
 }
-
 
 export default function decorate(block) {
   const newChildren = [...block.children]
