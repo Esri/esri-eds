@@ -33,6 +33,7 @@
 }
 
 .columns > div > .columns-img-col img {
+  aspect-ratio: 16 / 9;
   block-size: 100%;
   display: block;
   inline-size: 100%;
