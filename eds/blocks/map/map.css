@@ -85,7 +85,10 @@
 }
 
 .map-text-content {
+  inline-size: 1440px;
   margin-block: 0 var(--space-4);
+  max-inline-size: 92vw;
+  text-align: center;
 }
 
 .map-error-message {
@@ -131,6 +134,12 @@
     aspect-ratio: 1/1;
     max-inline-size: 96vw;
   }
+
+  .map-text-content {
+    inline-size: 1200px;
+    margin-inline: 8vw;
+    max-inline-size: 80vw;
+  }
 }
 
 @media (width > 860px) {
@@ -144,6 +153,12 @@
     inline-size: 72vw;
     max-inline-size: 1080px;
   }
+
+  .map-text-content {
+    inline-size: 840px;
+    margin-inline: 20vw;
+    max-inline-size: 56vw;
+  }
 }
 
 @media (width > 1500px) {
@@ -155,6 +170,11 @@
   .frame-wrapper {
     inline-size: 1080px;
     margin-inline: auto;
+  }
+
+  .map-text-content {
+    margin-inline: 299px;
+    padding-inline: .5rem;
   }
 }
 
