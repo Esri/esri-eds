@@ -125,8 +125,8 @@
   background-repeat: no-repeat;
   background-size: 200% 1px;
   color: #9f9f9f;
-  transition: background-position .25s;
   font-size: 14px;
+  transition: background-position .25s;
   white-space: nowrap;
 }
 
