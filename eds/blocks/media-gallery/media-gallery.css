@@ -74,7 +74,7 @@
     color: white;
     font-family: var(--calcite-sans-family);
     font-size: var(--font-2);
-    font-weight: var(--calcite-font-weight-normal);
+    font-weight: var(--calcite-font-weight-bold);
     line-height: 1.2;
     margin: 0;
     pointer-events: none;
@@ -96,6 +96,10 @@
     pointer-events: none;
     text-align: start;
     text-overflow: ellipsis;
+  }
+
+  .cards-card-body .card-content p.card-description {
+    font-size: clamp(.8rem, 1vw, 1rem);
   }
 
   img {
