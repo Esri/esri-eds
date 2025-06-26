@@ -78,8 +78,8 @@
   font-size: var(--font-0);
   inline-size: 100%;
   margin-block-start: 0;
-  text-decoration: none;
   padding-inline: var(--space-4);
+  text-decoration: none;
 }
 
 .local-navigation ul li button:hover {
@@ -126,8 +126,8 @@
   background-size: 200% 1px;
   color: #9f9f9f;
   transition: background-position .25s;
-  white-space: nowrap;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .local-navigation .subnav .subnav-ul a:hover {
@@ -159,8 +159,8 @@
 }
 
 .local-navigation .subnav ul li a {
-  padding-inline: 0;
   block-size: 60px;
+  padding-inline: 0;
 }
 
 .local-navigation calcite-button {
