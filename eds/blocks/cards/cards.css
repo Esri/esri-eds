@@ -2,8 +2,8 @@
   --category-size: var(--font-minus-2);
   --content-end-spacing: var(--space-5);
   --content-spacing: var(--space-2);
-  --description-size: var(--font-minus-1);
-  --subtitle-size: var(--font-minus-1);
+  --description-size: var(--font-0);
+  --subtitle-size: var(--font-0);
   --title-size: var(--font-2);
 }
 
@@ -283,6 +283,10 @@
     color: var(--calcite-ui-text-2);
     font-size: var(--subtitle-size);
     margin-block-end: var(--content-spacing);
+  }
+
+  .card-body-description {
+    font-size: var(--description-size);
   }
 
   a {
