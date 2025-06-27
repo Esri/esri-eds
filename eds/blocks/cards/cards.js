@@ -82,7 +82,7 @@ function processStandardCard(element) {
   if (pictureEl) {
     pictureEl.nextElementSibling.classList.add('card-body-title');
     const cardBodyTitle = element.querySelector('.card-body-title');
-    if (cardBodyContent.lastChild.classList === '') cardBodyContent.lastChild.classList.add('card-body-description');
+    if (cardBodyContent.lastChild.classList == '') cardBodyContent.lastChild.classList.add('card-body-description');
 
     if (cardBodyTitle.nextElementSibling && !cardBodyTitle.nextElementSibling.classList.contains('card-body-description')) {
       cardBodyTitle.nextElementSibling.classList.add('card-body-subtitle');
