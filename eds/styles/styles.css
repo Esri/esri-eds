@@ -303,7 +303,7 @@ main {
   a.button.secondary,
   button.secondary {
     background-color: unset;
-    border: 2px solid currentcolor;
+    border: 1px solid currentcolor;
     color: var(--calcite-ui-text-1);
     inline-size: fit-content;
   }
