@@ -109,6 +109,12 @@
         border-inline-end: none;
         margin-inline-end: 0;
       }
+
+      .button.secondary {
+        background-color: transparent;
+        border-color: var(--calcite-ui-brand);
+        color: var(--calcite-ui-brand);
+      }
     }
   }
 
