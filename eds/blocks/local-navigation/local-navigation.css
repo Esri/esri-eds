@@ -36,6 +36,8 @@
   list-style-type: none;
   padding: 0;
   position: absolute;
+  background-color: #151515;
+
 }
 
 .local-navigation ul.mobile-menu li a:hover {
