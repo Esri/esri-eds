@@ -117,8 +117,8 @@
 
 .local-navigation calcite-icon.chevron-icon {
   block-size: 65px;
-  cursor: pointer;
   color: var(--text-color-1);
+  cursor: pointer;
   display: block;
   inset-inline-end: var(--space-3);
   position: absolute;
