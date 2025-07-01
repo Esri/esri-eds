@@ -237,17 +237,13 @@
     padding-inline-start: var(--space-6);
   }
 
-  .local-navigation .subnav .subnav-ul a {
-    background-color: #202020;
-  }
-
   .local-navigation calcite-button {
     background-color: #2b2b2b;
     margin: 10px;
     padding: 0;
   }
 
-  .local-navigation calcite-icon {
+  .local-navigation calcite-icon.btn-mobile {
     display: none;
   }
 }
