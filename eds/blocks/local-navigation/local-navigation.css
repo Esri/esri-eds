@@ -74,8 +74,8 @@
   block-size: 65px;
   border: none;
   box-shadow: none;
-  cursor: pointer;
   color: var(--calcite-color-text-1);
+  cursor: pointer;
   display: flex;
   font-size: var(--font-0);
   inline-size: 100%;
