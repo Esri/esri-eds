@@ -163,11 +163,6 @@
   padding-inline-start: var(--space-4);
 }
 
-.local-navigation .subnav ul li a {
-  block-size: 60px;
-  padding-inline: 0;
-}
-
 .local-navigation calcite-button {
   background-color: #151515;
   display: flex;
@@ -200,10 +195,6 @@
   .local-navigation ul li a[aria-current="true"] {
     background-color: #202020;
     box-shadow: inset 0 -3px 0 0 var(--calcite-ui-brand);
-  }
-
-  .local-navigation ul li.page-title {
-    position: relative;
   }
 
   .local-navigation ul li.page-title a:hover {
