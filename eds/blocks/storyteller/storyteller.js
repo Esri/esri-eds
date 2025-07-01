@@ -49,13 +49,14 @@ function getVideoUrls(block) {
  * @returns {void}
  */
 function decorateButtons(block) {
-  block.querySelectorAll('a').forEach((anchorElement) => {
+  block.querySelectorAll('a').forEach((anchorElement, index) => {
     const linkButton = calciteButton({
       'aria-label': anchorElement.innerHTML,
       tabindex: '0',
       'icon-end': 'arrowRight',
       href: anchorElement.getAttribute('href'),
       scale: anchorElement.getAttribute('scale') || 'l',
+      appearance: index === 1 ? 'outline' : 'solid', // Set appearance to outline for the second anchor
     });
 
     linkButton.innerHTML = anchorElement.innerHTML;
