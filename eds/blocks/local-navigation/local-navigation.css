@@ -118,12 +118,6 @@
   display: block;
 }
 
-.local-navigation .subnav {
-  background-color: #202020;
-  inset-inline-end: 0;
-  position: relative;
-}
-
 .local-navigation .subnav .subnav-ul a {
   background-image: linear-gradient(90deg, #007ac2 50%, #555 0);
   background-position: 100% 100%;
