@@ -56,7 +56,7 @@
   color: #fff;
   cursor: pointer;
   display: flex;
-  padding-inline: var(--space-5);
+  padding-inline: var(--space-8);
   text-decoration: none;
 }
 
@@ -188,6 +188,7 @@
   .local-navigation ul li a {
     flex-direction: row;
     block-size: 65px;
+    padding-inline: var(--space-5);
   }
 
   .local-navigation ul li a[aria-current="true"] {
