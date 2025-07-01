@@ -211,12 +211,13 @@ function decorateMode(element) {
     }
   });
 }
-// If the page has calcite-mode-dark or the meta tag with content set to inverse, set all calcite buttons to inverse(black and white)
+// If the page has calcite-mode-dark or the meta tag with content set to inverse, 
+// set all calcite buttons to inverse(black and white)
 window.addEventListener('load', () => {
   const main = document.querySelector('main');
   const buttonColorMeta = document.querySelector('meta[name="buttoncolor"]');
   const buttonColor = buttonColorMeta.getAttribute('content');
-  if (main && main.classList.contains('calcite-mode-dark') || buttonColorMeta && buttonColor === 'inverse') {
+  if (main && main.classList.contains('calcite-mode-dark') || (buttonColorMeta && buttonColor === 'inverse')) {
     const calciteButtons = document.querySelectorAll('calcite-button');
     calciteButtons.forEach((button) => {
       button.setAttribute('kind', 'inverse');
