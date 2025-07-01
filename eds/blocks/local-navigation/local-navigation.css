@@ -127,11 +127,17 @@
   font-size: 14px;
   transition: background-position .25s;
   white-space: nowrap;
+  block-size: 60px;
+  padding-inline: 0;
+}
+
+.local-navigation ul li.page-title > a:hover {
+  background-color: #202020;
 }
 
 .local-navigation .subnav .subnav-ul a:hover {
-  background-color: #202020;
   background-position: 0 100%;
+  color: #ffffff;
 }
 
 .local-navigation .subnav .subnav-ul a::after {

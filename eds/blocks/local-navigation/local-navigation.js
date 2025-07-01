@@ -35,20 +35,28 @@ function navigationTitle(value, block) {
 
 function listenSubNav(subNavItems) {
   subNavItems.addEventListener('click', () => {
+    if (subNavItems.classList.contains('chevron-icon')) {
+      subNavItems = subNavItems.parentNode.querySelector('.subnav-btn');
+    }
+    const subNav = subNavItems.parentNode.querySelector('.subnav');
+    const order = subNavItems.getAttribute('attr-order');
+    const chevronIcon = subNavItems.nextElementSibling;
+    const allSubNavBtn = document.querySelectorAll('.subnav-btn');
     if (subNavItems.getAttribute('aria-expanded') === 'false') {
-      const order = subNavItems.getAttribute('attr-order');
-      const allSubNavBtn = document.querySelectorAll('.subnav-btn');
       subNavItems.setAttribute('aria-expanded', 'true');
-      subNavItems.nextElementSibling.removeAttribute('hidden');
+      chevronIcon.setAttribute('icon', 'chevron-up');
+      subNav.removeAttribute('hidden');
       allSubNavBtn.forEach((btn) => {
         if (btn.getAttribute('attr-order') !== order) {
           btn.setAttribute('aria-expanded', 'false');
-          btn.nextElementSibling.setAttribute('hidden', '');
+          btn.parentNode.querySelector('.subnav').setAttribute('hidden', '');
+          btn.nextElementSibling.setAttribute('icon', 'chevron-down');
         }
       });
     } else {
       subNavItems.setAttribute('aria-expanded', 'false');
-      subNavItems.nextElementSibling.setAttribute('hidden', '');
+      subNav.setAttribute('hidden', '');
+      chevronIcon.setAttribute('icon', 'chevron-down');
     }
   });
 
@@ -89,7 +97,7 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
       'aria-current': 'false',
       'attr-order': i,
     });
-    const chevronButton = domEl('calcite-icon', { /* add chevron icon to the subnav button, replace caret */
+    const chevronButton = domEl('calcite-icon', {
       class: 'chevron-icon',
       scale: 's',
       icon: 'chevron-down',
@@ -100,6 +108,7 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
     li.appendChild(subNavItems);
     li.appendChild(chevronButton);
     subNavItems.innerHTML = pgObj.pageTitle;
+    listenSubNav(chevronButton);
     listenSubNav(subNavItems);
 
     pgObj.subnavItems.forEach((item) => {
