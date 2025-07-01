@@ -70,8 +70,8 @@
 
 .local-navigation ul li button {
   align-items: center;
-  color: var(--calcite-color-text-1);
   background-color: var(--calcite-color-foreground-3);
+  color: var(--calcite-color-text-1);
   block-size: 65px;
   border: none;
   box-shadow: none;
