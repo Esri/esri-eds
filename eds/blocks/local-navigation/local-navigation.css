@@ -82,10 +82,10 @@
   background-color: var(--background-color-1);
   block-size: 65px;
   border: none;
+  box-shadow: none;
   cursor: pointer;
   display: flex;
   font-size: var(--font-0);
-  box-shadow: none;
   inline-size: 100%;
   margin: 0;
   padding-inline: var(--space-8);
@@ -117,8 +117,8 @@
 
 .local-navigation calcite-icon.chevron-icon {
   block-size: 65px;
-  display: block;
   color: var(--text-color-1);
+  display: block;
   cursor: pointer;
   inset-inline-end: var(--space-3);
   position: absolute;
@@ -132,9 +132,9 @@
   block-size: 60px;
   color: var(--text-color-2);
   font-size: 14px;
+  padding-inline: 0;
   transition: background-position .25s;
   white-space: nowrap;
-  padding-inline: 0;
 }
 
 .local-navigation ul li.page-title > a:hover {
