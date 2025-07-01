@@ -97,26 +97,25 @@
   display: none;
 }
 
-.local-navigation ul.mobile-menu button::after {
-  block-size: 13px;
-  content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 25' width='10' height='25'%3E%3Cpath fill='%23ffffff' d='M 0 0 14 0 7 7' /%3E%3C/svg%3E");
-  inset-inline-end: var(--space-4);
-  position: absolute;
-  transition-duration: 0.25s;
-}
-
 .local-navigation ul.mobile-menu button[aria-expanded="true"]::after {
   transform: rotateX(180deg) translateY(1px);
   transition-duration: 0.25s;
 }
 
-.local-navigation calcite-icon {
+.local-navigation calcite-icon.btn-mobile {
   block-size: 65px;
   color: #fff;
   cursor: pointer;
-  inset-inline-start: var(--space-4);
-  position: relative;
-  z-index: 3001;
+  margin-inline-start: var(--space-4);
+}
+
+.local-navigation calcite-icon.chevron-icon {
+  block-size: 65px;
+  color: #fff;
+  cursor: pointer;
+  inset-inline-end: var(--space-3);
+  position: absolute;
+  display: block;
 }
 
 .local-navigation .subnav {

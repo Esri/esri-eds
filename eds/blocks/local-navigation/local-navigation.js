@@ -89,9 +89,16 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
       'aria-current': 'false',
       'attr-order': i,
     });
+    const chevronButton = domEl('calcite-icon', { /* add chevron icon to the subnav button, replace caret */
+      class: 'chevron-icon',
+      scale: 's',
+      icon: 'chevron-down',
+      dir: 'ltr',
+    });
     const subNav = domEl('div', { class: 'subnav', id: 'subnav', hidden: '' });
     const subNavUL = domEl('ul', { class: 'subnav-ul' });
     li.appendChild(subNavItems);
+    li.appendChild(chevronButton);
     subNavItems.innerHTML = pgObj.pageTitle;
     listenSubNav(subNavItems);
 
