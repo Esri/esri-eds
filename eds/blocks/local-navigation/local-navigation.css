@@ -18,7 +18,7 @@
 .local-navigation .navigation-title a {
   align-items: center;
   block-size: 65px;
-  color: #fff;
+  color: #ffffff;
   display: flex;
   font-size: var(--font-0);
   white-space: nowrap;
@@ -52,7 +52,6 @@
 
 .local-navigation ul li a {
   align-items: center;
-  background-color: #151515;
   block-size: 56px;
   color: #fff;
   cursor: pointer;
@@ -75,7 +74,6 @@
   background-color: #151515;
   block-size: 65px;
   border: none;
-  color: #fff;
   cursor: pointer;
   display: flex;
   font-size: var(--font-0);
@@ -145,7 +143,6 @@
   content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'%3E%3Cpath fill='%23007ac2' d='M8 14.3l5.3-5.3H0V8h13.3L8 2.7V1.3L15.2 8.5 8 15.7V14.3z' /%3E%3C/svg%3E");
   display: flex;
   inline-size: 100%;
-  inset-inline-end: .20px;
   justify-content: end;
   margin-inline-end: 20px;
   opacity: 0;
@@ -160,7 +157,7 @@
 .local-navigation .subnav .subnav-ul {
   list-style-type: none;
   margin: 0;
-  padding-inline-start: var(--space-4);
+  padding-inline-start: var(--space-8);
 }
 
 .local-navigation calcite-button {
@@ -185,6 +182,7 @@
     justify-content: end;
     margin: 0;
     position: relative;
+    background-color: #2b2b2b;
   }
 
   .local-navigation ul li a {
