@@ -35,8 +35,9 @@ function navigationTitle(value, block) {
 
 function listenSubNav(subNavItems) {
   subNavItems.addEventListener('click', () => {
-    if (subNavItems.classList.contains('chevron-icon')) {
-      subNavItems = subNavItems.parentNode.querySelector('.subnav-btn');
+    let targetSubNavItems = subNavItems;
+    if (targetSubNavItems.classList.contains('chevron-icon')) {
+      targetSubNavItems = targetSubNavItems.parentNode.querySelector('.subnav-btn');
     }
     const subNav = subNavItems.parentNode.querySelector('.subnav');
     const order = subNavItems.getAttribute('attr-order');
