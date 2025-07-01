@@ -59,14 +59,6 @@ function listenSubNav(subNavItems) {
       chevronIcon.setAttribute('icon', 'chevron-down');
     }
   });
-
-  document.addEventListener('click', (e) => {
-    const isClickInside = subNavItems.contains(e.target);
-    if (!isClickInside) {
-      subNavItems.setAttribute('aria-expanded', 'false');
-      subNavItems.nextElementSibling.setAttribute('hidden', '');
-    }
-  });
 }
 
 /**
@@ -263,9 +255,27 @@ function ctaEventListener(block) {
  */
 function resetDropdown(block) {
   const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
+  const chevronBtns = block.querySelectorAll('calcite-icon.chevron-icon');
   const mobileMenu = block.querySelector('ul.mobile-menu');
+  document.addEventListener('click', (e) => {
+    const isClickInside = block.contains(e.target);
+    if (!isClickInside) {
+      chevronBtns.forEach((btn) => {
+        btn.setAttribute('icon', 'chevron-down');
+        btn.parentNode.querySelector('.subnav').setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+      mobileBtn.setAttribute('icon', 'chevron-down');
+      mobileMenu.setAttribute('aria-expanded', 'false');
+    }
+  });
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
+      chevronBtns.forEach((btn) => {
+        btn.setAttribute('icon', 'chevron-down');
+        btn.parentNode.querySelector('.subnav').setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+      });
       mobileBtn.setAttribute('icon', 'chevron-down');
       mobileMenu.setAttribute('aria-expanded', 'false');
     }
