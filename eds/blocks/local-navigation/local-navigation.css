@@ -212,14 +212,13 @@
   }
 
   .local-navigation ul.mobile-menu[aria-expanded="false"] {
-    align-items: flex-end;
-    block-size: 65px;
     display: flex;
     flex-wrap: nowrap;
   }
 
   .local-navigation ul li button {
     background-color: #2b2b2b;
+    padding-inline: var(--space-4) var(--space-8);
   }
 
   .local-navigation ul li button:hover {
