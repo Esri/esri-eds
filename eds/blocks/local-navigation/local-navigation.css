@@ -43,8 +43,8 @@
   inset-block-start: 65px;
   inset-inline-end: 0;
   list-style-type: none;
-  padding: 0;
   background-color: var(--background-color-1);
+  padding: 0;
   position: absolute;
 }
 
@@ -86,8 +86,8 @@
   display: flex;
   font-size: var(--font-0);
   inline-size: 100%;
-  padding-inline: var(--space-8);
   margin: 0;
+  padding-inline: var(--space-8);
   position: relative;
   box-shadow: none;
   text-decoration: none;
