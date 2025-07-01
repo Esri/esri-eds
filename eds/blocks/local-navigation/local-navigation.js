@@ -212,7 +212,6 @@ function initNavWrapper(block) {
     scale: 's',
     icon: 'chevron-down',
     dir: 'ltr',
-    'calcite-hydrated': '',
   });
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
@@ -234,7 +233,7 @@ function initNavWrapper(block) {
  * toggle caret-up or chevron-down mobile menu caret icon and aria-expanded attribute
  * @param {Element} block The header block element
  */
-function ctaEventListener(block) {
+function mobileEventListener(block) {
   const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
   const mobileMenu = block.querySelector('ul.mobile-menu');
 
@@ -311,7 +310,7 @@ function fetchNavData(block) {
       initNavWrapper(block);
       parseXML(jsonData, block, menuTitle);
       docAuthPageTitle(block);
-      ctaEventListener(block);
+      mobileEventListener(block);
       resetDropdown(block);
     })
     .catch((error) => error);
