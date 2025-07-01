@@ -73,9 +73,9 @@
   background-color: var(--calcite-color-foreground-3);
   block-size: 65px;
   border: none;
-  color: var(--calcite-color-text-1);
   box-shadow: none;
   cursor: pointer;
+  color: var(--calcite-color-text-1);
   display: flex;
   font-size: var(--font-0);
   inline-size: 100%;
