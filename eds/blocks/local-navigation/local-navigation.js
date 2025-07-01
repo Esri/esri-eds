@@ -206,6 +206,8 @@ function docAuthPageTitle(block) {
  */
 function initNavWrapper(block) {
   const htmlNavTag = document.createElement('nav');
+  const localNavContainer = document.querySelector('.local-navigation-container');
+  localNavContainer.classList.add('calcite-mode-dark');
   const navTitle = domEl('div', { class: 'navigation-title' });
   const ul = document.createElement('ul');
   const mobileButton = domEl('calcite-icon', {
@@ -218,7 +220,6 @@ function initNavWrapper(block) {
   const trialBtn = btnWrapper.lastElementChild;
   mobileButton.setAttribute('aria-label', 'menu');
   htmlNavTag.setAttribute('aria-label', 'main');
-  htmlNavTag.setAttribute('class', 'calcite-mode-light');
   htmlNavTag.id = 'main';
   ul.classList.add('mobile-menu');
   ul.setAttribute('aria-labelledby', 'nav-title');
