@@ -40,10 +40,6 @@
 
 }
 
-.local-navigation ul.mobile-menu li a:hover {
-  background-color: #202020;
-}
-
 .local-navigation ul.mobile-menu[aria-expanded="false"] {
   display: none;
 }
