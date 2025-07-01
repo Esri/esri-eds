@@ -3,7 +3,7 @@
   --background-color-2: #202020;
   --background-color-3: #2b2b2b;
   --background-color-4: #555;
-  --text-color-1: #ffffff;
+  --text-color-1: #fff;
   --text-color-2: #9f9f9f;
 }
 
@@ -44,9 +44,8 @@
   inset-inline-end: 0;
   list-style-type: none;
   padding: 0;
-  position: absolute;
   background-color: var(--background-color-1);
-
+  position: absolute;
 }
 
 .local-navigation ul.mobile-menu[aria-expanded="false"] {
@@ -88,10 +87,10 @@
   font-size: var(--font-0);
   inline-size: 100%;
   padding-inline: var(--space-8);
-  position: relative;
   margin: 0;
-  text-decoration: none;
+  position: relative;
   box-shadow: none;
+  text-decoration: none;
   transition: none;
 }
 
