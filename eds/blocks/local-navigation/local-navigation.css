@@ -62,8 +62,7 @@
 }
 
 .local-navigation ul li.page-title > button[aria-current="true"] {
-  background-color: #202020;
-  filter: drop-shadow(0 0 0 var(--theme-color));
+  box-shadow: inset 3px 0 0 0 var(--calcite-ui-brand);
 }
 
 .local-navigation ul li a[aria-current="true"] {
