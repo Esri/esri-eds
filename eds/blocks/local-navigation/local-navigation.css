@@ -39,8 +39,8 @@
 }
 
 .local-navigation ul.mobile-menu {
-  inline-size: 100%;
   background-color: var(--background-color-1);
+  inline-size: 100%;
   inset-block-start: 65px;
   inset-inline-end: 0;
   list-style-type: none;
@@ -85,10 +85,10 @@
   cursor: pointer;
   display: flex;
   font-size: var(--font-0);
+  box-shadow: none;
   inline-size: 100%;
   margin: 0;
   padding-inline: var(--space-8);
-  box-shadow: none;
   position: relative;
   text-decoration: none;
   transition: none;
@@ -117,10 +117,10 @@
 
 .local-navigation calcite-icon.chevron-icon {
   block-size: 65px;
+  display: block;
   color: var(--text-color-1);
   cursor: pointer;
   inset-inline-end: var(--space-3);
-  display: block;
   position: absolute;
 }
 
@@ -129,10 +129,10 @@
   background-position: 100% 100%;
   background-repeat: no-repeat;
   background-size: 200% 1px;
+  block-size: 60px;
   color: var(--text-color-2);
   font-size: 14px;
   transition: background-position .25s;
-  block-size: 60px;
   white-space: nowrap;
   padding-inline: 0;
 }
@@ -185,17 +185,17 @@
   }
 
   .local-navigation ul.mobile-menu {
+    background-color: var(--background-color-3);
     inline-size: 100%;
     inset-block-start: 0;
     justify-content: end;
     margin: 0;
     position: relative;
-    background-color: var(--background-color-3);
   }
 
   .local-navigation ul li a {
-    flex-direction: row;
     block-size: 65px;
+    flex-direction: row;
     padding-inline: var(--space-5);
   }
 
