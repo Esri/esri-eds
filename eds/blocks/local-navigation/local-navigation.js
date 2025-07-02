@@ -35,28 +35,29 @@ function navigationTitle(value, block) {
 
 function listenSubNav(subNavItems) {
   subNavItems.addEventListener('click', () => {
+    let targetSubNavItems = subNavItems;
+    if (targetSubNavItems.classList.contains('chevron-icon')) {
+      targetSubNavItems = targetSubNavItems.parentNode.querySelector('.subnav-btn');
+    }
+    const subNav = subNavItems.parentNode.querySelector('.subnav');
+    const order = subNavItems.getAttribute('attr-order');
+    const chevronIcon = subNavItems.nextElementSibling;
+    const allSubNavBtn = document.querySelectorAll('.subnav-btn');
     if (subNavItems.getAttribute('aria-expanded') === 'false') {
-      const order = subNavItems.getAttribute('attr-order');
-      const allSubNavBtn = document.querySelectorAll('.subnav-btn');
       subNavItems.setAttribute('aria-expanded', 'true');
-      subNavItems.nextElementSibling.removeAttribute('hidden');
+      chevronIcon.setAttribute('icon', 'chevron-up');
+      subNav.removeAttribute('hidden');
       allSubNavBtn.forEach((btn) => {
         if (btn.getAttribute('attr-order') !== order) {
           btn.setAttribute('aria-expanded', 'false');
-          btn.nextElementSibling.setAttribute('hidden', '');
+          btn.parentNode.querySelector('.subnav').setAttribute('hidden', '');
+          btn.nextElementSibling.setAttribute('icon', 'chevron-down');
         }
       });
     } else {
       subNavItems.setAttribute('aria-expanded', 'false');
-      subNavItems.nextElementSibling.setAttribute('hidden', '');
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    const isClickInside = subNavItems.contains(e.target);
-    if (!isClickInside) {
-      subNavItems.setAttribute('aria-expanded', 'false');
-      subNavItems.nextElementSibling.setAttribute('hidden', '');
+      subNav.setAttribute('hidden', '');
+      chevronIcon.setAttribute('icon', 'chevron-down');
     }
   });
 }
@@ -89,10 +90,18 @@ function appendPageTitle(pgObj, block, i, menuTitle) {
       'aria-current': 'false',
       'attr-order': i,
     });
+    const chevronButton = domEl('calcite-icon', {
+      class: 'chevron-icon',
+      scale: 's',
+      icon: 'chevron-down',
+      dir: 'ltr',
+    });
     const subNav = domEl('div', { class: 'subnav', id: 'subnav', hidden: '' });
     const subNavUL = domEl('ul', { class: 'subnav-ul' });
     li.appendChild(subNavItems);
+    li.appendChild(chevronButton);
     subNavItems.innerHTML = pgObj.pageTitle;
+    listenSubNav(chevronButton);
     listenSubNav(subNavItems);
 
     pgObj.subnavItems.forEach((item) => {
@@ -197,6 +206,8 @@ function docAuthPageTitle(block) {
  */
 function initNavWrapper(block) {
   const htmlNavTag = document.createElement('nav');
+  const localNavContainer = document.querySelector('.local-navigation-container');
+  localNavContainer.classList.add('calcite-mode-dark');
   const navTitle = domEl('div', { class: 'navigation-title' });
   const ul = document.createElement('ul');
   const mobileButton = domEl('calcite-icon', {
@@ -204,13 +215,11 @@ function initNavWrapper(block) {
     scale: 's',
     icon: 'chevron-down',
     dir: 'ltr',
-    'calcite-hydrated': '',
   });
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
   mobileButton.setAttribute('aria-label', 'menu');
   htmlNavTag.setAttribute('aria-label', 'main');
-  htmlNavTag.setAttribute('class', 'calcite-mode-light');
   htmlNavTag.id = 'main';
   ul.classList.add('mobile-menu');
   ul.setAttribute('aria-labelledby', 'nav-title');
@@ -226,7 +235,7 @@ function initNavWrapper(block) {
  * toggle caret-up or chevron-down mobile menu caret icon and aria-expanded attribute
  * @param {Element} block The header block element
  */
-function ctaEventListener(block) {
+function mobileEventListener(block) {
   const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
   const mobileMenu = block.querySelector('ul.mobile-menu');
 
@@ -247,9 +256,27 @@ function ctaEventListener(block) {
  */
 function resetDropdown(block) {
   const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
+  const chevronBtns = block.querySelectorAll('calcite-icon.chevron-icon');
   const mobileMenu = block.querySelector('ul.mobile-menu');
+  document.addEventListener('click', (e) => {
+    const isClickInside = block.contains(e.target);
+    if (!isClickInside) {
+      chevronBtns.forEach((btn) => {
+        btn.setAttribute('icon', 'chevron-down');
+        btn.parentNode.querySelector('.subnav').setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+      mobileBtn.setAttribute('icon', 'chevron-down');
+      mobileMenu.setAttribute('aria-expanded', 'false');
+    }
+  });
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
+      chevronBtns.forEach((btn) => {
+        btn.setAttribute('icon', 'chevron-down');
+        btn.parentNode.querySelector('.subnav').setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+      });
       mobileBtn.setAttribute('icon', 'chevron-down');
       mobileMenu.setAttribute('aria-expanded', 'false');
     }
@@ -285,7 +312,7 @@ function fetchNavData(block) {
       initNavWrapper(block);
       parseXML(jsonData, block, menuTitle);
       docAuthPageTitle(block);
-      ctaEventListener(block);
+      mobileEventListener(block);
       resetDropdown(block);
     })
     .catch((error) => error);
