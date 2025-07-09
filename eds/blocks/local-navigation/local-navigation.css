@@ -1,5 +1,6 @@
 .local-navigation-container {
-  background-color: var(--calcite-color-foreground-1);
+  background-color: var(--calcite-ui-foreground-1);
+  color: var(--clacite-ui-text-1);
   inset-block-start: 0;
   position: sticky;
   z-index: 3000;
