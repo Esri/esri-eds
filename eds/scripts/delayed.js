@@ -61,7 +61,9 @@ window.dataLayer.push({
   },
 });
 
-loadAnalytics(window.dataLayer);
+window.addEventListener('load', () => {
+  loadAnalytics(window.dataLayer);
+});
 
 // decorate modal
 const toggleLoader = () => {
