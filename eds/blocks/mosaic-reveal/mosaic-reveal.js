@@ -12,7 +12,6 @@ export default function decorate(block) {
       child.children[0].appendChild(h3({ class: 'title' }, titleText));
     }
 
-    child.children[0].appendChild(h3({ class: 'title' }, titleText));
     const expandButton = div(
       domEl(
         'button',
