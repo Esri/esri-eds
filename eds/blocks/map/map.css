@@ -34,18 +34,13 @@
 
 /* Base styles for map content wrapper */
 .map-default-content-wrapper:not(.section) {
-  background-color: transparent;
-  color: #fff;
   inline-size: 100%;
   margin-inline: auto;
   max-inline-size: 96vw;
-  padding: 0;
-  padding-inline: 0.5rem;
   text-align: center;
 }
 
 .map-default-content-wrapper > h2 {
-  font-weight: var(--calcite-font-weight-normal);
   line-height: 1.375;
   margin-block: 0 var(--space-4);
 }
