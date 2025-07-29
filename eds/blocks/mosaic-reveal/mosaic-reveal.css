@@ -86,7 +86,6 @@
 
 .mosaic-reveal .mosaic-reveal-content > h3 {
   font-size: 1.414rem;
-  font-weight: var(--calcite-font-weight-normal);
   line-height: 1.375;
   margin: 0 0 var(--space-4) 0;
 }
