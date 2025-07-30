@@ -6,9 +6,14 @@ export default function decorate(block) {
   [...block.children].forEach((child) => {
     const h3Element = child.querySelector('h3');
     let titleText = '';
+
+    const categoryElement = h3Element.previousElementSibling;
+    
     if (h3Element) {
       h3Element.setAttribute('tabindex', '-1');
       titleText = h3Element.textContent;
+      categoryElement.classList.add('category');
+      child.children[0].appendChild(categoryElement);
       child.children[0].appendChild(h3({ class: 'title' }, titleText));
     }
 
