@@ -115,6 +115,7 @@
     }
 
     .foreground {
+      aspect-ratio: 4 / 5;
       overflow: hidden;
       position: relative;
       z-index: 2;
