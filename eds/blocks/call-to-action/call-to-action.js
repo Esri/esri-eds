@@ -1,5 +1,5 @@
 import { loadFragment } from '../fragment/fragment.js';
-import { div } from '../../scripts/dom-helpers.js';
+import { div, calciteButton } from '../../scripts/dom-helpers.js';
 
 function decorateBlockSectionMode(block) {
   block.closest('.section')
@@ -22,4 +22,13 @@ export default async function decorate(block) {
     });
     block.replaceChildren(div(...fragment.children));
   }
+
+  block.querySelectorAll('.button-container a').forEach((anchorEl) => {
+    const appearance = anchorEl.classList.contains('secondary') ? 'outline' : 'solid';
+    anchorEl.parentElement.replaceWith(calciteButton({
+      appearance,
+      href: anchorEl.href,
+      label: anchorEl.textContent,
+    }, anchorEl.textContent));
+  });
 }
