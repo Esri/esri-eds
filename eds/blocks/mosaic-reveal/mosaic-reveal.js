@@ -27,7 +27,10 @@ export default function decorate(block) {
     content.classList.add('mosaic-reveal-content');
     content.setAttribute('hidden', '');
 
-    if (content.firstElementChild) {
+    if (
+      content.firstElementChild &&
+      content.firstElementChild.tagName.toLowerCase() !== 'h3'
+    ) {
       content.firstElementChild.classList.add('category');
     }
     const anchorElem = content.querySelector('a');
