@@ -66,7 +66,7 @@
     align-self: self-start;
     background-color: var(--esri-ui-opacity85-inverse);
     color: var(--calcite-ui-text-2);
-    font-size: var(--font--2);
+    font-size: var(--font-minus-2);
     font-weight: var(--calcite-font-weight-bold);
     inline-size: fit-content;
     line-height: 1;
@@ -223,4 +223,5 @@
   .mosaic-reveal .title {
     padding: var(--space-3) var(--space-12) var(--space-12);
   }
+}
 }
