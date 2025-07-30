@@ -29,8 +29,8 @@ export default function decorate(block) {
     content.setAttribute('hidden', '');
 
     if (
-      content.firstElementChild &&
-      content.firstElementChild.tagName.toLowerCase() !== 'h3'
+      content.firstElementChild
+      && content.firstElementChild.tagName.toLowerCase() !== 'h3'
     ) {
       content.firstElementChild.classList.add('category');
     }
