@@ -62,6 +62,21 @@
   position: absolute;
 }
 
+.mosaic-reveal .category {
+    background-color: var(--esri-ui-opacity85-inverse);
+    color: var(--calcite-ui-text-2);
+    font-size: var(--font--2);
+    font-weight: var(--calcite-font-weight-bold);
+    inline-size: fit-content;
+    inset-inline-start: -50px;
+    line-height: 1;
+    margin-block-end: var(--space-3);
+    padding: var(--space-2);
+    padding-inline-start: var(--space-12);
+    position: relative;
+    text-transform: uppercase;
+}
+
 .mosaic-reveal .mosaic-reveal-content {
   align-items: center;
   background-color: #0079c1;
@@ -80,7 +95,7 @@
   z-index: 5;
 }
 
-.mosaic-reveal .mosaic-reveal-content > :is(h3, p, p > a, .button-container) {
+.mosaic-reveal .mosaic-reveal-content > :is(h3, p:not(.category), p > a, .button-container) {
   inline-size: 80%;
 }
 
