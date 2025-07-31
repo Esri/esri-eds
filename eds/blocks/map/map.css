@@ -61,13 +61,6 @@
   display: none;
 }
 
-.map-default-content-wrapper > div > p {
-  font-size: var(--font-4);
-  font-weight: var(--calcite-font-weight-normal);
-  line-height: 1.375;
-  margin-block: 0 var(--space-4);
-}
-
 .map-frame {
   block-size: 100%;
   border: none;
