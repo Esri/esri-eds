@@ -10,8 +10,9 @@
   flex-direction: column;
 }
 
-.columns > div > div :where(h2, p) {
-  margin: var(--space-2) var(--space-8);
+.columns > div > div :is(h2, p) {
+  margin: 0 0 var(--space-4);
+
 }
 
 .columns > div > div :where(calcite-link, calcite-button) {
@@ -29,6 +30,8 @@
 }
 
 .columns > div > :not(.columns-img-col) {
+  inline-size: 90vw;
+  margin-inline: auto;
   padding: var(--space-16) 0 var(--space-20);
 }
 
@@ -81,7 +84,9 @@
   }
 
   .columns:not(.media-split) > div {
-    block-size: 600px;
+    /* not sure why this was added */
+
+    /* block-size: 600px; */
   }
 
   .columns > div > div {
