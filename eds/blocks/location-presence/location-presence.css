@@ -25,7 +25,6 @@
 .location-presence-heading {
   color: var(--calcite-ui-text-1);
   font-size: var(--title-size);
-  font-weight: var(--calcite-font-weight-normal);
   margin-block: 3rem 0.5rem;
 }
 

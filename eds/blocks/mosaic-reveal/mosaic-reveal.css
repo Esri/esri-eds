@@ -166,7 +166,6 @@
   box-sizing: border-box;
   color: var(--calcite-ui-text-1);
   font-size: 1.2rem;
-  font-weight: var(--calcite-font-weight-normal);
   inline-size: 100%;
   inset-block-end: 0;
   line-height: 1.375;
