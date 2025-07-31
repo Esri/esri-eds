@@ -36,7 +36,7 @@
 }
 
 .columns > div > .columns-img-col img {
-  aspect-ratio: 16 / 9;
+  /* aspect-ratio: 16 / 9; */
   block-size: 100%;
   display: block;
   inline-size: 100%;
@@ -84,9 +84,7 @@
   }
 
   .columns:not(.media-split) > div {
-    /* not sure why this was added */
-
-    /* block-size: 600px; */
+    block-size: 600px;
   }
 
   .columns > div > div {
