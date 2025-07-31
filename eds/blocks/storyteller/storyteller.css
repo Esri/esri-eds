@@ -53,8 +53,7 @@
   }
 
   h2 {
-    font-size: var(--font-4);
-    font-weight: var(--calcite-font-weight-bold);
+  margin-block-end: var(--space-1);
   }
 
   p {
