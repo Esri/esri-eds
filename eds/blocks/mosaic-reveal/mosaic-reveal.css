@@ -62,6 +62,21 @@
   position: absolute;
 }
 
+.mosaic-reveal .category {
+    align-self: self-start;
+    background-color: var(--esri-ui-opacity85-inverse);
+    color: var(--calcite-ui-text-2);
+    font-size: var(--font-minus-2);
+    font-weight: var(--calcite-font-weight-bold);
+    inline-size: fit-content;
+    line-height: 1;
+    margin-block-end: var(--space-3);
+    padding: var(--space-2);
+    padding-inline-start: var(--space-12);
+    position: relative;
+    text-transform: uppercase;
+}
+
 .mosaic-reveal .mosaic-reveal-content {
   align-items: center;
   background-color: #0079c1;
@@ -80,13 +95,12 @@
   z-index: 5;
 }
 
-.mosaic-reveal .mosaic-reveal-content > :is(h3, p, p > a, .button-container) {
+.mosaic-reveal .mosaic-reveal-content > :is(h3, p:not(.category), p > a, .button-container) {
   inline-size: 80%;
 }
 
 .mosaic-reveal .mosaic-reveal-content > h3 {
   font-size: 1.414rem;
-  font-weight: var(--calcite-font-weight-normal);
   line-height: 1.375;
   margin: 0 0 var(--space-4) 0;
 }
@@ -106,11 +120,30 @@
   text-decoration: underline;
 }
 
-.mosaic-reveal .mosaic-reveal-content[hidden] {
+.mosaic-reveal-content[hidden] {
+  background-color: transparent;
+  block-size: 50%;
+}
+
+.mosaic-reveal .mosaic-reveal-content[hidden] *:not(.category) {
   block-size: 0;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
+}
+
+.mosaic-reveal .mosaic-reveal-content *:not(.category) {
+  align-items: center;
+  block-size: 100%;
+  opacity: 1;
+  transform-origin: 50% 100%;
+  transition: 0.5s ease;
+  visibility: visible;
+  z-index: 5;
+}
+
+.mosaic-reveal .mosaic-reveal-content :is(.mosaic-reveal-button, .mosaic-contract-button){
+  block-size: 25px;
 }
 
 .mosaic-reveal > div > div:not(.mosaic-reveal-content) { /* stylelint-disable-line no-descending-specificity */

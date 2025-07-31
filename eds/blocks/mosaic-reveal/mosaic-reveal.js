@@ -6,13 +6,13 @@ export default function decorate(block) {
   [...block.children].forEach((child) => {
     const h3Element = child.querySelector('h3');
     let titleText = '';
+
     if (h3Element) {
       h3Element.setAttribute('tabindex', '-1');
       titleText = h3Element.textContent;
       child.children[0].appendChild(h3({ class: 'title' }, titleText));
     }
 
-    child.children[0].appendChild(h3({ class: 'title' }, titleText));
     const expandButton = div(
       domEl(
         'button',
@@ -27,6 +27,13 @@ export default function decorate(block) {
   contents.forEach((content) => {
     content.classList.add('mosaic-reveal-content');
     content.setAttribute('hidden', '');
+
+    if (
+      content.firstElementChild
+      && content.firstElementChild.tagName.toLowerCase() !== 'h3'
+    ) {
+      content.firstElementChild.classList.add('category');
+    }
 
     const anchorElem = content.querySelector('a');
     if (anchorElem) {
