@@ -10,6 +10,10 @@
   overflow: hidden;
   padding-block-end: var(--space-10);
 
+  h3 {
+    font-size: var(--font-1);
+  }
+
   /* Adjust styles when content is on the left */
   &:has(.content:first-child) {
     flex-direction: column;
