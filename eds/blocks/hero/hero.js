@@ -194,7 +194,7 @@ export default function decorate(block) {
     }
   }
 
-  const videoAssets = block.querySelectorAll('a');
+  const videoAssets = [...block.querySelectorAll('a')].filter((a) => !a.closest('.button-container'));
   if (videoAssets.length > 0) {
     const videoAsset = videoAssets[videoAssets.length - 1];
 
@@ -217,6 +217,7 @@ export default function decorate(block) {
     }
   }
 
+  // add calcite button for video link
   const videoLink = block.querySelector('.video-link');
   if (videoLink) {
     const btnContainer = videoLink.closest('.button-container');
@@ -236,6 +237,20 @@ export default function decorate(block) {
         calciteBtn.setAttribute('tabindex', '0');
         decorateModal(videoLink.href, calciteBtn);
       });
+    }
+  }
+
+  const buttonContainer = block.querySelector('.content .button-container');
+  if (buttonContainer) {
+    const anchorEl = buttonContainer.querySelector('a');
+    if (anchorEl) {
+      const appearance = anchorEl.classList.contains('secondary') ? 'outline' : 'solid';
+      const calciteBtn = calciteButton({
+        appearance,
+        kind: 'inverse',
+        label: anchorEl.textContent.trim(),
+      }, anchorEl.textContent.trim());
+      buttonContainer.replaceWith(calciteBtn);
     }
   }
 }
