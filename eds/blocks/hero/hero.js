@@ -194,7 +194,7 @@ export default function decorate(block) {
     }
   }
 
-  const videoAssets = [...block.querySelectorAll('a')].filter(a => !a.closest('.button-container'));
+  const videoAssets = [...block.querySelectorAll('a')].filter((a) => !a.closest('.button-container'));
   if (videoAssets.length > 0) {
     const videoAsset = videoAssets[videoAssets.length - 1];
 
