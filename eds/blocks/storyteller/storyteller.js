@@ -57,6 +57,7 @@ function decorateButtons(block) {
       href: anchorElement.getAttribute('href'),
       scale: anchorElement.getAttribute('scale') || 'l',
       appearance: index === 1 ? 'outline' : 'solid', // Set appearance to outline for the second anchor
+      kind: 'inverse',
     });
 
     linkButton.innerHTML = anchorElement.innerHTML;
