@@ -59,6 +59,7 @@
 
 .hero p.button-container a {
   margin-block: var(--space-2);
+  margin-inline: 0;
 }
 
 .hero video {
@@ -154,8 +155,14 @@
     max-inline-size: 720px;
   }
 
-  .hero :where(h1, p) {
+  .hero:not(.center) :where(h1, p) {
     inline-size: 90%;
+  }
+
+  .hero.center .content {
+    inline-size: 65%;
+    margin: auto;
+    max-inline-size: 600px;
   }
 
   .hero.small.center :is(.image, .content) {
