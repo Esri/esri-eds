@@ -12,7 +12,7 @@ export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
   document.querySelector('.centered-content-switcher-container').classList.add('calcite-mode-dark');
 
-  block.querySelectorAll('img').forEach((image) => image
+  block.querySelectorAll('picture img').forEach((image) => image
     .closest('picture')
     .replaceWith(
       createOptimizedPicture(image.src, image.alt, false, [{ width: '2560' }]),
@@ -164,5 +164,10 @@ export default function decorate(block) {
     }
   });
 
+  block.querySelectorAll('p').forEach((p) => {
+    if (!p.textContent.trim() && !p.children.length) {
+      p.remove();
+    }
+  });
   changeSelectedTab(selectedIdx);
 }

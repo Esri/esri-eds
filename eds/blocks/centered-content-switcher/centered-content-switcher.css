@@ -143,15 +143,53 @@
       text-align: center;
 
       & > p {
-        color: var(--calcite-ui-text-2);
-        font-size: var(--font-minus-2);
+        color: var(--calcite-ui-text-1);
+        font-size: var(--font-0);
+        inline-size: 680px;
+        margin: 0 auto var(--space-8);
+        max-inline-size: 90%;
+      }
+
+      & > p span.icon {
+        block-size: 64px;
+        inline-size: 64px;
+        max-inline-size: none;
+      }
+
+      & > p span.icon img {
+        filter: var(--theme-color);
+      }
+
+      & > p:has(span.icon) {
+        margin: 0 auto var(--space-5);
+      }
+
+      & > p:has(span.icon) + p {
+        font-size: var(--font-1);
+        margin-block-end: var(--space-4);
+      }
+
+      & > p:nth-of-type(4) {
         font-weight: var(--calcite-font-weight-bold);
-        margin-block: 0 var(--space-2);
-        padding-block-start: var(--space-5);
+        margin-block-end: .1rem;
+      }
+
+      & > p:nth-of-type(5) {
+        color: var(--calcite-ui-text-2);
+        font-size: var(--font-minus-1);
+        margin-block-end: var(--space-4);
       }
 
       & > p:first-child {
+        color: var(--calcite-ui-text-3);
+        font-size: var(--font-minus-1);
+        font-weight: var(--calcite-font-weight-bold);
+        margin-block-end: var(--space-1);
         text-transform: uppercase;
+      }
+
+      & > p.button-container{
+        margin-block-end: 0
       }
 
       calcite-button {
