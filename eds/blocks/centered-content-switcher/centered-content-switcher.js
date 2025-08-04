@@ -164,9 +164,9 @@ export default function decorate(block) {
     }
   });
 
-  block.querySelectorAll('p').forEach((p) => {
-    if (!p.textContent.trim() && !p.children.length) {
-      p.remove();
+  block.querySelectorAll('p').forEach((paragraph) => {
+    if (!paragraph.textContent.trim() && !paragraph.children.length) {
+      paragraph.remove();
     }
   });
   changeSelectedTab(selectedIdx);
