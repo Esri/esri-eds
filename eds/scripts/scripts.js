@@ -339,10 +339,61 @@ export function decorateTemplateAndTheme() {
 }
 
 /**
+ * Rewrites a single media URL to use the /eds/ path
+ * @param {string} urlString The URL to rewrite
+ * @returns {string} The rewritten URL or original if no match
+ */
+function rewriteMediaUrl(urlString) {
+  const url = new URL(urlString, window.location.href);
+  const { pathname } = url;
+
+  // Check if the filename matches media_<id>.<extension> pattern
+  const mediaMatch = pathname.match(/media_([a-z0-9]+)\.(jpg|png)$/i);
+  if (mediaMatch) {
+    const id = mediaMatch[1];
+    const extension = mediaMatch[2];
+    const { search: queryString } = url;
+
+    return `/eds/media_${id}.${extension}${queryString}`;
+  }
+
+  return urlString;
+}
+
+/**
+ * Rewrites media URLs for picture elements to use the /eds/ path
+ * @param {Element} element The element to process
+ */
+function rewriteMediaUrls(element) {
+  element.querySelectorAll('picture').forEach((picture) => {
+    picture.querySelectorAll('img').forEach((img) => {
+      if (img.src) {
+        img.src = rewriteMediaUrl(img.src);
+      }
+    });
+
+    picture.querySelectorAll('source').forEach((sourceElement) => {
+      if (sourceElement.srcset) {
+        // Handle srcset which may contain multiple URLs
+        const srcsetParts = sourceElement.srcset.split(',').map((part) => part.trim());
+        const newSrcsetParts = srcsetParts.map((part) => {
+          const [url, width] = part.split(' ');
+          const rewrittenUrl = rewriteMediaUrl(url);
+          return width ? `${rewrittenUrl} ${width}` : rewrittenUrl;
+        });
+        sourceElement.srcset = newSrcsetParts.join(', ');
+      }
+    });
+  });
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
+  rewriteMediaUrls(doc);
+
   loadScript('https://js.arcgis.com/calcite-components/1.8.0/calcite.esm.js', { type: 'module' });
   loadCSS('https://js.arcgis.com/calcite-components/1.8.0/calcite.css');
 

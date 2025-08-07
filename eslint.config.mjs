@@ -41,7 +41,7 @@ export default [
   {
     ignores: [
       'eds/scripts/aem.js',
-      'helix-importer-ui',
+      'tools/importer/helix-importer-ui',
       'tools/importer/import.bundle.js',
     ],
   },
