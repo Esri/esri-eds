@@ -144,8 +144,11 @@
 
   .overlay {
     background-color: var(--esri-ui-opacity85-inverse);
+    block-size: fit-content;
     color: var(--calcite-ui-text-1);
+    display: inline-block;
     inset-block-end: 0;
+    inset-block-start: unset;
     inset-inline-start: 0;
     padding: var(--space-6);
     position: absolute;
