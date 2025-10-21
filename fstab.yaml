@@ -1,2 +1,7 @@
 mountpoints:
-  /: https://esriis.sharepoint.com/:f:/r/sites/EsriMarketingPublic/Shared%20Documents/sites/esri?csf=1&web=1&e=Of2kRV
+  /:
+    url: https://content.da.live/esri/esri-eds/
+    type: markup
+
+#mountpoints:
+ # /: https://esriis.sharepoint.com/:f:/r/sites/EsriMarketingPublic/Shared%20Documents/sites/esri?csf=1&web=1&e=Of2kRV
